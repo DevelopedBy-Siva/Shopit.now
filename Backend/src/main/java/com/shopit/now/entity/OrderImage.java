@@ -9,24 +9,24 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class OrderImage {
-	@Id
-	@Column(name = "order_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column(name = "name")
-	private String name;
-	@Column(name = "type")
-	private String type;
-	@Column(name = "picByte", length = 100000)
-	private byte[] picByte;
+    @Id
+    @Column(name = "order_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "type")
+    private String type;
+    @Column(name = "picByte", length = 100000)
+    private byte[] picByte;
 
-	public OrderImage() {
-		super();
-	}
+    public OrderImage() {
+        super();
+    }
 
-	public OrderImage(String name, String type, byte[] picByte) {
-		this.name = name;
-		this.type = type;
-		this.picByte = picByte;
-	}
+    public OrderImage(String name, String type, byte[] picByte) {
+        this.name = name;
+        this.type = type;
+        this.picByte = picByte;
+    }
 }

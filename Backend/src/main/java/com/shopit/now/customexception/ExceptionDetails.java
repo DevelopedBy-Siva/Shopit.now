@@ -3,7 +3,6 @@ package com.shopit.now.customexception;
 import java.util.Date;
 
 public class ExceptionDetails {
-
     private Date timestamp;
     private String message;
     private String details;

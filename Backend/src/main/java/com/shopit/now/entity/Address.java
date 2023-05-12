@@ -2,7 +2,6 @@ package com.shopit.now.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -20,6 +19,6 @@ public class Address {
     @Column(nullable = false)
     private AddressDetails addressDetails;
 
-    @Column(nullable = false,name = "Default_Address")
+    @Column(nullable = false, name = "Default_Address")
     private boolean defaultAddress;
 }

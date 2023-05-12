@@ -19,10 +19,11 @@ public class UserProfileImage {
     private String type;
     @Column(name = "picByte", length = 1000000)
     private byte[] picByte;
-    @OneToOne(fetch =FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
+
     public UserProfileImage() {
         super();
     }

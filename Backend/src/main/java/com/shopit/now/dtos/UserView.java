@@ -1,7 +1,6 @@
 package com.shopit.now.dtos;
 
 import com.shopit.now.entity.UserProfileImage;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

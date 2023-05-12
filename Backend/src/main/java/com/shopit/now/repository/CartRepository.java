@@ -1,9 +1,8 @@
 package com.shopit.now.repository;
 
+import com.shopit.now.entity.CartDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.shopit.now.entity.CartDetails;
-
-public interface CartRepository extends JpaRepository<CartDetails,Integer> {
+public interface CartRepository extends JpaRepository<CartDetails, Integer> {
 
 }

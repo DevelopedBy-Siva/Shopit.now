@@ -10,8 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchPage {
-
     private List<SearchView> searchView;
     private int itemCount;
-
 }

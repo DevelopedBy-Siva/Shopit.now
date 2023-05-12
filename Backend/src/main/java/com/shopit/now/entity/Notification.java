@@ -22,7 +22,7 @@ public class Notification {
     }
 
     public Notification(int orderId, String productName, boolean seen) {
-        this.orderId=orderId;
+        this.orderId = orderId;
         this.productName = productName;
         this.seen = seen;
     }

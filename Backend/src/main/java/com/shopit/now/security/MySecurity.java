@@ -1,5 +1,6 @@
 package com.shopit.now.security;
 
+import com.shopit.now.jwtgenerator.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +13,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.shopit.now.jwtgenerator.JwtFilter;
-
 @Configuration
 @EnableWebSecurity
 public class MySecurity extends WebSecurityConfigurerAdapter {
@@ -25,7 +24,7 @@ public class MySecurity extends WebSecurityConfigurerAdapter {
     private MyUserDetailsService userDetailsService;
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -46,9 +45,9 @@ public class MySecurity extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth/**","/products/view/**","/products/search/**").permitAll()
-                .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
-                .antMatchers("/products/mark/**","/products/update/**","/products/add-item/**","/admin/all-users").hasRole("ADMIN")
+                .antMatchers("/auth/**", "/products/view/**", "/products/search/**").permitAll()
+                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/products/mark/**", "/products/update/**", "/products/add-item/**", "/admin/all-users").hasRole("ADMIN")
                 .antMatchers("/products/add-product-review/**").hasRole("USER")
                 .anyRequest()
                 .authenticated()

@@ -2,12 +2,11 @@ package com.shopit.now.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="Order_Status")
+@Table(name = "Order_Status")
 @Getter
 @Setter
 public class OrderStatus {

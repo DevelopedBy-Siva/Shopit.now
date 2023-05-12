@@ -2,6 +2,7 @@ package com.shopit.now.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
@@ -23,6 +24,7 @@ public class Thumbnail {
     public Thumbnail() {
         super();
     }
+
     public Thumbnail(String name, String type, byte[] picByte) {
         this.name = name;
         this.type = type;

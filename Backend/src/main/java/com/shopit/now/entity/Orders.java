@@ -1,7 +1,6 @@
 package com.shopit.now.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +10,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name="Orders")
+@Table(name = "Orders")
 public class Orders {
 
     @Id
@@ -30,7 +29,7 @@ public class Orders {
     @JoinColumn(name = "order_id")
     @MapsId
     private ItemDetails itemDetails;
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     @MapsId
     private OrderStatus orderStatus;

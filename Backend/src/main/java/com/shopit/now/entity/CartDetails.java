@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name="User_Cart")
+@Table(name = "User_Cart")
 @ToString
 public class CartDetails {
     @Id
@@ -26,11 +26,11 @@ public class CartDetails {
     public CartDetails() {
     }
 
-    public CartDetails(int productId, String productName, double totalPrice, int itemCount,boolean available) {
+    public CartDetails(int productId, String productName, double totalPrice, int itemCount, boolean available) {
         this.productId = productId;
         this.productName = productName;
         this.totalPrice = totalPrice;
         this.itemCount = itemCount;
-        this.available=available;
+        this.available = available;
     }
 }

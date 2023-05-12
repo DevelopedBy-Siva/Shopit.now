@@ -1,7 +1,6 @@
 package com.shopit.now.dtos;
 
 import com.shopit.now.entity.Thumbnail;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
