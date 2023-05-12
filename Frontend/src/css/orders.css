@@ -21,7 +21,6 @@
   display: flex;
   align-items: center;
   width: 100px;
-  font-family: "Roboto Condensed", sans-serif;
 }
 .orders-container .order-container-nav .go-back span {
   margin-left: 4px;
@@ -32,7 +31,6 @@
 }
 .orders-container .order-container-head {
   padding: 20px;
-  font-family: "Roboto Condensed", sans-serif;
   font-weight: bold;
 }
 .orders-container .order-container-head h2 {
@@ -44,7 +42,6 @@
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-  font-family: "Roboto Condensed", sans-serif;
   text-align: center;
 }
 .orders-container .nothing-in-here h2 {
@@ -79,7 +76,6 @@
   outline: none;
   font-size: 25px;
   font-weight: 600;
-  font-family: "Roboto Condensed", sans-serif;
   border: 2px solid black;
 }
 .orders-container .display-error-page button span {
@@ -106,7 +102,6 @@
   height: 150px;
   overflow: hidden;
   flex: 0.2;
-  font-family: "Roboto Condensed", sans-serif;
   background-color: rgb(226, 226, 226);
 }
 .orders-container .each-order-container div:first-child img {
@@ -127,7 +122,6 @@
   outline: none;
   border: 1px solid black;
   font-size: 14px;
-  font-family: "Roboto Condensed", sans-serif;
   background-color: white;
   margin: 5px;
   padding: 2px;
@@ -135,7 +129,6 @@
 .orders-container .each-order-container div:nth-child(2) {
   pointer-events: none;
   flex: 0.3;
-  font-family: "Roboto Condensed", sans-serif;
   padding: 0 10px;
 }
 .orders-container .each-order-container div:nth-child(2) h5 {
@@ -146,7 +139,6 @@
 .orders-container .each-order-container div:nth-child(3) {
   pointer-events: none;
   flex: 0.4;
-  font-family: "Roboto Condensed", sans-serif;
 }
 .orders-container .each-order-container div:nth-child(3) span {
   font-weight: 600;
@@ -171,7 +163,6 @@
   margin: 0;
   display: flex;
   justify-content: space-between;
-  font-family: "Roboto Condensed", sans-serif;
   background-color: rgb(243, 243, 243);
 }
 .orders-container
@@ -202,7 +193,6 @@
   justify-content: space-between;
   align-items: center;
   height: 0;
-  font-family: "Roboto Condensed", sans-serif;
   transition: all 0.3s ease-in-out;
   overflow: hidden;
 }
@@ -259,7 +249,6 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  font-family: "Roboto Condensed", sans-serif;
 }
 .orders-container .each-order-tracking ul li .faCircle {
   font-size: 25px !important;
@@ -348,7 +337,6 @@
   border: 1px solid black;
   outline: none;
   background-color: white;
-  font-family: "Roboto Condensed", sans-serif;
   width: 100px;
   padding: 2px 4px;
 }
@@ -370,7 +358,6 @@
   padding: 4px;
   font-size: 14px;
   text-align: center;
-  font-family: "Roboto Condensed", sans-serif;
   opacity: 0;
   transition: all 0.4s ease-in-out;
 }
@@ -390,7 +377,6 @@
   transform: translate(-50%, -50%);
 }
 .orders-container .cancellation-sub-container .cancellation-reason {
-  font-family: "Roboto Condensed", sans-serif;
   padding: 20px;
 }
 .orders-container .cancellation-sub-container .cancellation-reason h2 {

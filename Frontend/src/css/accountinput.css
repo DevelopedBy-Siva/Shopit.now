@@ -1,49 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
-.input-container-account{
-    margin: 10px;
-    margin-bottom: 40px !important;
-    width: 100%;
-    position: relative;
+.input-container-account {
+  margin: 10px;
+  margin-bottom: 40px !important;
+  width: 100%;
+  position: relative;
 }
-.input-container-account input{
-    outline: none;
-    border-bottom: 1px dashed !important;
-    border: none;
-    width: 95%;
-    font-size: 20px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    background-color: white;
-
+.input-container-account input {
+  outline: none;
+  border-bottom: 1px dashed !important;
+  border: none;
+  width: 95%;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: white;
 }
 .input-container-account input::-webkit-outer-spin-button,
 .input-container-account input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.input-container-account input[type=number] {
-    -moz-appearance: textfield;
+.input-container-account input[type="number"] {
+  -moz-appearance: textfield;
 }
-.input-container-account .close-btn{
-    position: absolute;
+.input-container-account .close-btn {
+  position: absolute;
 }
-.input-container-account label{
-    position: absolute;
-    left: 0;
-    font-family: 'Poppins', sans-serif;
-    transition: transform 0.5s ease-in-out;
-    transform: translateY(4px);
-    pointer-events: none;
-    font-size: 15px;
-    font-weight: 300;
+.input-container-account label {
+  position: absolute;
+  left: 0;
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(4px);
+  pointer-events: none;
+  font-size: 15px;
+  font-weight: 300;
 }
-.input-container-account input:focus ~ label,.input-container-account input:not(:placeholder-shown) ~ label{
-    transform: translateY(-20px);
+.input-container-account input:focus ~ label,
+.input-container-account input:not(:placeholder-shown) ~ label {
+  transform: translateY(-20px);
 }
 
-.input-container-account .error-display{
-    color: red;
-    position: absolute;
-    font-size: 10px;
+.input-container-account .error-display {
+  color: red;
+  position: absolute;
+  font-size: 10px;
 }

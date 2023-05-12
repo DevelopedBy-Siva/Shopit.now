@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 .add-product-container {
   width: 100%;
   display: flex;
@@ -10,7 +9,6 @@
   position: relative;
 }
 .admin-product-container .product-not-found {
-  font-family: "Oswald", sans-serif;
   text-align: center;
   font-size: 18px;
   padding: 20px 0;
@@ -24,7 +22,6 @@
   top: -32px !important;
   font-size: 18px;
   left: 40px;
-  font-family: "Oswald", sans-serif;
   color: #343434 !important;
 }
 .add-product-container .product-logo-container {
@@ -67,7 +64,6 @@
   width: 250px;
   outline: none;
   font-size: 16px;
-  font-family: "Bebas Neue", cursive;
   height: 35px;
   cursor: pointer;
   background: none;
@@ -78,7 +74,7 @@
   color: #343434;
   background-color: rgb(240, 240, 240);
   padding: 10px;
-  font-family: 'Roboto Condensed', sans-serif;}
+}
 
 .add-product-container .add-product-sub-container {
   width: 90%;
@@ -100,7 +96,6 @@
   outline: none;
   background: none;
   margin-bottom: 40px;
-  font-family: "Bebas Neue", cursive;
   font-size: 20px;
   color: #343434;
 }
@@ -110,7 +105,6 @@
 }
 .product-logo-main-container .product-logo-error {
   position: absolute;
-  font-family: "Bebas Neue", cursive;
   background-color: #343434;
   padding: 5px 10px;
   color: white;
@@ -145,7 +139,6 @@ input[type="number"] {
 }
 
 .add-product-container .add-product-sub-container .admin-input-container label {
-  font-family: "Bebas Neue", cursive;
   color: #343434;
   position: absolute;
   top: 2px;
@@ -162,7 +155,6 @@ input[type="number"] {
 }
 .add-product-container .add-product-sub-container .submit-btn {
   text-align: center;
-  font-family: "Bebas Neue", cursive;
   font-size: 16px;
 }
 .add-product-container .add-product-sub-container .submit-btn button {
@@ -183,7 +175,6 @@ input[type="number"] {
   left: 2px;
   font-size: 12px;
   color: red;
-  font-family: "Oswald", sans-serif;
 }
 .add-product-container .pick-category-container {
   position: relative;
@@ -194,12 +185,10 @@ input[type="number"] {
   left: 2px;
   font-size: 12px;
   color: red;
-  font-family: "Oswald", sans-serif;
 }
-.add-product-container .go-back-admin { 
+.add-product-container .go-back-admin {
   text-decoration: none;
   color: rgb(255, 255, 255);
-  font-family: "Bebas Neue", cursive;
   position: fixed;
   top: 10px;
   left: 10px;
@@ -216,7 +205,6 @@ input[type="number"] {
   z-index: 99999;
   padding: 15px;
   background-color: white;
-  font-family: "Oswald", sans-serif;
   font-size: 18px;
   top: 60px;
   right: 5px;
@@ -283,11 +271,9 @@ input[type="number"] {
 }
 .add-product-container .help-container .help-container-details h3 {
   font-size: 16px;
-  font-family: "Bebas Neue", cursive;
 }
 .add-product-container .help-container .help-container-details li {
   font-size: 10px;
-  font-family: "Oswald", sans-serif;
 }
 .help-container-details-visible {
   opacity: 1 !important;
@@ -309,7 +295,6 @@ input[type="number"] {
 .pick-4-images {
   position: absolute;
   font-size: 24px;
-  font-family: "Bebas Neue", cursive;
   background-color: white;
   border-radius: 0 0 10px 10px;
   padding: 5px;
@@ -376,7 +361,6 @@ input[type="number"] {
   text-align: center;
   padding: 5px;
   display: none;
-  font-family: "Bebas Neue", cursive;
   font-size: 20px;
   transform: translateY(100px);
   transition: all 0.5s ease-in-out;
@@ -444,7 +428,6 @@ input[type="number"] {
 }
 
 .product-save-loading-container .product-save-loading h5 {
-  font-family: "Bebas Neue", cursive;
   position: absolute;
   text-align: center;
   left: 50%;
@@ -456,7 +439,6 @@ input[type="number"] {
   .product-save-loading
   .product-saving-success
   h4 {
-  font-family: "Bebas Neue", cursive;
   position: absolute;
   text-align: center;
   left: 50%;
@@ -484,7 +466,6 @@ input[type="number"] {
   height: 250px;
 }
 .product-save-loading-container .product-save-loading .product-saving-fail h4 {
-  font-family: "Bebas Neue", cursive;
   position: absolute;
   text-align: center;
   left: 50%;

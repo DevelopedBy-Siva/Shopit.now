@@ -1,48 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-
-.input-container{
-    width: 100%;
-    max-width: 600px;
-    position: relative;
-    margin: 23px;
+.input-container {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  margin: 23px;
 }
-.input-container input{
-    outline: none;
-    border: 0;
-    width: 100%;
-    border-bottom: 1px dotted #343434;
-    color: black;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    background: white;
+.input-container input {
+  outline: none;
+  border: 0;
+  width: 100%;
+  border-bottom: 1px dotted #343434;
+  color: black;
+  font-weight: 600;
+  font-size: 20px;
+  background: white;
 }
 .input-container input::-webkit-outer-spin-button,
 .input-container input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.input-container input[type=number] {
+.input-container input[type="number"] {
   -moz-appearance: textfield;
   background-color: white;
-
 }
-.input-container label{
-    font-size: 16px;
-    pointer-events: none;
-    position: absolute;
-    transform: translateY(5px);
-    left: 0;
-    transition: transform 0.5s ease-in-out;
-    text-transform: uppercase;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    color: rgb(107, 107, 107);
+.input-container label {
+  font-size: 16px;
+  pointer-events: none;
+  position: absolute;
+  transform: translateY(5px);
+  left: 0;
+  transition: transform 0.5s ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgb(107, 107, 107);
 }
-.input-container input:focus ~ label,.input-container input:not(:placeholder-shown) ~ label{
-    transform: translateY(-22px);
+.input-container input:focus ~ label,
+.input-container input:not(:placeholder-shown) ~ label {
+  transform: translateY(-22px);
 }
-.input-error{
+.input-error {
   color: red;
   font-size: 12px;
   position: absolute;

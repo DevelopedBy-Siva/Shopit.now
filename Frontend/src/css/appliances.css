@@ -1,115 +1,116 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Raleway&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
+.appliances-container {
+  padding-top: 20px;
+  width: 100%;
+  height: 100%;
+}
+.appliances-container .appliances-cover {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.appliances-container .appliances-cover img {
+  object-fit: cover;
+  width: 80%;
+  height: 100%;
+  flex: 0.7;
+}
 
-.appliances-container{
-    padding-top: 20px;
-    width: 100%;
-    height: 100%;
+.appliances-container .appliances-cover div {
+  position: absolute;
+  width: 30%;
+  height: 250px;
+  right: 10%;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
 }
-.appliances-container .appliances-cover{
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    position: relative;
+.appliances-container .appliances-cover h5 {
+  font-size: 22px;
+  margin-left: 0;
+  width: 100%;
 }
-.appliances-container .appliances-cover img{
-    object-fit: cover;
+.appliances-container .appliances-cover h5 span {
+  display: block;
+}
+.appliances-container .appliances-cover h4 {
+  text-align: left;
+  width: 100%;
+  font-size: 30px;
+}
+.appliances-container h2 {
+  margin: 0;
+  margin: 50px 0 20px;
+  padding: 10px;
+  font-size: 28px;
+  text-align: center;
+  color: rgb(77, 77, 77);
+}
+.appliances-container .appliance-brand-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+.appliances-container
+  .appliance-brand-container
+  .appliance-brand-sub-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 1rem;
+  align-items: center;
+  cursor: pointer;
+}
+.appliances-container
+  .appliance-brand-container
+  .appliance-brand-sub-container
+  div {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.appliances-container .appliance-brand-container h5 {
+  font-size: 18px;
+}
+.appliances-container .appliance-brand-sub-container img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+@media (max-width: 601px) {
+  .appliances-container .appliances-cover div {
+    bottom: 0;
     width: 80%;
-    height: 100%;
-    flex: 0.7;
-}
-
-.appliances-container .appliances-cover div{
-    position: absolute;
-    width: 30%;
-    height: 250px;
+    height: 120px;
     right: 10%;
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-}
-.appliances-container .appliances-cover h5{
-    font-size: 22px;
-    margin-left: 0;
+  }
+  .appliances-container .appliances-cover h5 {
+    font-size: 20px;
+  }
+  .appliances-container .appliances-cover img {
     width: 100%;
-    font-family: 'Raleway', sans-serif;
-}
-.appliances-container .appliances-cover h5 span{
-    display: block;
-}
-.appliances-container .appliances-cover h4{
-    font-family: 'Lato', sans-serif;
-        text-align: left;
-    width: 100%;
-    font-size: 30px;
-}
-.appliances-container h2{
-    font-family: 'RocknRoll One', sans-serif;
-    margin: 0;
-    margin: 50px 0 20px;
-    padding: 10px;
-    font-size: 28px;
-    text-align: center;
-    color: rgb(77, 77, 77);
-}
-.appliances-container .appliance-brand-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-}
-.appliances-container .appliance-brand-container .appliance-brand-sub-container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 1rem;
-    align-items: center;
-    cursor: pointer;
-}
-.appliances-container .appliance-brand-container .appliance-brand-sub-container div{
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background-color: rgb(248, 248, 248);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.appliances-container .appliance-brand-container h5{
-    font-family: 'RocknRoll One', sans-serif;
-    font-size: 18px;
-}
-.appliances-container .appliance-brand-sub-container img{
-    width: 80%;
-    height: 80%;
-    object-fit: contain;
-}
-@media (max-width:601px){
-    .appliances-container .appliances-cover div{
-        bottom: 0;
-        width: 80%;
-        height: 120px;
-        right: 10%;
-    }
-    .appliances-container .appliances-cover h5{
-        font-size: 20px;
-    }
-    .appliances-container .appliances-cover img{
-        width: 100%;
-        object-fit: cover;
-        flex: 1;
-    }
-    .appliances-container .appliance-brand-container .appliance-brand-sub-container div{
-        width: 100px;
-        height: 100px;    
-    }
-    .appliances-container .appliance-brand-container h5{
-        font-size: 12px;
-    }
+    object-fit: cover;
+    flex: 1;
+  }
+  .appliances-container
+    .appliance-brand-container
+    .appliance-brand-sub-container
+    div {
+    width: 100px;
+    height: 100px;
+  }
+  .appliances-container .appliance-brand-container h5 {
+    font-size: 12px;
+  }
 }

@@ -11,7 +11,6 @@
 }
 
 .trending-admin-container h1 {
-  font-family: "Play", sans-serif;
   font-size: 20px;
   font-weight: bolder;
   color: #343434;
@@ -42,9 +41,7 @@
 .trending-admin-container-datas::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-.trending-admin-container-datas {
-  font-family: "Oswald", sans-serif;
-}
+
 .trending-admin-container-datas .trending-data {
   display: flex;
   margin-bottom: 20px;
@@ -55,7 +52,6 @@
   padding: 0 4px;
   color: #343434;
   text-transform: capitalize;
-  font-family: "Oswald", sans-serif;
 }
 .trending-header {
   display: flex;
@@ -68,7 +64,6 @@
   font-size: 12px;
   color: rgb(160, 160, 160);
   font-weight: lighter;
-  font-family: "Oswald", sans-serif;
   margin: 0;
 }
 .trending-header h5:first-child {

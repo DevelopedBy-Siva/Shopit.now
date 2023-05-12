@@ -14,7 +14,6 @@
   color: white;
   text-decoration: none;
   margin-top: 5px;
-  font-family: "Roboto Condensed", sans-serif;
   font-style: normal;
   font-weight: normal;
 }
@@ -38,7 +37,6 @@
   margin-top: -14px;
 }
 .footer-container .footer-logo h2 {
-  font-family: "Gugi", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 25px;
@@ -47,7 +45,6 @@
 }
 .footer-container .right-navi {
   color: white;
-  font-family: "Roboto Condensed", sans-serif;
   font-style: normal;
   font-weight: normal;
   padding-left: 20px;

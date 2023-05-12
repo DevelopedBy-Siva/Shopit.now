@@ -91,7 +91,11 @@ class Navbar extends Component {
               onClick={this.removeVisiblity}
               className="logo-container"
             >
-              <img src={APP_LOGO_BLACK} className="application-logo" />
+              <img
+                src={APP_LOGO_BLACK}
+                className="application-logo"
+                alt="app-logo"
+              />
             </Link>
             <div className="searchbar">
               <input

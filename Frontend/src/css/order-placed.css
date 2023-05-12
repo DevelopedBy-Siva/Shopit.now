@@ -8,7 +8,6 @@
 .order-placed-success-msg h5 {
   font-weight: bold;
   font-size: 25px;
-  font-family: "Roboto Condensed", sans-serif;
   text-align: center;
   padding: 10px 0;
   color: rgb(58, 188, 94);
@@ -29,7 +28,6 @@
   align-items: center;
 }
 .order-placed-success-msg .order-placed-sub h4 {
-  font-family: "Roboto Condensed", sans-serif;
   text-align: center;
   font-size: 16px;
 }

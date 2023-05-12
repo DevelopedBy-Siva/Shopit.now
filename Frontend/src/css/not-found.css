@@ -1,65 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+.not-found-container {
+  text-align: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 150px;
+}
+.not-found-icon {
+  transform: scale(12);
+  color: rgb(196, 196, 196);
+}
+.not-found-container h1 {
+  height: 180px;
+}
+.not-found-container h2 {
+  padding: 10px;
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: rgb(41, 41, 41);
+}
+.not-found-container p {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(80, 80, 80);
+}
+.not-found-container h3 .go-home {
+  text-decoration: none;
+  font-size: 25px;
+  color: rgb(54, 54, 54);
+}
+.not-found-container h3 {
+  margin-top: 20px;
+  background-color: rgb(196, 196, 196);
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100px;
+  padding: 5px;
+}
+.not-found-container h3:hover {
+  background-color: rgb(219, 219, 219);
+}
 
-.not-found-container{
-    text-align: center;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding-top: 150px;
-}
-.not-found-icon{
-    transform: scale(12);
-    color: rgb(196, 196, 196);
-}
-.not-found-container h1{
-    height: 180px;
-}
-.not-found-container h2{
-    padding: 10px;
-    font-size: 30px;
-    font-family: 'Anton', sans-serif;
-    letter-spacing:2px;
-    color: rgb(41, 41, 41);
-}
-.not-found-container p{
-    font-size: 18px;
-    font-weight: 500;
-    color: rgb(80, 80, 80);
-}
-.not-found-container h3 .go-home{
-    text-decoration: none;
+@media screen and (max-width: 500) {
+  .not-found-icon {
+    transform: scale(10);
+  }
+  .not-found-container h1 {
+    height: 160px;
+  }
+  .not-found-container h2 {
     font-size: 25px;
-    font-family: 'Anton', sans-serif;
-    color: rgb(54, 54, 54);
-}
-.not-found-container h3{
-    margin-top: 20px;
-    background-color: rgb(196, 196, 196);
-    cursor: pointer;
-    border-radius: 10px;
-    width: 100px;
-    padding: 5px;
-}
-.not-found-container h3:hover{
-    background-color: rgb(219, 219, 219);
-}
-
-
-@media screen and (max-width:500){
-    .not-found-icon{
-        transform: scale(10);
-    }
-    .not-found-container h1{
-        height: 160px;
-    }
-    .not-found-container h2{
-        font-size: 25px;
-    }
-    .not-found-container p{
-        font-size: 16px;
-    }
+  }
+  .not-found-container p {
+    font-size: 16px;
+  }
 }

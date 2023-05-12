@@ -1,7 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap");
-
 .role-admin-container {
   display: flex;
   height: 100%;
@@ -102,7 +98,6 @@
   font-weight: bold;
   border-radius: 50%;
   text-align: center;
-  font-family: "Bebas Neue", cursive;
 }
 .admin-full-container .admin-screen-error {
   position: relative;
@@ -110,7 +105,6 @@
   width: 100%;
   border-radius: 0 0 10px 10px;
   text-align: center;
-  font-family: "Bebas Neue", cursive;
   background-color: red;
   color: white;
   height: 0px;
@@ -133,21 +127,18 @@
 }
 
 .admin-container .admin-user-container div span:first-child {
-  font-family: "Oswald", sans-serif;
   font-size: 20px;
   padding-right: 10px;
 }
 .admin-container .admin-user-container div span:last-child {
   font-size: 10px;
   text-transform: uppercase;
-  font-family: "Bebas Neue", cursive;
   color: orangered;
 }
 .admin-container .admin-user-container div h4 {
   text-align: center;
   font-size: 18px;
   text-transform: lowercase;
-  font-family: "Oswald", sans-serif;
 }
 .admin-container .admin-controls {
   margin-top: 20px;
@@ -184,14 +175,12 @@
 .admin-container .admin-control-div div h2 {
   font-size: 14px;
   margin: 0;
-  font-family: "Oswald", sans-serif;
   padding-left: 5px;
   color: #a5a5a5;
 }
 .admin-container .admin-control-div h1 {
   font-size: 26px;
   margin: 0;
-  font-family: "Oswald", sans-serif;
   font-weight: bolder;
   color: #343434;
 }
@@ -241,7 +230,6 @@
   .dashboard-each-option
   div {
   display: flex;
-  font-family: "Oswald", sans-serif;
   align-items: center;
   height: 40px;
   width: 100;
@@ -291,7 +279,6 @@
   color: white;
   height: 40px;
   width: 100%;
-  font-family: "Oswald", sans-serif;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -353,7 +340,6 @@
 }
 .notification-container .no-notification {
   color: #cecece;
-  font-family: "Oswald", sans-serif;
   text-align: center;
   font-size: 14px;
   margin-left: 15px;
@@ -399,7 +385,6 @@
 
 .notification-container .notifications-display .notification-display-sub {
   width: 100%;
-  font-family: "Oswald", sans-serif;
   background-color: #343434;
   cursor: pointer;
   height: 55px !important;
@@ -495,7 +480,6 @@
 }
 .admin-full-container .all-users-container .all-users-sub-container h2 {
   font-size: 32px;
-  font-family: "Bebas Neue", cursive;
   font-weight: 500;
   padding: 10px;
   letter-spacing: 3px;
@@ -557,7 +541,6 @@
   .all-users-details-sub
   h4 {
   font-size: 18px;
-  font-family: "Oswald", sans-serif;
   text-transform: uppercase;
   overflow: hidden;
 }
@@ -568,7 +551,6 @@
   .all-users-details-sub
   h5 {
   font-size: 12px;
-  font-family: "Oswald", sans-serif;
   overflow: hidden;
 }
 .admin-full-container
@@ -607,7 +589,6 @@
   .user-details-1
   span {
   font-size: 40px;
-  font-family: "Bebas Neue", cursive;
   font-weight: 600;
   color: rgb(48, 48, 48);
 }
@@ -677,7 +658,6 @@
 }
 .admin-full-container .admin-settings-container h2 {
   font-size: 32px;
-  font-family: "Bebas Neue", cursive;
   font-weight: 500;
   padding: 10px;
   letter-spacing: 3px;
@@ -702,7 +682,6 @@
   align-items: center;
   text-align: center;
   font-size: 25px;
-  font-family: "Bebas Neue", cursive;
   font-weight: 500;
   background-color: rgb(48, 48, 48);
   color: white;
@@ -745,7 +724,6 @@
 }
 .admin-full-container .admin-settings-container .mainpulate-account h4 {
   color: red;
-  font-family: "Bebas Neue", cursive;
   font-size: 10px;
 }
 .mainpulate-account-visible {
@@ -767,7 +745,6 @@
   background-color: rgb(255, 196, 0);
   margin-top: 30px;
   border-radius: 5px;
-  font-family: "Bebas Neue", cursive;
   position: relative;
   width: 70px;
   height: 30px;
@@ -808,7 +785,6 @@
   left: 0;
   transition: all 0.4s ease-in-out;
   pointer-events: none;
-  font-family: "Bebas Neue", cursive;
 }
 .admin-settings-container .admin-setting-input-container input {
   width: 100%;
@@ -817,7 +793,6 @@
   outline: none;
   background: none;
   border: none;
-  font-family: "Bebas Neue", cursive;
 }
 
 .admin-settings-container .admin-setting-input-container input:focus ~ label,
@@ -829,7 +804,6 @@
 }
 .admin-settings-container .admin-setting-input-container h5 {
   color: red;
-  font-family: "Bebas Neue", cursive;
   font-size: 10px;
   position: absolute;
 }
@@ -888,7 +862,6 @@
 }
 .data-empty-animation-container h2,
 .network-error-animation-container h2 {
-  font-family: "Oswald", sans-serif;
   text-align: center;
   color: #a5a5a5;
   font-size: 16px;
@@ -952,7 +925,6 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  font-family: "Oswald", sans-serif;
   transform: translate(-50%, -50%);
   background-color: #343434;
   padding: 20px;

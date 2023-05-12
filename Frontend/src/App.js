@@ -3,7 +3,6 @@ import { Provider } from "react-redux";
 import store from "./State Management/store";
 import AppContainer from "./App Containers/AppContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 
 function App() {
   return (

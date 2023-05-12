@@ -11,7 +11,6 @@
 }
 
 .users-container h1 {
-  font-family: "Play", sans-serif;
   font-size: 20px;
   font-weight: bolder;
   color: #343434;
@@ -41,7 +40,6 @@
   overflow: hidden;
 }
 .admin-user-input-search {
-  font-family: "Oswald", sans-serif;
   width: 90%;
   height: 30px;
   margin: 10px 0 20px 0;
@@ -80,14 +78,12 @@
 }
 .users-each-container-datas h5 {
   margin: 0;
-  font-family: "Oswald", sans-serif;
   font-size: 14px;
   text-transform: capitalize;
   margin-left: 10px;
 }
 .admin-user-details h4 {
   margin: 0;
-  font-family: "Oswald", sans-serif;
   font-size: 10px;
   margin-left: 10px;
   color: #a5a5a5;

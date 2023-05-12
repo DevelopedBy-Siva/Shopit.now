@@ -44,7 +44,6 @@
 .login-container .registration-login-error h5 {
   font-weight: 600;
   font-size: 14px;
-  font-family: "Roboto Condensed", sans-serif;
 }
 .login-container .login-sub-container {
   padding: 0 20px;
@@ -74,7 +73,6 @@
   outline: none;
 }
 .login-container .login-sub-container h2 {
-  font-family: "Poppins", sans-serif;
   color: #343434;
   font-weight: 600;
   letter-spacing: 4px;
@@ -87,7 +85,6 @@
 }
 
 .login-container .dont-have-account {
-  font-family: "Gugi", sans-serif;
   color: rgb(48, 48, 48);
   font-size: 12px;
   padding: 8px;

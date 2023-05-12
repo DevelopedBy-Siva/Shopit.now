@@ -1,25 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
-
 .todays-deal-container {
   margin-top: 20px;
   padding: 10px;
   position: relative;
   height: 360px;
 }
-.todays-deal-container .todays-deal-error{
+.todays-deal-container .todays-deal-error {
   text-align: center;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 .todays-deal-container h2 {
   padding-bottom: 0px !important;
   padding: 10px;
   text-transform: uppercase;
   font-size: 20px;
-  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: bold;
 }
@@ -56,19 +52,16 @@
   color: #343434;
   font-size: 16px;
   width: 100%;
-  font-family: "Roboto", sans-serif;
   text-align: left;
   text-transform: capitalize;
   padding: 0;
   margin: 0;
-  text-overflow: ellipsis; 
-  overflow: hidden; 
+  text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
   margin-top: 10px !important;
-
 }
 .todays-deal-container .item-container h5 {
-  font-family: "Roboto", sans-serif;
   text-align: left;
   font-size: 14px;
   padding: 0;
@@ -76,13 +69,13 @@
   color: #5e5e5e;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
-.todays-deal-container .item-container h5 span{
+.todays-deal-container .item-container h5 span {
   font-size: 10px !important;
 }
 .todays-deal-container .item-container:hover img {
-  transform: scale(1.015); 
+  transform: scale(1.015);
   transform-origin: center;
 }
 .todays-deal-container .todays-deal-head {
@@ -90,7 +83,6 @@
   align-items: center;
 }
 .todays-deal-container .todays-deal-head span {
-  font-family: "Roboto", sans-serif;
   padding-left: 10px;
   color: #5e5e5e;
   font-size: 16px;
@@ -139,7 +131,7 @@
 .todays-deal-container .time-gen-container {
   font-size: 14px;
 }
-.todays-deal-container .time-gen-container span{
+.todays-deal-container .time-gen-container span {
   font-size: 14px;
   padding-left: 4px;
 }
@@ -147,18 +139,18 @@
   .todays-deal-container .time-gen-container {
     font-size: 10px !important;
   }
-  .todays-deal-container .time-gen-container span{
+  .todays-deal-container .time-gen-container span {
     font-size: 10px !important;
-  }  
+  }
   .todays-deal-container .btn-right,
-.todays-deal-container .btn-left {
-  height: 60px;
-  width: 20px;
-  padding: 2px 6px;
-}
-.todays-deal-container button .btn-lr-icons {
-  font-size: 20px;
-}
+  .todays-deal-container .btn-left {
+    height: 60px;
+    width: 20px;
+    padding: 2px 6px;
+  }
+  .todays-deal-container button .btn-lr-icons {
+    font-size: 20px;
+  }
   .todays-deal-container {
     height: 290px;
   }
