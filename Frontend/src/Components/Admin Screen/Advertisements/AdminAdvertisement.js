@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { FaSearch, FaExclamation } from "react-icons/fa";
 import Lottie from "lottie-react";
 import loadingIcon from "../../../animations/dataload.json";
 import countLoading from "../../../animations/loading.json";
@@ -299,7 +298,7 @@ class AdminAdvertisement extends Component {
             {productCountLoading ? (
               <Lottie animationData={countLoading} className="count-loading" />
             ) : productCountError ? (
-              <FontAwesomeIcon icon={faExclamation} className="count-error" />
+              <FaExclamation className="count-error" />
             ) : (
               <span>{productCount}</span>
             )}
@@ -309,7 +308,7 @@ class AdminAdvertisement extends Component {
             {adCountLoading ? (
               <Lottie animationData={countLoading} className="count-loading" />
             ) : adCountError ? (
-              <FontAwesomeIcon icon={faExclamation} className="count-error" />
+              <FaExclamation className="count-error" />
             ) : (
               <span>{adCount}</span>
             )}
@@ -328,7 +327,7 @@ class AdminAdvertisement extends Component {
           />
 
           <button onClick={this.handleSearch}>
-            <FontAwesomeIcon icon={faSearch} />
+            <FaSearch />
           </button>
         </div>
         <div className="ad-products-container">

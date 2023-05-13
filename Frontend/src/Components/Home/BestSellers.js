@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronRight,
-  faChevronLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import Lottie from "lottie-react";
 import loadAnim from "../../animations/dataload.json";
 import "../../css/bestseller.css";
@@ -74,10 +70,10 @@ class BestSellers extends Component {
               })}
             </div>
             <button onClick={this.handleScrollLeft} id="bestseller-btn-l">
-              <FontAwesomeIcon icon={faChevronLeft} />
+              <FaChevronLeft />
             </button>
             <button onClick={this.handleScrollRight} id="bestseller-btn-r">
-              <FontAwesomeIcon icon={faChevronRight} />
+              <FaChevronRight />
             </button>
           </>
         )}

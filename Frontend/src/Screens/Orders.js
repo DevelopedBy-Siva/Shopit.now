@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import APP_LOGO_BLACK from "../Icons/app-logo-black.svg";
 import { Link } from "react-router-dom";
-import { faAngleLeft, faCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaAngleLeft, FaCircle } from "react-icons/fa";
 import axios from "axios";
 import * as service from "../services/LoginReg";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../api/api";
@@ -162,7 +161,7 @@ class Orders extends Component {
       <div className="orders-container">
         <div className="order-container-nav">
           <Link to="/account" className="go-back">
-            <FontAwesomeIcon className="left-fa-icon" icon={faAngleLeft} />
+            <FaAngleLeft className="left-fa-icon" />
             <span className="go-back">Go Back</span>
           </Link>
           <Link to="/" className="order-logo-container">
@@ -327,11 +326,10 @@ class Orders extends Component {
                         >
                           Processing
                         </p>
-                        <FontAwesomeIcon
+                        <FaCircle
                           className={`faCircle ${
                             statusCode >= 1 ? "track-color-visible" : ""
                           }`}
-                          icon={faCircle}
                         />
                         {statusCode > 1 && <span />}
                       </li>
@@ -343,11 +341,10 @@ class Orders extends Component {
                         >
                           Dispatched
                         </p>
-                        <FontAwesomeIcon
+                        <FaCircle
                           className={`faCircle ${
                             statusCode >= 2 ? "track-color-visible" : ""
                           }`}
-                          icon={faCircle}
                         />
                         {statusCode > 2 && <span />}
                       </li>
@@ -359,11 +356,10 @@ class Orders extends Component {
                         >
                           Shipped
                         </p>
-                        <FontAwesomeIcon
+                        <FaCircle
                           className={`faCircle ${
                             statusCode >= 3 ? "track-color-visible" : ""
                           }`}
-                          icon={faCircle}
                         />
                         {statusCode > 3 && <span />}
                       </li>
@@ -375,11 +371,10 @@ class Orders extends Component {
                         >
                           Delivered
                         </p>
-                        <FontAwesomeIcon
+                        <FaCircle
                           className={`faCircle ${
                             statusCode === 4 ? "track-color-visible" : ""
                           }`}
-                          icon={faCircle}
                         />
                       </li>
                     </ul>

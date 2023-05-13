@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import APP_LOGO_WHITE from "../../../Icons/app-logo-white.svg";
 import logo from "../../../Icons/logo-now";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCog,
-  faSignOutAlt,
-  faHome,
-  faPlusCircle,
-  faListAlt,
-  faBullhorn,
-} from "@fortawesome/free-solid-svg-icons";
+  FaCog,
+  FaSignOutAlt,
+  FaHome,
+  FaPlusCircle,
+  FaListAlt,
+  FaBullhorn,
+} from "react-icons/fa";
 import DashBoardOptions from "./DashBoardOptions";
 
 class AdminDashboard extends Component {
@@ -40,32 +39,36 @@ class AdminDashboard extends Component {
               url="/"
               dashboardToggle={dashboardToggle}
               name="Dashboard"
-              fa={faHome}
-            />
+            >
+              <FaHome className={!dashboardToggle ? "" : "scale-svg"} />
+            </DashBoardOptions>
             <DashBoardOptions
               handleSmallDashboard={handleSmallDashboard}
               selectedScreen={selectedScreen}
               url="/admin/products"
               dashboardToggle={dashboardToggle}
               name="Products"
-              fa={faListAlt}
-            />
+            >
+              <FaListAlt className={!dashboardToggle ? "" : "scale-svg"} />
+            </DashBoardOptions>
             <DashBoardOptions
               handleSmallDashboard={handleSmallDashboard}
               selectedScreen={selectedScreen}
               url="/admin/add-product"
               dashboardToggle={dashboardToggle}
               name="Add Product"
-              fa={faPlusCircle}
-            />
+            >
+              <FaPlusCircle className={!dashboardToggle ? "" : "scale-svg"} />
+            </DashBoardOptions>
             <DashBoardOptions
               handleSmallDashboard={handleSmallDashboard}
               selectedScreen={selectedScreen}
               url="/admin/advertisement"
               dashboardToggle={dashboardToggle}
               name="Advertisement"
-              fa={faBullhorn}
-            />
+            >
+              <FaBullhorn className={!dashboardToggle ? "" : "scale-svg"} />
+            </DashBoardOptions>
           </div>
         </div>
         <div className="nav-btn">
@@ -75,14 +78,12 @@ class AdminDashboard extends Component {
             url="/admin/settings"
             dashboardToggle={dashboardToggle}
             name="Settings"
-            fa={faCog}
-          />
+          >
+            <FaCog className={!dashboardToggle ? "" : "scale-svg"} />
+          </DashBoardOptions>
           <div onClick={handleLogout} className={`dashboard-each-option`}>
             <div>
-              <FontAwesomeIcon
-                className={!dashboardToggle ? "" : "scale-svg"}
-                icon={faSignOutAlt}
-              />
+              <FaSignOutAlt className={!dashboardToggle ? "" : "scale-svg"} />
               <h5 className={!dashboardToggle ? "" : "hide-it"}>Logout</h5>
             </div>
           </div>

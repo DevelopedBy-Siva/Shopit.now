@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
+import { FaFilter, FaSyncAlt } from "react-icons/fa";
 import Lottie from "lottie-react";
 import _ from "lodash";
 
@@ -206,14 +205,13 @@ class NewOrders extends Component {
             <AdminOrdersError error={serverError ? errorMsg : adminError} />
           )}
           <div className="order-filter-header-r">
-            <FontAwesomeIcon
+            <FaSyncAlt
               className="refresh-orders"
               onClick={this.props.fetchOrders}
-              icon={faSyncAlt}
             />
             {data.length > 1 && (
               <div className="order-filter" onClick={this.diplayFilter}>
-                <FontAwesomeIcon icon={faFilter} />
+                <FaFilter />
                 <div
                   className={`order-filter-list ${
                     filter ? "order-filter-list-display" : ""

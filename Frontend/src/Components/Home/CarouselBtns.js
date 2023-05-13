@@ -1,6 +1,5 @@
 import React from "react";
-import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 
 function NextArrow(props) {
   const { style, onClick } = props;
@@ -10,7 +9,7 @@ function NextArrow(props) {
       style={style}
       onClick={onClick}
     >
-      <FontAwesomeIcon className="btn-lr-icons" size="3x" icon={faCaretRight} />
+      <FaCaretRight className="btn-lr-icons" />
     </button>
   );
 }
@@ -23,7 +22,7 @@ function PrevArrow(props) {
       style={style}
       onClick={onClick}
     >
-      <FontAwesomeIcon className="btn-lr-icons" size="3x" icon={faCaretLeft} />
+      <FaCaretLeft className="btn-lr-icons" />
     </button>
   );
 }

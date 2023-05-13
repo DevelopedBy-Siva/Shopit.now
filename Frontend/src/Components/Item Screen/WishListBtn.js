@@ -1,7 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
-import { faHeart as heartUnFilled } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as heartFill } from "@fortawesome/free-solid-svg-icons";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import Lottie from "lottie-react";
 import loadingAnim from "../../animations/dataload.json";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
@@ -109,10 +107,7 @@ class WishListBtn extends Component {
               <div className="wishlist-btn-loading-c" />
             </>
           )}
-          <FontAwesomeIcon
-            icon={wishlisted ? heartFill : heartUnFilled}
-            color={wishlisted ? "red" : ""}
-          />
+          {wishlisted ? <AiFillHeart /> : <AiOutlineHeart />}
           <span>Wishlist{wishlisted && "ed"}</span>
           {serverError && <h4>Cannot use it right now, try again later.</h4>}
         </button>

@@ -5,12 +5,7 @@ import * as Yup from "yup";
 import { passwordPattern, passwordRule } from "../datas/passwordPattern";
 import MainAccountContainer from "../Components/Account Screen/MainAccountContainer";
 import AccountContainerInput from "../Components/Home/AccountContainerInput";
-import {
-  faCamera,
-  faAngleRight,
-  faTimesCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaCamera, FaAngleRight, FaTimesCircle } from "react-icons/fa";
 import APP_LOGO_WHITE from "../Icons/app-logo-white.svg";
 import Lottie from "lottie-react";
 import loading from "../animations/smallLoad.json";
@@ -74,10 +69,7 @@ class Account extends MainAccountContainer {
                     accept="image/*"
                     type="file"
                   />
-                  <FontAwesomeIcon
-                    className="camera-icon-click"
-                    icon={faCamera}
-                  />
+                  <FaCamera className="camera-icon-click" />
                 </label>
               </div>
               <h3>{user.fullname}</h3>
@@ -94,7 +86,7 @@ class Account extends MainAccountContainer {
               {account.map((item, index) => (
                 <Link key={index} to={item.to} className="user-options">
                   <span className="user-options-link">{item.name}</span>
-                  <FontAwesomeIcon icon={faAngleRight} />
+                  <FaAngleRight />
                 </Link>
               ))}
               <div
@@ -107,7 +99,7 @@ class Account extends MainAccountContainer {
                 className="user-options"
               >
                 <span className="user-options-link">Change Password</span>
-                <FontAwesomeIcon icon={faAngleRight} />
+                <FaAngleRight />
               </div>
               <div
                 onClick={() =>
@@ -119,7 +111,7 @@ class Account extends MainAccountContainer {
                 className="user-options"
               >
                 <span className="user-options-link">Delete Account</span>
-                <FontAwesomeIcon icon={faAngleRight} />
+                <FaAngleRight />
               </div>
               <div
                 onClick={() =>
@@ -131,7 +123,7 @@ class Account extends MainAccountContainer {
                 className="user-options-logout"
               >
                 <span className="user-options-link-logout">Logout</span>
-                <FontAwesomeIcon icon={faAngleRight} />
+                <FaAngleRight />
               </div>
             </div>
           </div>
@@ -187,7 +179,7 @@ class Account extends MainAccountContainer {
                   type="password"
                   name="Re-enter Password"
                 />
-                <FontAwesomeIcon
+                <FaTimesCircle
                   onClick={() =>
                     this.closeChange(
                       "background-overlay-change",
@@ -195,7 +187,6 @@ class Account extends MainAccountContainer {
                     )
                   }
                   className="close-btn"
-                  icon={faTimesCircle}
                 />
                 <button type="submit" className="password-change-btn">
                   Change

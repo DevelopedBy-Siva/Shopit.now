@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaExclamationCircle, FaBell } from "react-icons/fa";
 import { getJwt } from "../../../../services/LoginReg";
 import {
   api_endpoints as API_ENDPOINT,
@@ -102,7 +100,7 @@ class Notifications extends Component {
     return (
       <div className="notification-container">
         {notificationCount > 0 && <h3>{notificationCount}</h3>}
-        <FontAwesomeIcon onClick={this.handleNotification} icon={faBell} />
+        <FaBell onClick={this.handleNotification} />
         <div
           className={`notifications-display ${
             notificationToggle ? "notifications-display-visible" : ""
@@ -110,7 +108,7 @@ class Notifications extends Component {
         >
           {notificationError ? (
             <div className="notification-error">
-              <FontAwesomeIcon size="4x" icon={faExclamationCircle} />
+              <FaExclamationCircle />
               <h4>Server error occured. Try after sometime...</h4>
             </div>
           ) : notifications.length === 0 ? (

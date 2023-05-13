@@ -6,8 +6,7 @@ import {
 } from "../../../api/api";
 import axios from "axios";
 import { getJwt, getCurrentUser } from "../../../services/LoginReg";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaCamera } from "react-icons/fa";
 import loadingAnim from "../../../animations/dataload.json";
 import Lottie from "lottie-react";
 
@@ -136,7 +135,7 @@ class UserDetails extends Component {
               onChange={this.handleImageChange}
               style={{ display: "none" }}
             />
-            <FontAwesomeIcon id="camera-logo" icon={faCamera} />
+            <FaCamera id="camera-logo" />
           </label>
         </div>
         <div>

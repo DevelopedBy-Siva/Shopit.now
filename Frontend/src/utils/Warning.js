@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
+import React, { Component } from "react";
+import { FaExclamationCircle } from "react-icons/fa";
 
 class Warning extends Component {
-
-    render() {
-        return (
-            <FontAwesomeIcon className="warning-icon" icon={faExclamationCircle} />
-        );
-    }
+  render() {
+    return <FaExclamationCircle className="warning-icon" />;
+  }
 }
 
 export default Warning;

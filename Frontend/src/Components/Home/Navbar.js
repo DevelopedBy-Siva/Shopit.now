@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as service from "../../services/LoginReg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
   mapDispatchToProps,
   mapStateToProps,
@@ -185,4 +186,4 @@ class Navbar extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar));
