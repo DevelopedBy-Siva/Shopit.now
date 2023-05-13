@@ -1,13 +1,19 @@
 .footer-container {
   margin-top: 20px;
+  padding: 20px;
+  background-color: #343434;
+}
+
+.footer-container .wrapper {
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
   align-items: center;
-  justify-content: space-evenly;
-  padding: 20px;
-  background-color: #343434;
+  justify-content: center;
+  margin: auto;
+  max-width: 920px;
 }
+
 .footer-container .footer-navi-link {
   display: block;
   font-size: 14px;
@@ -18,9 +24,9 @@
 }
 .footer-container .left-navi,
 .footer-container .mid-navi {
-  width: 160px;
   text-align: left;
   padding: 20px;
+  flex: 1;
 }
 .footer-container .footer-logo {
   display: flex;
@@ -55,30 +61,29 @@
 .footer-container .right-navi .fontawsm-logo {
   display: flex;
   align-items: center;
+  margin-top: 14px;
 }
-.footer-container .right-navi .fontawsm {
-  margin-bottom: 8px;
+.footer-container .right-navi .icon {
+  margin-bottom: 7px;
+  font-size: 18px;
 }
 .footer-container .right-navi h4 {
   padding-left: 5px;
-  font-size: 20px;
+  font-size: 16px;
 }
 .footer-container .right-navi h5 {
   font-size: 13px;
   font-weight: 300;
 }
+
 @media (max-width: 500px) {
   .footer-container .footer-navi-link {
     font-size: 12px;
   }
-  .footer-container .left-navi,
-  .footer-container .mid-navi {
-    width: 120px;
-  }
   .footer-container .right-navi h4 {
-    font-size: 18px;
+    font-size: 13px;
   }
   .footer-container .right-navi h5 {
-    font-size: 12px;
+    font-size: 11px;
   }
 }

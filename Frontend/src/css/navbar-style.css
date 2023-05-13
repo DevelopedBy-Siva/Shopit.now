@@ -74,12 +74,12 @@
 }
 
 .navbar-container .account-space .searchbar .search-icon {
-  width: 38px;
-  max-width: 38px;
+  width: 42px;
+  max-width: 42px;
   position: relative;
   cursor: pointer;
   border: none;
-  font-size: 18px;
+  font-size: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,7 +110,9 @@
   position: relative;
   cursor: pointer;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 20px;
+  color: #000 !important;
+  transform: translateY(-3px);
 }
 .navbar-container .account-space .user-details .cart-icon .warning-icon {
   position: absolute;
@@ -121,22 +123,18 @@
 }
 .navbar-container .account-space .user-details .cart-icon span {
   position: absolute;
-  top: -12px;
-  left: 10px;
+  top: -8px;
+  left: 5px;
   background: #c4c4c4;
   padding: 1px 5px;
   border-radius: 50%;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   color: black !important;
   text-decoration: none !important;
 }
 
-.navbar-container .account-space .user-details .cart-icon i {
-  color: black !important;
-}
-
-.navbar-container .account-space .user-details .cart-icon i:hover {
+.navbar-container .account-space .user-details .cart-icon:hover .icon {
   color: red !important;
 }
 
@@ -289,7 +287,7 @@
     display: none;
   }
   .navbar-container .account-space .searchbar .search-icon {
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .navbar-container .account-space .searchbar input {

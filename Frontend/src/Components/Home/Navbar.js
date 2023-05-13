@@ -9,6 +9,9 @@ import {
 import Warning from "../../utils/Warning";
 import LogoContainer from "../Logo";
 import "../../css/navbar-style.css";
+import { BsSearch } from "react-icons/bs";
+import { RiShoppingCartFill } from "react-icons/ri";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const categories = [
   {
@@ -101,7 +104,7 @@ class Navbar extends Component {
                 className="search-icon"
                 type="submit"
               >
-                <i className="fa fa-search fa-xs" aria-hidden="true"></i>
+                <BsSearch className="icon" />
               </button>
             </form>
             <div className="user-details">
@@ -120,12 +123,12 @@ class Navbar extends Component {
                 onClick={this.removeVisiblity}
                 className="cart-icon"
               >
-                <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+                <RiShoppingCartFill className="icon" />
                 {!cartFetch.error ? <span>{this.cartLen}</span> : <Warning />}
               </Link>
             </div>
             <div onClick={this.menuVisibility} className="menu-toggle">
-              <i className="fa fa-bars" aria-hidden="true"></i>
+              <GiHamburgerMenu />
             </div>
           </div>
         </div>
@@ -147,7 +150,7 @@ class Navbar extends Component {
               onClick={this.removeVisiblity}
               className="cart-icon"
             >
-              <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+              <RiShoppingCartFill className="icon" />
               {!cartFetch.error ? <span>{this.cartLen}</span> : <Warning />}
             </Link>
           </div>
