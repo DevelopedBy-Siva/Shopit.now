@@ -1,6 +1,6 @@
 .navbar-container {
   width: 100%;
-  height: 90px;
+  height: 70px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -21,13 +21,11 @@
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .logo-container {
-  width: 150px;
-  max-width: 150px;
-  padding: 0 5px;
-}
-.logo-container img {
+  font-weight: 400;
+  color: #000 !important;
+  font-size: 20px;
   cursor: pointer;
-  width: 100%;
+  text-decoration: none !important;
 }
 
 .navbar-container .account-space {
@@ -38,10 +36,10 @@
   align-items: center;
 }
 .navbar-container .account-space .searchbar {
-  width: 750px;
-  max-width: 750px;
-  margin: 0 4px 0 0;
-  height: 35px;
+  width: 340px;
+  max-width: 340px;
+  margin-right: 15px;
+  height: 34px;
   display: flex;
   background: #fafafa;
   border: 1px solid #e8e8e8;
@@ -49,7 +47,7 @@
   border-radius: 5px;
 }
 .navbar-container .account-space .searchbar input {
-  padding: 2px 10px 0px 10px;
+  padding: 0 10px;
   font-size: 16px;
   height: 100%;
   border: 0px;
@@ -61,29 +59,29 @@
 }
 
 .navbar-container .account-space .searchbar input::-webkit-input-placeholder {
-  font-weight: 100;
+  font-size: 14px;
 }
 
 .navbar-container .account-space .searchbar input:-ms-input-placeholder {
-  font-weight: 100;
+  font-size: 14px;
 }
 
 .navbar-container .account-space .searchbar input::placeholder {
-  font-weight: 100;
+  font-size: 14px;
+  letter-spacing: 1px;
 }
 
 .navbar-container .account-space .searchbar .search-icon {
-  background: #e8e8e8;
-  padding: 2px;
-  width: 45px;
-  max-width: 45px;
+  width: 38px;
+  max-width: 38px;
   position: relative;
   cursor: pointer;
-}
-
-.svg-search-icon {
-  position: absolute;
-  top: -2px;
+  border: none;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
 }
 
 .navbar-container .account-space .user-details {
@@ -95,12 +93,13 @@
   color: black;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
-  margin-right: 8px;
+  font-size: 15px;
+  margin-right: 14px;
   box-sizing: border-box;
   font-weight: 400;
   text-transform: uppercase;
 }
+
 .navbar-container .account-space .user-details .user-links:hover {
   color: red;
 }
@@ -108,41 +107,46 @@
   position: relative;
   cursor: pointer;
   text-decoration: none;
+  font-size: 18px;
 }
 .navbar-container .account-space .user-details .cart-icon .warning-icon {
   position: absolute;
-  top: -12px;
-  left: 12px;
-  color: rgb(255, 38, 0);
-  font-size: 16px;
+  top: -8px;
+  left: 10px;
+  color: rgb(255, 187, 0);
+  font-size: 12px;
 }
 .navbar-container .account-space .user-details .cart-icon span {
   position: absolute;
   top: -12px;
-  left: 15px;
+  left: 10px;
   background: #c4c4c4;
   padding: 1px 5px;
   border-radius: 50%;
   font-size: 10px;
   font-weight: 600;
   color: black !important;
+  text-decoration: none !important;
 }
+
+.navbar-container .account-space .user-details .cart-icon i {
+  color: black !important;
+}
+
 .navbar-container .categories-space {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   text-align: center;
-  height: 40px;
-  align-items: center;
 }
 .navbar-container .categories-space .categories-link {
   text-decoration: none;
   color: black;
-  margin: 0 10px;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
-  width: 90px;
+  font-size: 15px;
+  margin-right: 14px;
 }
 .navbar-container .categories-space .categories-link:hover {
   color: red;

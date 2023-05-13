@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import "../../css/navbar-style.css";
-import APP_LOGO_BLACK from "../../Icons/app-logo-black.svg";
 import cart from "../../Icons/cart";
-import search from "../../Icons/search";
 import menu from "../../Icons/menu-toggle";
 import * as service from "../../services/LoginReg";
 import { Link } from "react-router-dom";
@@ -12,6 +9,7 @@ import {
   mapStateToProps,
 } from "../../State Management/MappingStates";
 import Warning from "../../utils/Warning";
+import "../../css/navbar-style.css";
 
 const categoriesLink = [
   "",
@@ -49,7 +47,7 @@ class Navbar extends Component {
     this.setState({ cartLen, loggedIn, notLogged, categories });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, _) {
     const userCart = this.props.userCart;
     if (prevProps.userCart !== userCart)
       this.setState({ cartLen: userCart.length });
@@ -71,10 +69,8 @@ class Navbar extends Component {
 
   handleSearch = () => {
     const { query } = this.state;
-    if (query.length > 0) {
-      return `/search/${query}`;
-    }
-    return "/";
+    // if (query.length > 0) `/search/${query}`
+    return;
   };
 
   render() {
@@ -91,26 +87,35 @@ class Navbar extends Component {
               onClick={this.removeVisiblity}
               className="logo-container"
             >
-              <img
-                src={APP_LOGO_BLACK}
-                className="application-logo"
-                alt="app-logo"
-              />
+              Shopit.now
             </Link>
-            <div className="searchbar">
+            <div className="categories-space">
+              {categories.map((data, index) => (
+                <Link
+                  onClick={this.removeVisiblity}
+                  className="categories-link"
+                  key={index}
+                  to={`/${categoriesLink[index]}`}
+                >
+                  {data}
+                </Link>
+              ))}
+            </div>
+            <form className="searchbar" onSubmit={this.handleSearch}>
               <input
                 onChange={this.handleSearchQuery}
                 value={query}
-                placeholder="Search Products, Brands and so on..."
+                placeholder="Search..."
               />
-              <Link
+              <button
                 onClick={this.removeVisiblity}
                 to={this.handleSearch}
                 className="search-icon"
+                type="submit"
               >
-                {search}
-              </Link>
-            </div>
+                <i class="fa fa-search fa-xs" aria-hidden="true"></i>
+              </button>
+            </form>
             <div className="user-details">
               {whatToshow.map((data, index) => (
                 <Link
@@ -127,25 +132,13 @@ class Navbar extends Component {
                 onClick={this.removeVisiblity}
                 className="cart-icon"
               >
-                {cart}
+                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                 {!cartFetch.error ? <span>{cartLen}</span> : <Warning />}
               </Link>
             </div>
             <div onClick={this.menuVisibility} className="menu-toggle">
               {menu}
             </div>
-          </div>
-          <div className="categories-space">
-            {categories.map((data, index) => (
-              <Link
-                onClick={this.removeVisiblity}
-                className="categories-link"
-                key={index}
-                to={`/${categoriesLink[index]}`}
-              >
-                {data}
-              </Link>
-            ))}
           </div>
         </div>
         <div className={menuVisible ? "menuVisible" : "menu-container"}>
