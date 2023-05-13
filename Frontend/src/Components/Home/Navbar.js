@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import cart from "../../Icons/cart";
-import menu from "../../Icons/menu-toggle";
 import * as service from "../../services/LoginReg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -9,49 +7,46 @@ import {
   mapStateToProps,
 } from "../../State Management/MappingStates";
 import Warning from "../../utils/Warning";
+import LogoContainer from "../Logo";
 import "../../css/navbar-style.css";
 
-const categoriesLink = [
-  "",
-  "kidsandbaby",
-  "fashions",
-  "mobiles",
-  "laptops",
-  "appliances",
+const categories = [
+  {
+    name: "home",
+    link: "",
+  },
+  {
+    name: "kids & baby",
+    link: "kidsandbaby",
+  },
+  {
+    name: "fashion",
+    link: "fashions",
+  },
+  {
+    name: "mobiles",
+    link: "mobiles",
+  },
+  {
+    name: "laptops",
+    link: "laptops",
+  },
+  {
+    name: "appliances",
+    link: "appliances",
+  },
 ];
+
+const loggedIn = ["account", "wishlist"];
+const notLogged = ["login", "register"];
 
 class Navbar extends Component {
   state = {
-    loggedIn: [],
-    notLogged: [],
-    categories: [],
     menuVisible: false,
-    cartLen: 0,
     query: "",
   };
 
-  componentDidMount() {
-    const loggedIn = ["account", "wishlist"];
-    const notLogged = ["login", "register"];
-    const categories = [
-      "HOME",
-      "KIDS & BABY",
-      "FASHION",
-      "MOBILES",
-      "LAPTOPS",
-      "APPLIANCES",
-    ];
-    let cartLen = 0;
-    const userCart = this.props.userCart;
-    if (service.getCurrentUser() && userCart) cartLen = userCart.length;
-    this.setState({ cartLen, loggedIn, notLogged, categories });
-  }
-
-  componentDidUpdate(prevProps, _) {
-    const userCart = this.props.userCart;
-    if (prevProps.userCart !== userCart)
-      this.setState({ cartLen: userCart.length });
-  }
+  cartLen = this.props.userCart.length;
 
   menuVisibility = () => {
     const { menuVisible } = this.state;
@@ -67,37 +62,31 @@ class Navbar extends Component {
     this.setState({ query: e.currentTarget.value });
   };
 
-  handleSearch = () => {
+  handleSearch = (e) => {
+    e.preventDefault();
     const { query } = this.state;
-    // if (query.length > 0) `/search/${query}`
+    if (query.length > 0) this.props.history.push(`/search/${query}`);
     return;
   };
 
   render() {
-    const { menuVisible, loggedIn, notLogged, cartLen, categories, query } =
-      this.state;
+    const { menuVisible, query } = this.state;
     const { user, cartFetch } = this.props;
     const whatToshow = user ? loggedIn : notLogged;
     return (
       <>
         <div className="navbar-container">
           <div className="account-space">
-            <Link
-              to="/"
-              onClick={this.removeVisiblity}
-              className="logo-container"
-            >
-              Shopit.now
-            </Link>
+            <LogoContainer />
             <div className="categories-space">
               {categories.map((data, index) => (
                 <Link
                   onClick={this.removeVisiblity}
                   className="categories-link"
                   key={index}
-                  to={`/${categoriesLink[index]}`}
+                  to={`/${data.link}`}
                 >
-                  {data}
+                  {data.name}
                 </Link>
               ))}
             </div>
@@ -109,11 +98,10 @@ class Navbar extends Component {
               />
               <button
                 onClick={this.removeVisiblity}
-                to={this.handleSearch}
                 className="search-icon"
                 type="submit"
               >
-                <i class="fa fa-search fa-xs" aria-hidden="true"></i>
+                <i className="fa fa-search fa-xs" aria-hidden="true"></i>
               </button>
             </form>
             <div className="user-details">
@@ -132,12 +120,12 @@ class Navbar extends Component {
                 onClick={this.removeVisiblity}
                 className="cart-icon"
               >
-                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                {!cartFetch.error ? <span>{cartLen}</span> : <Warning />}
+                <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+                {!cartFetch.error ? <span>{this.cartLen}</span> : <Warning />}
               </Link>
             </div>
             <div onClick={this.menuVisibility} className="menu-toggle">
-              {menu}
+              <i className="fa fa-bars" aria-hidden="true"></i>
             </div>
           </div>
         </div>
@@ -159,8 +147,8 @@ class Navbar extends Component {
               onClick={this.removeVisiblity}
               className="cart-icon"
             >
-              {cart}
-              {!cartFetch.error ? <span>{cartLen}</span> : <Warning />}
+              <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+              {!cartFetch.error ? <span>{this.cartLen}</span> : <Warning />}
             </Link>
           </div>
           <ul>
@@ -170,9 +158,9 @@ class Navbar extends Component {
                 <Link
                   onClick={this.removeVisiblity}
                   className="menu-categories-links"
-                  to={`/${categoriesLink[index]}`}
+                  to={`/${data.link}`}
                 >
-                  {data}
+                  {data.name}
                 </Link>
               </li>
             ))}

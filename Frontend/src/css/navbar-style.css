@@ -1,6 +1,6 @@
 .navbar-container {
   width: 100%;
-  height: 70px;
+  height: 64px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -36,39 +36,41 @@
   align-items: center;
 }
 .navbar-container .account-space .searchbar {
-  width: 340px;
-  max-width: 340px;
-  margin-right: 15px;
-  height: 34px;
+  width: 380px;
+  max-width: 380px;
+  margin: 0 15px;
+  height: 32px;
   display: flex;
   background: #fafafa;
   border: 1px solid #e8e8e8;
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 .navbar-container .account-space .searchbar input {
   padding: 0 10px;
-  font-size: 16px;
+  font-size: 14px;
   height: 100%;
   border: 0px;
   outline: none;
   width: 100%;
   background: none;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 300;
 }
 
 .navbar-container .account-space .searchbar input::-webkit-input-placeholder {
-  font-size: 14px;
+  font-size: 13px;
+  opacity: 0.6;
 }
 
 .navbar-container .account-space .searchbar input:-ms-input-placeholder {
-  font-size: 14px;
+  font-size: 13px;
+  opacity: 0.6;
 }
 
 .navbar-container .account-space .searchbar input::placeholder {
-  font-size: 14px;
-  letter-spacing: 1px;
+  font-size: 13px;
+  opacity: 0.6;
 }
 
 .navbar-container .account-space .searchbar .search-icon {
@@ -77,11 +79,12 @@
   position: relative;
   cursor: pointer;
   border: none;
-  font-size: 20px;
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: none;
+  opacity: 0.6;
 }
 
 .navbar-container .account-space .user-details {
@@ -93,11 +96,11 @@
   color: black;
   font-style: normal;
   font-weight: normal;
-  font-size: 15px;
-  margin-right: 14px;
+  font-size: 14px;
+  margin-right: 12px;
   box-sizing: border-box;
   font-weight: 400;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .navbar-container .account-space .user-details .user-links:hover {
@@ -133,6 +136,10 @@
   color: black !important;
 }
 
+.navbar-container .account-space .user-details .cart-icon i:hover {
+  color: red !important;
+}
+
 .navbar-container .categories-space {
   display: flex;
   justify-content: center;
@@ -145,8 +152,10 @@
   color: black;
   font-style: normal;
   font-weight: normal;
-  font-size: 15px;
-  margin-right: 14px;
+  font-size: 14px;
+  margin-right: 16px;
+  text-transform: capitalize;
+  font-weight: 400;
 }
 .navbar-container .categories-space .categories-link:hover {
   color: red;
@@ -154,6 +163,11 @@
 .navbar-container .account-space .menu-toggle {
   display: none;
 }
+
+.navbar-container .account-space .menu-toggle .fa-bars {
+  font-size: 16px;
+}
+
 .menu-container {
   z-index: 99999;
   right: 0;
@@ -232,7 +246,7 @@
   font-size: 14px;
 }
 .menu-categories-head {
-  text-transform: uppercase;
+  text-transform: capitalize;
   background-color: #d6d5d5;
   padding: 5px;
   text-align: center;
@@ -246,48 +260,23 @@
   display: block;
   text-decoration: none !important;
   color: white !important;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 .menu-categories-links {
   width: 100%;
   display: block;
   text-decoration: none !important;
   color: black !important;
+  text-transform: capitalize;
 }
-@media (max-width: 960px) {
-  .navbar-container h1 {
-    font-size: 26px;
+@media (max-width: 980px) {
+  .navbar-container {
+    height: 55px;
   }
-  .navbar-container .account-space .searchbar input {
-    font-size: 16px;
-  }
-  .navbar-container .account-space .user-details .user-links {
-    font-size: 14px;
-  }
+
   .navbar-container .account-space .searchbar {
-    height: 35px;
+    height: 26px;
   }
-  .navbar-container .account-space .searchbar .search-icon {
-    width: 40px;
-  }
-  .navbar-container .account-space .user-details .cart-icon span {
-    font-size: 10px;
-    top: -12px;
-    left: 10px;
-  }
-  .navbar-container .categories-space .categories-link {
-    font-size: 14px;
-  }
-}
-@media (max-width: 768px) {
-  .navbar-container .categories-space .categories-link {
-    font-size: 12px;
-  }
-  .navbar-container h1 {
-    font-size: 20px;
-  }
-}
-@media (max-width: 651px) {
   .navbar-container .account-space .user-details {
     display: none !important;
   }
@@ -299,27 +288,23 @@
   .navbar-container .categories-space {
     display: none;
   }
-  .navbar-container {
-    height: 70px;
+  .navbar-container .account-space .searchbar .search-icon {
+    font-size: 15px;
   }
-  .navbar-container h1 {
-    font-size: 18px;
-  }
-  .navbar-container .account-space .searchbar {
-    height: 32px;
-  }
+
   .navbar-container .account-space .searchbar input {
     font-size: 14px;
   }
-}
-@media (max-width: 329px) {
-  .navbar-container h1 {
-    font-size: 16px;
+
+  .navbar-container .account-space .searchbar input::-webkit-input-placeholder {
+    font-size: 12px;
   }
-  .navbar-container .account-space .searchbar {
-    height: 28px;
+
+  .navbar-container .account-space .searchbar input:-ms-input-placeholder {
+    font-size: 12px;
   }
-  .navbar-container .account-space .searchbar input {
-    font-size: 10px;
+
+  .navbar-container .account-space .searchbar input::placeholder {
+    font-size: 12px;
   }
 }

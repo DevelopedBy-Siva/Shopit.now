@@ -50,7 +50,7 @@ class BestSellers extends Component {
     const { onClick } = this.props;
     return (
       <div className="bestseller-main-container">
-        <h2>BEST SELLERS IN MOBILES, LAPTOPS & ACCESSORIES</h2>
+        <h2>Best sellers in Mobiles, Laptops & Accessories</h2>
         {loading ? (
           <Lottie animationData={loadAnim} className="bestseller-loading" />
         ) : error ? (
