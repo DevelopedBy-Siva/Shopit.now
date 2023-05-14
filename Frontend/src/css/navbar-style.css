@@ -202,7 +202,6 @@
   width: calc(100% - 32px);
   max-width: 330px;
   background-color: #fff;
-  transition: all 0.5s ease-in-out;
   overflow-y: auto;
   box-shadow: -2px 0px 2px rgba(37, 37, 37, 0.163);
 }
@@ -253,7 +252,6 @@
   color: #fff;
   font-size: 21px;
   transform: translateY(-2px);
-  border-radius: 10px;
 }
 .menu-user-details .cart-icon span {
   position: absolute;
@@ -262,6 +260,7 @@
   color: #fff;
   font-size: 14px;
   font-weight: 300;
+  pointer-events: none;
 }
 .menu-user-details .cart-icon .warning-icon {
   position: absolute;
@@ -269,6 +268,7 @@
   right: 2px;
   color: rgb(255, 187, 0);
   font-size: 14px;
+  pointer-events: none;
 }
 .menu-categories-head {
   text-transform: capitalize;

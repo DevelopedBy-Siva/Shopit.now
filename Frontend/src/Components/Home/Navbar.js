@@ -3,6 +3,8 @@ import * as service from "../../services/LoginReg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import ReactFocusLock from "react-focus-lock";
+import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import {
   mapDispatchToProps,
   mapStateToProps,
@@ -14,7 +16,6 @@ import { BsSearch } from "react-icons/bs";
 import { RiShoppingCartFill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
-import ReactFocusLock from "react-focus-lock";
 
 const categories = [
   {
@@ -134,17 +135,19 @@ class Navbar extends Component {
             </div>
           </div>
         </div>
-        {menuVisible && (
-          <MenuContainer
-            menuVisibility={this.menuVisibility}
-            whatToshow={whatToshow}
-            removeVisiblity={this.removeVisiblity}
-            cartLen={this.cartLen}
-            cartFetch={cartFetch}
-            categories={categories}
-            user={user}
-          />
-        )}
+        <AnimatePresence>
+          {menuVisible && (
+            <MenuContainer
+              menuVisibility={this.menuVisibility}
+              whatToshow={whatToshow}
+              removeVisiblity={this.removeVisiblity}
+              cartLen={this.cartLen}
+              cartFetch={cartFetch}
+              categories={categories}
+              user={user}
+            />
+          )}
+        </AnimatePresence>
       </>
     );
   }
@@ -162,10 +165,27 @@ function MenuContainer({
   return (
     <ReactFocusLock>
       <div className="nav-menu">
-        <div className="menu-cover" onClick={menuVisibility}>
+        <motion.div
+          className="menu-cover"
+          onClick={menuVisibility}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ type: "spring", bounce: 0, duration: 0.3 }}
+        >
           <IoClose className="icon" />
-        </div>
-        <div className="menuVisible">
+        </motion.div>
+        <motion.div
+          className="menuVisible"
+          initial={{ x: "100%" }}
+          animate={{
+            x: 0,
+          }}
+          exit={{
+            x: "100%",
+          }}
+          transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+        >
           <div className="menu-user-details">
             {whatToshow.map((data, index) => (
               <span key={index}>
@@ -208,7 +228,7 @@ function MenuContainer({
               </div>
             )}
           </ul>
-        </div>
+        </motion.div>
       </div>
     </ReactFocusLock>
   );
