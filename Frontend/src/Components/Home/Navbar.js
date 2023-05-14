@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import * as service from "../../services/LoginReg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -162,6 +162,13 @@ function MenuContainer({
   categories,
   user,
 }) {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  });
+
   return (
     <ReactFocusLock>
       <div className="nav-menu">
@@ -203,19 +210,21 @@ function MenuContainer({
               {!cartFetch.error ? <span>{cartLen}</span> : <Warning />}
             </Link>
           </div>
-          <ul>
-            <div className="menu-categories-head">Categories</div>
-            {categories.map((data, index) => (
-              <li className="menu-items" key={index}>
-                <Link
-                  onClick={removeVisiblity}
-                  className="menu-categories-links"
-                  to={`/${data.link}`}
-                >
-                  {data.name}
-                </Link>
-              </li>
-            ))}
+          <div className="menu-options-wrapper">
+            <ul>
+              <div className="menu-categories-head">Categories</div>
+              {categories.map((data, index) => (
+                <li className="menu-items" key={index}>
+                  <Link
+                    onClick={removeVisiblity}
+                    className="menu-categories-links"
+                    to={`/${data.link}`}
+                  >
+                    {data.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
             {user && (
               <div className="logout">
                 <Link
@@ -227,7 +236,7 @@ function MenuContainer({
                 </Link>
               </div>
             )}
-          </ul>
+          </div>
         </motion.div>
       </div>
     </ReactFocusLock>
