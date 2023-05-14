@@ -13,6 +13,8 @@ import "../../css/navbar-style.css";
 import { BsSearch } from "react-icons/bs";
 import { RiShoppingCartFill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
+import ReactFocusLock from "react-focus-lock";
 
 const categories = [
   {
@@ -54,8 +56,7 @@ class Navbar extends Component {
 
   menuVisibility = () => {
     const { menuVisible } = this.state;
-    if (menuVisible) this.setState({ menuVisible: false });
-    else this.setState({ menuVisible: true });
+    this.setState({ menuVisible: !menuVisible });
   };
 
   removeVisiblity = () => {
@@ -129,16 +130,47 @@ class Navbar extends Component {
               </Link>
             </div>
             <div onClick={this.menuVisibility} className="menu-toggle">
-              <GiHamburgerMenu />
+              <GiHamburgerMenu className="icon" />
             </div>
           </div>
         </div>
-        <div className={menuVisible ? "menuVisible" : "menu-container"}>
+        {menuVisible && (
+          <MenuContainer
+            menuVisibility={this.menuVisibility}
+            whatToshow={whatToshow}
+            removeVisiblity={this.removeVisiblity}
+            cartLen={this.cartLen}
+            cartFetch={cartFetch}
+            categories={categories}
+            user={user}
+          />
+        )}
+      </>
+    );
+  }
+}
+
+function MenuContainer({
+  menuVisibility,
+  whatToshow,
+  removeVisiblity,
+  cartLen,
+  cartFetch,
+  categories,
+  user,
+}) {
+  return (
+    <ReactFocusLock>
+      <div className="nav-menu">
+        <div className="menu-cover" onClick={menuVisibility}>
+          <IoClose className="icon" />
+        </div>
+        <div className="menuVisible">
           <div className="menu-user-details">
             {whatToshow.map((data, index) => (
               <span key={index}>
                 <Link
-                  onClick={this.removeVisiblity}
+                  onClick={removeVisiblity}
                   className="menu-user-links"
                   to={`/${data}`}
                 >
@@ -146,13 +178,9 @@ class Navbar extends Component {
                 </Link>
               </span>
             ))}
-            <Link
-              to="/cart"
-              onClick={this.removeVisiblity}
-              className="cart-icon"
-            >
+            <Link to="/cart" onClick={removeVisiblity} className="cart-icon">
               <RiShoppingCartFill className="icon" />
-              {!cartFetch.error ? <span>{this.cartLen}</span> : <Warning />}
+              {!cartFetch.error ? <span>{cartLen}</span> : <Warning />}
             </Link>
           </div>
           <ul>
@@ -160,7 +188,7 @@ class Navbar extends Component {
             {categories.map((data, index) => (
               <li className="menu-items" key={index}>
                 <Link
-                  onClick={this.removeVisiblity}
+                  onClick={removeVisiblity}
                   className="menu-categories-links"
                   to={`/${data.link}`}
                 >
@@ -181,9 +209,9 @@ class Navbar extends Component {
             )}
           </ul>
         </div>
-      </>
-    );
-  }
+      </div>
+    </ReactFocusLock>
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar));

@@ -172,6 +172,15 @@
     font-size: 20px;
   }
 }
+
+@media (max-width: 500px) {
+  .todays-deal-container h2 {
+    font-size: 20px;
+    padding-bottom: 0px;
+    padding-left: 0px !important;
+  }
+}
+
 @media (max-width: 380px) {
   .todays-deal-container h2 {
     font-size: 16px;
