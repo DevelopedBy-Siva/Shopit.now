@@ -32,7 +32,7 @@ class ProductFilter extends Component {
           }`}
         >
           <div className="filter-head">
-            <FaSlidersH />
+            <FaSlidersH className="icon" />
             <h2>Filter</h2>
             {filterVisible && (
               <button onClick={handleReset} id="search-filter-reset">
