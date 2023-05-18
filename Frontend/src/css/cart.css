@@ -9,57 +9,60 @@
   padding: 10px;
   box-shadow: 0 0 8px rgb(202, 202, 202);
   position: relative;
+  flex: 1;
 }
 .cart-container .cart-left-container h2 {
-  font-weight: 600;
-  font-size: 30px;
+  font-weight: 500;
+  font-size: 22px;
   padding: 10px;
 }
 .cart-container .cart-left-container h2 span {
-  font-size: 20px;
+  font-size: 18px;
   padding-left: 5px;
 }
 .cart-container .confirm-order-container {
   margin-left: 20px;
-  top: 150px;
-  position: sticky;
-  width: 25%;
   border-radius: 10px;
-  padding: 10px;
+  padding: 26px 10px;
+  width: 100%;
+  max-width: 260px;
+  flex-shrink: 0;
   box-shadow: 0 0 8px rgb(202, 202, 202);
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 100%;
-  min-height: 100px;
   background-color: white;
 }
 .cart-container .confirm-order-container h2 {
   text-align: center;
-  font-size: 25px;
+  font-size: 22px;
+  font-weight: 500;
 }
 .cart-container .confirm-order-container h3 {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 400;
 }
 .cart-container .confirm-order-container h3 span {
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 16px;
 }
 .cart-container .confirm-order-container h1 span {
-  font-size: 20px;
-  letter-spacing: 2px;
+  font-size: 14px;
 }
 .cart-container .confirm-order-container h1 {
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 10px;
 }
 .cart-container .confirm-order-container h4 {
   text-align: center;
-  margin: 10px 0;
+  margin: 4px 0;
 }
 .cart-container .confirm-order-container h5 {
   font-size: 14px;
+  font-weight: 400;
+  padding: 8px 0;
   color: green;
 }
 .cart-container .confirm-order-container button {
@@ -67,10 +70,10 @@
   outline: none;
   cursor: pointer;
   border: none;
-  padding: 8px;
+  padding: 8px 16px;
   border-radius: 5px;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
 }
 .cart-container .confirm-order-container button:hover {
   box-shadow: 0 0 8px rgb(170, 170, 170);
@@ -89,17 +92,18 @@
   font-size: 100px;
 }
 .cart-empty h3 {
-  font-size: 25px;
+  font-size: 20px;
+  font-weight: 400;
 }
 .cart-empty p {
-  font-size: 12px;
+  font-size: 14px;
 }
 .cart-empty .go-shopping {
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 400;
   color: black;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 4px 12px;
+  border-radius: 6px;
   background-color: rgb(96, 208, 252);
 }
 .purchase-item-container {
@@ -115,35 +119,47 @@
   align-items: center;
 }
 .purchase-item-sub-container .purchase-container h3 {
-  font-size: 20px;
-  width: 300px;
+  font-size: 19px;
   text-transform: capitalize;
-  font-weight: bold;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .purchase-item-sub-container .purchase-container h4 {
-  font-size: 15px;
+  font-size: 12px;
   pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .purchase-item-sub-container .purchase-container h4 span {
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 13px;
 }
 .purchase-item-sub-container .item-increase-container button {
   border: none;
   outline: none;
-  font-size: 20px;
-  font-weight: 600;
-  width: 30px;
-  height: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  width: 26px;
+  height: 26px;
   margin-right: 6px;
-  margin-bottom: 4px;
   border-radius: 50%;
   background-color: white;
   box-shadow: 0 0 10px rgb(187, 187, 187);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .purchase-item-sub-container .item-price {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   pointer-events: none;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .purchase-item-sub-container .item-price span {
   font-size: 14px;
@@ -157,13 +173,13 @@
 .item-operations button {
   cursor: pointer;
   margin-left: 8px;
-  font-weight: 600;
+  font-weight: 500;
   background-color: white;
   border: 1px solid rgb(158, 158, 158);
-  padding: 2px 5px;
+  padding: 4px 8px;
   font-size: 12px;
   outline: none;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: all 0.08s ease-in-out;
 }
 .item-operations button:hover {
@@ -191,13 +207,13 @@
 }
 
 .save-for-later-container h2 {
-  font-weight: 600;
-  font-size: 30px;
+  font-weight: 500;
+  font-size: 22px;
   padding: 10px;
 }
 .save-for-later-container h2 span {
-  font-size: 20px;
-  padding-left: 5px;
+  font-size: 16px;
+  padding-left: 3px;
 }
 .save-later-item-container .save-later-item {
   display: flex;
@@ -210,36 +226,37 @@
   align-items: center;
   pointer-events: none;
 }
-.save-for-later-container .save-for-later-empty svg {
+.save-for-later-container .save-for-later-empty .icon {
   opacity: 0.8;
-  font-size: 28px;
+  font-size: 22px;
   margin-right: 10px;
   color: rgba(80, 80, 80, 0.713);
 }
 .save-for-later-container .save-for-later-empty h1 {
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   margin-top: 8px;
+  font-weight: 300;
   color: rgba(80, 80, 80, 0.713);
 }
 
 .save-later-item-container .save-later-item-details h3 {
-  font-size: 25px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 400;
   width: 100%;
-  max-width: 400px;
   text-transform: capitalize;
 }
 .save-later-item-container .save-later-item-details h4 {
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 400;
 }
 .save-later-item-container .save-later-item-details h4 span {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
 }
 .save-later-item .save-later-item-price h3 {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 500;
 }
 .save-later-item .save-later-item-price span {
   font-size: 14px;
@@ -250,12 +267,13 @@
   align-items: center;
 }
 .save-later-item-container .save-later-item-operations button {
-  margin-left: 20px;
-  font-weight: 600;
+  margin-left: 14px;
+  font-weight: 400;
   background-color: rgb(80, 80, 80);
   color: rgb(233, 233, 233);
-  padding: 4px 6px;
-  border-radius: 10px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 13px;
   cursor: pointer;
   outline: none;
   border: none;
@@ -279,14 +297,24 @@
   color: rgb(212, 212, 212) !important;
 }
 .cart-item-main-container .purchase-container {
-  flex: 0.8;
+  flex: 1;
 }
 .cart-item-main-container .item-increase-container {
-  flex: 0.3;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 .cart-item-main-container .item-price {
-  flex: 0.3;
   text-align: right;
+  max-width: 200px;
+  width: 30%;
+  flex-shrink: 0;
+}
+.purchase-container {
+  overflow: hidden;
+}
+.cart-item-main-container .item-increase-container .icon {
+  font-size: 18px;
 }
 .purchase-item-container h5 {
   position: absolute;
@@ -298,33 +326,19 @@
   border-radius: 4px;
   padding: 2px 4px;
 }
-.cart-error-container {
-  display: flex;
-  justify-content: center;
-  background-color: #bbbbbb;
-  border-radius: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.cart-error-container .cart-error-anim {
-  width: 100px;
-  height: 80px;
-  margin-top: -10px;
-}
+
 .cart-error-container h5 {
   text-align: center;
-  color: white;
-  font-size: 24px;
-  font-weight: 500;
+  color: rgba(80, 80, 80, 0.713);
+  font-size: 16px;
+  font-weight: 400;
 }
-.cart-empty .cart-empty-anim {
-  width: 200px;
-  height: 150px;
-}
+
 .cart-left-container .cart-loading-anim {
-  height: 130px;
-  width: 100px;
+  width: 80px;
+  max-width: 80px;
   margin: auto;
+  opacity: 0.6;
 }
 .purchase-item-sub-container
   .purchase-container
@@ -358,14 +372,13 @@
 }
 .cart-container #out-of-stock {
   position: absolute;
-  bottom: 14px;
-  left: 6px;
-  font-size: 14px;
+  bottom: 18px;
+  left: 12px;
+  font-size: 12px;
   background-color: rgb(245, 78, 78);
-  padding: 2px;
+  padding: 2px 8px;
   border-radius: 5px;
   color: white;
-  width: 100px;
   text-align: center;
 }
 .cart-container .confirm-order-container h4 span {
@@ -398,30 +411,26 @@
 .remove-btn-label {
   color: rgb(255, 196, 0) !important;
 }
-@media (max-width: 601px) {
-  .cart-container #out-of-stock {
-    font-size: 8px;
-    bottom: 12px;
-    width: auto;
-    left: 4px;
-  }
+@media (max-width: 980px) {
   .cart-container {
     flex-direction: column-reverse;
     justify-content: space-between;
   }
-  .cart-container .cart-left-container {
-    width: 100%;
-  }
-  .cart-container .confirm-order-container {
-    top: 85px;
-    margin-left: 0px;
-    width: 100%;
-  }
-  .cart-container .cart-left-container {
-    margin-top: 10px;
-  }
 
+  .cart-container .confirm-order-container {
+    flex: 1;
+    max-width: none;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 15px 8px;
+  }
+  .cart-container .cart-left-container h2 {
+    font-size: 18px;
+  }
   .cart-container .confirm-order-container h2 {
+    font-size: 18px;
+  }
+  .save-for-later-container h2 {
     font-size: 18px;
   }
   .cart-container .confirm-order-container h3 {
@@ -431,105 +440,69 @@
     font-size: 14px;
   }
   .cart-container .confirm-order-container h1 span {
-    font-size: 16px;
+    font-size: 12px;
   }
   .cart-container .confirm-order-container h1 {
-    font-size: 20px;
+    font-size: 16px;
   }
   .cart-container .confirm-order-container h5 {
     font-size: 12px;
   }
   .cart-container .confirm-order-container button {
-    font-size: 15px;
-    padding: 4px;
+    font-size: 14px;
   }
-  .cart-container .confirm-order-container h4 {
-    margin: 5px 0;
+  .purchase-item-sub-container .purchase-container h3 {
+    font-size: 16px;
+  }
+  .purchase-item-sub-container .item-increase-container button {
     font-size: 15px;
+    width: 21px;
+    height: 21px;
+  }
+  .purchase-item-sub-container .item-price {
+    font-size: 18px;
+  }
+  .purchase-item-sub-container .item-price span {
+    font-size: 14px;
+  }
+  .item-operations button {
+    padding: 4px 6px;
+    font-size: 10px;
   }
   .cart-empty h3 {
     font-size: 18px;
   }
-  .purchase-item-sub-container .purchase-container h3 {
-    width: 120px;
-    font-size: 14px;
-  }
-  .purchase-item-container {
-    padding: 5px;
-  }
-  .purchase-item-sub-container .purchase-container h4 {
-    font-size: 14px;
-  }
-  .purchase-item-sub-container .item-increase-container button {
-    font-size: 16px;
-    width: 24px;
-    height: 24px;
-    margin-right: 5px;
-  }
-  .purchase-item-sub-container .item-price {
-    font-size: 14px;
-  }
-  .save-later-item-container .save-later-item-details h3 {
-    font-size: 18px;
-    width: 160px;
-  }
-  .save-later-item .save-later-item-price h3 {
-    font-size: 18px;
-  }
-  .save-later-item .save-later-item-price span {
+  .cart-empty p {
     font-size: 12px;
   }
-  .save-later-item-container .save-later-item-operations button {
-    margin-left: 15px;
-    padding: 2px 4px;
-    font-size: 14px;
-  }
-  .item-operations span {
-    font-size: 8px;
-  }
-  .purchase-item-container h5 {
-    font-size: 7px;
-    top: 2px;
-    right: 3px;
-    padding: 1px;
+  .cart-empty .go-shopping {
+    font-size: 12px;
+    padding: 4px 12px;
   }
   .cart-error-container h5 {
-    font-size: 18px;
-    padding: 5px;
-  }
-}
-@media (max-width: 301px) {
-  .purchase-item-sub-container .item-increase-container button {
-    font-size: 14px;
-  }
-  .purchase-item-sub-container .purchase-container h3 {
-    width: 100px;
-    font-size: 13px;
-  }
-  .purchase-item-sub-container .item-price {
     font-size: 12px;
-  }
-  .cart-container .confirm-order-container {
-    margin-left: 0px;
   }
   .save-later-item-container .save-later-item-details h3 {
-    font-size: 14px;
-    width: 120px;
+    font-size: 16px;
   }
   .save-later-item .save-later-item-price h3 {
-    font-size: 14px;
-  }
-  .save-later-item .save-later-item-price span {
-    font-size: 10px;
+    font-size: 16px;
   }
   .save-later-item-container .save-later-item-operations button {
-    margin-left: 10px;
-    font-size: 12px;
+    padding: 4px 8px;
+    font-size: 10px;
   }
-  .purchase-item-container h5 {
-    font-size: 6px;
-    top: 2px;
-    right: 3px;
-    width: 60px;
+  .save-for-later-container .save-for-later-empty h1 {
+    font-size: 14px;
+  }
+  .save-for-later-container .save-for-later-empty .icon {
+    font-size: 18px;
+  }
+  .cart-item-main-container .item-increase-container .icon {
+    font-size: 14px;
+  }
+  .cart-container #out-of-stock {
+    font-size: 10px;
+    padding: 2px 8px;
   }
 }

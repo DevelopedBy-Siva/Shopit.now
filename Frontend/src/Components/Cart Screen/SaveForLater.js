@@ -88,7 +88,7 @@ class SaveForLater extends Component {
             <CartError />
           ) : len < 1 ? (
             <div className="save-for-later-empty">
-              <FaBoxOpen />
+              <FaBoxOpen className="icon" />
               <h1>Ouch...its empty in here!</h1>
             </div>
           ) : (

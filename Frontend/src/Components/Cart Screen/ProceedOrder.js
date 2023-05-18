@@ -36,7 +36,7 @@ class ProceedOrder extends Component {
     });
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, _) {
     if (prevProps.userCart !== this.props.userCart) {
       this.cartDetails();
     }
@@ -82,7 +82,7 @@ class ProceedOrder extends Component {
           </button>
           {(unavailable.length !== 0 || this.availabilityCheck()) && (
             <span>
-              Remove or Save for later the Out of Stock Items to continue
+              Remove or Save for later the out of stock items to continue
             </span>
           )}
         </h4>

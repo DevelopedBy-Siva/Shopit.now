@@ -100,12 +100,7 @@ class Cart extends Component {
       <>
         <div className="cart-container">
           <div className="cart-left-container">
-            <h2>
-              Shopping Cart{" "}
-              <span>
-                {len === 1 ? `(${len} item)` : len > 1 ? `(${len} items)` : ""}
-              </span>
-            </h2>
+            <h2>Shopping Cart</h2>
             {loading ? (
               <CartLoadin />
             ) : error ? (
