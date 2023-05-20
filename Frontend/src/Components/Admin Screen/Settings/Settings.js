@@ -1,27 +1,25 @@
-import React, { Component } from 'react';
-import UserDetails from './UserDetails';
-import '../../../css/settings.css';
-import PasswordChange from './PasswordChange';
-import DeleteAccount from './DeleteAccount';
+import React, { Component } from "react";
+import PasswordChange from "./PasswordChange";
+import DeleteAccount from "./DeleteAccount";
+import "../../../css/settings.css";
 
 class Settings extends Component {
-    state = {  }
+  state = {};
 
-    componentDidMount(){
-        this.props.handleSelectedScreen("Settings");
-    }
+  componentDidMount() {
+    this.props.handleSelectedScreen("Settings");
+  }
 
-    render() {
-        return (
-            <div className="admin-settings-container">
-                <div className="admin-settings-sub-container">
-                    <UserDetails/>
-                    <PasswordChange/>
-                    <DeleteAccount/>
-                </div>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="admin-settings-container">
+        <div className="admin-settings-sub-container">
+          <PasswordChange />
+          <DeleteAccount />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Settings;

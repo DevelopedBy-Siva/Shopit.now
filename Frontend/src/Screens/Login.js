@@ -1,14 +1,12 @@
 import React from "react";
 import InputContainer from "../Components/Home/InputContainer";
-import APP_LOGO_WHITE from "../Icons/app-logo-white.svg";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import "../css/login.css";
 import { Link, Redirect } from "react-router-dom";
 import LoginMain from "../Components/login-register/LoginMain";
-import LoginRegError from "../Components/login-register/LoginRegError";
-import Success from "../Components/login-register/Success";
 import { getCurrentUser } from "../services/LoginReg";
+import Loader from "../Components/Loader";
 
 const validate = Yup.object().shape({
   email: Yup.string()
@@ -26,13 +24,14 @@ const validate = Yup.object().shape({
 class Login extends LoginMain {
   render() {
     if (getCurrentUser()) return <Redirect to="/" />;
-    const { loginError, loginBegan } = this.state;
+    const { loginBegan } = this.state;
     return (
       <div className="login-container">
-        {loginBegan && <Success />}
         <div className="login-sub-container">
-          {loginError && <LoginRegError error={loginError} />}
-          <h2>LOGIN</h2>
+          <h2>
+            Hey, hello <span>&#128075;</span>
+          </h2>
+          <h3>Enter the information you entered while registering.</h3>
           <Formik
             initialValues={{
               email: "",
@@ -50,6 +49,7 @@ class Login extends LoginMain {
             }) => (
               <form onSubmit={handleSubmit}>
                 <InputContainer
+                  disabled={loginBegan}
                   inputRef={this.userref}
                   spellCheck="false"
                   autoComplete="off"
@@ -62,6 +62,7 @@ class Login extends LoginMain {
                   name="email"
                 />
                 <InputContainer
+                  disabled={loginBegan}
                   inputRef={this.passref}
                   spellCheck="false"
                   type="password"
@@ -77,7 +78,11 @@ class Login extends LoginMain {
                   ref={this.submitRef}
                   type="submit"
                 >
-                  LOGIN
+                  {loginBegan ? (
+                    <Loader style={{ width: "18px", height: "18px" }} />
+                  ) : (
+                    "LOGIN"
+                  )}
                 </button>
                 <Link className="dont-have-account" to="/register">
                   Don't have an account?
@@ -86,10 +91,6 @@ class Login extends LoginMain {
             )}
           </Formik>
         </div>
-
-        <Link to="/" className="logo">
-          <img src={APP_LOGO_WHITE} alt="login screen app logo" />
-        </Link>
       </div>
     );
   }

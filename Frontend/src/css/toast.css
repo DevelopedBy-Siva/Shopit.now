@@ -1,0 +1,58 @@
+.toast-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: auto;
+  padding: 5px 28px 5px 12px;
+}
+
+.toast-container .icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  margin-right: 10px;
+  background-color: #fff;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.toast-container .message {
+  flex: 1;
+  font-size: 12px;
+  line-height: 17px;
+  color: #fff;
+  font-weight: 300;
+  pointer-events: none;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.toast-container .close {
+  position: absolute;
+  top: -3px;
+  right: 6px;
+  font-size: 0.85rem;
+  color: #ececec;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.toast-container .close:hover {
+  color: #fff;
+}
+
+.notistack-SnackbarContainer {
+  z-index: 999999999;
+}
+.notistack-Snackbar {
+  min-width: 0;
+}
+.notistack-MuiContent {
+  padding: 0;
+  margin: auto;
+}
