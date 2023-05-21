@@ -7,6 +7,7 @@ import { Link, Redirect } from "react-router-dom";
 import LoginMain from "../Components/login-register/LoginMain";
 import { getCurrentUser } from "../services/LoginReg";
 import Loader from "../Components/Loader";
+import { IoArrowBack } from "react-icons/io5";
 
 const validate = Yup.object().shape({
   email: Yup.string()
@@ -28,6 +29,12 @@ class Login extends LoginMain {
     return (
       <div className="login-container">
         <div className="login-sub-container">
+          <span className="skip-to-app">
+            <Link to="/">
+              <IoArrowBack className="icon" />
+              Back to app
+            </Link>
+          </span>
           <h2>
             Hey, hello <span>&#128075;</span>
           </h2>
@@ -58,7 +65,6 @@ class Login extends LoginMain {
                   onChange={handleChange("email")}
                   errors={errors.email}
                   touched={touched.email}
-                  style={{ background: "none", maxWidth: "450px" }}
                   name="email"
                 />
                 <InputContainer
@@ -70,7 +76,6 @@ class Login extends LoginMain {
                   onChange={handleChange("password")}
                   errors={errors.password}
                   touched={touched.password}
-                  style={{ background: "none", maxWidth: "450px" }}
                   name="password"
                 />
                 <button

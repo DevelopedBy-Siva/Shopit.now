@@ -1,7 +1,11 @@
 .register-container {
-  display: flex;
+  margin: 35px 0;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 .register-container .registration-login-success-loader {
   position: fixed;
@@ -18,17 +22,14 @@
 .register-container .registration-login-success-loader .loader {
   transform: scale(1.5);
 }
-.register-container .left-container {
-  flex: 0.4;
-  background-color: #343434;
-}
+
 .register-container .right-container {
-  flex: 0.6;
+  width: 90%;
+  max-width: 650px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  flex-direction: column;
 }
 .register-container .right-container .registration-login-error {
   background-color: rgba(255, 0, 0, 0.644);
@@ -61,7 +62,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 22px !important;
 }
 .register-container .right-container .first-last-name-container {
   display: flex;
@@ -87,23 +87,26 @@
   font-size: 15px;
   color: white;
 }
-.left-sub-container h3 .signin-link {
-  color: red;
-  text-decoration: none;
-}
-.left-sub-container h3 .signin-link:hover {
-  text-decoration: underline;
-}
+
 .btn-container {
-  margin: 20px;
-  border: 0;
-  background-color: red;
   color: white;
-  font-weight: 600;
+  background: rgba(0, 131, 253, 0.8);
+  border: none;
+  padding: 5px;
+  width: 100%;
+  max-width: 450px;
+  height: 32px;
+  border-radius: 5px;
   outline: none;
-  padding: 6px;
-  font-size: 20px;
-  border-radius: 10px;
+  margin-top: 20px;
+  display: flex;
+  font-size: 14px;
+  font-weight: 400;
+  justify-content: center;
+  align-items: center;
+}
+.btn-container:hover {
+  background: rgba(0, 131, 253, 1);
 }
 .password-container {
   width: 100%;
@@ -172,60 +175,64 @@
   font-size: 12px;
   position: absolute;
 }
-@media (max-width: 600px) {
-  .password-rules li {
-    font-size: 10px;
-  }
-  .password-rules {
-    width: 105px;
-  }
-  .password-rules ul {
-    padding: 2px;
-  }
-  .register-container .right-container .registration-login-error h5 {
-    font-size: 15px !important;
-  }
+
+.register-container .right-container h2 {
+  color: #343434;
+  font-weight: 800;
+  text-align: left;
+  width: 100%;
+  max-width: 450px;
+  margin: 0;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  font-size: 44px;
 }
 
-@media (max-width: 500px) {
-  .register-container {
-    flex-direction: column;
-  }
-  .register-container .left-container {
-    flex: 0.25;
-  }
-  .register-container .right-container .first-last-name-container {
-    flex-direction: column;
-  }
-  .left-sub-container h1 {
-    font-size: 18px;
-  }
-  .left-sub-container h2 {
-    font-size: 40px;
-    padding-top: 10px;
-  }
-  .right-container {
-    padding-top: 20px;
-  }
-  .password-rules li {
-    font-size: 9px;
-  }
-  .password-rules {
-    bottom: 35px;
-    transform: translateX(120px);
-    width: 180px;
-  }
-  .left-sub-container .logo-container img {
-    margin-top: 5px;
-    width: 80px;
-  }
+.register-container .right-container h3 {
+  color: #343434;
+  text-align: left;
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.8;
+  font-weight: 400;
+  letter-spacing: 1px;
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 24px;
 }
-@media (max-width: 320px) {
-  .password-rules {
-    width: 140px;
-    bottom: 25px;
+
+.register-container .skip-to-app {
+  display: inline-block;
+  width: 100%;
+  max-width: 450px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-align: left;
+  margin: 6px 0;
+  opacity: 0.8;
+}
+
+.register-container .skip-to-app a {
+  text-decoration: none;
+  color: #343434;
+}
+
+.register-container .skip-to-app .icon {
+  transform: translateY(-1px);
+  margin-right: 3px;
+}
+
+.register-container .skip-to-app a:hover {
+  color: rgba(0, 131, 253, 1);
+}
+
+@media (max-width: 701px) {
+  .register-container .right-container h2 {
+    font-size: 36px;
   }
-  .password-rules li {
-    font-size: 9px;
+
+  .register-container .right-container h3 {
+    font-size: 13px;
   }
 }

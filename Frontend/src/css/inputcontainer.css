@@ -1,5 +1,6 @@
 .input-container {
   width: 100%;
+  max-width: 450px;
   position: relative;
   margin: 26px 0;
 }
@@ -10,7 +11,7 @@
   border-bottom: 1px dotted #343434;
   color: black;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 16px;
   letter-spacing: 1px;
   background: white;
 }
@@ -24,7 +25,7 @@
   background-color: white;
 }
 .input-container label {
-  font-size: 13px;
+  font-size: 12px;
   pointer-events: none;
   position: absolute;
   transform: translateY(5px);
@@ -37,13 +38,13 @@
 }
 .input-container input:focus ~ label,
 .input-container input:not(:placeholder-shown) ~ label {
-  transform: translateY(-22px);
+  transform: translateY(-17px);
 }
 .input-error {
   color: red;
   font-size: 13px;
   position: absolute;
-  bottom: -28px;
+  top: 30px;
   letter-spacing: 1px;
   font-weight: 400;
 }

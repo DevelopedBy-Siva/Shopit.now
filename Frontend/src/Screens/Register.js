@@ -1,15 +1,14 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import APP_LOGO_WHITE from "../Icons/app-logo-white.svg";
 import InputContainer from "../Components/Home/InputContainer";
 import { passwordPattern } from "../datas/passwordPattern";
 import RegisterMain from "../Components/login-register/RegisterMain";
-import LoginRegError from "../Components/login-register/LoginRegError";
-import Success from "../Components/login-register/Success";
 import { getCurrentUser } from "../services/LoginReg";
+import { IoArrowBack } from "react-icons/io5";
 import "../css/register.css";
+import Loader from "../Components/Loader";
 
 const validate = Yup.object().shape({
   name: Yup.string()
@@ -31,7 +30,10 @@ const validate = Yup.object().shape({
     .trim(),
   password: Yup.string()
     .max(20)
-    .matches(passwordPattern, "Password rule violation")
+    .matches(
+      passwordPattern,
+      "Password should have atleast one uppercase, lowercase, digit and special character(@$!%*?&)"
+    )
     .required("Enter the password")
     .label("Password")
     .trim(),
@@ -45,27 +47,23 @@ const validate = Yup.object().shape({
 class Register extends RegisterMain {
   render() {
     if (getCurrentUser()) return <Redirect to="/" />;
-    const { registrationBegin, registerError } = this.state;
+    const { registrationBegin } = this.state;
     return (
       <div className="register-container">
-        {registrationBegin && <Success />}
-        <div className="left-container">
-          <div className="left-sub-container">
-            <Link to="/" className="logo-container">
-              <img src={APP_LOGO_WHITE} alt="Register screen white logo" />
-            </Link>
-            <h2>Create your</h2>
-            <h2 style={{ paddingTop: 0 }}>account</h2>
-            <h3>
-              Already Registered?{" "}
-              <Link to="/login" className="signin-link">
-                Sign in
-              </Link>
-            </h3>
-          </div>
-        </div>
         <div className="right-container">
-          {registerError && <LoginRegError error={registerError} />}
+          <span className="skip-to-app">
+            <Link to="/">
+              <IoArrowBack className="icon" />
+              Back to app
+            </Link>
+          </span>
+          <h2>Create new account</h2>
+          <h3>
+            Already a member?{" "}
+            <Link to="/login" className="signin-link">
+              Sign in
+            </Link>
+          </h3>
           <Formik
             initialValues={{
               name: "",
@@ -97,6 +95,7 @@ class Register extends RegisterMain {
                   spellCheck="false"
                   type="text"
                   name="full name"
+                  disabled={registrationBegin}
                 />
                 <InputContainer
                   inputRef={this.emailref}
@@ -110,6 +109,7 @@ class Register extends RegisterMain {
                   spellCheck="false"
                   type="text"
                   name="email"
+                  disabled={registrationBegin}
                 />
                 <InputContainer
                   inputRef={this.mobileref}
@@ -121,37 +121,19 @@ class Register extends RegisterMain {
                   spellCheck="false"
                   type="number"
                   name="mobile"
+                  disabled={registrationBegin}
                 />
-                <div className="password-container">
-                  <input
-                    ref={this.passwordref}
-                    placeholder=" "
-                    onBlur={() => setFieldTouched("password")}
-                    onChange={handleChange("password")}
-                    maxLength={20}
-                    type="password"
-                    name="password"
-                  />
-                  <label htmlFor="password">Password</label>
-                  {touched.password && (
-                    <h5 className="input-error">{errors.password}</h5>
-                  )}
-                  <div
-                    className={
-                      errors.password && touched.password
-                        ? "password-rules force-show"
-                        : "password-rules"
-                    }
-                  >
-                    <ul>
-                      <li>Password should contain minimum 8 characters</li>
-                      <li>
-                        Password should have atleast one uppercase, lowercase,
-                        digit and special character(@$!%*?&)
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <InputContainer
+                  inputRef={this.passwordref}
+                  onBlur={() => setFieldTouched("password")}
+                  touched={touched.password}
+                  onChange={handleChange("password")}
+                  errors={errors.password}
+                  maxLength={20}
+                  type="password"
+                  name="password"
+                  disabled={registrationBegin}
+                />
                 <InputContainer
                   inputRef={this.confirmref}
                   onBlur={() => setFieldTouched("confirm")}
@@ -160,6 +142,7 @@ class Register extends RegisterMain {
                   onChange={handleChange("confirm")}
                   type="password"
                   name="re-enter password"
+                  disabled={registrationBegin}
                 />
                 <button
                   disabled={registrationBegin}
@@ -167,7 +150,11 @@ class Register extends RegisterMain {
                   type="submit"
                   className="btn-container"
                 >
-                  Register
+                  {registrationBegin ? (
+                    <Loader style={{ width: "18px", height: "18px" }} />
+                  ) : (
+                    "REGISTER"
+                  )}
                 </button>
               </form>
             )}
