@@ -15,8 +15,12 @@ class LoginMain extends Component {
     loginBegan: false,
   };
 
+  disableBtn = (event, isLoading) => {
+    toast.remove();
+    if (isLoading) event.preventDefault();
+  };
+
   handleLogin = async ({ email, password }) => {
-    this.handleFocusOut();
     toast.remove();
     this.handleError(true, null);
     await userLogin(email, password)
@@ -26,7 +30,8 @@ class LoginMain extends Component {
       })
       .catch(({ response }) => {
         let message = "Server down. Try after sometime";
-        if (response.status === 401) message = "Invalid email or password";
+        if (response && response.status === 401)
+          message = "Invalid email or password";
         this.handleError(false, message);
         toast.error(message, toast.props.persist);
       });
@@ -39,11 +44,6 @@ class LoginMain extends Component {
   loginSuccess = (data, state) => {
     setJwt(data);
     window.location = state ? state.from.pathname : "/";
-  };
-  handleFocusOut = () => {
-    this.userref.current.blur();
-    this.passref.current.blur();
-    this.submitRef.current.blur();
   };
 }
 

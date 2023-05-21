@@ -105,8 +105,11 @@
   justify-content: center;
   align-items: center;
 }
-.btn-container:hover {
+.btn-container:hover:enabled {
   background: rgba(0, 131, 253, 1);
+}
+.btn-container:hover:disabled {
+  cursor: not-allowed;
 }
 .password-container {
   width: 100%;
@@ -201,6 +204,10 @@
   margin-bottom: 24px;
 }
 
+.register-container .right-container h3 a:hover {
+  color: rgba(0, 131, 253, 1) !important;
+}
+
 .register-container .skip-to-app {
   display: inline-block;
   width: 100%;
@@ -225,6 +232,15 @@
 
 .register-container .skip-to-app a:hover {
   color: rgba(0, 131, 253, 1);
+}
+
+.register-container .disable-link {
+  cursor: not-allowed;
+}
+
+.register-container .disable-link:hover {
+  color: #343434 !important;
+  text-decoration: none;
 }
 
 @media (max-width: 701px) {

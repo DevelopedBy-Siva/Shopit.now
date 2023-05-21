@@ -77,8 +77,12 @@
   align-items: center;
 }
 
-.login-container .login-sub-container form button:hover {
+.login-container .login-sub-container form button:hover:enabled {
   background: rgba(0, 131, 253, 1);
+}
+
+.login-container .login-sub-container form button:hover:disabled {
+  cursor: not-allowed;
 }
 
 .login-container .login-sub-container h2 {
@@ -95,7 +99,7 @@
 
 .login-container .login-sub-container h2 span {
   display: inline-block;
-  transform: translate(-5px, -2px);
+  transform: translate(-2px, -2px);
 }
 
 .login-container .login-sub-container h3 {
@@ -156,14 +160,18 @@
   color: rgba(0, 131, 253, 1);
 }
 
+.login-container .disable-link {
+  cursor: not-allowed;
+}
+
+.login-container .disable-link:hover {
+  color: #343434 !important;
+  text-decoration: none;
+}
+
 @media (max-width: 701px) {
   .login-container .login-sub-container h2 {
     font-size: 36px;
-  }
-
-  .login-container .login-sub-container h2 span {
-    display: inline-block;
-    transform: translate(-14px, -2px);
   }
 
   .login-container .login-sub-container h3 {

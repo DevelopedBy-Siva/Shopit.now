@@ -52,7 +52,11 @@ class Register extends RegisterMain {
       <div className="register-container">
         <div className="right-container">
           <span className="skip-to-app">
-            <Link to="/">
+            <Link
+              onClick={(e) => this.disableBtn(e, registrationBegin)}
+              className={registrationBegin ? "disable-link" : ""}
+              to="/"
+            >
               <IoArrowBack className="icon" />
               Back to app
             </Link>
@@ -60,7 +64,13 @@ class Register extends RegisterMain {
           <h2>Create new account</h2>
           <h3>
             Already a member?{" "}
-            <Link to="/login" className="signin-link">
+            <Link
+              to="/login"
+              onClick={(e) => this.disableBtn(e, registrationBegin)}
+              className={`signin-link ${
+                registrationBegin ? "disable-link" : ""
+              }`}
+            >
               Sign in
             </Link>
           </h3>

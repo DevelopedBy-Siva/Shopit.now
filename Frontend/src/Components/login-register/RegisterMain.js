@@ -19,8 +19,12 @@ class RegisterMain extends Component {
     registrationBegin: false,
   };
 
+  disableBtn = (event, isLoading) => {
+    toast.remove();
+    if (isLoading) event.preventDefault();
+  };
+
   handleRegistration = async ({ name, email, mobile, password }) => {
-    this.focusOut();
     const register = { fullname: name, email, mobile, password };
     this.errorHandle(null, true);
     await userRegistration(register)
@@ -29,7 +33,8 @@ class RegisterMain extends Component {
       })
       .catch(({ response }) => {
         let registerError = "Server down. Try after sometime";
-        if (response.status === 400) registerError = "Email already registered";
+        if (response && response.status === 400)
+          registerError = "Email already registered";
         this.errorHandle(registerError, false);
         toast.error(registerError, toast.props.persist);
       });
@@ -48,17 +53,6 @@ class RegisterMain extends Component {
       .catch(() => {
         window.location = "/login";
       });
-  };
-  focusOut = () => {
-    const refs = [
-      this.nameref,
-      this.emailref,
-      this.mobileref,
-      this.passwordref,
-      this.confirmref,
-      this.submitRef,
-    ];
-    refs.forEach((ref) => ref.current.blur());
   };
 }
 

@@ -30,7 +30,11 @@ class Login extends LoginMain {
       <div className="login-container">
         <div className="login-sub-container">
           <span className="skip-to-app">
-            <Link to="/">
+            <Link
+              onClick={(e) => this.disableBtn(e, loginBegan)}
+              className={loginBegan ? "disable-link" : ""}
+              to="/"
+            >
               <IoArrowBack className="icon" />
               Back to app
             </Link>
@@ -89,7 +93,13 @@ class Login extends LoginMain {
                     "LOGIN"
                   )}
                 </button>
-                <Link className="dont-have-account" to="/register">
+                <Link
+                  onClick={(e) => this.disableBtn(e, loginBegan)}
+                  className={`dont-have-account ${
+                    loginBegan ? "disable-link" : ""
+                  }`}
+                  to="/register"
+                >
                   Don't have an account?
                 </Link>
               </form>
