@@ -2,24 +2,33 @@
   margin-top: 20px;
   padding: 10px;
   position: relative;
-  height: 360px;
 }
+
+.todays-deal-sub-container {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .todays-deal-container .todays-deal-error {
   text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   font-size: 13px;
   letter-spacing: 1px;
 }
 .todays-deal-container h2 {
-  padding-bottom: 0px !important;
-  padding: 10px;
   text-transform: capitalize;
   font-size: 18px;
   font-weight: 500;
   letter-spacing: 1px;
+  margin: 0;
+  flex: 1;
+}
+.todays-deal-container .todays-deal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .todays-deal-container .new-deals-load {
   position: absolute;
@@ -137,55 +146,5 @@
   font-size: 14px;
   padding-left: 4px;
 }
-@media (max-width: 768px) {
-  .todays-deal-container .time-gen-container {
-    font-size: 10px !important;
-  }
-  .todays-deal-container .time-gen-container span {
-    font-size: 10px !important;
-  }
-  .todays-deal-container .btn-right,
-  .todays-deal-container .btn-left {
-    height: 60px;
-    width: 20px;
-    padding: 2px 6px;
-  }
-  .todays-deal-container button .btn-lr-icons {
-    font-size: 20px;
-  }
-  .todays-deal-container {
-    height: 290px;
-  }
-  .todays-deal-container .item-container {
-    height: 230px;
-  }
-  .todays-deal-container .item-container img {
-    height: 170px;
-  }
-  .todays-deal-container .item-container h4 {
-    font-size: 15px;
-  }
-  .todays-deal-container .item-container h5 {
-    font-size: 12px;
-  }
-  .todays-deal-container h2 {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 500px) {
-  .todays-deal-container h2 {
-    font-size: 20px;
-    padding-bottom: 0px;
-    padding-left: 0px !important;
-  }
-}
-
-@media (max-width: 380px) {
-  .todays-deal-container h2 {
-    font-size: 16px;
-  }
-  .todays-deal-container .todays-deal-head span {
-    font-size: 16px;
-  }
+@media (max-width: 980px) {
 }

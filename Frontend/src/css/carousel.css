@@ -50,21 +50,13 @@
   object-fit: fill;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 980px) {
   .carousel-container .carousel img {
     object-fit: cover;
-    height: 200px;
+    width: 100%;
+    height: 100%;
   }
   .carousel-container {
-    height: 200px;
-  }
-  .carousel-container .slick-dots li button:before {
-    width: 20px;
-  }
-  .carousel-container .slick-dots li {
-    margin: 0 8px;
-  }
-  .carousel-container .slick-dots li.slick-active button:before {
-    width: 25px;
+    height: 300px;
   }
 }

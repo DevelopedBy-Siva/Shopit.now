@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import TimeGen from "../../utils/TimeGen";
-import Lottie from "lottie-react";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
 import axios from "axios";
-import load from "../../animations/dataload.json";
 import Slider from "react-slick";
-import configs from "../../utils/TodaysDealCarousel";
-import { NextArrow, PrevArrow } from "./CarouselBtns";
-
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import "../../css/todaysdeal.css";
+import SkeletonLoader from "../Loader/SkeletonLoader";
 
 class TodaysDeals extends Component {
   state = {
@@ -32,46 +28,51 @@ class TodaysDeals extends Component {
     const { data, loading, error } = this.state;
     const { onClick } = this.props;
 
-    const settings = {
-      ...configs,
-      prevArrow: <PrevArrow />,
-      nextArrow: <NextArrow />,
-    };
-
     return (
       <div className="todays-deal-container">
-        <div className="todays-deal-head">
+        <div className="todays-deal-header">
           <h2>Today's Deals</h2>
-          {loading && (
-            <Lottie className="new-deals-load" animationData={load} />
-          )}
-          {!loading && !error && data.length !== 0 && (
-            <span>
-              <TimeGen />
-            </span>
+          {!loading && !error && data.length > 0 && (
+            <div className="home-corousel-btns">
+              <button disabled>
+                <BiChevronLeft />
+              </button>
+              <button>
+                <BiChevronRight />
+              </button>
+            </div>
           )}
         </div>
-        {error ? (
-          <div className="todays-deal-error">Couldn't load today's deals</div>
-        ) : (
-          <Slider {...settings}>
-            {data.map((item) => {
-              const imgUrl = `data:${item.thumbnail.type};base64,${item.thumbnail.picByte}`;
-              return (
-                <div key={item.id}>
-                  <div onClick={() => onClick(item)} className="item-container">
-                    <img src={imgUrl} alt="todays-deals" />
-                    <h4>{item.title.toLowerCase()}</h4>
-                    <h5>
-                      <span>$ </span>
-                      {item.price}
-                    </h5>
+        <div className="todays-deal-sub-container">
+          {!loading ? (
+            <SkeletonLoader />
+          ) : error ? (
+            <span className="todays-deal-error">
+              Couldn't load today's deals
+            </span>
+          ) : (
+            <Slider>
+              {data.map((item) => {
+                const imgUrl = `data:${item.thumbnail.type};base64,${item.thumbnail.picByte}`;
+                return (
+                  <div key={item.id}>
+                    <div
+                      onClick={() => onClick(item)}
+                      className="item-container"
+                    >
+                      <img src={imgUrl} alt="todays-deals" />
+                      <h4>{item.title.toLowerCase()}</h4>
+                      <h5>
+                        <span>$ </span>
+                        {item.price}
+                      </h5>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </Slider>
-        )}
+                );
+              })}
+            </Slider>
+          )}
+        </div>
       </div>
     );
   }

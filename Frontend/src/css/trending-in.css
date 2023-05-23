@@ -3,7 +3,6 @@
 }
 .trending-in-container h2 {
   margin-top: 10px;
-  padding: 20px 20px 0 20px;
   text-transform: capitalize;
   font-size: 18px;
   font-weight: 500;
@@ -32,7 +31,7 @@
   border-radius: 5px;
 }
 
-@media (max-width: 801px) {
+@media (max-width: 980px) {
   .trending-in-container .trending-in .trending-home-container {
     margin: 5px;
     padding: 5px;
@@ -46,22 +45,5 @@
   .trending-in-container h2 {
     font-size: 20px;
     padding-left: 0px !important;
-  }
-}
-@media (max-width: 601px) {
-  .trending-in-container .trending-in .trending-home-container {
-    margin: 5px;
-    padding: 5px;
-    width: 80px;
-    height: 80px;
-  }
-  .trending-in-container .trending-home-container img {
-    width: 100%;
-    height: 100%;
-  }
-}
-@media (max-width: 380px) {
-  .trending-in-container h2 {
-    font-size: 16px !important;
   }
 }
