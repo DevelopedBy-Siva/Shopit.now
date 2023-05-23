@@ -5,7 +5,7 @@
 }
 
 .todays-deal-sub-container {
-  height: 300px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,12 +123,6 @@
 .todays-deal-container button .btn-lr-icons {
   color: rgba(120, 120, 120);
   pointer-events: none;
-}
-.todays-deal-container button:hover {
-  background: rgb(238, 238, 238);
-}
-.todays-deal-container button:hover .btn-lr-icons {
-  color: rgb(63, 63, 63);
 }
 .remove-btn {
   display: none !important;

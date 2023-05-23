@@ -44,7 +44,7 @@ class TodaysDeals extends Component {
           )}
         </div>
         <div className="todays-deal-sub-container">
-          {!loading ? (
+          {loading ? (
             <SkeletonLoader />
           ) : error ? (
             <span className="todays-deal-error">

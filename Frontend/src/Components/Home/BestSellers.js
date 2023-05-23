@@ -5,6 +5,8 @@ import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import Lottie from "lottie-react";
 import loadAnim from "../../animations/dataload.json";
 import "../../css/bestseller.css";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import SkeletonLoader from "../Loader/SkeletonLoader";
 
 class BestSellers extends Component {
   constructor(props) {
@@ -46,37 +48,54 @@ class BestSellers extends Component {
     const { onClick } = this.props;
     return (
       <div className="bestseller-main-container">
-        <h2>Best sellers in Mobiles, Laptops & Accessories</h2>
-        {loading ? (
-          <Lottie animationData={loadAnim} className="bestseller-loading" />
-        ) : error ? (
-          <div className="bestseller-error">Couldn't load the products.</div>
-        ) : (
-          <>
-            <div ref={this.scrollRef} className="bestseller-container">
-              {data.map((item) => {
-                const { id, title, thumbnail } = item;
-                const imgUrl = `data:${thumbnail.type};base64,${thumbnail.picByte}`;
-                return (
-                  <div
-                    onClick={() => onClick(item)}
-                    key={id}
-                    className="best-seller-item-container"
-                  >
-                    <img src={imgUrl} alt="bestsellers" />
-                    <h4>{title}</h4>
-                  </div>
-                );
-              })}
+        <div className="bestseller-main-header">
+          <h2>Best sellers in Mobiles, Laptops & Accessories</h2>
+          {!loading && !error && data.length > 0 && (
+            <div className="home-corousel-btns">
+              <button disabled>
+                <BiChevronLeft />
+              </button>
+              <button>
+                <BiChevronRight />
+              </button>
             </div>
-            <button onClick={this.handleScrollLeft} id="bestseller-btn-l">
-              <FaChevronLeft />
-            </button>
-            <button onClick={this.handleScrollRight} id="bestseller-btn-r">
-              <FaChevronRight />
-            </button>
-          </>
-        )}
+          )}
+        </div>
+
+        <div className="bestseller-main-sub-container">
+          {loading ? (
+            <SkeletonLoader />
+          ) : error ? (
+            <span className="bestseller-error">
+              Couldn't load the products.
+            </span>
+          ) : (
+            <>
+              <div ref={this.scrollRef} className="bestseller-container">
+                {data.map((item) => {
+                  const { id, title, thumbnail } = item;
+                  const imgUrl = `data:${thumbnail.type};base64,${thumbnail.picByte}`;
+                  return (
+                    <div
+                      onClick={() => onClick(item)}
+                      key={id}
+                      className="best-seller-item-container"
+                    >
+                      <img src={imgUrl} alt="bestsellers" />
+                      <h4>{title}</h4>
+                    </div>
+                  );
+                })}
+              </div>
+              <button onClick={this.handleScrollLeft} id="bestseller-btn-l">
+                <FaChevronLeft />
+              </button>
+              <button onClick={this.handleScrollRight} id="bestseller-btn-r">
+                <FaChevronRight />
+              </button>
+            </>
+          )}
+        </div>
       </div>
     );
   }
