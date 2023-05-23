@@ -1,18 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 import Logo from "../Logo";
 import { FaTruck, FaBalanceScale } from "react-icons/fa";
 import "../../css/footer-navi.css";
-
-const leftNavi = ["Contact Us", "FAQ", "T&C", "Terms Of Use", "Track Orders"];
-const naviMid = [
-  "Shipping",
-  "Cancellation",
-  "Returns",
-  "Privacy policy",
-  "Site Map",
-];
 
 class FooterNavi extends Component {
   render() {
@@ -20,21 +10,13 @@ class FooterNavi extends Component {
       <div className="footer-container">
         <div className="wrapper">
           <div className="left-navi">
-            {leftNavi.map((item, index) => (
-              <Link className="footer-navi-link" to="" key={index}>
-                {item}
-              </Link>
-            ))}
-          </div>
-          <div className="mid-navi">
-            {naviMid.map((item, index) => (
-              <Link className="footer-navi-link" to="" key={index}>
-                {item}
-              </Link>
-            ))}
+            <Logo style={{ color: "white" }} />
+            <p className="slogan">
+              Discover. Shop. Smile.<br></br>Your One-Stop Destination for
+              Everything!
+            </p>
           </div>
           <div className="right-navi">
-            <Logo style={{ color: "white" }} />
             <div>
               <span className="fontawsm-logo">
                 <FaBalanceScale className="icon" />
