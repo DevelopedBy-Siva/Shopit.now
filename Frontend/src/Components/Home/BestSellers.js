@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import Lottie from "lottie-react";
-import loadAnim from "../../animations/dataload.json";
-import "../../css/bestseller.css";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import SkeletonLoader from "../Loader/SkeletonLoader";
+import "../../css/bestseller.css";
 
 class BestSellers extends Component {
   constructor(props) {
@@ -87,12 +84,6 @@ class BestSellers extends Component {
                   );
                 })}
               </div>
-              <button onClick={this.handleScrollLeft} id="bestseller-btn-l">
-                <FaChevronLeft />
-              </button>
-              <button onClick={this.handleScrollRight} id="bestseller-btn-r">
-                <FaChevronRight />
-              </button>
             </>
           )}
         </div>

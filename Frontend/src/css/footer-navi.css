@@ -7,11 +7,14 @@
 .footer-container .wrapper {
   display: flex;
   flex-wrap: wrap;
-  align-content: space-between;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin: auto;
-  max-width: 580px;
+  max-width: 600px;
+}
+
+.footer-container .left-navi {
+  margin: auto;
 }
 
 .footer-container .left-navi .slogan {
@@ -19,6 +22,7 @@
   font-size: 13px;
   line-height: 20px;
   margin-top: 8px;
+  min-width: 200px;
 }
 
 .footer-container .footer-navi-link {
@@ -29,38 +33,13 @@
   margin-top: 5px;
   font-weight: 300;
 }
-.footer-container .left-navi,
-.footer-container .mid-navi {
-  text-align: left;
-  padding: 20px;
-  flex: 1;
-}
-.footer-container .footer-logo {
-  display: flex;
-  align-items: center;
-  width: 200px;
-  justify-content: center;
-  padding: 20px;
-  text-decoration: none;
-}
-.footer-container .footer-logo .logo-now {
-  width: 40px;
-  height: 40px;
-  margin-top: -14px;
-}
-.footer-container .footer-logo h2 {
-  font-style: normal;
-  font-size: 25px;
-  color: white;
-  font-weight: 300;
-  padding-right: 5px;
-}
+
 .footer-container .right-navi {
   color: white;
   font-style: normal;
-  padding-left: 20px;
   pointer-events: none;
   font-weight: 300;
+  margin: auto;
 }
 .footer-container .right-navi div:first-child {
   margin-bottom: 20px;
@@ -76,7 +55,8 @@
 }
 .footer-container .right-navi h4 {
   padding-left: 5px;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 500;
 }
 .footer-container .right-navi h5 {
   font-size: 13px;
@@ -84,13 +64,4 @@
 }
 
 @media (max-width: 500px) {
-  .footer-container .footer-navi-link {
-    font-size: 12px;
-  }
-  .footer-container .right-navi h4 {
-    font-size: 13px;
-  }
-  .footer-container .right-navi h5 {
-    font-size: 11px;
-  }
 }
