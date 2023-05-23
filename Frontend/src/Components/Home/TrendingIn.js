@@ -1,34 +1,35 @@
-import React, { Component } from 'react';
-import adidas from "../../Images/logo/adidas.jpeg";
-import louis from "../../Images/logo/louis.png";
-import hm from "../../Images/logo/hm.png";
-import allen from "../../Images/logo/allen.jpeg";
-import wrogn from "../../Images/logo/wrogn.jpg";
-import nike from "../../Images/logo/nike.png";
-import roadster from "../../Images/logo/roadster.jpeg";
-import hrx from "../../Images/logo/hrx.jpg";
-import '../../css/trending-in.css';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import img1 from "../../Images/logo/1.webp";
+import img2 from "../../Images/logo/2.webp";
+import img3 from "../../Images/logo/3.webp";
+import img4 from "../../Images/logo/4.webp";
+import img5 from "../../Images/logo/5.webp";
+import img6 from "../../Images/logo/6.webp";
+import img7 from "../../Images/logo/7.webp";
+import img8 from "../../Images/logo/8.webp";
 
-const images = [adidas, louis, hm, allen, wrogn, nike, roadster, hrx];
+import "../../css/trending-in.css";
+
+const images = [img1, img2, img3, img4, img5, img6, img7, img8];
 
 class TrendingIn extends Component {
-
-    render() {
-        return (
-            <div className="trending-in-container">
-                <h2>Trending Brands in Fashion</h2>
-                <div className="trending-in">
-                    {images.map((item, index) =>
-                        <div className="trending-home-container" key={index}>
-                            <Link to="/search/fashion"><img src={item} alt={item} /></Link>
-                        </div>
-                    )}
-                </div>
+  render() {
+    return (
+      <div className="trending-in-container">
+        <h2>Trending Brands in Fashion</h2>
+        <div className="trending-in">
+          {images.map((item, index) => (
+            <div className="trending-home-container" key={index}>
+              <Link to="/search/fashion">
+                <img src={item} alt={item} />
+              </Link>
             </div>
-
-        );
-    }
+          ))}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default TrendingIn;
