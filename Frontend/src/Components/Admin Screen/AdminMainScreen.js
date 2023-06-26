@@ -47,11 +47,13 @@ class AdminMainScreen extends Component {
     } = this.state;
     return (
       <div className="wrap-whole-admin">
-        <Logout
-          loggingOut={this.loggingOut}
-          handleLogout={this.handleLogout}
-          logoutDisplay={logoutDisplay}
-        />
+        {logoutDisplay && (
+          <Logout
+            loggingOut={this.loggingOut}
+            handleLogout={this.handleLogout}
+            logoutDisplay={logoutDisplay}
+          />
+        )}
         <Admin
           dashboardToggle={dashboardToggle}
           smallScreenDashboard={smallScreenDashboard}

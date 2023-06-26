@@ -20,7 +20,7 @@
   height: 100vh;
 }
 .l-cont-large {
-  width: 150px;
+  width: 170px;
 }
 .display-half {
   width: 40px !important;
@@ -35,7 +35,6 @@
   background-color: white;
   height: 45px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 0 20px 0 10px;
   position: sticky;
@@ -45,6 +44,7 @@
 .role-admin-nav-right {
   display: flex;
   align-items: center;
+  margin-left: auto;
 }
 
 .role-admin-nav svg {
@@ -56,31 +56,12 @@
   margin-right: 20px;
 }
 .role-admin-l-cont .admin-logo-container {
-  color: #ffffff;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 10px 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   pointer-events: none;
   height: 60px;
-  position: relative;
-}
-.role-admin-l-cont .admin-logo-container span:first-child {
-  transition: all 0.2s ease-in-out;
-}
-.role-admin-l-cont .admin-logo-container span:first-child img {
-  width: 100px;
-}
-.role-admin-l-cont .admin-logo-container span:last-child {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.admin-logo-container .now-logo-hide {
-  opacity: 0;
+  display: flex;
+  justify-content: center;
 }
 .now-logo {
   transition: all 0.2s 0.1s ease-in-out;
@@ -223,6 +204,7 @@
   .dashboard-each-option {
   width: 100%;
 }
+
 .role-admin-container
   .role-admin-l-cont
   .dashboard
@@ -232,7 +214,6 @@
   display: flex;
   align-items: center;
   height: 40px;
-  width: 100;
   justify-content: flex-start;
   color: white;
   cursor: pointer;
@@ -257,7 +238,7 @@
   .nav-btn
   .dashboard-each-option
   svg {
-  margin-right: 3px;
+  margin-right: 4px;
   font-size: 16px;
   transition: all 0.2s 0.2s ease-in-out;
 }
@@ -270,6 +251,8 @@
   margin: 0;
   font-size: 14px;
   padding-left: 4px;
+  font-weight: 300;
+  letter-spacing: 0px;
   transition: all 0.2s 0.2s ease-in-out;
 }
 .dashboard-admin-options .dashboard-each-option div {
@@ -297,6 +280,8 @@
   margin: 0;
   font-size: 14px;
   padding-left: 4px;
+  font-weight: 300;
+  letter-spacing: 0px;
   transition: all 0.2s 0.2s ease-in-out;
 }
 .hide-it {
@@ -305,7 +290,7 @@
   font-size: 6px !important;
 }
 .dashboard-admin-options .dashboard-each-option svg {
-  margin-right: 3px;
+  margin-right: 4px;
   font-size: 16px;
   transition: all 0.2s 0.2s ease-in-out;
 }
@@ -908,56 +893,52 @@
   left: 0;
   right: 0;
   z-index: 9999999999999999;
-  background-color: rgba(255, 255, 255, 0.59);
-  pointer-events: none;
-  opacity: 0;
+  background-color: rgba(255, 255, 255, 0.692);
   transition: all 0.2s ease-in-out;
 }
-.display-logout-container {
-  opacity: 1 !important;
-  pointer-events: all !important;
-}
+
 .admin-logout-now-container .logout-btns {
-  width: 300px;
-  max-width: 300px;
+  width: 90%;
+  max-width: 420px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #343434;
-  padding: 20px;
+  padding: 25px 15px;
 }
 .admin-logout-now-container .logout-btns h5 {
   text-align: center;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
   margin-bottom: 20px;
+  font-weight: 300;
 }
 .admin-logout-now-container .logout-btns div {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   margin-top: 18px;
 }
 .admin-logout-now-container .logout-btns button {
-  padding: 5px;
+  padding: 4px 8px;
   box-sizing: border-box;
-  outline: none;
-  font-size: 16px;
+  font-size: 13px;
 }
 .admin-logout-now-container .logout-btns button:first-child {
   background-color: red;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  margin-right: 15px;
 }
 .admin-logout-now-container .logout-btns button:last-child {
   background-color: white;
   color: #343434;
   border: 1px solid #343434;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 @media (max-width: 780px) {
   .admin-logout-now-container .logout-btns h5 {

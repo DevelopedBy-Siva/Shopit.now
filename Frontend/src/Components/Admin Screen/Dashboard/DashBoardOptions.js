@@ -4,14 +4,8 @@ import { Link } from "react-router-dom";
 class DashBoardOptions extends Component {
   state = {};
   render() {
-    const {
-      name,
-      dashboardToggle,
-      url,
-      selectedScreen,
-      handleSmallDashboard,
-      children,
-    } = this.props;
+    const { name, url, selectedScreen, handleSmallDashboard, children } =
+      this.props;
     return (
       <Link
         to={url}
@@ -22,7 +16,7 @@ class DashBoardOptions extends Component {
       >
         <div>
           {children}
-          <h5 className={!dashboardToggle ? "" : "hide-it"}>{name}</h5>
+          <h5>{name}</h5>
         </div>
       </Link>
     );
