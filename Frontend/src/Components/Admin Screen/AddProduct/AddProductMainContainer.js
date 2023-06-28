@@ -6,6 +6,7 @@ import {
 } from "../../../api/api";
 import dummyImage from "../../../Images/camera.png";
 import { getJwt } from "../../../services/LoginReg";
+import toast from "../../Toast";
 
 class AddProductMainContainer extends Component {
   constructor(props) {
@@ -14,9 +15,9 @@ class AddProductMainContainer extends Component {
     this.logoError = React.createRef();
     this.moreThanFiveError = React.createRef();
     this.helpError = React.createRef();
-    this.productImageError = React.createRef();
     this.goBackChange = React.createRef();
     this.helpChange = React.createRef();
+    this.formRef = React.createRef();
   }
 
   state = {
@@ -25,20 +26,31 @@ class AddProductMainContainer extends Component {
     productImage: dummyImage,
     allproductImages: [],
     loading: false,
-    beforeSuccess: false,
     uploadNote: null,
     uploadFail: false,
     submitImages: [],
-    uploadLen: 0,
   };
   componentDidMount() {
     this.props.handleSelectedScreen("Add Product");
   }
 
+  reinitialise = () => {
+    this.setState({
+      logoImage: dummyImage,
+      thumbnail: null,
+      productImage: dummyImage,
+      allproductImages: [],
+      loading: false,
+      uploadNote: null,
+      uploadFail: false,
+      submitImages: [],
+    });
+  };
+
   handleLogoChange = (e) => {
+    this.logoError.current.classList.remove("product-logo-error-visible");
     if (e.target.files[0]) {
       const { size, type } = e.target.files[0];
-      this.imageUploadErrorRemove();
       if (this.imageValidation(size, type)) {
         const reader = new FileReader();
         reader.onload = () => {
@@ -57,42 +69,21 @@ class AddProductMainContainer extends Component {
   };
 
   imageValidation = (size, type) => {
-    this.imageUploadErrorRemove();
-    const allowedTypes = ["jpeg", "png", "jpg"];
-    const allowedSize = 1000000;
+    const allowedTypes = ["webp"];
+    const allowedSize = 50 * 1024;
     const imageType = type.split("/");
     if (!allowedTypes.includes(imageType[1])) {
-      const errorMsg = "Should be .jpeg or .png";
-      this.imageUploadErrorAdd(errorMsg);
+      toast.info("Image should be of type .webp");
       return false;
     } else if (size >= allowedSize) {
-      const errorMsg = "Should be less than 1mb";
-      this.imageUploadErrorAdd(errorMsg);
+      toast.info("Image size should be less than 50kb");
       return false;
-    } else {
-      this.imageUploadErrorRemove();
-      this.logoError.current.classList.remove("product-logo-error-visible");
-      return true;
     }
+    return true;
   };
 
-  imageUploadErrorAdd = (errorMsg) => {
-    this.imageUploadError.current.innerHTML = errorMsg;
-    this.imageUploadError.current.classList.add(
-      "product-image-upload-error-display"
-    );
-  };
-
-  imageUploadErrorRemove = () => {
-    this.imageUploadError.current.classList.remove(
-      "product-image-upload-error-display"
-    );
-  };
-
-  handleProductSubmit = (value) => {
+  handleProductSubmit = (value, resetForm) => {
     const { allproductImages, logoImage } = this.state;
-    if (allproductImages.length !== 4) this.handleProductImageErrors();
-    else this.handleProductImageErrorsRemove();
     if (!this.productImageCheck()) {
       this.logoError.current.classList.add("product-logo-error-visible");
     } else {
@@ -100,8 +91,13 @@ class AddProductMainContainer extends Component {
     }
     if (allproductImages.length === 4 && logoImage !== dummyImage) {
       this.setState({ loading: true });
-      this.setState({ uploadNote: "Uploading Product Details.." });
-      this.uploadTheFile(value);
+      toast.promise(
+        "Please wait... Adding product",
+        toast.props.promise,
+        true,
+        false
+      );
+      this.uploadTheFile(value, resetForm);
     }
   };
   productImageCheck = () => {
@@ -111,7 +107,7 @@ class AddProductMainContainer extends Component {
     }
     return true;
   };
-  uploadTheFile = async (data) => {
+  uploadTheFile = async (data, resetForm) => {
     const { thumbnail, submitImages } = this.state;
     const thumbnailImage = new FormData();
     thumbnailImage.append("thumbnailFile", thumbnail, thumbnail.name);
@@ -127,6 +123,7 @@ class AddProductMainContainer extends Component {
       },
     };
     const allimages = new FormData();
+    if (submitImages && submitImages.length !== 4) toast.info("Pick 4 images");
     for (let i of submitImages) {
       allimages.append("imageFiles", i);
     }
@@ -136,17 +133,16 @@ class AddProductMainContainer extends Component {
         headers: { Authorization: getJwt() },
       })
       .then(({ data }) => {
-        this.setState({ uploadNote: "Uploading the Thumbnail...Hold On..." });
-        this.sendThumbnailRequest(data, thumbnailImage, allimages);
+        this.sendThumbnailRequest(data, thumbnailImage, allimages, resetForm);
       })
       .catch(() => {
         this.setState({
-          uploadNote: "Product details submission failed...",
-          uploadFail: true,
+          loading: false,
         });
+        toast.error("Sorry! Failed to add product");
       });
   };
-  sendThumbnailRequest = async (id, thumbnailImage, allimages) => {
+  sendThumbnailRequest = async (id, thumbnailImage, allimages, resetForm) => {
     await axios
       .post(
         `${URL(API_ENDPOINT.productAddApi)}/thumbnail-image/${id}`,
@@ -156,19 +152,14 @@ class AddProductMainContainer extends Component {
         }
       )
       .then(() => {
-        this.setState({
-          uploadNote: "Just a min...Uploading the Product Images..",
-        });
-        this.sendProductImagesRequest(id, allimages);
+        this.sendProductImagesRequest(id, allimages, resetForm);
       })
       .catch(() => {
-        this.setState({
-          uploadNote: "Thumbnail upload failed...",
-          uploadFail: true,
-        });
+        this.setState({ loading: false });
+        toast.error("Sorry! Failed to add product");
       });
   };
-  sendProductImagesRequest = async (id, allimages) => {
+  sendProductImagesRequest = async (id, allimages, resetForm) => {
     await axios
       .post(
         `${URL(API_ENDPOINT.productAddApi)}/product-images/${id}`,
@@ -178,29 +169,21 @@ class AddProductMainContainer extends Component {
         }
       )
       .then(() => {
-        this.setState({ beforeSuccess: true, uploadNote: null });
+        this.reinitialise();
+        resetForm({
+          values: "",
+        });
+        this.formRef.current.reset();
+        toast.success("Product successfully added");
       })
       .catch(() => {
-        this.setState({
-          uploadNote: "Image upload failed...",
-          uploadFail: true,
-        });
+        this.setState({ loading: false });
+        toast.error("Sorry! Failed to add product");
       });
   };
 
   handleHelp = () =>
     this.helpError.current.classList.toggle("help-container-details-visible");
-
-  handleProductImageErrors = () => {
-    this.productImageError.current.classList.add(
-      "product-image-errors-display"
-    );
-  };
-  handleProductImageErrorsRemove = () => {
-    this.productImageError.current.classList.remove(
-      "product-image-errors-display"
-    );
-  };
 
   handleProductImages = (e) => {
     if (e.target.files.length) {
@@ -218,13 +201,10 @@ class AddProductMainContainer extends Component {
       l = 4 - storedLen;
       if (imgLen + storedLen > 4) {
         this.moreImageSelectionError();
-        this.handleProductImageErrorsRemove();
       }
     } else {
       if (imgLen + storedLen <= 4) {
         l = imgLen;
-        if (imgLen + storedLen === 4) this.handleProductImageErrorsRemove();
-        else if (imgLen + storedLen < 4) this.handleProductImageErrors();
       } else l = imgLen - (imgLen + storedLen - 4) - 4;
     }
     for (let i = 0; i < l; i++) {
@@ -251,7 +231,6 @@ class AddProductMainContainer extends Component {
     const updateSubmitImages = submitImages.filter(
       (i, index) => index !== position
     );
-    if (updateProductImages.length < 4) this.handleProductImageErrors();
     this.setState({
       allproductImages: updateProductImages,
       submitImages: updateSubmitImages,
@@ -261,14 +240,6 @@ class AddProductMainContainer extends Component {
     const error = this.moreThanFiveError.current.classList;
     error.add("more-than-five-selection-visible");
     setTimeout(() => error.remove("more-than-five-selection-visible"), 4000);
-  };
-  tryUploadAgian = () => {
-    this.setState({
-      loading: false,
-      beforeSuccess: false,
-      uploadNote: null,
-      uploadFail: false,
-    });
   };
 }
 

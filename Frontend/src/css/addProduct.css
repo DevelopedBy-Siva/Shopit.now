@@ -63,14 +63,14 @@
   border-radius: 4px;
   width: 250px;
   outline: none;
-  font-size: 16px;
+  font-size: 15px;
   height: 35px;
   cursor: pointer;
   background: none;
   color: #343434;
 }
 .add-product-container .pick-category-container option {
-  font-size: 18px;
+  font-size: 16px;
   color: #343434;
   background-color: rgb(240, 240, 240);
   padding: 10px;
@@ -96,9 +96,17 @@
   outline: none;
   background: none;
   margin-bottom: 40px;
-  font-size: 20px;
+  font-size: 18px;
   color: #343434;
 }
+
+.add-product-container
+  .add-product-sub-container
+  .admin-input-container
+  input[type="number"] {
+  margin-bottom: 30px;
+}
+
 .product-logo-main-container {
   position: relative;
   margin: auto;
@@ -110,7 +118,8 @@
   color: white;
   top: -15px;
   right: -100px;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 300;
   border-radius: 5px;
   pointer-events: none;
   opacity: 0;
@@ -138,10 +147,18 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.add-product-sub-container .product-images-label {
+  font-size: 16px;
+  font-weight: 400;
+  margin-right: 12px;
+  color: #343434;
+}
+
 .add-product-container .add-product-sub-container .admin-input-container label {
   color: #343434;
   position: absolute;
   top: 2px;
+  font-weight: 400;
   font-size: 16px;
   left: 0;
   pointer-events: none;
@@ -155,25 +172,30 @@ input[type="number"] {
 }
 .add-product-container .add-product-sub-container .submit-btn {
   text-align: center;
-  font-size: 16px;
-}
-.add-product-container .add-product-sub-container .submit-btn button {
+  font-size: 12px;
   border: none;
   outline: none;
   border-radius: 5px;
   background-color: #343434;
-  padding: 8px;
+  padding: 4px;
+  height: 32px;
+  width: 100px;
   color: white;
-  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px auto 0 auto;
 }
+
 .add-product-container .add-product-sub-container .admin-input-container {
   position: relative;
 }
 .add-product-container .add-product-sub-container .admin-input-container h5 {
   position: absolute;
-  top: 25px;
+  top: 27px;
   left: 2px;
   font-size: 12px;
+  font-weight: 400;
   color: red;
 }
 .add-product-container .pick-category-container {
@@ -183,6 +205,7 @@ input[type="number"] {
   position: absolute;
   bottom: -25px;
   left: 2px;
+  font-weight: 400;
   font-size: 12px;
   color: red;
 }
@@ -220,22 +243,31 @@ input[type="number"] {
 }
 
 .add-product-container .product-images-container {
-  width: 60px;
-  height: 50px;
-  border-radius: 10px;
   overflow: hidden;
-  background-color: rgb(255, 255, 255);
-  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
-.add-product-container .product-images-container img {
-  object-fit: fill;
-  width: 70%;
-  height: 70%;
-  opacity: 0.8;
+
+.add-product-container .product-images-container span {
+  display: block;
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #343434;
 }
+
+.add-product-container .product-images-container label {
+  background-color: rgb(216, 216, 216);
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.add-product-container .product-images-container svg {
+  font-size: 20px;
+}
+
 .add-product-container .product-images-container input {
   display: none;
 }
@@ -257,11 +289,11 @@ input[type="number"] {
 .add-product-container .help-container .help-container-details {
   position: absolute;
   right: 5px;
-  width: 100px;
+  width: 170px;
   color: rgb(43, 43, 43);
   background-color: #343434 !important;
-  padding: 5px 20px;
-  border-radius: 10px;
+  padding: 5px 14px;
+  border-radius: 6px;
   color: white;
   pointer-events: none;
   opacity: 0;
@@ -269,11 +301,20 @@ input[type="number"] {
   transition: all 0.4s ease-in-out;
   animation: helpContainerAnimate 0.3s infinite ease-in-out alternate;
 }
-.add-product-container .help-container .help-container-details h3 {
-  font-size: 16px;
+.add-product-container .help-container .help-container-details span {
+  font-size: 14px;
+  font-weight: 400;
+  display: inline-block;
+  margin: 0;
+  margin: 12px 0;
+  line-height: 17px;
+  border-bottom: 1px solid #fff;
 }
-.add-product-container .help-container .help-container-details li {
-  font-size: 10px;
+.add-product-container .help-container .help-container-details p {
+  font-size: 11px;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
 }
 .help-container-details-visible {
   opacity: 1 !important;
@@ -315,9 +356,9 @@ input[type="number"] {
   color: red;
 }
 
-.add-product-container .product-image-main-container {
+.add-product-container .product-image-sub-container {
   display: flex;
-  align-items: center;
+  margin-top: 25px;
 }
 .add-product-container .product-image-main-container .each-image {
   margin-left: 8px;
@@ -341,6 +382,10 @@ input[type="number"] {
   z-index: 99999;
   top: -15px;
   right: -5px;
+  border-radius: 50%;
+  outline: none;
+  background: none;
+  border: none;
 }
 .add-product-container
   .product-image-main-container
@@ -526,106 +571,5 @@ input[type="number"] {
   to {
     transform: scale(1.8);
     pointer-events: all;
-  }
-}
-@media (max-width: 601px) {
-  .add-product-container .help-container .help-container-details {
-    position: absolute;
-    right: 5px;
-    width: 80px;
-    padding: 0px 15px;
-    opacity: 0;
-  }
-  .add-product-container .help-container .help-container-details h3 {
-    font-size: 12px;
-  }
-  .add-product-container .help-container .help-container-details li {
-    font-size: 8px;
-  }
-  .add-product-container .help-container .help-container-circle {
-    font-size: 20px;
-  }
-  .pick-4-images {
-    font-size: 18px;
-  }
-  .pick-4-images span {
-    font-size: 24px;
-  }
-  .add-product-container .go-back-admin {
-    font-size: 20px;
-  }
-  .add-product-container .add-product-sub-container .submit-btn {
-    font-size: 20px;
-  }
-
-  .product-image-main-container h5 {
-    font-size: 20px;
-  }
-  .product-image-main-container h5 span {
-    font-size: 25px;
-    padding: 0 2px;
-  }
-  .add-product-container .product-image-main-container .each-image {
-    width: 50px;
-    height: 50px;
-  }
-  .product-logo-main-container .product-logo-error {
-    top: -28px;
-    right: -80px;
-    font-size: 12px;
-  }
-  .add-product-container .product-logo-container {
-    width: 100px;
-    height: 100px;
-  }
-  .add-product-container .product-image-upload-error {
-    padding: 10px;
-    font-size: 15px;
-    top: 50px;
-  }
-  .add-product-container .more-than-five-selection {
-    font-size: 14px;
-  }
-  .add-product-container .more-than-five-selection span {
-    font-size: 18px;
-    padding: 0 3px;
-  }
-  .product-save-loading-container
-    .product-save-loading
-    .product-save-loading-icon {
-    width: 150px;
-  }
-  .product-save-loading-container
-    .product-save-loading
-    .product-save-success-icon {
-    width: 200px;
-    height: 200px;
-  }
-  .product-save-loading-container .product-save-loading h5 {
-    font-size: 20px;
-  }
-  @keyframes successAnimation {
-    from {
-      top: 50%;
-      width: 200px;
-    }
-    to {
-      top: 30%;
-      width: 150px;
-    }
-  }
-  .product-save-loading-container
-    .product-save-loading
-    .product-saving-success
-    h4 {
-    font-size: 24px;
-  }
-  .product-save-fail-icon {
-    position: absolute;
-    left: 50%;
-    top: 30%;
-    transform: translate(-50%, -50%);
-    width: 160px;
-    height: 160px;
   }
 }

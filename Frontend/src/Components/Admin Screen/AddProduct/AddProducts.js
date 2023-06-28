@@ -1,11 +1,8 @@
 import React from "react";
-import Lottie from "lottie-react";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import { FaQuestionCircle, FaTimesCircle, FaTimes } from "react-icons/fa";
-import submitLoading from "../../../animations/loading.json";
-import successSubmit from "../../../animations/success.json";
-import submitFailure from "../../../animations/failure.json";
+import { FaTimesCircle, FaHandPointRight } from "react-icons/fa";
+import { MdInfo, MdCameraAlt } from "react-icons/md";
 
 import AddProductMainContainer from "./AddProductMainContainer";
 import AdminInputContainer from "../AdminInputContainer";
@@ -13,6 +10,7 @@ import DropDownCategory from "./DropDownCategory";
 import dummyImage from "../../../Images/camera.png";
 
 import "../../../css/addProduct.css";
+import Loader from "../../Loader";
 
 const validate = Yup.object().shape({
   title: Yup.string()
@@ -31,67 +29,9 @@ const validate = Yup.object().shape({
 });
 class AddProducts extends AddProductMainContainer {
   render() {
-    const {
-      uploadFail,
-      uploadNote,
-      beforeSuccess,
-      loading,
-      logoImage,
-      productImage,
-      allproductImages,
-    } = this.state;
+    const { loading, logoImage, allproductImages } = this.state;
     return (
       <div className="add-product-container">
-        {loading && (
-          <div className="product-save-loading-container">
-            <div className="product-save-loading">
-              {uploadFail ? (
-                <div className="product-saving-fail">
-                  <FaTimes
-                    className="close-product-saving-fail"
-                    onClick={this.tryUploadAgian}
-                  />
-                  <Lottie
-                    className="product-save-fail-icon"
-                    animationData={submitFailure}
-                    loop={false}
-                    autoPlay={true}
-                  />
-                  <h4>Image upload failed...</h4>
-                </div>
-              ) : (
-                <div className="product-saving-success">
-                  {beforeSuccess && (
-                    <FaTimes
-                      onClick={() => (window.location = "/admin/add-product")}
-                      className="close-product-saving-success"
-                    />
-                  )}
-                  <h5>{uploadNote}</h5>
-                  {!beforeSuccess && (
-                    <Lottie
-                      className="product-save-loading-icon"
-                      animationData={submitLoading}
-                      autoPlay
-                      loop
-                    />
-                  )}
-                  {beforeSuccess && (
-                    <Lottie
-                      className="product-save-success-icon"
-                      animationData={successSubmit}
-                      loop={false}
-                      autoPlay={true}
-                    />
-                  )}
-                  {beforeSuccess && (
-                    <h4>You have successFully added the product</h4>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
         <div className="add-product-sub-container">
           <Formik
             initialValues={{
@@ -99,7 +39,9 @@ class AddProducts extends AddProductMainContainer {
               category: "",
               price: "",
             }}
-            onSubmit={this.handleProductSubmit}
+            onSubmit={(values, { resetForm }) =>
+              this.handleProductSubmit(values, resetForm)
+            }
             validationSchema={validate}
           >
             {({
@@ -109,7 +51,7 @@ class AddProducts extends AddProductMainContainer {
               setFieldTouched,
               touched,
             }) => (
-              <form onSubmit={handleSubmit}>
+              <form ref={this.formRef} onSubmit={handleSubmit}>
                 <div className="product-logo-main-container">
                   <label
                     className="product-logo-container"
@@ -129,18 +71,20 @@ class AddProducts extends AddProductMainContainer {
                     />
                   </label>
                   <h5 ref={this.logoError} className="product-logo-error">
-                    Pick a Thumbnail
+                    Pick a thumbnail
                   </h5>
                 </div>
                 <AdminInputContainer
                   type="text"
                   name="Title"
+                  disabled={loading}
                   errors={errors.title}
                   touched={touched.title}
                   onBlur={() => setFieldTouched("title")}
                   onChange={handleChange("title")}
                 />
                 <DropDownCategory
+                  disabled={loading}
                   errors={errors.category}
                   touched={touched.category}
                   onBlur={() => setFieldTouched("category")}
@@ -149,6 +93,7 @@ class AddProducts extends AddProductMainContainer {
                 <AdminInputContainer
                   type="number"
                   name="Price ($)"
+                  disabled={loading}
                   errors={errors.price}
                   touched={touched.price}
                   onBlur={() => setFieldTouched("price")}
@@ -156,36 +101,46 @@ class AddProducts extends AddProductMainContainer {
                 />
                 <div className="product-image-main-container">
                   {allproductImages.length !== 4 && (
-                    <label
-                      className="product-images-container"
-                      htmlFor="product-image"
-                    >
-                      <input
-                        name="images"
-                        multiple
-                        accept="image/*"
-                        onChange={this.handleProductImages}
-                        id="product-image"
-                        type="file"
-                      />
-                      <img src={productImage} alt="Products" />
-                    </label>
-                  )}
-                  {allproductImages.map((image, index) => (
-                    <div key={index} className="each-image">
-                      <div className="close-each-product">
-                        <FaTimesCircle
-                          onClick={() => this.removeProductImage(index)}
-                          className="close-each-product-icon"
+                    <div className="product-images-container">
+                      <span>Pick 4 images of the product</span>
+                      <label htmlFor="product-image">
+                        <input
+                          disabled={loading}
+                          name="images"
+                          multiple
+                          accept="image/*"
+                          onChange={this.handleProductImages}
+                          id="product-image"
+                          type="file"
                         />
-                      </div>
-                      <img src={image} alt="Products" />
+                        <MdCameraAlt />
+                      </label>
                     </div>
-                  ))}
+                  )}
+                  <div className="product-image-sub-container">
+                    {allproductImages.map((image, index) => (
+                      <div key={index} className="each-image">
+                        <button
+                          className="close-each-product"
+                          disabled={loading}
+                        >
+                          <FaTimesCircle
+                            onClick={() => this.removeProductImage(index)}
+                            className="close-each-product-icon"
+                          />
+                        </button>
+                        <img src={image} alt="Products" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h2 className="submit-btn">
-                  <button type="submit">Add Product</button>
-                </h2>
+                <button disabled={loading} className="submit-btn" type="submit">
+                  {loading ? (
+                    <Loader style={{ width: "18px", height: "18px" }} />
+                  ) : (
+                    "Add Product"
+                  )}
+                </button>
               </form>
             )}
           </Formik>
@@ -196,23 +151,26 @@ class AddProducts extends AddProductMainContainer {
         ></div>
         <div onClick={this.handleHelp} className="help-container">
           <div ref={this.helpChange} className="help-container-circle">
-            <FaQuestionCircle />
+            <MdInfo />
           </div>
           <div ref={this.helpError} className="help-container-details">
-            <h3>Note:</h3>
-            <ul>
-              <li>Images Should be of .jpeg or png</li>
-              <li>Should be less than 1mb</li>
-              <li>Should submit 4 product images</li>
-            </ul>
+            <span>Note:-</span>
+            <div>
+              <p>
+                <FaHandPointRight /> Images should be of type .webp
+              </p>
+              <p>
+                <FaHandPointRight /> Images should be less than 50kb
+              </p>
+              <p>
+                <FaHandPointRight /> Must submit 4 images of the product
+              </p>
+            </div>
           </div>
         </div>
         <div ref={this.moreThanFiveError} className="more-than-five-selection">
           Only <span>4 images</span> are allowed so other selections are removed
         </div>
-        <h5 className="pick-4-images" ref={this.productImageError}>
-          Pick <span>4</span> images
-        </h5>
       </div>
     );
   }

@@ -15,7 +15,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     @Query("select count(o) from Orders o")
     int noOfOrders();
 
-    @Query("select o from Orders o where o.orderStatus.cancelled=0 and o.orderStatus.delivered=0 order by o.orderStatus.shipped ASC , o.orderDate desc")
+    @Query("select o from Orders o where o.orderStatus.cancelled=false and o.orderStatus.delivered=false order by o.orderStatus.shipped ASC , o.orderDate desc")
     List<Orders> getAdminOrders();
 
 }
