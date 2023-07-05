@@ -5,10 +5,9 @@
 }
 .trending-in-container h2 {
   margin-top: 10px;
-  text-transform: capitalize;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 21px;
+  font-weight: 600;
 }
 .trending-in-container .trending-in {
   display: flex;
