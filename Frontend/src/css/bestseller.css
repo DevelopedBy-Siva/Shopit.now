@@ -1,10 +1,9 @@
 .bestseller-main-container {
-  padding: 10px;
   position: relative;
 }
 
 .bestseller-main-sub-container {
-  height: 250px;
+  height: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,6 +36,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 10px;
 }
 
 .bestseller-main-container h2 {
@@ -48,9 +48,9 @@
   flex: 1;
 }
 .bestseller-main-container .bestseller-container {
-  width: 90%;
+  width: 100%;
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   align-items: center;
   margin-top: 20px;
@@ -93,25 +93,54 @@
 .bestseller-main-container .bestseller-container .best-seller-item-container {
   border-radius: 5px;
   cursor: pointer;
-  width: 250px;
-  height: 205px;
-  padding: 10px;
-  border: 1px solid rgb(196, 196, 196);
-  margin: 8px;
-  margin-bottom: 25px !important;
+  flex-shrink: 0;
+  width: 285px;
+  height: 275px;
+  margin-left: 35px;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.bestseller-main-container
+  .bestseller-container
+  .best-seller-item-container
+  .bestseller-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  overflow: hidden;
+}
+.bestseller-main-container
+  .bestseller-container
+  .best-seller-item-container
+  .bestseller-details
+  h5 {
+  font-size: 14px;
+  color: rgb(190, 0, 0);
+  margin-left: 10px;
+}
+.bestseller-main-container
+  .bestseller-container
+  .best-seller-item-container:first-of-type {
+  margin-left: 25px;
 }
 .bestseller-container .best-seller-item-container img {
-  width: 220px;
-  height: 160px;
+  width: 100%;
+  height: 200px;
   object-fit: cover;
 }
 .bestseller-container .best-seller-item-container h4 {
-  font-size: 16px;
+  font-size: 14px;
   text-align: left;
-  padding: 5px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  line-height: 22px;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
   text-transform: capitalize;
 }
 @media (max-width: 980px) {

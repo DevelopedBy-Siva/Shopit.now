@@ -1,6 +1,7 @@
 .trending-in-container {
   padding: 10px;
   min-height: 260px;
+  margin-top: 20px;
 }
 .trending-in-container h2 {
   margin-top: 10px;
