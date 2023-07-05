@@ -118,7 +118,7 @@
 }
 .admin-settings-input-container h5 {
   position: absolute;
-  font-size: 10px;
+  font-size: 11px;
   color: red;
   bottom: -22px;
 }
@@ -130,11 +130,12 @@
 .admin-settings-password-container button {
   background-color: rgb(255, 174, 0);
   padding: 4px;
-  font-size: 12px;
+  font-size: 13px;
   border-radius: 4px;
   border: #343434;
   color: #343434;
-  font-weight: 600;
+  font-weight: 400;
+  width: 130px;
   margin-bottom: 20px;
 }
 .admin-settings-password-container p {
@@ -143,11 +144,11 @@
 .admin-settings-password-container h1,
 .admin-settings-delete-container h1 {
   color: #343434;
+  width: 90%;
   font-size: 18px;
-  margin: 0;
-  padding: 20px 10px;
+  margin: 0 auto;
+  padding: 20px 0;
   margin-bottom: 20px;
-  color: #a5a5a5;
 }
 .admin-settings-password-container,
 .admin-settings-delete-container {
@@ -164,11 +165,11 @@
 .admin-settings-delete-container button {
   background-color: rgb(255, 0, 0);
   padding: 4px;
-  font-size: 15px;
+  font-size: 13px;
   border-radius: 4px;
   border: white;
   color: white;
-  font-weight: 500;
+  font-weight: 400;
   width: 80px;
   margin-bottom: 20px;
   border: none;
@@ -181,12 +182,14 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #343434;
 }
 .admin-settings-delete-container h5 {
-  bottom: 56px;
+  bottom: 60px;
   left: 5%;
-  font-size: 12px;
+  font-size: 11px;
   position: absolute;
   color: red;
 }

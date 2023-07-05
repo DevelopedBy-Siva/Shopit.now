@@ -71,7 +71,7 @@ class DeleteAccount extends Component {
           </div>
         )}
         <h4>
-          Are you sure you want to delete your account? Once you delete your
+          Are you sure you want to delete the account? Once you delete the
           account, there is no way getting it back.
         </h4>
         <InputContainer
