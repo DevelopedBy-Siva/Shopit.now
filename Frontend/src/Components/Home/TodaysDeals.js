@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
 import axios from "axios";
-import Slider from "react-slick";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import "../../css/todaysdeal.css";
 import SkeletonLoader from "../Loader/SkeletonLoader";
@@ -51,26 +50,29 @@ class TodaysDeals extends Component {
               Couldn't load today's deals
             </span>
           ) : (
-            <Slider>
+            <div className="todaysdeal-container">
               {data.map((item) => {
-                const imgUrl = `data:${item.thumbnail.type};base64,${item.thumbnail.picByte}`;
+                const { id, title, thumbnail, price } = item;
+                const fraudPrice = price * 2;
+                const imgUrl = `data:${thumbnail.type};base64,${thumbnail.picByte}`;
                 return (
-                  <div key={item.id}>
+                  <div key={id}>
                     <div
                       onClick={() => onClick(item)}
                       className="item-container"
                     >
                       <img src={imgUrl} alt="todays-deals" />
-                      <h4>{item.title.toLowerCase()}</h4>
-                      <h5>
-                        <span>$ </span>
-                        {item.price}
-                      </h5>
+                      <div className="todaysdeals-details">
+                        <h4>{title}</h4>
+                        <h5>${price}</h5>
+                        <h6>${fraudPrice}</h6>
+                      </div>
+                      <span className="todaysdeal-discount">-50%</span>
                     </div>
                   </div>
                 );
               })}
-            </Slider>
+            </div>
           )}
         </div>
       </div>

@@ -71,7 +71,6 @@ class BestSellers extends Component {
               <div ref={this.scrollRef} className="bestseller-container">
                 {data.map((item) => {
                   const { id, title, thumbnail, price } = item;
-                  console.log(item);
                   const imgUrl = `data:${thumbnail.type};base64,${thumbnail.picByte}`;
                   return (
                     <div
