@@ -45,14 +45,17 @@ class HomeScreenCarousel extends Component {
         {loading ? (
           <SkeletonLoader size={1} />
         ) : error ? (
-          <div className="ad-error">Couldn't load advertisements</div>
+          <p className="ad-error">Couldn't load advertisements</p>
         ) : (
           <Slider {...settings}>
             {carouselData.map((item) => {
               const imgUrl = `data:${item.type};base64,${item.picByte}`;
               return (
                 <div key={item.productId} className="carousel">
-                  <Link to={`/products/${item.productId}`}>
+                  <Link
+                    className="carousel-link"
+                    to={`/products/${item.productId}`}
+                  >
                     <img src={imgUrl} alt="carousel" />
                   </Link>
                 </div>

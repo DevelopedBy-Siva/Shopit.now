@@ -7,6 +7,7 @@
   text-transform: uppercase;
   font-size: 21px;
   font-weight: 600;
+  line-height: 21px;
 }
 .trending-in-container .trending-in {
   display: flex;
