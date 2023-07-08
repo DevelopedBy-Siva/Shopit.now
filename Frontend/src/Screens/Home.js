@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   TrendingIn,
-  Advertisement,
   BestSellers,
   FooterNavi,
   HomeScreenCarousel,
@@ -22,7 +21,6 @@ class Home extends Component {
         <HomeScreenCarousel />
         <TodaysDeals onClick={this.handleItemPage} />
         <BestSellers onClick={this.handleItemPage} />
-        <Advertisement />
         <TrendingIn />
         <FooterNavi />
       </div>

@@ -1,9 +1,11 @@
 .carousel-container {
   width: 100%;
-  background-color: rgb(231, 231, 231);
   overflow: hidden;
   position: relative;
   height: 460px;
+}
+.carousel-container .css-8g2xm3-SkeletonTheme {
+  height: 100%;
 }
 .carousel-container .ad-error {
   text-align: center;
@@ -48,6 +50,21 @@
   width: 100%;
   height: 100%;
   object-fit: fill;
+}
+
+.carousel-container .skeleton-loading {
+  width: 100%;
+  height: 100%;
+}
+.carousel-container .skeleton-loading .skeleton {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+.carousel-container .skeleton-loading .skeleton .react-loading-skeleton {
+  background-size: 40% 100%;
+  background-image: linear-gradient(90deg, #e7e7e7, #d1d1d1, #e7e7e7);
 }
 
 @media (max-width: 980px) {

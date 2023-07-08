@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../../css/carousel.css";
 import axios from "axios";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
+import SkeletonLoader from "../Loader/SkeletonLoader";
 
 class HomeScreenCarousel extends Component {
   state = {
@@ -28,7 +29,7 @@ class HomeScreenCarousel extends Component {
   }
 
   render() {
-    const { carouselData, error } = this.state;
+    const { carouselData, error, loading } = this.state;
     let settings = {
       dots: true,
       infinite: true,
@@ -41,7 +42,9 @@ class HomeScreenCarousel extends Component {
     };
     return (
       <div className="carousel-container">
-        {error ? (
+        {loading ? (
+          <SkeletonLoader size={1} />
+        ) : error ? (
           <div className="ad-error">Couldn't load advertisements</div>
         ) : (
           <Slider {...settings}>
