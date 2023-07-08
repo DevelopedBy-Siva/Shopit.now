@@ -1,16 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import SkeletonLoader from "../Loader/SkeletonLoader";
+import CarouselNavigate from "./CarouselNavigate";
 import "../../css/bestseller.css";
 
-class BestSellers extends Component {
-  constructor(props) {
-    super(props);
-    this.scrollRef = React.createRef();
-  }
-
+class BestSellers extends CarouselNavigate {
   state = {
     loading: true,
     data: [],
@@ -32,14 +28,6 @@ class BestSellers extends Component {
       });
   };
 
-  handleScrollLeft = () => {
-    this.scrollRef.current.scrollLeft -= 400;
-  };
-
-  handleScrollRight = () => {
-    this.scrollRef.current.scrollLeft += 400;
-  };
-
   render() {
     const { data, error, loading } = this.state;
     const { onClick } = this.props;
@@ -49,10 +37,10 @@ class BestSellers extends Component {
           <h2>Best sellers in Mobiles, Laptops & Accessories</h2>
           {!loading && !error && data.length > 0 && (
             <div className="home-corousel-btns">
-              <button disabled>
+              <button onClick={this.handleScrollLeft}>
                 <BiChevronLeft />
               </button>
-              <button>
+              <button onClick={this.handleScrollRight}>
                 <BiChevronRight />
               </button>
             </div>
@@ -77,6 +65,7 @@ class BestSellers extends Component {
                       onClick={() => onClick(item)}
                       key={id}
                       className="best-seller-item-container"
+                      ref={this.itemRef}
                     >
                       <img src={imgUrl} alt="bestsellers" />
                       <div className="bestseller-details">

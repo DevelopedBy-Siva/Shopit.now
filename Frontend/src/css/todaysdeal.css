@@ -23,7 +23,7 @@
 }
 
 .todays-deal-container .todaysdeal-container {
-  width: 100%;
+  width: calc(100% - 30px);
   display: flex;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -84,14 +84,15 @@
   flex-shrink: 0;
   width: 285px;
   height: 310px;
-  margin-left: 35px;
+  margin: 0;
+  margin-left: 25px;
   background-color: #fff;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   position: relative;
 }
 .todays-deal-container .item-container:first-of-type {
-  margin-left: 25px;
+  margin-left: 0 !important;
 }
 .todays-deal-container .item-container img {
   width: 100%;
