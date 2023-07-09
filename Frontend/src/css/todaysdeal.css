@@ -90,6 +90,7 @@
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   position: relative;
+  text-decoration: none;
 }
 .todays-deal-container .item-container:first-of-type {
   margin-left: 0 !important;
@@ -114,6 +115,7 @@
   text-transform: capitalize;
   height: 48px;
   margin: 0;
+  color: #000;
 }
 .todays-deal-container .item-container h5 {
   font-size: 16px;

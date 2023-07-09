@@ -4,6 +4,7 @@ import axios from "axios";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import SkeletonLoader from "../Loader/SkeletonLoader";
 import useCarouselNavigate from "../Hooks/useCarouselNavigation";
+import { Link } from "react-router-dom";
 import "../../css/todaysdeal.css";
 
 function TodaysDeals() {
@@ -56,7 +57,12 @@ function TodaysDeals() {
               const fraudPrice = price * 2;
               const imgUrl = `data:${thumbnail.type};base64,${thumbnail.picByte}`;
               return (
-                <div className="item-container" ref={itemRef} key={id}>
+                <Link
+                  to={`/products/${id}`}
+                  className="item-container"
+                  ref={itemRef}
+                  key={id}
+                >
                   <img src={imgUrl} alt="todays-deals" />
                   <div className="todaysdeals-details">
                     <h4>{title}</h4>
@@ -64,7 +70,7 @@ function TodaysDeals() {
                     <h6>${fraudPrice}</h6>
                   </div>
                   <span className="todaysdeal-discount">-50%</span>
-                </div>
+                </Link>
               );
             })}
           </div>

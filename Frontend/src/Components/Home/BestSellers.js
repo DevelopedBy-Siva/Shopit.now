@@ -4,6 +4,7 @@ import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import SkeletonLoader from "../Loader/SkeletonLoader";
 import useCarouselNavigate from "../Hooks/useCarouselNavigation";
+import { Link } from "react-router-dom";
 import "../../css/bestseller.css";
 
 function BestSellers() {
@@ -56,7 +57,8 @@ function BestSellers() {
               const { id, title, thumbnail, price } = item;
               const imgUrl = `data:${thumbnail.type};base64,${thumbnail.picByte}`;
               return (
-                <div
+                <Link
+                  to={`/products/${id}`}
                   ref={itemRef}
                   key={id}
                   className="best-seller-item-container"
@@ -66,7 +68,7 @@ function BestSellers() {
                     <h4>{title}</h4>
                     <h5>${price}</h5>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

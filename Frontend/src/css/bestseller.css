@@ -104,6 +104,7 @@
   background-color: #fff;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  text-decoration: none;
 }
 .bestseller-main-container
   .bestseller-container
@@ -147,6 +148,7 @@
   -webkit-box-orient: vertical;
   white-space: normal;
   text-transform: capitalize;
+  color: #000;
 }
 
 @media (max-width: 980px) {
