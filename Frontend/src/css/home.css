@@ -2,13 +2,13 @@
   padding: 20px 0 0 0;
 }
 
-.home-container .skeleton-loading {
+.skeleton-loading {
   display: flex;
   width: 100vw;
   overflow: hidden;
 }
 
-.home-container .skeleton-loading .skeleton {
+.skeleton-loading .skeleton {
   width: 220px;
   height: 200px;
   flex-shrink: 0;
@@ -16,7 +16,7 @@
   border-radius: 5px;
 }
 
-.home-container .skeleton-loading span {
+.skeleton-loading span {
   line-height: unset;
 }
 

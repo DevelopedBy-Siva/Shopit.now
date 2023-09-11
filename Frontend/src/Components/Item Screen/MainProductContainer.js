@@ -30,8 +30,13 @@ class MainProductContainer extends Component {
     initialUrl: null,
   };
   componentDidMount() {
-    this.itemCheck();
     this.setState({ user: getCurrentUser() });
+    this.itemCheck();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname)
+      this.itemCheck();
   }
 
   itemCheck = async () => {
