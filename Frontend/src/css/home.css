@@ -9,8 +9,8 @@
 }
 
 .skeleton-loading .skeleton {
-  width: 220px;
-  height: 200px;
+  width: 280px;
+  height: 250px;
   flex-shrink: 0;
   margin: 0 15px;
   border-radius: 5px;
@@ -42,4 +42,11 @@
   border: 1px solid #dddd;
   flex-shrink: 0;
   display: flex;
+}
+
+@media (max-width: 980px) {
+  .skeleton-loading .skeleton {
+    width: 220px;
+    height: 200px;
+  }
 }
