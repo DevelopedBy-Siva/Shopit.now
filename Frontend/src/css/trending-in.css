@@ -1,15 +1,17 @@
 .trending-in-container {
-  padding: 10px;
   min-height: 260px;
-  margin-top: 20px;
+  margin: 80px 0;
 }
 .trending-in-container h2 {
   text-transform: uppercase;
   font-size: 21px;
   font-weight: 600;
   line-height: 21px;
+  margin: 0;
+  padding-bottom: 40px;
 }
 .trending-in-container .trending-in {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-items: center;

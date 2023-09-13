@@ -1,10 +1,10 @@
 .recommended-products-main-container {
   position: relative;
-  margin-top: 25px;
+  margin-top: 120px;
+  padding-bottom: 80px;
 }
 
 .recommended-products-main-sub-container {
-  height: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,6 +38,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 40px;
 }
 
 .recommended-products-main-container h2 {
@@ -50,12 +51,11 @@
   flex: 1;
 }
 .recommended-products-main-container .recommended-products-container {
-  width: calc(100% - 30px);
+  width: 100%;
   display: flex;
   overflow-x: hidden;
   scroll-behavior: smooth;
   align-items: center;
-  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   --scroll-behavior: smooth;
@@ -69,6 +69,7 @@
   text-align: center;
   font-size: 13px;
   letter-spacing: 1px;
+  padding: 40px 0 80px 0;
 }
 .recommended-products-main-container .recommended-products-loading {
   width: 150px;
@@ -156,9 +157,6 @@
 }
 
 @media (max-width: 980px) {
-  .recommended-products-main-sub-container {
-    height: 240px;
-  }
   .recommended-products-main-container h2 {
     font-size: 18px;
   }
@@ -187,9 +185,6 @@
 }
 
 @media (max-width: 480px) {
-  .recommended-products-main-sub-container {
-    height: 228px;
-  }
   .recommended-products-main-container h2 {
     font-size: 16px;
   }

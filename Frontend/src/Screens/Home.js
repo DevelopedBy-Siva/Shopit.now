@@ -19,9 +19,11 @@ class Home extends Component {
     return (
       <div className="home-container">
         <HomeScreenCarousel />
-        <TodaysDeals onClick={this.handleItemPage} />
-        <BestSellers onClick={this.handleItemPage} />
-        <TrendingIn />
+        <div className="contain">
+          <TodaysDeals onClick={this.handleItemPage} />
+          <BestSellers onClick={this.handleItemPage} />
+          <TrendingIn />
+        </div>
         <FooterNavi />
       </div>
     );
