@@ -1,12 +1,14 @@
 .add-product-container {
   width: 100%;
   display: flex;
-  height: 94.5vh;
+  min-height: 0;
+  overflow-y: auto;
   justify-content: center;
   align-items: center;
   padding-top: 10px;
   background: rgb(245, 245, 245);
   position: relative;
+  padding: 100px 0 50px 0;
 }
 .admin-product-container .product-not-found {
   text-align: center;
@@ -17,6 +19,27 @@
   font-weight: bold;
   font-size: 28px;
 }
+
+.add-product-container .product-description {
+  display: block;
+  width: 100%;
+  margin: 26px 0 50px 0;
+  position: relative;
+}
+
+.add-product-container .product-description textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  padding: 10px;
+  outline: none;
+  border: 1px solid rgb(138, 138, 138);
+  color: #343434;
+  border-radius: 5px;
+  font-size: 14px;
+  background: none;
+}
+
 .admin-component-heading {
   position: absolute;
   top: -32px !important;
@@ -56,7 +79,7 @@
   display: none;
 }
 .add-product-container .pick-category-container {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 .add-product-container .pick-category-container select {
   border: 1px solid rgb(138, 138, 138);
@@ -100,11 +123,8 @@
   color: #343434;
 }
 
-.add-product-container
-  .add-product-sub-container
-  .admin-input-container
-  input[type="number"] {
-  margin-bottom: 30px;
+.add-product-container .add-product-sub-container .admin-input-container input {
+  margin-bottom: 50px;
 }
 
 .product-logo-main-container {
@@ -165,6 +185,17 @@ input[type="number"] {
   transition: all 0.3s ease-in-out;
 }
 
+.add-product-container .product-description label {
+  color: #343434;
+  position: absolute;
+  top: -26px;
+  font-weight: 400;
+  font-size: 16px;
+  left: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
 .admin-input-container input:focus ~ label,
 .admin-input-container input:not(:placeholder-shown) ~ label {
   transform: translateY(-25px);
@@ -193,6 +224,14 @@ input[type="number"] {
 .add-product-container .add-product-sub-container .admin-input-container h5 {
   position: absolute;
   top: 27px;
+  left: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  color: red;
+}
+.add-product-container .product-description h5 {
+  position: absolute;
+  bottom: -20px;
   left: 2px;
   font-size: 12px;
   font-weight: 400;

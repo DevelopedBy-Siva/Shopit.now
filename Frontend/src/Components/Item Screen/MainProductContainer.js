@@ -10,6 +10,7 @@ class MainProductContainer extends Component {
       title: "",
       price: "",
       category: "",
+      description: "",
       inStock: 0,
       trending: false,
       thumbnail: {},

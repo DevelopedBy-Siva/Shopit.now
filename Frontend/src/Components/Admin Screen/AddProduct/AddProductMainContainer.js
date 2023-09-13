@@ -115,6 +115,7 @@ class AddProductMainContainer extends Component {
       title: data.title,
       price: data.price,
       category: data.category,
+      description: data.description,
       inStock: 0,
       trending: false,
       productRatings: {

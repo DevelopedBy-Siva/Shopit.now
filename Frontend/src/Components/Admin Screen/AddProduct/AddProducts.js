@@ -20,6 +20,11 @@ const validate = Yup.object().shape({
     .label("Product Name")
     .trim(),
   category: Yup.string().required("Pick the category").label("Category"),
+  description: Yup.string()
+    .required("Enter the product description")
+    .min(50)
+    .label("Description")
+    .trim(),
   price: Yup.string()
     .min(2, "Price cannot be less than $10")
     .max(4, "Price cannot be greater than $9999")
@@ -38,6 +43,7 @@ class AddProducts extends AddProductMainContainer {
               title: "",
               category: "",
               price: "",
+              description: "",
             }}
             onSubmit={(values, { resetForm }) =>
               this.handleProductSubmit(values, resetForm)
@@ -99,6 +105,19 @@ class AddProducts extends AddProductMainContainer {
                   onBlur={() => setFieldTouched("price")}
                   onChange={handleChange("price")}
                 />
+                <div className="product-description">
+                  <label>Description</label>
+                  <textarea
+                    name="Description"
+                    placeholder="Please provide details about the product..."
+                    disabled={loading}
+                    onBlur={() => setFieldTouched("description")}
+                    onChange={handleChange("description")}
+                  />
+                  {errors.description && touched.description && (
+                    <h5>{errors.description}</h5>
+                  )}
+                </div>
                 <div className="product-image-main-container">
                   {allproductImages.length !== 4 && (
                     <div className="product-images-container">
