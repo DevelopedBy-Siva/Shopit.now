@@ -6,6 +6,7 @@ import SkeletonLoader from "../Loader/SkeletonLoader";
 import useCarouselNavigate from "../Hooks/useCarouselNavigation";
 import { Link } from "react-router-dom";
 import "../../css/bestseller.css";
+import Currency from "../Item Screen/Currency";
 
 function BestSellers() {
   const [api, setApi] = useState({
@@ -66,7 +67,9 @@ function BestSellers() {
                   <img src={imgUrl} alt="bestsellers" />
                   <div className="bestseller-details">
                     <h4>{title}</h4>
-                    <h5>${price}</h5>
+                    <div className="bestseller-currency">
+                      <Currency curr={price} />
+                    </div>
                   </div>
                 </Link>
               );

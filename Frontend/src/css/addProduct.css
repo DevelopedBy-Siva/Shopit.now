@@ -1,11 +1,11 @@
 .add-product-container {
   width: 100%;
+  flex: 1;
   display: flex;
   min-height: 0;
   overflow-y: auto;
   justify-content: center;
   align-items: center;
-  padding-top: 10px;
   background: rgb(245, 245, 245);
   position: relative;
   padding: 100px 0 50px 0;
@@ -66,7 +66,7 @@
 .add-product-container .product-logo-container img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s ease-in-out;
 }
 .dummylogo {
@@ -410,7 +410,7 @@ input[type="number"] {
 .add-product-container .product-image-main-container .each-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 10px;
 }
 .add-product-container
@@ -444,7 +444,7 @@ input[type="number"] {
   color: white;
   text-align: center;
   padding: 5px;
-  display: none;
+  display: block;
   font-size: 20px;
   transform: translateY(100px);
   transition: all 0.5s ease-in-out;

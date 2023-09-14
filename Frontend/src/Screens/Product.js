@@ -1,4 +1,8 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import Lottie from "lottie-react";
+
 import {
   MainProductContainer,
   ProductDetails,
@@ -6,7 +10,6 @@ import {
   RecommendedProducts,
   ProductReviewContainer,
 } from "../Refactor/ItemScreenRefactor";
-import Lottie from "lottie-react";
 import load from "../animations/dataload.json";
 import "../css/product.css";
 import WishListBtn from "../Components/Item Screen/WishListBtn";
@@ -41,36 +44,38 @@ class Product extends MainProductContainer {
             </div>
             <div className="product-container">
               <div className="product-image-container">
-                <div className="all-images">
-                  {product.productimage.map((i, index) => {
-                    const imgUrl = `data:${i.type};base64,${i.picByte}`;
-                    return (
-                      <div
-                        key={index}
-                        className={
-                          index === 0
-                            ? "image-container selected-image"
-                            : "image-container"
-                        }
-                      >
-                        <img
-                          onClick={this.handleImageSelect}
-                          src={imgUrl}
-                          alt="Product"
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="full-image">
-                  <img src={initialUrl} alt="Product Cover" />
+                <div className="product-image-wrapper">
+                  <div className="all-images">
+                    {product.productimage.map((i, index) => {
+                      const imgUrl = `data:${i.type};base64,${i.picByte}`;
+                      return (
+                        <div
+                          key={index}
+                          className={
+                            index === 0
+                              ? "image-container selected-image"
+                              : "image-container"
+                          }
+                        >
+                          <img
+                            onClick={this.handleImageSelect}
+                            src={imgUrl}
+                            alt="Product"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="full-image">
+                    <img src={initialUrl} alt="Product Cover" />
+                  </div>
                 </div>
               </div>
               <div className="product-details-container">
                 <ProductDetails
                   overallRating={overallRating}
-                  starDimension="20px"
-                  starSpacing="2px"
+                  starDimension="18px"
+                  starSpacing="1px"
                   product={product}
                 />
                 <AddNowBtn
@@ -82,22 +87,21 @@ class Product extends MainProductContainer {
                   productId={product.id}
                   handleLogin={this.handleLogin}
                 />
+                <div className="product-description-container">
+                  <h5>Product Description</h5>
+                  <ReactMarkdown
+                    components={{
+                      h1: "h6",
+                      h2: "h6",
+                      h3: "h6",
+                      h4: "h6",
+                      h5: "h6",
+                    }}
+                    children={product.description}
+                    remarkPlugins={[remarkGfm]}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="small-screen-btns">
-              <AddNowBtn
-                handleBuyNow={this.handleBuyNow}
-                handleLogin={this.handleLogin}
-                product={product}
-              />
-              <WishListBtn
-                productId={product.id}
-                handleLogin={this.handleLogin}
-              />
-            </div>
-            <div className="product-description-container">
-              <h5>Product Description</h5>
-              <p>{product.description}</p>
             </div>
             <div className="reviews-container">
               <ProductReviewContainer

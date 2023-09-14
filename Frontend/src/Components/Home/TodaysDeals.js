@@ -6,6 +6,7 @@ import SkeletonLoader from "../Loader/SkeletonLoader";
 import useCarouselNavigate from "../Hooks/useCarouselNavigation";
 import { Link } from "react-router-dom";
 import "../../css/todaysdeal.css";
+import Currency from "../Item Screen/Currency";
 
 function TodaysDeals() {
   const [api, setApi] = useState({
@@ -66,8 +67,12 @@ function TodaysDeals() {
                   <img src={imgUrl} alt="todays-deals" />
                   <div className="todaysdeals-details">
                     <h4>{title}</h4>
-                    <h5>${price}</h5>
-                    <h6>${fraudPrice}</h6>
+                    <div className="todaysdeals-currency todaysdeals-currency-new">
+                      <Currency curr={price} />
+                    </div>
+                    <div className="todaysdeals-currency todaysdeals-currency-old">
+                      <Currency curr={fraudPrice} />
+                    </div>
                   </div>
                   <span className="todaysdeal-discount">-50%</span>
                 </Link>

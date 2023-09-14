@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ProductStars from "./ProductStars";
-import { FaAngleDoubleDown, FaLock } from "react-icons/fa";
+import { FaAngleDoubleDown } from "react-icons/fa";
 import Lottie from "lottie-react";
 import loading from "../../animations/smallLoad.json";
 
@@ -30,27 +30,19 @@ class ProductReviewContainer extends Component {
             <h3>
               {overallRating} <span>out of 5</span>
             </h3>
-            <h5>{`${totalReviews} ratings`}</h5>
             <div>
               <ProductStars
                 starRatedColor="orange"
                 rating={overallRating}
+                totalReviews={totalReviews}
+                showRaters={true}
                 starDimension="25px"
                 starSpacing="1px"
               />
             </div>
           </div>
           <div className="reviews-sub-container-review">
-            {!user && (
-              <div className="reviews-sub-container-review-cover">
-                <FaLock className="reviews-sub-container-lock" />
-                <h2>Login to submit review</h2>
-                <button onClick={handleLogin}>Login</button>
-              </div>
-            )}
-            <div
-              className={!user ? "reviews-sub-container-review-cover-blur" : ""}
-            >
+            <div>
               <h4>Write your review</h4>
               <div className="star-rating-container">
                 <h5 className="star-rating-error">Please enter the rating</h5>
@@ -77,7 +69,7 @@ class ProductReviewContainer extends Component {
                   </h4>
                 )}
                 <span>Required minimum 10 characters</span>
-                <button onClick={handleReviewSubmit}>
+                <button disabled={!user} onClick={handleReviewSubmit}>
                   {reviewSubmit && (
                     <Lottie
                       className="loading-on-review-submit"

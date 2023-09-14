@@ -15,6 +15,8 @@ public class Products {
     private int id;
     private String title;
     private Double price;
+    @Column(length = 5024)
+    private String description;
     private String category;
     private int inStock;
     private boolean trending;

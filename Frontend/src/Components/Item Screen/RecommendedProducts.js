@@ -6,6 +6,8 @@ import SkeletonLoader from "../Loader/SkeletonLoader";
 import useCarouselNavigate from "../Hooks/useCarouselNavigation";
 import { Link, useParams } from "react-router-dom";
 import "../../css/recommended-products.css";
+import Currency from "./Currency";
+// import { formatCurrency } from "./Currency";
 
 function RecommendedProducts({ productId }) {
   const [api, setApi] = useState({
@@ -72,7 +74,9 @@ function RecommendedProducts({ productId }) {
                   <img src={imgUrl} alt="recommended-productss" />
                   <div className="recommended-products-details">
                     <h4>{title}</h4>
-                    <h5>${price}</h5>
+                    <div className="recommended-products-currency">
+                      <Currency curr={price} />
+                    </div>
                   </div>
                 </Link>
               );

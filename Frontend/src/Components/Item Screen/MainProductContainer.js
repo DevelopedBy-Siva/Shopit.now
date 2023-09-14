@@ -30,8 +30,11 @@ class MainProductContainer extends Component {
     loading: false,
     initialUrl: null,
   };
+
+  currentUser = getCurrentUser();
+
   componentDidMount() {
-    this.setState({ user: getCurrentUser() });
+    this.setState({ user: this.currentUser });
     this.itemCheck();
   }
 
@@ -79,6 +82,9 @@ class MainProductContainer extends Component {
 
   handleReviewSubmit = () => {
     const { review, rating, product, user, loadedReview } = this.state;
+
+    if (!this.currentUser) return;
+
     const updatedReview = review.trim();
     if (this.checkSubmission(user.sub)) {
       const submissionError = document.querySelector(

@@ -23,6 +23,7 @@ const validate = Yup.object().shape({
   description: Yup.string()
     .required("Enter the product description")
     .min(50)
+    .max(5024)
     .label("Description")
     .trim(),
   price: Yup.string()
@@ -186,9 +187,6 @@ class AddProducts extends AddProductMainContainer {
               </p>
             </div>
           </div>
-        </div>
-        <div ref={this.moreThanFiveError} className="more-than-five-selection">
-          Only <span>4 images</span> are allowed so other selections are removed
         </div>
       </div>
     );

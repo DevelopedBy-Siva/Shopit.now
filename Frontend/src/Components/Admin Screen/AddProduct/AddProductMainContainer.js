@@ -13,7 +13,6 @@ class AddProductMainContainer extends Component {
     super(props);
     this.imageUploadError = React.createRef();
     this.logoError = React.createRef();
-    this.moreThanFiveError = React.createRef();
     this.helpError = React.createRef();
     this.goBackChange = React.createRef();
     this.helpChange = React.createRef();
@@ -200,9 +199,6 @@ class AddProductMainContainer extends Component {
     let l = 0;
     if (imgLen >= 4) {
       l = 4 - storedLen;
-      if (imgLen + storedLen > 4) {
-        this.moreImageSelectionError();
-      }
     } else {
       if (imgLen + storedLen <= 4) {
         l = imgLen;
@@ -236,11 +232,6 @@ class AddProductMainContainer extends Component {
       allproductImages: updateProductImages,
       submitImages: updateSubmitImages,
     });
-  };
-  moreImageSelectionError = () => {
-    const error = this.moreThanFiveError.current.classList;
-    error.add("more-than-five-selection-visible");
-    setTimeout(() => error.remove("more-than-five-selection-visible"), 4000);
   };
 }
 
