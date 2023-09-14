@@ -255,11 +255,24 @@
 }
 .product-description-container {
   padding: 50px 0 20px 0;
-  font-size: 16px;
+  font-size: 15px;
+  color: #000;
 }
 
 .product-description-container ul {
   padding-left: 30px;
+}
+
+.product-description-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.product-description-container table,
+.product-description-container td,
+.product-description-container th {
+  border: 1px solid #d3d3d3;
+  padding: 5px;
 }
 
 .product-description-container h5:first-child {
