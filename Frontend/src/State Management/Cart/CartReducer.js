@@ -28,7 +28,7 @@ import * as services from "../../services/LoginReg";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
 
 const initialState = {
-  loading: false,
+  loading: true,
   cart: [],
   error: false,
   cartRemoveSuccess: false,

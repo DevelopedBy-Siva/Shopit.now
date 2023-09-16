@@ -681,3 +681,10 @@
   background: none;
   border: 1px solid #000;
 }
+
+.product-container .out-of-stock {
+  color: red;
+  font-weight: 400;
+  font-size: 20px;
+  text-align: left;
+}

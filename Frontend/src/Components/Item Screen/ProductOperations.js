@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Loader from "../Loader";
 import toast from "../Toast";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import { getJwt } from "../../services/LoginReg";
 import { api_endpoints, formUrl as URL } from "../../api/api";
+import Loader from "../Loader";
+import { addToCart } from "../../State Management/Cart/CartActions";
 
 const operations = [
   {
@@ -24,15 +26,20 @@ const operations = [
 
 export default function ProductOperations({
   user,
-  productId,
-  wishListed,
+  product,
   toggleWishlist,
+  handleOutOfStock,
 }) {
+  const userCart = useSelector((state) => state.CartOperations);
+  const { cart } = userCart;
+  const dispatch = useDispatch();
+
   const perform = async (type, setLoading) => {
     setLoading(true);
     switch (type) {
       case "CART":
-        toast.success("Item addded to cart", { autoHideDuration: 2000 });
+        await handleAddToCart();
+        setLoading(false);
         return;
       case "WISH":
         await handleWishListOperation();
@@ -43,13 +50,41 @@ export default function ProductOperations({
     }
   };
 
+  const handleAddToCart = async () => {
+    const cartItem = {
+      productId: product.id,
+      productName: product.title,
+      totalPrice: product.price,
+      itemCount: 1,
+    };
+    return await axios
+      .post(`${URL(api_endpoints.userCart)}/add/${user.id}`, cartItem, {
+        headers: {
+          Authorization: getJwt(),
+        },
+      })
+      .then(({ status }) => {
+        dispatch(addToCart(cartItem));
+        if (status === 204) handleOutOfStock();
+        toast.success("Item addded to cart", { autoHideDuration: 2000 });
+      })
+      .catch((error) => {
+        const status = error && error.response && error.response.status;
+        if (status === 406) {
+          handleOutOfStock();
+          return;
+        }
+        toast.error("Something went wrong");
+      });
+  };
+
   const handleWishListOperation = async () => {
-    const opr = wishListed ? "REMOVE" : "ADD";
-    await axios
+    const opr = product.wishListed ? "REMOVE" : "ADD";
+    return await axios
       .post(
-        `${URL(api_endpoints.userOperations)}/wishlist/${
-          user.id
-        }/${productId}?opr=${opr}`,
+        `${URL(api_endpoints.userOperations)}/wishlist/${user.id}/${
+          product.id
+        }?opr=${opr}`,
         null,
         {
           headers: {
@@ -59,7 +94,7 @@ export default function ProductOperations({
       )
       .then(() => {
         toast.info(
-          `Item ${wishListed ? "removed from" : "added to"} wishlist`,
+          `Item ${product.wishListed ? "removed from" : "added to"} wishlist`,
           { autoHideDuration: 2000 }
         );
         toggleWishlist();
@@ -69,19 +104,35 @@ export default function ProductOperations({
       });
   };
 
+  const isStockAvailable = () => {
+    let count = 0;
+    cart.forEach((item) => {
+      if (item.productId === product.id) count = item.itemCount;
+    });
+    return product.inStock > count ? true : false;
+  };
+
   return (
-    <div className="product-operation-container">
-      {operations.map((item, index) => (
-        <ButtonWrapper
-          user={user}
-          perform={perform}
-          type={item.type}
-          key={index}
-        >
-          {item.type === "WISH" && wishListed ? item.alt : item.title}
-        </ButtonWrapper>
-      ))}
-    </div>
+    <>
+      {!isStockAvailable() && <h6 className="out-of-stock">Out of Stock</h6>}
+      <div className="product-operation-container">
+        {operations.map((item, index) => {
+          if (!isStockAvailable() && item.type !== "WISH") return "";
+          return (
+            <ButtonWrapper
+              user={user}
+              perform={perform}
+              type={item.type}
+              key={index}
+            >
+              {item.type === "WISH" && product.wishListed
+                ? item.alt
+                : item.title}
+            </ButtonWrapper>
+          );
+        })}
+      </div>
+    </>
   );
 }
 

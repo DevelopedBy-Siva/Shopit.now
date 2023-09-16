@@ -223,6 +223,15 @@ class MainProductContainer extends Component {
       },
     }));
   };
+
+  handleOutOfStock = () => {
+    this.setState((prevState) => ({
+      product: {
+        ...prevState.product,
+        inStock: 0,
+      },
+    }));
+  };
 }
 
 export default MainProductContainer;

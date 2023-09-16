@@ -328,23 +328,33 @@ public class UserServicesImpl implements UserServices {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null)
             throw new UserNotFound("User Not Found");
+
         List<CartDetails> oldCart = user.getCart();
         boolean found = oldCart.stream().anyMatch(i -> i.getProductId() == cartDetails.getProductId());
+        int totalItems = 1;
         if (found) {
-            oldCart.stream().forEach(i -> {
-                if (i.getProductId() == cartDetails.getProductId()) {
-                    i.setItemCount(i.getItemCount() + cartDetails.getItemCount());
-                    double price = cartDetails.getTotalPrice() + i.getTotalPrice();
-                    i.setTotalPrice(price);
+            for(int index = 0; index < oldCart.size(); index++) {
+                if (oldCart.get(index).getProductId() == cartDetails.getProductId()) {
+                    totalItems = oldCart.get(index).getItemCount() + cartDetails.getItemCount();
+                    oldCart.get(index).setItemCount(totalItems);
+                    double price = cartDetails.getTotalPrice() + oldCart.get(index).getTotalPrice();
+                    oldCart.get(index).setTotalPrice(price);
                 }
-            });
-
+            }
         } else {
             oldCart.add(cartDetails);
         }
+
+        Products products = productRepository.findById(cartDetails.getProductId()).orElse(null);
+        if(products == null || products.getInStock() < totalItems)
+            return new ResponseEntity<>("OUT_OF_STOCK", HttpStatus.NOT_ACCEPTABLE);
+
         try {
             user.setCart(oldCart);
             userRepository.save(user);
+            if(products.getInStock() < (totalItems + 1))
+                return new ResponseEntity<>("OUT_OF_STOCK", HttpStatus.NO_CONTENT);
+
             return new ResponseEntity<>("Successfully added", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Unknown Error occured", HttpStatus.INTERNAL_SERVER_ERROR);

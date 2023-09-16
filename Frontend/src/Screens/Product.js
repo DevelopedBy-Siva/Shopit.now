@@ -80,9 +80,9 @@ class Product extends MainProductContainer {
 
                 <ProductOperations
                   user={user}
-                  productId={product.id}
-                  wishListed={product.wishListed}
+                  product={product}
                   toggleWishlist={this.toggleWishlist}
+                  handleOutOfStock={this.handleOutOfStock}
                 />
                 <div className="product-description-container">
                   <h5>Product Description</h5>

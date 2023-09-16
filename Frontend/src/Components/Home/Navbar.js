@@ -1,21 +1,16 @@
-import React, { Component, useEffect } from "react";
-import * as service from "../../services/LoginReg";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ReactFocusLock from "react-focus-lock";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
-import {
-  mapDispatchToProps,
-  mapStateToProps,
-} from "../../State Management/MappingStates";
-import Warning from "../../utils/Warning";
-import LogoContainer from "../Logo";
-import "../../css/navbar-style.css";
 import { BsSearch } from "react-icons/bs";
 import { RiShoppingCartFill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+import LogoContainer from "../Logo";
+import * as service from "../../services/LoginReg";
+
+import "../../css/navbar-style.css";
 
 const categories = [
   {
@@ -47,110 +42,102 @@ const categories = [
 const loggedIn = ["account", "wishlist"];
 const notLogged = ["login", "register"];
 
-class Navbar extends Component {
-  state = {
-    menuVisible: false,
-    query: "",
+export default function Navbar({ user }) {
+  const history = useHistory();
+
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [query, setQuery] = useState("");
+
+  const menuVisibility = () => {
+    setMenuVisible(!menuVisible);
   };
 
-  cartLen = this.props.userCart.length;
-
-  menuVisibility = () => {
-    const { menuVisible } = this.state;
-    this.setState({ menuVisible: !menuVisible });
+  const removeVisiblity = () => {
+    setMenuVisible(false);
   };
 
-  removeVisiblity = () => {
-    this.setState({ menuVisible: false });
+  const handleSearchQuery = (e) => {
+    setQuery(e.currentTarget.value);
   };
 
-  handleSearchQuery = (e) => {
-    this.setState({ query: e.currentTarget.value });
-  };
-
-  handleSearch = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
-    const { query } = this.state;
-    if (query.length > 0) this.props.history.push(`/search/${query}`);
+    if (query.length > 0) history.push(`/search/${query}`);
     return;
   };
 
-  render() {
-    const { menuVisible, query } = this.state;
-    const { user, cartFetch } = this.props;
-    const whatToshow = user ? loggedIn : notLogged;
-    return (
-      <>
-        <div className="navbar-container">
-          <div className="account-space">
-            <LogoContainer />
-            <div className="categories-space">
-              {categories.map((data, index) => (
-                <Link
-                  onClick={this.removeVisiblity}
-                  className="categories-link"
-                  key={index}
-                  to={`/${data.link}`}
-                >
-                  {data.name}
-                </Link>
-              ))}
-            </div>
-            <form className="searchbar" onSubmit={this.handleSearch}>
-              <input
-                onChange={this.handleSearchQuery}
-                value={query}
-                placeholder="Search..."
-              />
-              <button
-                onClick={this.removeVisiblity}
-                className="search-icon"
-                type="submit"
-              >
-                <BsSearch className="icon" />
-              </button>
-            </form>
-            <div className="user-details">
-              {whatToshow.map((data, index) => (
-                <Link
-                  key={index}
-                  onClick={this.removeVisiblity}
-                  className="user-links"
-                  to={`/${data}`}
-                >
-                  {data}
-                </Link>
-              ))}
+  const whatToshow = user ? loggedIn : notLogged;
+
+  const userCart = useSelector((state) => state.CartOperations);
+  const { cart, loading } = userCart;
+
+  return (
+    <>
+      <div className="navbar-container">
+        <div className="account-space">
+          <LogoContainer />
+          <div className="categories-space">
+            {categories.map((data, index) => (
               <Link
-                to="/cart"
-                onClick={this.removeVisiblity}
-                className="cart-icon"
+                onClick={removeVisiblity}
+                className="categories-link"
+                key={index}
+                to={`/${data.link}`}
               >
-                <RiShoppingCartFill className="icon" />
-                {!cartFetch.error ? <span>{this.cartLen}</span> : <Warning />}
+                {data.name}
               </Link>
-            </div>
-            <div onClick={this.menuVisibility} className="menu-toggle">
-              <GiHamburgerMenu className="icon" />
-            </div>
+            ))}
+          </div>
+          <form className="searchbar" onSubmit={handleSearch}>
+            <input
+              onChange={handleSearchQuery}
+              value={query}
+              placeholder="Search..."
+            />
+            <button
+              onClick={removeVisiblity}
+              className="search-icon"
+              type="submit"
+            >
+              <BsSearch className="icon" />
+            </button>
+          </form>
+          <div className="user-details">
+            {whatToshow.map((data, index) => (
+              <Link
+                key={index}
+                onClick={removeVisiblity}
+                className="user-links"
+                to={`/${data}`}
+              >
+                {data}
+              </Link>
+            ))}
+            <Link to="/cart" onClick={removeVisiblity} className="cart-icon">
+              <RiShoppingCartFill className="icon" />
+              {!loading && <span>{cart.length}</span>}
+            </Link>
+          </div>
+          <div onClick={menuVisibility} className="menu-toggle">
+            <GiHamburgerMenu className="icon" />
           </div>
         </div>
-        <AnimatePresence>
-          {menuVisible && (
-            <MenuContainer
-              menuVisibility={this.menuVisibility}
-              whatToshow={whatToshow}
-              removeVisiblity={this.removeVisiblity}
-              cartLen={this.cartLen}
-              cartFetch={cartFetch}
-              categories={categories}
-              user={user}
-            />
-          )}
-        </AnimatePresence>
-      </>
-    );
-  }
+      </div>
+      <AnimatePresence>
+        {menuVisible && (
+          <MenuContainer
+            menuVisibility={menuVisibility}
+            whatToshow={whatToshow}
+            removeVisiblity={removeVisiblity}
+            cartLen={cart.length}
+            loading={loading}
+            categories={categories}
+            user={user}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  );
 }
 
 function MenuContainer({
@@ -158,7 +145,6 @@ function MenuContainer({
   whatToshow,
   removeVisiblity,
   cartLen,
-  cartFetch,
   categories,
   user,
 }) {
@@ -207,7 +193,7 @@ function MenuContainer({
             ))}
             <Link to="/cart" onClick={removeVisiblity} className="cart-icon">
               <RiShoppingCartFill className="icon" />
-              {!cartFetch.error ? <span>{cartLen}</span> : <Warning />}
+              <span>{{ cartLen }}</span>
             </Link>
           </div>
           <div className="menu-options-wrapper">
@@ -242,5 +228,3 @@ function MenuContainer({
     </ReactFocusLock>
   );
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar));
