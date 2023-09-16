@@ -6,13 +6,12 @@ import Lottie from "lottie-react";
 import {
   MainProductContainer,
   ProductDetails,
-  AddNowBtn,
   RecommendedProducts,
   ProductReviewContainer,
 } from "../Refactor/ItemScreenRefactor";
 import load from "../animations/dataload.json";
 import "../css/product.css";
-import WishListBtn from "../Components/Item Screen/WishListBtn";
+import ProductOperations from "../Components/Item Screen/ProductOperations";
 
 class Product extends MainProductContainer {
   render() {
@@ -78,15 +77,8 @@ class Product extends MainProductContainer {
                   starSpacing="1px"
                   product={product}
                 />
-                <AddNowBtn
-                  handleBuyNow={this.handleBuyNow}
-                  handleLogin={this.handleLogin}
-                  product={product}
-                />
-                <WishListBtn
-                  productId={product.id}
-                  handleLogin={this.handleLogin}
-                />
+
+                <ProductOperations user={user} />
                 <div className="product-description-container">
                   <h5>Product Description</h5>
                   <ReactMarkdown

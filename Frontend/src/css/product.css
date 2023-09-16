@@ -620,3 +620,56 @@
 .product-container .product-currency span:first-child {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.product-container .product-operation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.product-container .product-operation-container button {
+  width: 100%;
+  max-width: 340px;
+  height: 38px;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-container .product-operation-container button:first-child {
+  background: #ffc000;
+}
+
+.product-container .product-operation-container button:nth-child(2) {
+  background: #ff7518;
+}
+
+.product-container .product-operation-container button:nth-child(3) {
+  background: none;
+  border: 1px solid gray;
+}
+
+.product-container
+  .product-operation-container
+  button:first-child:hover:enabled {
+  background: #ffc81f;
+}
+
+.product-container
+  .product-operation-container
+  button:nth-child(2):hover:enabled {
+  background: #ff822d;
+}
+
+.product-container
+  .product-operation-container
+  button:nth-child(3):hover:enabled {
+  background: none;
+  border: 1px solid #000;
+}
