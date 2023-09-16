@@ -125,7 +125,7 @@
 .todays-deal-container .item-container h6 {
   font-size: 16px;
   color: #5e5e5e;
-  text-decoration: line-through;
+  /* text-decoration: line-through; */
   margin: 0;
 }
 .todays-deal-container .todays-deal-head {
@@ -212,7 +212,18 @@
 
 .todaysdeals-details .todaysdeals-currency-old {
   color: #5e5e5e;
-  text-decoration: line-through;
+  width: fit-content;
+  position: relative;
+}
+
+.todaysdeals-details .todaysdeals-currency-old::before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background-color: #5e5e5e;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .todaysdeals-details .todaysdeals-currency-old .currency {
