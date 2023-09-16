@@ -5,6 +5,7 @@
 .skeleton-loading {
   display: flex;
   width: 100vw;
+  max-width: 1720px;
   overflow: hidden;
 }
 
