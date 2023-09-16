@@ -25,8 +25,7 @@ class LoginMain extends Component {
     this.handleError(true, null);
     await userLogin(email, password)
       .then(({ data }) => {
-        const { state } = this.props.location;
-        this.loginSuccess(data, state);
+        this.loginSuccess(data);
       })
       .catch(({ response }) => {
         let message = "Server down. Try after sometime";
@@ -41,9 +40,14 @@ class LoginMain extends Component {
     this.setState({ loginBegan, loginError });
   };
 
-  loginSuccess = (data, state) => {
+  redirectTo = () => {
+    const { state } = this.props.location;
+    return state && state.redirect ? state.redirect.pathname : "/";
+  };
+
+  loginSuccess = (data) => {
     setJwt(data);
-    window.location = state ? state.from.pathname : "/";
+    window.location = this.redirectTo();
   };
 }
 

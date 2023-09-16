@@ -178,6 +178,16 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.bestseller-main-container
+  .bestseller-container
+  .best-seller-item-container
+  .bestseller-details
+  .bestseller-currency
+  .currency::after {
+  content: ".00";
+  font-size: 11px;
+}
+
 @media (max-width: 980px) {
   .bestseller-main-container h2 {
     font-size: 18px;
@@ -209,6 +219,14 @@
     .bestseller-details
     .bestseller-currency
     span {
+    font-size: 10px;
+  }
+  .bestseller-main-container
+    .bestseller-container
+    .best-seller-item-container
+    .bestseller-details
+    .bestseller-currency
+    .currency::after {
     font-size: 10px;
   }
 }
@@ -243,6 +261,14 @@
     .bestseller-details
     .bestseller-currency
     span {
+    font-size: 9px;
+  }
+  .bestseller-main-container
+    .bestseller-container
+    .best-seller-item-container
+    .bestseller-details
+    .bestseller-currency
+    .currency::after {
     font-size: 9px;
   }
 }

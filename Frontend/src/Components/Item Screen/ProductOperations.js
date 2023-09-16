@@ -17,7 +17,7 @@ const operations = [
   },
 ];
 
-export default function ProductOperations({ user }) {
+export default function ProductOperations({ user, product }) {
   const perform = (type, setLoading) => {
     setLoading(true);
     switch (type) {
@@ -48,11 +48,10 @@ export default function ProductOperations({ user }) {
 
 function ButtonWrapper({ perform, user, type, children }) {
   const history = useHistory();
-
   const [loading, setLoading] = useState(false);
 
   function isLoggedIn() {
-    if (!user) return history.push("/login");
+    if (!user) return history.push("/login", { redirect: history.location });
     perform(type, setLoading);
   }
 

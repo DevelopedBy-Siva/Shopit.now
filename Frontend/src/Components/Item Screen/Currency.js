@@ -7,15 +7,6 @@ export default function Currency({ curr = "" }) {
     <>
       <span>$</span>
       <h5 className="currency">{price}</h5>
-      <span
-        style={{
-          display: "inline-block",
-          height: "fit-content",
-          marginTop: "auto",
-        }}
-      >
-        .00
-      </span>
     </>
   );
 }

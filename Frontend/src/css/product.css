@@ -607,9 +607,17 @@
   font-weight: 500;
 }
 
+.product-container .product-currency .currency::after {
+  content: ".00";
+  font-weight: 400;
+  margin: 0;
+  font-size: 15px;
+}
+
 .product-container .product-currency span {
   font-weight: 400;
   margin: 0;
+  margin-top: 2px;
   font-size: 15px;
 }
 

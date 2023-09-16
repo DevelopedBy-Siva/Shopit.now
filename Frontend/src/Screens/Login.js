@@ -33,7 +33,7 @@ class Login extends LoginMain {
             <Link
               onClick={(e) => this.disableBtn(e, loginBegan)}
               className={loginBegan ? "disable-link" : ""}
-              to="/"
+              to={this.redirectTo()}
             >
               <IoArrowBack className="icon" />
               Back to app

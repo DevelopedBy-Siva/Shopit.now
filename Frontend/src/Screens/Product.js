@@ -78,7 +78,7 @@ class Product extends MainProductContainer {
                   product={product}
                 />
 
-                <ProductOperations user={user} />
+                <ProductOperations user={user} product={product} />
                 <div className="product-description-container">
                   <h5>Product Description</h5>
                   <ReactMarkdown

@@ -177,6 +177,13 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.recommended-products-container
+  .recommended-products-currency
+  .currency::after {
+  content: ".00";
+  font-size: 11px;
+}
+
 @media (max-width: 980px) {
   .recommended-products-main-container h2 {
     font-size: 18px;
@@ -201,6 +208,12 @@
   }
   .recommended-products-container .recommended-products-currency .currency {
     font-size: 15px;
+  }
+
+  .recommended-products-container
+    .recommended-products-currency
+    .currency::after {
+    font-size: 10px;
   }
 }
 
@@ -227,5 +240,10 @@
   }
   .recommended-products-container .recommended-products-currency .currency {
     font-size: 14px;
+  }
+  .recommended-products-container
+    .recommended-products-currency
+    .currency::after {
+    font-size: 9px;
   }
 }

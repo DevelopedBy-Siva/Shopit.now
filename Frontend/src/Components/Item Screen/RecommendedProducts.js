@@ -7,7 +7,6 @@ import useCarouselNavigate from "../Hooks/useCarouselNavigation";
 import { Link, useParams } from "react-router-dom";
 import "../../css/recommended-products.css";
 import Currency from "./Currency";
-// import { formatCurrency } from "./Currency";
 
 function RecommendedProducts({ productId }) {
   const [api, setApi] = useState({
