@@ -1,5 +1,7 @@
 package com.shopit.now.service.products;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shopit.now.customexception.custom.GlobalServerException;
 import com.shopit.now.customexception.custom.InvalidRequest;
 import com.shopit.now.customexception.custom.ProductNotFound;
@@ -7,6 +9,7 @@ import com.shopit.now.dtos.*;
 import com.shopit.now.entity.*;
 import com.shopit.now.repository.AdvertisementRepository;
 import com.shopit.now.repository.ProductRepository;
+import com.shopit.now.repository.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +31,12 @@ public class ProductServicesImpl implements ProductServices {
 
     @Autowired
     private AdvertisementRepository advertisementRepository;
+
+    @Autowired
+    private WishListRepository wishListRepository;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Override
     public int handleGetAllproducts() {
@@ -105,10 +114,18 @@ public class ProductServicesImpl implements ProductServices {
     }
 
     @Override
-    public Products getProductById(int id) throws ProductNotFound, InvalidRequest {
+    public Product getProductById(int id, String userId) throws ProductNotFound, InvalidRequest {
         Products products = productRepository.findById(id).orElse(null);
-        if(products==null) throw new ProductNotFound("Product not found");
-        return products;
+        if(products == null) throw new ProductNotFound("Product not found");
+        Product response = objectMapper.convertValue(products, Product.class);
+        try {
+            int user = Integer.parseInt(userId);
+            Wishlist wishlist = wishListRepository.findByProductIdAndUser_Id(id, user);
+            if(wishlist != null)
+                response.setWishListed(true);
+        } catch (Exception ex){}
+
+        return response;
     }
 
     @Override

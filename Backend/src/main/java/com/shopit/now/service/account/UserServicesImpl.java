@@ -727,20 +727,18 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     @Transactional
-    public boolean handleWishlist(int userId, int productId) throws UserNotFound, GlobalServerException {
+    public boolean handleWishlist(int userId, int productId, String opr) throws UserNotFound, GlobalServerException {
         try {
             Wishlist wishlist = wishListRepository.findByProductIdAndUser_Id(productId, userId);
-            if (wishlist == null) {
+            if (opr.equals("ADD") && wishlist == null) {
                 User user = userRepository.findById(userId).orElse(null);
                 if (user != null)
                     wishListRepository.save(new Wishlist(productId, user));
-                return true;
-            } else {
+            } else if (opr.equals("REMOVE")) {
                 wishListRepository.deleteByProductIdAndUser_Id(productId, userId);
-                return false;
             }
+            return true;
         } catch (Exception e) {
-            System.out.println(e);
             throw new GlobalServerException("Server error occured");
         }
     }

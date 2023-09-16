@@ -3,10 +3,7 @@ package com.shopit.now.service.products;
 import com.shopit.now.customexception.custom.GlobalServerException;
 import com.shopit.now.customexception.custom.InvalidRequest;
 import com.shopit.now.customexception.custom.ProductNotFound;
-import com.shopit.now.dtos.AdProductView;
-import com.shopit.now.dtos.AllProductDisplay;
-import com.shopit.now.dtos.SearchPage;
-import com.shopit.now.dtos.View;
+import com.shopit.now.dtos.*;
 import com.shopit.now.entity.Advertisement;
 import com.shopit.now.entity.Products;
 import com.shopit.now.entity.UsersReview;
@@ -30,7 +27,7 @@ public interface ProductServices {
 
     List<View> handleNewDeals();
 
-    Products getProductById(int id) throws ProductNotFound, InvalidRequest;
+    Product getProductById(int id, String userId) throws ProductNotFound, InvalidRequest;
 
     AllProductDisplay getProductView(int page, int size);
 

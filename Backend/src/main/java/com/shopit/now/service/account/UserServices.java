@@ -70,7 +70,7 @@ public interface UserServices {
 
     List<WishlistView> getWishlist(int userId) throws UserNotFound;
 
-    boolean handleWishlist(int userId, int productId) throws UserNotFound, GlobalServerException;
+    boolean handleWishlist(int userId, int productId, String opr) throws UserNotFound, GlobalServerException;
 
     ResponseEntity<String> handleWishlistRemove(int userId, int productId) throws UserNotFound;
 

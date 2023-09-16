@@ -78,7 +78,12 @@ class Product extends MainProductContainer {
                   product={product}
                 />
 
-                <ProductOperations user={user} product={product} />
+                <ProductOperations
+                  user={user}
+                  productId={product.id}
+                  wishListed={product.wishListed}
+                  toggleWishlist={this.toggleWishlist}
+                />
                 <div className="product-description-container">
                   <h5>Product Description</h5>
                   <ReactMarkdown

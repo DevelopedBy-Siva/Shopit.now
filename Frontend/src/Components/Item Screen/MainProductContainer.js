@@ -19,6 +19,7 @@ class MainProductContainer extends Component {
         overallRating: 0,
         usersReviews: [],
       },
+      wishListed: false,
     },
     user: {},
     rating: 0,
@@ -47,7 +48,11 @@ class MainProductContainer extends Component {
     this.setState({ loading: true });
     const { item } = this.props.match.params;
     await axios
-      .get(`${URL(API_ENDPOINT.productApi)}/view/get-product/${item}`)
+      .get(
+        `${URL(API_ENDPOINT.productApi)}/view/get-product/${item}?userId=${
+          this.currentUser ? this.currentUser.id : ""
+        }`
+      )
       .then(({ data: found }) => {
         this.successfullSubmission(found);
       })
@@ -208,6 +213,15 @@ class MainProductContainer extends Component {
   };
   handleBuyNow = () => {
     this.props.history.push("/order-processing");
+  };
+
+  toggleWishlist = () => {
+    this.setState((prevState) => ({
+      product: {
+        ...prevState.product,
+        wishListed: !prevState.product.wishListed,
+      },
+    }));
   };
 }
 

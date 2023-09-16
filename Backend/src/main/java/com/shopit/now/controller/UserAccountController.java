@@ -219,9 +219,9 @@ public class UserAccountController {
     }
 
     @PostMapping("/user/wishlist/{userId}/{productId}")
-    boolean handleWishList(@PathVariable int userId, @PathVariable int productId)
+    boolean handleWishList(@PathVariable int userId, @PathVariable int productId, @RequestParam(required = true) String opr)
             throws UserNotFound, GlobalServerException {
-        return accountServices.handleWishlist(userId, productId);
+        return accountServices.handleWishlist(userId, productId, opr);
     }
 
     @DeleteMapping("/user/wishlist/{userId}/{wishlistId}")

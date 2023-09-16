@@ -40,8 +40,8 @@ public class ProductsController {
     }
 
     @GetMapping("/view/get-product/{id}")
-    public Products getTheProduct(@PathVariable int id) throws ProductNotFound, InvalidRequest {
-        return services.getProductById(id);
+    public Product getTheProduct(@PathVariable int id, @RequestParam(required = false, defaultValue = "") String userId) throws ProductNotFound, InvalidRequest {
+        return services.getProductById(id, userId);
     }
 
     @GetMapping("/view/advertisements")
