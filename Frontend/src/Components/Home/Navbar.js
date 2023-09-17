@@ -74,52 +74,54 @@ export default function Navbar({ user }) {
   return (
     <>
       <div className="navbar-container">
-        <div className="account-space">
-          <LogoContainer />
-          <div className="categories-space">
-            {categories.map((data, index) => (
-              <Link
+        <div className="navbar-wrapper contain">
+          <div className="account-space">
+            <LogoContainer />
+            <div className="categories-space">
+              {categories.map((data, index) => (
+                <Link
+                  onClick={removeVisiblity}
+                  className="categories-link"
+                  key={index}
+                  to={`/${data.link}`}
+                >
+                  {data.name}
+                </Link>
+              ))}
+            </div>
+            <form className="searchbar" onSubmit={handleSearch}>
+              <input
+                onChange={handleSearchQuery}
+                value={query}
+                placeholder="Search..."
+              />
+              <button
                 onClick={removeVisiblity}
-                className="categories-link"
-                key={index}
-                to={`/${data.link}`}
+                className="search-icon"
+                type="submit"
               >
-                {data.name}
+                <BsSearch className="icon" />
+              </button>
+            </form>
+            <div className="user-details">
+              {whatToshow.map((data, index) => (
+                <Link
+                  key={index}
+                  onClick={removeVisiblity}
+                  className="user-links"
+                  to={`/${data}`}
+                >
+                  {data}
+                </Link>
+              ))}
+              <Link to="/cart" onClick={removeVisiblity} className="cart-icon">
+                <RiShoppingCartFill className="icon" />
+                {!loading && <span>{cart.length}</span>}
               </Link>
-            ))}
-          </div>
-          <form className="searchbar" onSubmit={handleSearch}>
-            <input
-              onChange={handleSearchQuery}
-              value={query}
-              placeholder="Search..."
-            />
-            <button
-              onClick={removeVisiblity}
-              className="search-icon"
-              type="submit"
-            >
-              <BsSearch className="icon" />
-            </button>
-          </form>
-          <div className="user-details">
-            {whatToshow.map((data, index) => (
-              <Link
-                key={index}
-                onClick={removeVisiblity}
-                className="user-links"
-                to={`/${data}`}
-              >
-                {data}
-              </Link>
-            ))}
-            <Link to="/cart" onClick={removeVisiblity} className="cart-icon">
-              <RiShoppingCartFill className="icon" />
-              {!loading && <span>{cart.length}</span>}
-            </Link>
-          </div>
-          <div onClick={menuVisibility} className="menu-toggle">
-            <GiHamburgerMenu className="icon" />
+            </div>
+            <div onClick={menuVisibility} className="menu-toggle">
+              <GiHamburgerMenu className="icon" />
+            </div>
           </div>
         </div>
       </div>
@@ -193,7 +195,7 @@ function MenuContainer({
             ))}
             <Link to="/cart" onClick={removeVisiblity} className="cart-icon">
               <RiShoppingCartFill className="icon" />
-              <span>{{ cartLen }}</span>
+              <span>{cartLen}</span>
             </Link>
           </div>
           <div className="menu-options-wrapper">

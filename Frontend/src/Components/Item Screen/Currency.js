@@ -5,7 +5,13 @@ export default function Currency({ curr = "" }) {
 
   return (
     <>
-      <span>$</span>
+      <span
+        style={{
+          fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+        }}
+      >
+        $
+      </span>
       <h5 className="currency">{price}</h5>
     </>
   );

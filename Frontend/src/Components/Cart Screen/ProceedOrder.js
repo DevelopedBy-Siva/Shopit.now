@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import loadingAnim from "../../animations/dataload.json";
 import Lottie from "lottie-react";
 import { FaCheckCircle } from "react-icons/fa";
+import Currency from "../Item Screen/Currency";
 
 class ProceedOrder extends Component {
   state = {
@@ -54,10 +55,9 @@ class ProceedOrder extends Component {
     return (
       <div className="confirm-order-container">
         <h2>Subtotal</h2>
-        <h1>
-          <span>$ </span>
-          {totalPrice}.00
-        </h1>
+        <div className="total-price">
+          <Currency curr={totalPrice} />
+        </div>
         <h3>
           Total items: <span>{totalItem}</span>
         </h3>

@@ -7,6 +7,7 @@ import { FaBoxOpen } from "react-icons/fa";
 import { connect } from "react-redux";
 import CartLoadin from "./CartLoadin";
 import CartError from "./CartError";
+import Currency from "../Item Screen/Currency";
 
 class SaveForLater extends Component {
   state = {
@@ -74,7 +75,7 @@ class SaveForLater extends Component {
       this.state;
     const len = data.length;
     return (
-      <div className="save-for-later-container">
+      <div className="save-for-later-container contain">
         <div className="save-for-later-sub-container">
           <h2>
             Save for Later{" "}
@@ -110,10 +111,7 @@ class SaveForLater extends Component {
                     </h4>
                   </div>
                   <div className="save-later-item-price">
-                    <h3>
-                      <span>$ </span>
-                      {i.totalPrice}.00
-                    </h3>
+                    <Currency curr={i.totalPrice} />
                   </div>
                 </div>
                 <div className="save-later-item-operations">

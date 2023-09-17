@@ -6,6 +6,7 @@ import {
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { BiMinus, BiPlus } from "react-icons/bi";
+import Currency from "../Item Screen/Currency";
 
 class CartItems extends Component {
   state = {
@@ -111,9 +112,9 @@ class CartItems extends Component {
                     <BiMinus className="icon" />
                   </button>
                 </div>
-                <h4 className="item-price">
-                  <span>$</span> {item.totalPrice}
-                </h4>
+                <div className="item-price">
+                  <Currency curr={item.totalPrice} />
+                </div>
               </div>
               <div className="item-operations">
                 <button
@@ -133,7 +134,7 @@ class CartItems extends Component {
                 ""
               )}
               {(this.checkUnavailable(item.productId) || !item.available) && (
-                <span id="out-of-stock">Out of Stock</span>
+                <span className="out-of-stock">Out of Stock</span>
               )}
             </div>
           </div>

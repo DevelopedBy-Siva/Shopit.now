@@ -98,7 +98,7 @@ class Cart extends Component {
     const { len, loading, error, unavailable, proceedLoading } = this.state;
     return (
       <>
-        <div className="cart-container">
+        <div className="cart-container contain">
           <div className="cart-left-container">
             <h2>Shopping Cart</h2>
             {loading ? (

@@ -50,11 +50,33 @@
 .cart-container .confirm-order-container h1 span {
   font-size: 14px;
 }
-.cart-container .confirm-order-container h1 {
-  font-weight: 500;
-  font-size: 18px;
-  margin-top: 10px;
+.cart-container .confirm-order-container .total-price {
+  margin: 10px 0;
+  display: flex;
 }
+
+.cart-container .confirm-order-container .total-price .currency {
+  font-weight: 500;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+  color: #000;
+}
+
+.cart-container .confirm-order-container .total-price .currency::after {
+  content: ".00";
+  font-weight: 400;
+  margin: 0;
+  font-size: 12px;
+}
+
+.cart-container .confirm-order-container .total-price span {
+  font-weight: 400;
+  margin: 0;
+  margin-top: 1px;
+  font-size: 12px;
+}
+
 .cart-container .confirm-order-container h4 {
   text-align: center;
   margin: 4px 0;
@@ -108,10 +130,11 @@
 }
 .purchase-item-container {
   box-shadow: 0 0 4px rgb(221, 221, 221);
-  padding: 10px 15px;
+  padding: 15px;
   border-radius: 10px;
   background-color: rgba(233, 233, 233, 0.397);
-  margin-bottom: 10px;
+  margin-bottom: 18px;
+  border: 1px solid #dedede;
 }
 .purchase-item-container .purchase-item-sub-container {
   display: flex;
@@ -200,7 +223,7 @@
 }
 .save-later-item-container {
   box-shadow: 0 0 4px rgb(212, 212, 212);
-  padding: 10px 15px;
+  padding: 15px;
   border-radius: 10px;
   background-color: rgba(230, 230, 230, 0.479);
   margin-bottom: 10px;
@@ -254,13 +277,36 @@
   font-size: 13px;
   font-weight: 500;
 }
-.save-later-item .save-later-item-price h3 {
-  font-size: 19px;
+
+.save-later-item .save-later-item-price .currency {
   font-weight: 500;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+  background: none !important;
+  color: #212529;
+  position: unset;
 }
+
+.save-later-item .save-later-item-price .currency::after {
+  content: ".00";
+  font-weight: 400;
+  margin: 0;
+  font-size: 12px;
+}
+
 .save-later-item .save-later-item-price span {
-  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  margin-top: 1px;
+  font-size: 12px;
+  display: block;
 }
+
+.save-later-item .save-later-item-price {
+  display: flex;
+}
+
 .save-later-item-container .save-later-item-operations {
   display: flex;
   justify-content: flex-end;
@@ -370,9 +416,9 @@
   border-radius: 4px;
   padding: 2px 4px;
 }
-.cart-container #out-of-stock {
+.cart-container .out-of-stock {
   position: absolute;
-  bottom: 18px;
+  bottom: 24px;
   left: 12px;
   font-size: 12px;
   background-color: rgb(245, 78, 78);
@@ -411,6 +457,36 @@
 .remove-btn-label {
   color: rgb(255, 196, 0) !important;
 }
+
+.purchase-item-container .item-price .currency {
+  font-weight: 500;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+  background: none !important;
+  color: #212529;
+  position: unset;
+}
+
+.purchase-item-container .item-price .currency::after {
+  content: ".00";
+  font-weight: 400;
+  margin: 0;
+  font-size: 12px;
+}
+
+.purchase-item-container .item-price span {
+  font-weight: 400;
+  margin: 0;
+  margin-top: 1px;
+  font-size: 12px;
+}
+
+.purchase-item-container .item-price {
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media (max-width: 980px) {
   .cart-container {
     flex-direction: column-reverse;
@@ -445,6 +521,19 @@
   .cart-container .confirm-order-container h1 {
     font-size: 16px;
   }
+
+  .cart-container .confirm-order-container .total-price .currency {
+    font-size: 16px;
+  }
+
+  .cart-container .confirm-order-container .total-price .currency::after {
+    font-size: 9px;
+  }
+
+  .cart-container .confirm-order-container .total-price span {
+    font-size: 9px;
+  }
+
   .cart-container .confirm-order-container h5 {
     font-size: 12px;
   }
@@ -501,8 +590,32 @@
   .cart-item-main-container .item-increase-container .icon {
     font-size: 14px;
   }
-  .cart-container #out-of-stock {
+  .cart-container .out-of-stock {
     font-size: 10px;
     padding: 2px 8px;
+  }
+
+  .save-later-item .save-later-item-price .currency {
+    font-size: 16px;
+  }
+
+  .save-later-item .save-later-item-price .currency::after {
+    font-size: 10px;
+  }
+
+  .save-later-item .save-later-item-price span {
+    font-size: 10px;
+  }
+
+  .purchase-item-container .item-price .currency {
+    font-size: 16px;
+  }
+
+  .purchase-item-container .item-price .currency::after {
+    font-size: 10px;
+  }
+
+  .purchase-item-container .item-price span {
+    font-size: 10px;
   }
 }
