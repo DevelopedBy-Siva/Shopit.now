@@ -16,6 +16,7 @@ import Mobile from "../Screens/Category/Mobile";
 import Appliances from "../Screens/Category/Appliances";
 import KidsAndBaby from "../Screens/Category/KidsAndBaby";
 import ProductSearch from "../Screens/ProductSearch";
+import AccountContainer from "./AccountContainer";
 
 class HomeContainer extends Component {
   render() {
@@ -37,6 +38,7 @@ class HomeContainer extends Component {
           <ProtectedRoute path="/cart" Component={Cart} />
           <ProtectedRoute path="/wishlist" Component={Wishlist} />
           <ProtectedRoute path="/order-placed" Component={OrderPlacedMsg} />
+          <ProtectedRoute path="/account" Component={AccountContainer} />
           <Route path="/not-found" component={NotFound} />
           <Route path="/" exact component={Home} />
           <Redirect to="/not-found" />

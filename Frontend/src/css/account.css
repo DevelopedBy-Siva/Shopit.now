@@ -1,372 +1,102 @@
-.account-submission-cover {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(49, 49, 49, 0.582);
-  z-index: 9999999;
-}
-.account-submission-cover-icon {
-  width: 100%;
-  height: 300px;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-}
-.account-container {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  overflow-x: hidden;
-  transition: all 0.4s ease-in-out;
-}
-.delete-account-container .account-error {
-  color: red;
-  position: absolute;
-  bottom: 80px;
-  left: 30px;
-}
-.delete-account-container .account-error h5 {
-  font-size: 15px !important;
-  font-weight: 500;
-}
-.change-container .account-error {
-  color: red;
-  position: absolute;
-  top: 36%;
-  left: 20px;
-}
-.change-container .account-error h5 {
-  font-size: 12px !important;
-  font-weight: 500;
-}
-.account-left-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0.4;
-  background-color: #343434;
-}
-.account-container .account-sub-container {
-  flex: 0.6;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  width: 100%;
-  border-radius: 10px;
-  background-color: white;
-  padding-right: 5px;
-}
-.account-container .account-sub-container .user-options {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  color: black;
-  padding: 10px 15px;
-  text-decoration: none;
-  border: 1px solid rgb(211, 211, 211);
-  border-radius: 20px;
-  overflow: hidden;
-  margin-bottom: 10px;
+.user-account-container h1 {
+  font-size: 24px;
   font-weight: 400;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-.account-sub-container .account-links {
-  width: 70%;
-}
-.account-sub-container .user-options-logout {
-  display: block;
-  font-weight: 400;
+  margin: 40px 0;
   width: 100%;
-  color: black;
-  padding: 10px;
-  text-decoration: none;
-  border: 1px solid rgb(211, 211, 211);
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-.account-sub-container .user-options-logout:hover {
-  background-color: red;
-  color: white;
-}
-.account-sub-container .user-options-logout:hover .user-options-link-logout {
-  color: white;
-}
-.user-options-link {
-  color: black;
-  font-size: 17px;
-}
-.user-options-link-logout {
-  color: black;
-  font-size: 17px;
 }
 
-.account-sub-container .user-options:hover {
-  background-color: rgb(219, 219, 219);
+.user-account-container .operation-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #d3d3d3;
+  width: 100%;
 }
 
-.account-container .account-sub-container h3 {
-  font-size: 30px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 5px;
+.user-account-container .operation-container .account-opr {
+  border: 1px solid #d3d3d3;
   padding: 20px;
-}
-.account-left-container .user-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.account-left-container .user-container img {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  margin: 10px;
-  object-fit: cover;
-}
-.account-left-container .user-container h3 {
-  font-size: 40px;
-  color: white;
-  text-transform: uppercase;
-}
-.account-left-container .user-container h4 {
-  font-size: 18px;
-  color: rgb(209, 209, 209);
-  text-transform: lowercase;
-}
-.user-image-container {
-  position: relative;
-  background-color: rgb(255, 255, 255);
-  border-radius: 50%;
-}
-.user-image-container .user-image-error {
-  position: absolute;
-  font-size: 14px;
-  right: -80px;
-  width: 80px;
-  text-align: center;
-  max-width: 80px;
-  z-index: 99999;
-  color: white;
-  background-color: rgba(255, 0, 0, 0.774);
-  box-shadow: 0 0 4px rgba(95, 95, 95, 0.39);
-  padding: 2px 4px;
-  border-radius: 5px;
-  pointer-events: none;
-}
-.user-image-container .camera-icon {
-  position: absolute;
-  top: 10px;
-  right: 5px;
-  display: flex;
-  width: 40px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: rgb(255, 255, 255);
-  align-self: center;
-  cursor: pointer;
-  overflow: hidden;
-}
-.user-image-container .camera-icon input {
-  display: none;
-}
-.user-image-container .camera-icon .camera-icon-click {
-  transform: scale(1.6);
-}
-
-.user-image-container .camera-icon:hover {
-  transform: scale(0.95) !important;
-  background-color: rgb(243, 243, 243);
-}
-.background-overlay-change,
-.background-overlay-logout,
-.background-overlay-delete {
-  z-index: 99;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(255, 255, 255, 0.39);
-  pointer-events: none;
-  transition: all 0.4s ease-in-out;
-  opacity: 0;
-}
-.background-overlay-display {
-  pointer-events: all !important;
-  opacity: 1 !important;
-}
-.blur-background {
-  filter: blur(5px);
-}
-
-.change-container {
-  z-index: 999;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  width: 90%;
-  max-width: 600px;
-  padding: 40px 10px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  background: white;
-  box-shadow: 0 0 8px rgb(161, 161, 161);
-  transition: all 0.3s ease-in-out;
-  pointer-events: none;
-  opacity: 0;
-}
-.change-container h2 {
-  text-align: center;
-  font-weight: 500;
-  padding: 10px 0;
-}
-.password-change-btn {
-  color: white;
-  border: none;
-  outline: none;
-  background: #343434;
-  border-radius: 5px;
-  width: 80px;
-  padding: 5px;
-  margin: 10px;
-  letter-spacing: 1px;
-  font-size: 18px;
-  margin: auto;
-  display: block;
-  text-align: center;
-}
-.change-container .close-btn {
-  position: absolute;
-  right: -5px;
-  top: -15px;
-  color: #343434;
-  transform: scale(2);
-  cursor: pointer;
-}
-.change-container-display {
-  pointer-events: all !important;
-  opacity: 1 !important;
-}
-
-.logout-container,
-.delete-account-container {
-  width: 400px;
+  justify-content: space-between;
+  width: 100%;
   max-width: 400px;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  text-align: center;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgb(161, 161, 161);
-  transition: all 0.3s ease-in-out;
-  pointer-events: none;
-  opacity: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fff;
+  transition: background 0.2s ease-in-out;
 }
-.logout-container h4 {
-  font-size: 20px;
-  padding: 10px;
-  font-weight: 500;
+
+.user-account-container .operation-container .account-opr:hover {
+  background: #d3d3d3;
 }
-.delete-account-container h4 {
-  font-size: 20px;
-  padding: 20px;
-  font-weight: 500;
+
+.user-account-container .operation-container .account-opr .account-opr-wrapper {
+  margin-left: 15px;
 }
-.logout-container button,
-.delete-account-container button {
-  width: 60px;
-  padding: 5px;
-  margin: 10px;
-  font-weight: 500;
-  outline: none;
-  border-radius: 5px;
-  letter-spacing: 1px;
-  text-align: center;
+
+.user-account-container .operation-container .account-opr svg {
+  font-size: 22px;
+  flex-shrink: 0;
 }
-.logout-container button:first-child,
-.delete-account-container button:first-child {
-  background-color: red;
-  color: white;
+
+.user-account-container .operation-container h4 {
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.user-account-container .operation-container p {
+  font-size: 13px;
+  font-weight: 300;
+  margin: 0;
+  margin-top: 8px;
+  padding: 0;
+}
+
+.user-account-container .account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-account-container .account-logout button {
   border: none;
-}
-.logout-container button:last-child,
-.delete-account-container button:last-child {
-  width: 60px;
-  padding: 5px;
-  margin: 10px;
-  font-weight: 500;
   outline: none;
-  border: 1px solid black;
-  background-color: white;
-  color: black;
+  font-size: 15px;
 }
 
-.logout-container-display,
-.delete-account-container-display {
-  opacity: 1 !important;
-  pointer-events: all !important;
-  z-index: 999;
-}
-.account-sub-container .logo-container img {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 110px;
+.user-account-container .account-logout button:hover {
+  text-decoration: underline;
 }
 
-@media (max-width: 500px) {
-  .account-container {
-    flex-direction: column;
+@media (max-width: 980px) {
+  .user-account-container h1 {
+    font-size: 20px;
   }
-  .account-left-container {
-    flex: 0.3;
+  .user-account-container .operation-container .account-opr svg {
+    font-size: 18px;
   }
-}
-@media (max-width: 600px) {
-  .account-left-container .user-container h3 {
-    font-size: 28px;
+
+  .user-account-container .operation-container h4 {
+    font-size: 15px;
   }
-  .account-left-container .user-container h4 {
-    font-size: 14px;
+
+  .user-account-container .operation-container p {
+    font-size: 12px;
   }
-  .account-left-container .user-container img {
-    width: 100px;
-    height: 100px;
+  .user-account-container
+    .operation-container
+    .account-opr
+    .account-opr-wrapper {
+    margin-left: 10px;
   }
-  .user-image-container .camera-icon .camera-icon-click {
-    transform: scale(1);
+  .user-account-container .account-logout button {
+    font-size: 13px;
   }
-  .user-image-container .camera-icon {
-    padding: 6px;
-    right: 10px;
-  }
-  .change-container .close-btn {
-    transform: scale(1.7);
-  }
-  .account-sub-container .logo-container img {
-    top: 5px;
-    left: 5px;
-    width: 80px;
-  }
-  .user-image-container .camera-icon {
-    width: 25px;
-    height: 25px;
+
+  .user-account-container .operation-container {
+    justify-content: center;
   }
 }
