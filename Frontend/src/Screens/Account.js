@@ -7,22 +7,22 @@ import "../css/account.css";
 const operations = [
   {
     title: "Orders",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    desc: "View your order status and history",
     ico: <FaTruck />,
   },
   {
     title: "Your Address",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    desc: "Add a new shipping address to your account",
     ico: <MdLocationOn />,
   },
   {
     title: "Change Password",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    desc: "Update your account password",
     ico: <MdKey />,
   },
   {
     title: "Delete Account",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    desc: "Permanently remove your account and data",
     ico: <MdRemoveCircle />,
   },
 ];

@@ -18,9 +18,8 @@
   border: 1px solid #d3d3d3;
   padding: 20px;
   display: flex;
-  justify-content: space-between;
   width: 100%;
-  max-width: 400px;
+  max-width: 360px;
   border-radius: 8px;
   cursor: pointer;
   background: #fff;
@@ -32,7 +31,7 @@
 }
 
 .user-account-container .operation-container .account-opr .account-opr-wrapper {
-  margin-left: 15px;
+  margin-left: 12px;
 }
 
 .user-account-container .operation-container .account-opr svg {
