@@ -1,118 +1,126 @@
-import React, { Component } from 'react';
-import Lottie from "lottie-react";
-import loadingAnim from "../animations/dataload.json";
+import React, { useEffect, useState } from "react";
+import { formUrl as URL, api_endpoints } from "../api/api";
+import { getCurrentUser, getJwt } from "../services/LoginReg";
+import axios from "axios";
+import loadingAnim from "../animations/loading.json";
 import emptyAnim from "../animations/empty-box.json";
-import serverAnim from "../animations/server-error.json";
-import { mapStateToProps,mapDispatchToProps } from "../State Management/MappingStates";
-import { connect } from "react-redux";
+import Lottie from "lottie-react";
+import Loader from "../Components/Loader";
+import toast from "../Components/Toast";
+import Currency from "../Components/Item Screen/Currency";
+import { Link } from "react-router-dom";
+
 import "../css/wishlist.css";
-import { Link } from 'react-router-dom';
 
-class Wishlist extends Component {
-    state = { 
-        loading:true,
-        data:[],
-        error:false,
-        updateLoading:false,
-        updateError:null,
-        updateIndex:null,
-        alreadyDeleted:false 
+export default function Wishlist() {
+  const [api, setApi] = useState({
+    loading: true,
+    error: null,
+    data: [],
+  });
+
+  useEffect(() => {
+    async function getData() {
+      const user = getCurrentUser();
+      await axios
+        .get(`${URL(api_endpoints.userOperations)}/wishlist/${user.id}`, {
+          headers: {
+            Authorization: getJwt(),
+          },
+        })
+        .then(({ data }) => {
+          setApi({ loading: false, error: null, data });
+        })
+        .catch(() => {
+          setApi({ loading: false, error: "error", data: [] });
+        });
     }
+    getData();
+  }, []);
 
-    componentDidMount(){
-        this.props.fetchWishlist();
-    }
-
-    componentDidUpdate(prevProps,prevState){
-        if(prevProps.wishlist!==this.props.wishlist){
-            const {loading,data,error,updateLoading,updateError}=this.props.wishlist;
-            this.setState({loading,data,error,updateLoading,updateError});
-            if(updateError){
-                clearTimeout(this.errorTimer);
-                this.manageError();
-            }        
-            if(updateLoading===false) this.setState({updateIndex:null});
-        }
-    }
-
-    manageError=()=>{
-        this.errorTimer=setTimeout(()=> this.props.removeTheError(),6000);
-    }
-
-    componentWillUnmount(){
-        this.props.removeTheError();
-        clearTimeout(this.errorTimer);
-    }
-
-    handleRemove=(id,index)=>{
-        this.setState({updateIndex:index});
-        this.props.removeFromWishlist(id);
-    }
-
-    closeUpdateError=()=>{
-        this.props.removeTheError();
-        clearTimeout(this.errorTimer)
-    }
-
-    handleToCart=(item,index)=>{
-        this.setState({updateIndex:index});
-        this.props.moveWishlistToCart(item);
-    }
-
-    routeToProduct=(id)=>{
-        return this.props.history.push(`products/${id}`);
-    }
-
-    render() {
-
-        const {loading,error,data,updateLoading,updateError,updateIndex} =this.state;
-        return (
-            <div className="wishlist-container">
-                <h1>Your Wishlist</h1>
-                {loading?
-                    <div className="loading-anim">
-                        <Lottie animationData={loadingAnim}/>
-                    </div>:
-                    error ?
-                    <div className="error-anim">
-                        <Lottie loop={false} animationData={serverAnim}/>
-                        <h5>Server error occured. Try again later</h5>
-                    </div>:
-                    data.length===0?
-                    <div className="empty-anim">
-                        <Lottie loop={false} animationData={emptyAnim}/>
-                        <h5>Nothing in the Wishlist</h5>
-                    </div>:
-                    <div className="wishlist-sub-container">
-                        {data.map((i,index)=>{
-                            const imgUrl=`data:${i.thumbnail.type};base64,${i.thumbnail.picByte}`;
-                            return (
-                                <div className="wishlist-item-container" key={index} >
-                                    {(updateLoading && updateIndex===index )&&  <div className="update-loading" /> }
-                                    <div className="image-container">
-                                        <img onClick={()=>this.routeToProduct(i.pid)} src={imgUrl} alt={i.name}/>
-                                        {!i.available &&<div className="not-available">
-                                            <span>Out of Stock</span>
-                                        </div> }
-                                    </div>
-                                    <Link className="wishlist-to-product" to={`products/${i.pid}`} ><h4>{i.name}</h4></Link>
-                                    <h3>$ <span>{i.price}</span>.00</h3>
-                                    <div className="wishlist-btn-container">
-                                        <button disabled={updateLoading?true:!i.available?true:false} onClick={()=>this.handleToCart(i,index)} id="btn-add">Add to Cart</button>
-                                        <button disabled={updateLoading} onClick={()=>this.handleRemove(i.wid,index)} id="btn-remove">Remove from Wishlist</button>
-                                    </div>
-                                </div>
-                        )})}
-                    </div>
-                }
-                {updateError && <div className="wishlist-update-error">
-                    <button onClick={this.closeUpdateError} className="close-btn">X</button>
-                    <h5>{updateError}</h5>
-                </div>}
-            </div>
-                    
-        );
-    }
+  return (
+    <div className="user-wishlist-container contain">
+      <div className="user-wishlist-header">
+        <h1>Your Wishlist</h1>
+      </div>
+      <div className="user-wishlists">
+        {api.loading ? (
+          <Lottie
+            className="wishlist-loading-anim"
+            animationData={loadingAnim}
+          />
+        ) : api.error ? (
+          <div className="user-wishlist-error">
+            Sorry, we couldn't retrieve the wishlist at the moment. Please try
+            again later.
+          </div>
+        ) : api.data.length === 0 ? (
+          <div className="user-wishlist-empty">
+            <Lottie loop={false} animationData={emptyAnim} />
+            <p>Nothing is in the wishlist</p>
+          </div>
+        ) : (
+          <div className="user-wishlist-box-container">
+            {api.data.map((item, index) => (
+              <BoxDetails key={index} item={item} api={api} setApi={setApi} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Wishlist);
+function BoxDetails({ item, api, setApi }) {
+  const [remove, setRemove] = useState(false);
+
+  const handleWishList = async (wid) => {
+    const user = getCurrentUser();
+    setRemove(true);
+
+    await axios
+      .delete(
+        `${URL(api_endpoints.userOperations)}/wishlist/${user.id}/${wid}`,
+        {
+          headers: {
+            Authorization: getJwt(),
+          },
+        }
+      )
+      .then(() => {
+        const newData = api.data.filter((item) => item.wid !== wid);
+        setApi({ ...api, data: newData });
+        toast.info("Item removed from wishlist");
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      });
+    setRemove(false);
+  };
+
+  const { wid, pid, name, thumbnail, price } = item;
+  const imgUrl = `data:${thumbnail.type};base64,${thumbnail.picByte}`;
+  return (
+    <div className="user-wishlist-box">
+      {!remove && (
+        <Link to={`/products/${pid}`} className="user-wishlist-overlay" />
+      )}
+      <img src={imgUrl} alt="user-wishlist" />
+      <div className="user-wishlist-details">
+        <h4>{name}</h4>
+        <div className="user-wishlist-currency">
+          <Currency curr={price} />
+        </div>
+        <div className="user-wishlist-button-container">
+          <button disabled={remove} onClick={() => handleWishList(wid)}>
+            {remove ? (
+              <Loader style={{ width: "16px", height: "16px" }} />
+            ) : (
+              "Remove from wishlist"
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
