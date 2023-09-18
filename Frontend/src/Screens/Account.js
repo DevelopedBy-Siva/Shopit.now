@@ -3,13 +3,21 @@ import { FaTruck } from "react-icons/fa";
 import { MdRemoveCircle, MdLocationOn, MdKey, MdClose } from "react-icons/md";
 import ReactFocusLock from "react-focus-lock";
 import { useHistory } from "react-router-dom";
-import { getCurrentUser, getJwt, removeJwt } from "../services/LoginReg";
+import * as Yup from "yup";
+import { Formik } from "formik";
+import axios from "axios";
+import { passwordPattern } from "../datas/passwordPattern";
+import {
+  getCurrentUser,
+  getJwt,
+  removeJwt,
+  setJwt,
+} from "../services/LoginReg";
 import Loader from "../Components/Loader";
 import toast from "../Components/Toast";
 import { formUrl as URL, api_endpoints } from "../api/api";
 
 import "../css/account.css";
-import axios from "axios";
 
 const operations = [
   {
@@ -37,6 +45,32 @@ const operations = [
     comp: DeleteAccount,
   },
 ];
+
+const validatePaasword = Yup.object().shape({
+  current: Yup.string()
+    .max(20)
+    .matches(
+      passwordPattern,
+      "Password should have atleast one uppercase, lowercase, digit and special character(@$!%*?&)"
+    )
+    .required("Enter the current password")
+    .label("Current Password")
+    .trim(),
+  newPswd: Yup.string()
+    .max(20)
+    .matches(
+      passwordPattern,
+      "Password should have atleast one uppercase, lowercase, digit and special character(@$!%*?&)"
+    )
+    .required("Enter the new password")
+    .label("New Password")
+    .trim(),
+  confirmPswd: Yup.string()
+    .required("Confirm the password")
+    .oneOf([Yup.ref("newPswd"), null], "Passwords doesn't match")
+    .label("Confirm Password")
+    .trim(),
+});
 
 export default function Account() {
   const [loading, setLoading] = useState(false);
@@ -106,12 +140,138 @@ function FocusWrapper({ loading, toggle, children }) {
 }
 
 function ChangePassword({ toggle, loading, setLoading }) {
+  const handleChangePassword = async ({ current, newPswd }) => {
+    setLoading(true);
+    const user = getCurrentUser();
+
+    await axios
+      .put(
+        `${URL(api_endpoints.userOperations)}/update-password/${user.id}`,
+        {},
+        {
+          headers: {
+            Authorization: getJwt(),
+            "current-password": current,
+            "new-password": newPswd,
+          },
+        }
+      )
+      .then(({ data }) => {
+        setJwt(data);
+        toggle();
+        setLoading(false);
+        toast.success("Password updated successfully");
+      })
+      .catch(({ response }) => {
+        setLoading(false);
+        if (response.status === 401) {
+          toast.error("Oops! Incorrect password");
+          return;
+        }
+        toast.error("Something went wrong");
+      });
+  };
+
   return (
     <FocusWrapper loading={loading} toggle={toggle}>
       <div className="account-change-password">
         <ModalHeadingWrapper loading={loading} toggle={toggle}>
           Change Password
         </ModalHeadingWrapper>
+        <div className="account-change-password-content">
+          <Formik
+            initialValues={{
+              current: "",
+              newPswd: "",
+              confirmPswd: "",
+            }}
+            onSubmit={handleChangePassword}
+            validationSchema={validatePaasword}
+          >
+            {({
+              handleSubmit,
+              handleChange,
+              errors,
+              setFieldTouched,
+              touched,
+              isValid,
+              dirty,
+            }) => {
+              return (
+                <form
+                  onSubmit={handleSubmit}
+                  className="account-change-password-content-form"
+                >
+                  <div>
+                    <label name="current-pswd">
+                      Enter the current password:
+                    </label>
+                    <input
+                      name="current-pswd"
+                      onChange={handleChange("current")}
+                      disabled={loading}
+                      maxLength={20}
+                      type="password"
+                      onBlur={() => setFieldTouched("current")}
+                    />
+                    {errors.current && touched.current && (
+                      <span className="account-change-password-input-error">
+                        {errors.current}
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    <label name="new-pswd">Enter new password:</label>
+                    <input
+                      name="new-pswd"
+                      onChange={handleChange("newPswd")}
+                      disabled={loading}
+                      maxLength={20}
+                      type="password"
+                      onBlur={() => setFieldTouched("newPswd")}
+                    />
+                    {errors.newPswd && touched.newPswd && (
+                      <span className="account-change-password-input-error">
+                        {errors.newPswd}
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    <label name="confirm-pswd">Confirm password:</label>
+                    <input
+                      name="confirm-pswd"
+                      onChange={handleChange("confirmPswd")}
+                      disabled={loading}
+                      maxLength={20}
+                      type="password"
+                      onBlur={() => setFieldTouched("confirmPswd")}
+                    />
+                    {errors.confirmPswd && touched.confirmPswd && (
+                      <span className="account-change-password-input-error">
+                        {errors.confirmPswd}
+                      </span>
+                    )}
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={
+                      !isValid || !dirty
+                        ? "account-change-password-btn-grey"
+                        : ""
+                    }
+                  >
+                    {loading ? (
+                      <Loader style={{ width: "18px", height: "18px" }} />
+                    ) : (
+                      "Change Password"
+                    )}
+                  </button>
+                </form>
+              );
+            }}
+          </Formik>
+        </div>
       </div>
     </FocusWrapper>
   );

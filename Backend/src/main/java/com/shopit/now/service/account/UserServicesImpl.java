@@ -146,7 +146,8 @@ public class UserServicesImpl implements UserServices {
             String password = bCryptPasswordEncoder.encode(newPassword);
             user.get().setPassword(password);
             userRepository.save(user.get());
-            return new ResponseEntity<>("Password successfully changed", HttpStatus.OK);
+            String jwt = userLogin(user.get().getEmail(), newPassword);
+            return new ResponseEntity<>(jwt, HttpStatus.OK);
         } catch (Exception exception) {
             return new ResponseEntity<>("Unexpected error occured", HttpStatus.INTERNAL_SERVER_ERROR);
         }
