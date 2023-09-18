@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import APP_LOGO_BLACK from "../Icons/app-logo-black.svg";
-import { Link } from "react-router-dom";
-import { FaAngleLeft, FaCircle } from "react-icons/fa";
+import { FaCircle } from "react-icons/fa";
 import axios from "axios";
 import * as service from "../services/LoginReg";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../api/api";
@@ -159,15 +157,6 @@ class Orders extends Component {
     } = this.state;
     return (
       <div className="orders-container">
-        <div className="order-container-nav">
-          <Link to="/account" className="go-back">
-            <FaAngleLeft className="left-fa-icon" />
-            <span className="go-back">Go Back</span>
-          </Link>
-          <Link to="/" className="order-logo-container">
-            <img src={APP_LOGO_BLACK} alt="order app logo" />
-          </Link>
-        </div>
         <div className="order-container-head">
           <h2>Order Details</h2>
         </div>

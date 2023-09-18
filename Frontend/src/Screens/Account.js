@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { FaTruck } from "react-icons/fa";
 import { MdRemoveCircle, MdLocationOn, MdKey, MdClose } from "react-icons/md";
 import ReactFocusLock from "react-focus-lock";
+import { useHistory } from "react-router-dom";
+import { getCurrentUser, getJwt, removeJwt } from "../services/LoginReg";
+import Loader from "../Components/Loader";
+import toast from "../Components/Toast";
+import { formUrl as URL, api_endpoints } from "../api/api";
 
 import "../css/account.css";
-import { removeJwt } from "../services/LoginReg";
+import axios from "axios";
 
 const operations = [
   {
@@ -46,18 +51,26 @@ export default function Account() {
       </div>
       <div className="operation-container">
         {operations.map((item, index) => (
-          <ButtonWrapper key={index} item={item} />
+          <ButtonWrapper
+            loading={loading}
+            setLoading={setLoading}
+            key={index}
+            item={item}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-function ButtonWrapper({ item }) {
+function ButtonWrapper({ item, loading, setLoading }) {
   const [visible, setVisible] = useState(false);
 
+  const history = useHistory();
+
   function toggle() {
-    if (!item.redirect) setVisible(!visible);
+    if (item.redirect) return history.push("/account/orders");
+    if (!loading) return setVisible(!visible);
   }
 
   return (
@@ -69,27 +82,34 @@ function ButtonWrapper({ item }) {
           <p>{item.desc}</p>
         </div>
       </div>
-      {visible && <item.comp toggle={toggle} />}
+      {visible && (
+        <item.comp toggle={toggle} loading={loading} setLoading={setLoading} />
+      )}
     </>
   );
 }
 
-function FocusWrapper({ toggle, children }) {
+function FocusWrapper({ loading, toggle, children }) {
   return (
     <ReactFocusLock>
       <div className="account-screen-modal">
-        <div className="account-screen-modal-overlay" onClick={toggle}></div>
+        <button
+          className={`account-screen-modal-overlay ${
+            loading && "account-screen-modal-disable"
+          }`}
+          onClick={toggle}
+        ></button>
         <div className="account-modal-content">{children}</div>
       </div>
     </ReactFocusLock>
   );
 }
 
-function ChangePassword({ toggle }) {
+function ChangePassword({ toggle, loading, setLoading }) {
   return (
-    <FocusWrapper toggle={toggle}>
+    <FocusWrapper loading={loading} toggle={toggle}>
       <div className="account-change-password">
-        <ModalHeadingWrapper toggle={toggle}>
+        <ModalHeadingWrapper loading={loading} toggle={toggle}>
           Change Password
         </ModalHeadingWrapper>
       </div>
@@ -97,33 +117,103 @@ function ChangePassword({ toggle }) {
   );
 }
 
-function DeleteAccount({ toggle }) {
+function DeleteAccount({ toggle, loading, setLoading }) {
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async () => {
+    if (passwordValidation()) return;
+    setLoading(true);
+    const user = getCurrentUser();
+    await axios
+      .post(
+        `${URL(api_endpoints.userOperations)}/delete-user/${user.id}`,
+        {},
+        {
+          headers: {
+            Authorization: getJwt(),
+            "user-password": password,
+          },
+        }
+      )
+      .then(() => {
+        removeJwt();
+      })
+      .catch(({ response }) => {
+        setLoading(false);
+        if (response.status === 401) {
+          toast.error("Oops! Incorrect password");
+          return;
+        }
+        toast.error("Something went wrong");
+      });
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+  };
+
+  const passwordValidation = () => {
+    return password.length === 0;
+  };
+
+  return (
+    <FocusWrapper loading={loading} toggle={toggle}>
+      <div className="account-delete-account">
+        <ModalHeadingWrapper loading={loading} toggle={toggle}>
+          Delete Account
+        </ModalHeadingWrapper>
+        <div className="account-delete-account-content">
+          <p>
+            Are you sure you want to do this? Once deleted, there is no way to
+            retrieve the account.
+          </p>
+          <div className="account-delete-account-content-form">
+            <label>Enter your password:</label>
+            <input
+              onChange={handleInputChange}
+              disabled={loading}
+              type="password"
+            />
+            <button
+              onClick={handleSubmit}
+              disabled={passwordValidation() || loading}
+              className={passwordValidation() ? "account-delete-btn-grey" : ""}
+            >
+              {loading ? (
+                <Loader style={{ width: "18px", height: "18px" }} />
+              ) : (
+                "Delete Account"
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </FocusWrapper>
+  );
+}
+
+function AddAddress({ toggle, loading, setLoading }) {
   return (
     <FocusWrapper toggle={toggle}>
-      <div className="account-delete-account">
-        <ModalHeadingWrapper toggle={toggle}>
-          Delete Account
+      <div className="account-add-address">
+        <ModalHeadingWrapper loading={loading} toggle={toggle}>
+          Your Address
         </ModalHeadingWrapper>
       </div>
     </FocusWrapper>
   );
 }
 
-function AddAddress({ toggle }) {
-  return (
-    <FocusWrapper toggle={toggle}>
-      <div className="account-add-address">
-        <ModalHeadingWrapper toggle={toggle}>Your Address</ModalHeadingWrapper>
-      </div>
-    </FocusWrapper>
-  );
-}
-
-function ModalHeadingWrapper({ toggle, children }) {
+function ModalHeadingWrapper({ loading, toggle, children }) {
   return (
     <div className="account-screen-modal-header">
       <h2>{children}</h2>
-      <button onClick={toggle} className="account-screen-modal-close">
+      <button
+        onClick={toggle}
+        disabled={loading}
+        className="account-screen-modal-close"
+      >
         <MdClose />
       </button>
     </div>
