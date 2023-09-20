@@ -95,6 +95,7 @@ class Product extends MainProductContainer {
                 userReview={product.productRatings}
                 user={user}
                 productId={product.id}
+                updateOverallRating={this.updateOverallRating}
               />
             </div>
             <RecommendedProducts productId={product.id} />

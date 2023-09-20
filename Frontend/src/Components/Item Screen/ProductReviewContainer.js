@@ -12,6 +12,7 @@ function ProductReviewContainer({
   overallRating,
   userReview,
   productId,
+  updateOverallRating,
 }) {
   const [loading, setLoading] = useState(false);
   const [myReview, setMyReview] = useState({
@@ -21,6 +22,7 @@ function ProductReviewContainer({
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [error, setError] = useState(null);
   const [allReviews, setAllReviews] = useState([]);
+  const [show, setShow] = useState(false);
 
   const history = useHistory();
 
@@ -69,6 +71,11 @@ function ProductReviewContainer({
         const usersReviews = [...allReviews];
         usersReviews.unshift({ ...request });
         setAllReviews(usersReviews);
+        let rating = 0;
+        for (let index = 0; index < usersReviews.length; index++)
+          rating += usersReviews[index].rating;
+        const overall = Math.round((rating / usersReviews.length) * 10) / 10;
+        updateOverallRating(overall);
       })
       .catch(() => {
         toast.error("Oops, something went wrong");
@@ -116,7 +123,7 @@ function ProductReviewContainer({
           </div>
         </div>
         <div className="reviews-sub-container-review">
-          <div>
+          <div className="review-input-container">
             <h4>Write your review</h4>
             <div className="star-rating-container">
               <ProductStars
@@ -153,28 +160,34 @@ function ProductReviewContainer({
                 )}
               </button>
             )}
+            {error && <p className="review-input-error">{error}</p>}
           </div>
-          {error && <p className="review-input-error">{error}</p>}
+          <div className="all-user-reviews">
+            {allReviews
+              .slice(0, show ? allReviews.length : 3)
+              .map((i, index) => (
+                <div className="all-user-reviews-sub-container" key={index}>
+                  <span className="review-avatar">{i.name.charAt(0)}</span>
+                  <div className="each-review-sub-container">
+                    <span className="reviewer-name">{i.name}</span>
+                    <ProductStars
+                      rating={i.rating}
+                      starDimension="15px"
+                      starSpacing="1px"
+                      starRatedColor="orange"
+                    />
+                    <h5>{i.review}</h5>
+                  </div>
+                </div>
+              ))}
+          </div>
+          <div className="show-more-reviews">
+            <span />
+            <span onClick={() => setShow(!show)}>
+              {!show ? "Show more" : "Hide"}
+            </span>
+          </div>
         </div>
-      </div>
-      <div className="all-user-reviews">
-        {allReviews.map((i, index) => (
-          <div className="all-user-reviews-sub-container" key={index}>
-            <div className="each-review-sub-container">
-              <span className="review-avatar">{i.name.charAt(0)}</span>
-              <div className="each-star">
-                <span>{i.name}</span>
-                <ProductStars
-                  rating={i.rating}
-                  starDimension="15px"
-                  starSpacing="1px"
-                  starRatedColor="orange"
-                />
-              </div>
-            </div>
-            <h5>{i.review}</h5>
-          </div>
-        ))}
       </div>
     </>
   );

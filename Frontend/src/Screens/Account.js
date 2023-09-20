@@ -221,7 +221,7 @@ function ChangePassword({ toggle, loading, setLoading }) {
                     )}
                   </div>
                   <div>
-                    <label name="new-pswd">Enter new password:</label>
+                    <label name="new-pswd">Enter the new password:</label>
                     <input
                       name="new-pswd"
                       onChange={handleChange("newPswd")}

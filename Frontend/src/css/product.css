@@ -298,13 +298,15 @@
 }
 
 .reviews-container .reviews-sub-container .reviews-sub-container-rating {
-  flex-shrink: 0;
   width: 100%;
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  margin-top: 50px;
+  position: sticky;
+  top: 120px;
+  height: fit-content;
 }
 .reviews-sub-container-rating h5 {
   font-size: 16px;
@@ -316,6 +318,13 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.reviews-container
+  .reviews-sub-container
+  .reviews-sub-container-review
+  .review-input-container {
   border: 1px solid #d3d3d3;
   padding: 15px;
   border-radius: 5px;
@@ -356,14 +365,9 @@
 }
 .reviews-container .reviews-sub-container {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 40px;
   gap: 20px;
-}
-.reviews-sub-container-review h5 {
-  text-align: right;
 }
 
 .reviews-sub-container-review h4 {
@@ -380,7 +384,7 @@
   padding: 5px;
   border-radius: 5px;
   width: 65px;
-  float: right;
+  margin-left: auto;
 }
 .reviews-sub-container textarea {
   width: 100%;
@@ -417,28 +421,31 @@
   opacity: 1 !important;
 }
 .all-user-reviews .review-avatar {
-  background: rgb(219, 139, 93);
+  background: #3498db;
   color: black;
-  padding: 0px;
-  width: 25px;
-  text-align: center;
+  width: 28px;
+  height: 28px;
   font-size: 16px;
   text-transform: uppercase;
-  font-weight: 600;
-  display: inline-block;
+  font-weight: 400;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .all-user-reviews {
-  width: 70%;
-  margin-left: auto;
+  margin-top: 35px;
+  width: 100%;
   position: relative;
 }
 .all-user-reviews .all-user-reviews-sub-container .each-review-sub-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 .all-user-reviews .all-user-reviews-sub-container {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  display: flex;
+  gap: 10px;
 }
 
 .all-user-reviews-sub-container .each-review-sub-container .each-star {
@@ -457,9 +464,8 @@
   font-weight: 500;
 }
 .all-user-reviews-sub-container h5 {
-  width: 96%;
-  margin-left: auto;
   font-size: 12px;
+  font-weight: 400;
 }
 .star-rating-container {
   position: relative;
@@ -699,6 +705,44 @@
   padding: 0;
 }
 
+.reviewer-name {
+  font-size: 15px;
+  font-weight: 400;
+  text-transform: capitalize;
+  line-height: 1;
+  margin-bottom: -4px;
+}
+
+.show-more-reviews {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.show-more-reviews span:first-of-type {
+  width: 100%;
+  height: 0.1px;
+  display: block;
+  background: #d3d3d3;
+}
+
+.show-more-reviews span:last-of-type {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  display: inline-block;
+  background: #f0f0f0;
+  cursor: pointer;
+  color: gray;
+  padding: 0 3px;
+}
+
 @media (max-width: 980px) {
   .reviews-sub-container {
     flex-direction: column;
@@ -708,7 +752,7 @@
   }
 
   .reviews-sub-container-rating {
-    margin: 15px 0;
+    margin: 25px auto;
   }
 
   .reviews-sub-container-review button {
@@ -730,5 +774,23 @@
 
   .reviews-container h3 {
     font-size: 20px;
+  }
+  .reviewer-name {
+    font-size: 13px;
+  }
+  .all-user-reviews-sub-container h5 {
+    font-size: 11px;
+  }
+  .all-user-reviews .review-avatar {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+  .show-more-reviews span:last-of-type {
+    font-size: 11px;
+  }
+  .reviews-container .reviews-sub-container .reviews-sub-container-rating {
+    position: relative;
+    top: unset;
   }
 }

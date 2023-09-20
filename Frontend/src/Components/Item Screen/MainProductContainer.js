@@ -76,6 +76,10 @@ class MainProductContainer extends Component {
     });
   };
 
+  updateOverallRating = (rating = 0) => {
+    this.setState({ overallRating: rating });
+  };
+
   checkSubmission = (user) => {
     const { product } = this.state;
     const check = product.productRatings.usersReviews.find(
