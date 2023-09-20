@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Component } from "react";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
-import { getJwt, getCurrentUser } from "../../services/LoginReg";
+import { getCurrentUser } from "../../services/LoginReg";
 
 class MainProductContainer extends Component {
   state = {
@@ -83,61 +83,6 @@ class MainProductContainer extends Component {
     );
     if (check) return true;
     return false;
-  };
-
-  handleReviewSubmit = () => {
-    const { review, rating, product, user, loadedReview } = this.state;
-
-    if (!this.currentUser) return;
-
-    const updatedReview = review.trim();
-    if (this.checkSubmission(user.sub)) {
-      const submissionError = document.querySelector(
-        ".review-btn-container h5"
-      );
-      submissionError.classList.add("display-already-submitted-review");
-    } else if (updatedReview.length < 10) {
-      const submitBtn = document.querySelector(".review-btn-container span");
-      submitBtn.classList.add("display-submit-error");
-    } else if (rating === 0) {
-      const starRating = document.querySelector(
-        ".star-rating-container .star-rating-error"
-      );
-      starRating.classList.add("star-rating-error-display");
-    } else {
-      const newReview = {
-        name: user.fullname,
-        email: user.sub,
-        rating: rating,
-        review: updatedReview,
-      };
-      this.reviewToServer(
-        newReview,
-        product.id,
-        product,
-        newReview,
-        loadedReview
-      );
-    }
-  };
-
-  reviewToServer = async (review, id, product, newReview, loadedReview) => {
-    this.setState({ reviewSubmit: true });
-    await axios
-      .post(
-        `${URL(API_ENDPOINT.productApi)}/add-product-review/${id}`,
-        review,
-        {
-          headers: { Authorization: getJwt() },
-        }
-      )
-      .then(() => {
-        this.refactorTheChanges(product, newReview, loadedReview);
-        this.setState({ reviewSubmit: false, displayReviewError: false });
-      })
-      .catch(() => {
-        this.setState({ reviewSubmit: false, displayReviewError: true });
-      });
   };
 
   refactorTheChanges = (product, newReview, loadedReview) => {

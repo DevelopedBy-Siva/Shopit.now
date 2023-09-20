@@ -15,18 +15,7 @@ import ProductOperations from "../Components/Item Screen/ProductOperations";
 
 class Product extends MainProductContainer {
   render() {
-    const {
-      user,
-      loading,
-      initialUrl,
-      displayReviewError,
-      reviewSubmit,
-      loadedReview,
-      product,
-      rating,
-      review,
-      overallRating,
-    } = this.state;
+    const { user, loading, initialUrl, product, overallRating } = this.state;
     return (
       <div className="product-main-container contain">
         {loading ? (
@@ -102,19 +91,10 @@ class Product extends MainProductContainer {
             </div>
             <div className="reviews-container">
               <ProductReviewContainer
-                displayReviewError={displayReviewError}
-                reviewSubmit={reviewSubmit}
                 overallRating={overallRating}
-                loadedReview={loadedReview}
-                handleLoadMore={this.handleLoadMore}
                 userReview={product.productRatings}
-                handleReviewSubmit={this.handleReviewSubmit}
-                review={review}
-                onChange={this.handleReviewOnChange}
-                rating={rating}
-                changeRating={this.changeRating}
                 user={user}
-                handleLogin={this.handleLogin}
+                productId={product.id}
               />
             </div>
             <RecommendedProducts productId={product.id} />

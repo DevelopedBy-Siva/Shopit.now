@@ -219,20 +219,27 @@ public class ProductServicesImpl implements ProductServices {
     }
 
     @Override
-    public ResponseEntity<?> submitProductReview(int productId,UsersReview usersReview) throws ProductNotFound {
-        Products products=productRepository.findById(productId).orElse(null);
-        if(products==null){
+    public ResponseEntity<?> submitProductReview(int productId, UsersReview usersReview) throws ProductNotFound {
+        Products products = productRepository.findById(productId).orElse(null);
+        if (products == null)
             throw new ProductNotFound("Product not found");
-        }else{
-            double overallRating=overallRatingCalc(products,usersReview.getRating());
-            products.getProductRatings().setOverallRating(overallRating);
-            products.getProductRatings().getUsersReviews().add(usersReview);
-            try{
-                productRepository.save(products);
-                return new ResponseEntity("User review added successfully",HttpStatus.OK);
-            }catch (Exception e){
-                return new ResponseEntity("Internal Server Error. Try again later",HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+
+        double overallRating = overallRatingCalc(products, usersReview.getRating());
+        products.getProductRatings().setOverallRating(overallRating);
+        boolean found = false;
+        for (int index = 0; index < products.getProductRatings().getUsersReviews().size(); index++) {
+            if (products.getProductRatings().getUsersReviews().get(index).getEmail().equals(usersReview.getEmail()))
+                found = true;
+        }
+        if (found)
+            return new ResponseEntity(null, HttpStatus.NO_CONTENT);
+
+        products.getProductRatings().getUsersReviews().add(usersReview);
+        try {
+            productRepository.save(products);
+            return new ResponseEntity("User review added successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("Internal Server Error. Try again later", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

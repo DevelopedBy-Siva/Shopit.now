@@ -1,28 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 import StarRatings from "react-star-ratings";
 
-class ProductStars extends Component {
-  total_reviews = this.props.totalReviews;
-  show_number_of_raters = this.props.showRaters;
-
-  render() {
-    const { ...rest } = this.props;
-    return (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <StarRatings name="rating" {...rest} />
-        {this.show_number_of_raters && (
-          <div
-            style={{
-              display: "block",
-              fontSize: "13px",
-              marginLeft: "5px",
-              marginTop: "0px",
-            }}
-          >{` (${this.total_reviews})`}</div>
-        )}
-      </div>
-    );
-  }
+function ProductStars({ totalReviews, showRaters, ...rest }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <StarRatings name="rating" {...rest} />
+      {showRaters && (
+        <div
+          style={{
+            display: "block",
+            fontSize: "13px",
+            marginLeft: "5px",
+            marginTop: "0px",
+          }}
+        >{` (${totalReviews})`}</div>
+      )}
+    </div>
+  );
 }
 
 export default ProductStars;
