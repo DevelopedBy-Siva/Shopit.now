@@ -46,7 +46,7 @@ public class UserAccountController {
     }
 
     @PutMapping("/user/address/{id}")
-    ResponseEntity<String> handleAddress(@PathVariable int id, @RequestBody Address address) throws UserNotFound {
+    ResponseEntity<Address> handleAddress(@PathVariable int id, @RequestBody AddressDetails address) throws UserNotFound {
         return accountServices.addUserAddress(id, address);
     }
 
@@ -68,10 +68,10 @@ public class UserAccountController {
         return accountServices.deleteAccount(id, password);
     }
 
-    @PutMapping("/user/update-address/{userId}")
-    ResponseEntity<String> updateAddress(@PathVariable int userId, @RequestBody Address address)
+    @PutMapping("/user/update-address/{userId}/{addressId}")
+    ResponseEntity<String> updateAddress(@PathVariable int userId, @PathVariable int addressId, @RequestBody AddressDetails address)
             throws UserNotFound, AddressNotFound {
-        return accountServices.updateAddress(userId, address);
+        return accountServices.updateAddress(userId, addressId, address);
     }
 
     @PutMapping("/user/update-default-address/{uid}/{aid}")

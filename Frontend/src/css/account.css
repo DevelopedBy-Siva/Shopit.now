@@ -453,3 +453,9 @@
     font-size: 12px;
   }
 }
+
+@media (max-width: 680px) {
+  .address-box-container {
+    justify-content: center;
+  }
+}

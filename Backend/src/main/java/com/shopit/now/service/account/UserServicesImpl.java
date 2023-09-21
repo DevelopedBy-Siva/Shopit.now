@@ -116,19 +116,23 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public ResponseEntity<String> addUserAddress(int id, Address address) throws UserNotFound {
+    public ResponseEntity<Address> addUserAddress(int id, AddressDetails address) throws UserNotFound {
 
-        Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty())
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null)
             throw new UserNotFound("User not found");
 
-        address.setDefaultAddress(false);
-        user.get().getAddress().add(address);
+        Address toAdd = new Address();
+        toAdd.setDefaultAddress(false);
+        toAdd.setAddressDetails(address);
+
+        user.getAddress().add(toAdd);
         try {
-            userRepository.save(user.get());
-            return new ResponseEntity<>("Address Added Successfully", HttpStatus.OK);
+            User userResponse = userRepository.save(user);
+            Address response = userResponse.getAddress().get(userResponse.getAddress().size() - 1);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception exception) {
-            return new ResponseEntity<>("Unexpected Error Occured", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -171,41 +175,34 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public ResponseEntity<String> updateAddress(int userId, Address address) throws UserNotFound, AddressNotFound {
+    public ResponseEntity<String> updateAddress(int userId, int addressId, AddressDetails address) throws UserNotFound, AddressNotFound {
 
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isEmpty())
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null)
             throw new UserNotFound("User not found");
 
-        List<Address> found = user.get().getAddress();
-        if (found.size() == 0) {
+        List<Address> found = user.getAddress();
+        if (found.size() == 0)
             throw new AddressNotFound("Address not found");
-        } else {
-            Iterator<Address> itr = found.iterator();
-            int flag = 1;
-            while (itr.hasNext()) {
-                Address check = itr.next();
-                if (check.getId() == address.getId()) {
-                    itr.remove();
-                    flag = 1;
-                    break;
-                } else {
-                    flag = 0;
-                }
-            }
-            if (flag == 0) {
-                throw new AddressNotFound("Address not found");
-            } else {
-                try {
-                    found.add(address);
-                    user.get().setAddress(found);
-                    userRepository.save(user.get());
-                    return new ResponseEntity<>("Address update successfull", HttpStatus.OK);
-                } catch (Exception exception) {
-                    return new ResponseEntity<>("Unexpected error occured", HttpStatus.INTERNAL_SERVER_ERROR);
-                }
 
+        boolean isUpdated = false;
+        for (Address add : found) {
+            if (add.getId() == addressId) {
+                add.setAddressDetails(address);
+                isUpdated = true;
+                break;
             }
+        }
+
+        if (!isUpdated)
+            throw new AddressNotFound("Address not found");
+
+        try {
+            user.setAddress(found);
+            userRepository.save(user);
+            return new ResponseEntity<>("Address update successfull", HttpStatus.OK);
+        } catch (Exception exception) {
+            return new ResponseEntity<>("Unexpected error occured", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

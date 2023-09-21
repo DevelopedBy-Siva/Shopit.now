@@ -17,14 +17,14 @@ public interface UserServices {
     ResponseEntity<String> registerTheUser(String fullname, String email, String password, String mobile)
             throws UserAlreadyExists;
 
-    ResponseEntity<String> addUserAddress(int id, Address address) throws UserNotFound;
+    ResponseEntity<Address> addUserAddress(int id, AddressDetails address) throws UserNotFound;
 
     ResponseEntity<String> changePassword(int id, String currentPassword, String newPassword)
             throws InvalidCredentials, UserNotFound;
 
     ResponseEntity<String> deleteAccount(int id, String password) throws UserNotFound, InvalidCredentials;
 
-    ResponseEntity<String> updateAddress(int userId, Address address) throws UserNotFound, AddressNotFound;
+    ResponseEntity<String> updateAddress(int userId, int addressId, AddressDetails address) throws UserNotFound, AddressNotFound;
 
     ResponseEntity<String> updateDefaultAddress(int userId, int aId) throws UserNotFound;
 

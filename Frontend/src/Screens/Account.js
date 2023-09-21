@@ -388,11 +388,8 @@ function AddAddress({ toggle, loading, setLoading }) {
   const [todo, setTodo] = useState({
     type: null,
     values: addressValues,
+    id: null,
   });
-
-  async function handleAddress() {
-    setLoading(true);
-  }
 
   useEffect(() => {
     async function getApi() {
@@ -413,8 +410,8 @@ function AddAddress({ toggle, loading, setLoading }) {
     getApi();
   }, []);
 
-  const handleTask = (type, values = addressValues) => {
-    setTodo({ type, values });
+  const handleTask = (type, values = addressValues, id = null) => {
+    setTodo({ type, values, id });
   };
 
   const goBack = () => setTodo({ type: null, values: addressValues });
@@ -422,6 +419,51 @@ function AddAddress({ toggle, loading, setLoading }) {
   const btnInactive = (e) => e.target.classList.add("account-address-inactive");
   const btnRemoveInactive = (e) =>
     e.target.classList.remove("account-address-inactive");
+
+  async function handleAddress(address) {
+    setLoading(true);
+    const user = getCurrentUser();
+    if (todo.type === "EDIT") {
+      await axios
+        .put(
+          `${URL(api_endpoints.userOperations)}/update-address/${user.id}/${
+            todo.id
+          }`,
+          address,
+          {
+            headers: { Authorization: getJwt() },
+          }
+        )
+        .then(() => {
+          const data = [...api.data];
+          data.forEach((item) => {
+            if (item.id === todo.id) item.addressDetails = { ...address };
+          });
+          setApi({ ...api, data });
+          goBack();
+          toast.info("Address is updated");
+        })
+        .catch(() => {
+          toast.error("Something went wrong");
+        });
+      setLoading(false);
+      return;
+    }
+
+    await axios
+      .put(`${URL(api_endpoints.userOperations)}/address/${user.id}`, address, {
+        headers: { Authorization: getJwt() },
+      })
+      .then(({ data }) => {
+        setApi({ ...api, data: [...api.data, data] });
+        goBack();
+        toast.info("Address saved successfully");
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      });
+    setLoading(false);
+  }
 
   const handleDefault = async (e, addressId) => {
     const user = getCurrentUser();
@@ -444,6 +486,7 @@ function AddAddress({ toggle, loading, setLoading }) {
           else item.defaultAddress = false;
         });
         setApi({ ...api, data });
+        toast.info("Default address updated");
       })
       .catch(() => {
         toast.error("Something went wrong");
@@ -466,6 +509,7 @@ function AddAddress({ toggle, loading, setLoading }) {
       .then(() => {
         const data = [...api.data].filter((item) => item.id !== addressId);
         setApi({ ...api, data });
+        toast.info("Saved address removed");
       })
       .catch(() => {
         toast.error("Something went wrong");
@@ -511,7 +555,7 @@ function AddAddress({ toggle, loading, setLoading }) {
                           <button
                             disabled={loading}
                             onClick={() =>
-                              handleTask("EDIT", item.addressDetails)
+                              handleTask("EDIT", item.addressDetails, item.id)
                             }
                           >
                             Edit
