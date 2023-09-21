@@ -280,6 +280,7 @@
   text-transform: capitalize;
   position: relative;
   background: none;
+  background: #f0f0f0;
 }
 
 .address-box span {

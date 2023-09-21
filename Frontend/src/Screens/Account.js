@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaTruck } from "react-icons/fa";
 import { MdRemoveCircle, MdLocationOn, MdKey, MdClose } from "react-icons/md";
 import { HiOutlinePlusSm, HiOutlineMinusSm } from "react-icons/hi";
@@ -588,150 +588,165 @@ function AddAddress({ toggle, loading, setLoading }) {
             </div>
           </div>
         ) : (
-          <div className="account-address-content account-address-wrapper">
-            <button
-              disabled={loading}
-              onClick={goBack}
-              className="account-address-go-back"
-            >
-              Back
-            </button>
-            <div className="address-sub-heading">
-              <HiOutlinePlusSm />
-              <span>
-                {todo.type === "EDIT" ? "Edit address" : "Add new address"}
-              </span>
-            </div>
-            <Formik
-              initialValues={{ ...todo.values }}
-              onSubmit={handleAddress}
-              validationSchema={validateAddress}
-            >
-              {({
-                handleSubmit,
-                handleChange,
-                errors,
-                setFieldTouched,
-                touched,
-                isValid,
-                dirty,
-                values,
-              }) => {
-                return (
-                  <form
-                    onSubmit={handleSubmit}
-                    className="account-change-password-content-form"
-                  >
-                    <div>
-                      <label name="houseNo">House No/Street:</label>
-                      <input
-                        name="houseNo"
-                        onChange={handleChange("houseNo")}
-                        disabled={loading}
-                        maxLength={10}
-                        type="text"
-                        value={values.houseNo}
-                        onBlur={() => setFieldTouched("houseNo")}
-                      />
-                      {errors.houseNo && touched.houseNo && (
-                        <span className="account-change-password-input-error">
-                          {errors.houseNo}
-                        </span>
-                      )}
-                    </div>
-                    <div>
-                      <label name="town">Town:</label>
-                      <input
-                        name="town"
-                        onChange={handleChange("town")}
-                        disabled={loading}
-                        maxLength={20}
-                        type="text"
-                        value={values.town}
-                        onBlur={() => setFieldTouched("town")}
-                      />
-                      {errors.town && touched.town && (
-                        <span className="account-change-password-input-error">
-                          {errors.town}
-                        </span>
-                      )}
-                    </div>
-                    <div>
-                      <label name="city">City:</label>
-                      <input
-                        name="city"
-                        onChange={handleChange("city")}
-                        disabled={loading}
-                        maxLength={20}
-                        type="text"
-                        value={values.city}
-                        onBlur={() => setFieldTouched("city")}
-                      />
-                      {errors.city && touched.city && (
-                        <span className="account-change-password-input-error">
-                          {errors.city}
-                        </span>
-                      )}
-                    </div>
-                    <div>
-                      <label name="state">State:</label>
-                      <input
-                        name="state"
-                        onChange={handleChange("state")}
-                        disabled={loading}
-                        maxLength={20}
-                        type="text"
-                        value={values.state}
-                        onBlur={() => setFieldTouched("state")}
-                      />
-                      {errors.state && touched.state && (
-                        <span className="account-change-password-input-error">
-                          {errors.state}
-                        </span>
-                      )}
-                    </div>
-                    <div>
-                      <label name="pincode">Pincode:</label>
-                      <input
-                        name="pincode"
-                        onChange={handleChange("pincode")}
-                        disabled={loading}
-                        maxLength={10}
-                        type="text"
-                        value={values.pincode}
-                        onBlur={() => setFieldTouched("pincode")}
-                      />
-                      {errors.pincode && touched.pincode && (
-                        <span className="account-change-password-input-error">
-                          {errors.pincode}
-                        </span>
-                      )}
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className={
-                        !isValid || !dirty
-                          ? "account-change-password-btn-grey"
-                          : ""
-                      }
-                    >
-                      {loading ? (
-                        <Loader style={{ width: "18px", height: "18px" }} />
-                      ) : todo.type === "EDIT" ? (
-                        "Edit Address"
-                      ) : (
-                        "Add Address"
-                      )}
-                    </button>
-                  </form>
-                );
-              }}
-            </Formik>
-          </div>
+          <AddressFormContainer
+            loading={loading}
+            goBack={goBack}
+            todo={todo}
+            handleAddress={handleAddress}
+          />
         )}
       </div>
     </FocusWrapper>
+  );
+}
+
+function AddressFormContainer({ loading, goBack, todo, handleAddress }) {
+  const submitBtnRef = useRef(null);
+
+  useEffect(() => {
+    if (submitBtnRef.current && todo.type === "EDIT")
+      submitBtnRef.current.classList.remove("account-change-password-btn-grey");
+  }, [todo.type]);
+
+  return (
+    <div className="account-address-content account-address-wrapper">
+      <button
+        disabled={loading}
+        onClick={goBack}
+        className="account-address-go-back"
+      >
+        Back
+      </button>
+      <div className="address-sub-heading">
+        <HiOutlinePlusSm />
+        <span>{todo.type === "EDIT" ? "Edit address" : "Add new address"}</span>
+      </div>
+      <Formik
+        initialValues={{ ...todo.values }}
+        onSubmit={handleAddress}
+        validationSchema={validateAddress}
+      >
+        {({
+          handleSubmit,
+          handleChange,
+          errors,
+          setFieldTouched,
+          touched,
+          isValid,
+          dirty,
+          values,
+        }) => {
+          return (
+            <form
+              onSubmit={handleSubmit}
+              className="account-change-password-content-form"
+            >
+              <div>
+                <label name="houseNo">House No/Street:</label>
+                <input
+                  name="houseNo"
+                  onChange={handleChange("houseNo")}
+                  disabled={loading}
+                  maxLength={10}
+                  type="text"
+                  value={values.houseNo}
+                  onBlur={() => setFieldTouched("houseNo")}
+                />
+                {errors.houseNo && touched.houseNo && (
+                  <span className="account-change-password-input-error">
+                    {errors.houseNo}
+                  </span>
+                )}
+              </div>
+              <div>
+                <label name="town">Town:</label>
+                <input
+                  name="town"
+                  onChange={handleChange("town")}
+                  disabled={loading}
+                  maxLength={20}
+                  type="text"
+                  value={values.town}
+                  onBlur={() => setFieldTouched("town")}
+                />
+                {errors.town && touched.town && (
+                  <span className="account-change-password-input-error">
+                    {errors.town}
+                  </span>
+                )}
+              </div>
+              <div>
+                <label name="city">City:</label>
+                <input
+                  name="city"
+                  onChange={handleChange("city")}
+                  disabled={loading}
+                  maxLength={20}
+                  type="text"
+                  value={values.city}
+                  onBlur={() => setFieldTouched("city")}
+                />
+                {errors.city && touched.city && (
+                  <span className="account-change-password-input-error">
+                    {errors.city}
+                  </span>
+                )}
+              </div>
+              <div>
+                <label name="state">State:</label>
+                <input
+                  name="state"
+                  onChange={handleChange("state")}
+                  disabled={loading}
+                  maxLength={20}
+                  type="text"
+                  value={values.state}
+                  onBlur={() => setFieldTouched("state")}
+                />
+                {errors.state && touched.state && (
+                  <span className="account-change-password-input-error">
+                    {errors.state}
+                  </span>
+                )}
+              </div>
+              <div>
+                <label name="pincode">Pincode:</label>
+                <input
+                  name="pincode"
+                  onChange={handleChange("pincode")}
+                  disabled={loading}
+                  maxLength={10}
+                  type="text"
+                  value={values.pincode}
+                  onBlur={() => setFieldTouched("pincode")}
+                />
+                {errors.pincode && touched.pincode && (
+                  <span className="account-change-password-input-error">
+                    {errors.pincode}
+                  </span>
+                )}
+              </div>
+              <button
+                ref={submitBtnRef}
+                type="submit"
+                disabled={loading}
+                className={
+                  !isValid || !dirty ? "account-change-password-btn-grey" : ""
+                }
+              >
+                {loading ? (
+                  <Loader style={{ width: "18px", height: "18px" }} />
+                ) : todo.type === "EDIT" ? (
+                  "Edit Address"
+                ) : (
+                  "Add Address"
+                )}
+              </button>
+            </form>
+          );
+        }}
+      </Formik>
+    </div>
   );
 }
 
