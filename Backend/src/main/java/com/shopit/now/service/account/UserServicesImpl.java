@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -543,10 +545,13 @@ public class UserServicesImpl implements UserServices {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null)
             throw new UserNotFound("User Not Found");
-        ArrayList<Notification> notifications = new ArrayList<>();
         for (Orders o : orders) {
-            o.setOrderDate(orderDate());
-            o.setDeliveryDate(deliveryDate());
+            Instant orderDate = Instant.now();
+            Instant deliveryDate = orderDate.plus(4, ChronoUnit.DAYS);
+
+            o.setOrderDate(orderDate.toString());
+            o.setDeliveryDate(deliveryDate.toString());
+
             OrderStatus orderStatus = new OrderStatus(false, false, false, false);
             o.setOrderStatus(orderStatus);
             Products product = productRepository.findById(o.getItemDetails().getProductId()).orElse(null);
@@ -564,35 +569,14 @@ public class UserServicesImpl implements UserServices {
             OrderImage orderImage = new OrderImage(thumbnail.getName(), thumbnail.getType(), thumbnail.getPicByte());
             o.setOrderImage(orderImage);
             o.setUser(user);
-            notifications.add(new Notification(o.getId(), o.getItemDetails().getProductName(), false));
         }
         user.getOrders().addAll(orders);
         try {
             userRepository.save(user);
-            notificationRepository.saveAll(notifications);
             return new ResponseEntity<>("Successfully added", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Unknown Error occured", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    private Date orderDate() throws ParseException {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        String orderDate = dateFormat.format(cal.getTime());
-        Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(orderDate);
-        return date;
-    }
-
-    private Date deliveryDate() throws ParseException {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        int days = ((int) (Math.random() * (7 - 4))) + 4;
-        c.add(Calendar.DATE, days);
-        String deliveryDate = dateFormat.format(c.getTime());
-        Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(deliveryDate);
-        return date;
     }
 
     @Override

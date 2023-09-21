@@ -17,8 +17,8 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private int id;
-    private Date orderDate;
-    private Date deliveryDate;
+    private String orderDate;
+    private String deliveryDate;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     @MapsId

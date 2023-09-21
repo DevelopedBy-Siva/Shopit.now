@@ -61,6 +61,7 @@ class Orders extends Component {
         },
       })
       .then(({ data }) => {
+        console.log(data);
         this.setState({ orders: data, loading: false });
       })
       .catch(() => {
@@ -156,7 +157,7 @@ class Orders extends Component {
       trackVisibleIndex,
     } = this.state;
     return (
-      <div className="orders-container">
+      <div className="orders-container contain">
         <div className="order-container-head">
           <h2>Order Details</h2>
         </div>
