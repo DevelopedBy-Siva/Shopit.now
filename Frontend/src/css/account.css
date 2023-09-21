@@ -223,6 +223,142 @@
   margin-top: 4px;
 }
 
+.account-user-address {
+  padding: 30px 0 10px 0;
+  min-height: 120px;
+}
+
+.account-user-address p {
+  padding: 10px 0 !important;
+  margin: 0 !important;
+  text-align: center;
+  font-size: 12px !important;
+}
+
+.account-add-address h4 {
+  padding: 10px 0 !important;
+  margin: 0 !important;
+  font-size: 14px !important;
+  display: flex;
+  align-items: center;
+}
+
+.account-add-address h4 svg {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.address-sub-heading {
+  display: flex;
+  align-items: center;
+}
+
+.address-sub-heading svg {
+  margin-right: 6px;
+  font-size: 15px;
+}
+
+.address-sub-heading span {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.account-saved-address-content {
+  margin-bottom: 20px;
+}
+
+.account-add-address form,
+.account-saved-address-content {
+  padding: 20px;
+}
+
+.address-box {
+  padding: 25px 15px 45px 15px !important;
+  border: 1px solid #d3d3d3;
+  width: 300px;
+  border-radius: 8px;
+  text-transform: capitalize;
+  position: relative;
+  background: none;
+}
+
+.address-box span {
+  pointer-events: none;
+  font-weight: 400;
+  font-size: 14px !important;
+  display: block;
+  line-height: 1.4;
+}
+
+.address-box-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.address-btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  bottom: 8px;
+}
+
+.address-btn-container button {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.address-btn-container span {
+  margin: 0 6px;
+}
+
+.address-btn-container button:hover:enabled {
+  text-decoration: underline;
+}
+
+.add-new-address-button-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-new-address-button-container button {
+  display: block;
+  border: none;
+  background: none;
+  font-size: 15px !important;
+}
+
+.add-new-address-button-container svg {
+  font-size: 15px;
+  margin-right: 6px;
+}
+
+.account-address-go-back {
+  background: none;
+  border: none;
+  display: block;
+  margin: 15px 0 15px auto;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.account-address-go-back:hover:enabled {
+  text-decoration: underline;
+}
+
+.account-address-wrapper button:disabled {
+  color: #212529;
+  cursor: wait;
+}
+
+.account-address-inactive {
+  color: #d3d3d3 !important;
+}
+
 @media (max-width: 980px) {
   .user-account-container h1 {
     font-size: 20px;
@@ -275,5 +411,45 @@
 
   .account-change-password-content-form .account-change-password-input-error {
     font-size: 11px;
+  }
+
+  .account-user-address p {
+    font-size: 11px !important;
+  }
+
+  .account-add-address h4 {
+    font-size: 14px !important;
+  }
+
+  .account-add-address h4 svg,
+  .add-new-address-button-container svg {
+    font-size: 16px;
+  }
+  .account-add-address form,
+  .account-saved-address-content {
+    padding: 20px;
+  }
+  .address-box span {
+    font-size: 13px !important;
+  }
+  .address-box {
+    max-width: 260px;
+  }
+  .address-btn-container button {
+    font-size: 12px;
+  }
+
+  .address-sub-heading svg,
+  .add-new-address-button-container svg {
+    font-size: 14px;
+    margin-right: 6px;
+  }
+
+  .address-sub-heading span,
+  .add-new-address-button-container button {
+    font-size: 14px !important;
+  }
+  .account-address-go-back {
+    font-size: 12px;
   }
 }
