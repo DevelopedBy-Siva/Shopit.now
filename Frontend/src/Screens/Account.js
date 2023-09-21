@@ -452,6 +452,28 @@ function AddAddress({ toggle, loading, setLoading }) {
     btnRemoveInactive(e);
   };
 
+  const handleRemove = async (e, addressId) => {
+    const user = getCurrentUser();
+    setLoading(true);
+    btnInactive(e);
+    await axios
+      .delete(
+        `${URL(api_endpoints.userOperations)}/delete-address/${
+          user.id
+        }/${addressId}`,
+        { headers: { Authorization: getJwt() } }
+      )
+      .then(() => {
+        const data = [...api.data].filter((item) => item.id !== addressId);
+        setApi({ ...api, data });
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      });
+    setLoading(false);
+    btnRemoveInactive(e);
+  };
+
   return (
     <FocusWrapper toggle={toggle}>
       <div className="account-add-address">
@@ -496,7 +518,12 @@ function AddAddress({ toggle, loading, setLoading }) {
                           </button>
 
                           <span>|</span>
-                          <button disabled={loading}>Remove</button>
+                          <button
+                            onClick={(e) => handleRemove(e, item.id)}
+                            disabled={loading}
+                          >
+                            Remove
+                          </button>
                           {!item.defaultAddress && (
                             <>
                               <span>|</span>
