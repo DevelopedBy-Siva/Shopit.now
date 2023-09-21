@@ -181,12 +181,14 @@ function ProductReviewContainer({
                 </div>
               ))}
           </div>
-          <div className="show-more-reviews">
-            <span />
-            <span onClick={() => setShow(!show)}>
-              {!show ? "Show more" : "Hide"}
-            </span>
-          </div>
+          {allReviews.length > 3 && (
+            <div className="show-more-reviews">
+              <span />
+              <span onClick={() => setShow(!show)}>
+                {!show ? "Show more" : "Hide"}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </>
