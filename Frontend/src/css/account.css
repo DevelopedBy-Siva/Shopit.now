@@ -416,32 +416,33 @@
 .account-order-box-btn-container button {
   border-radius: 5px;
   font-size: 13px;
-  width: 90px;
-  height: 25px;
+  width: 100px;
   border: 1px solid #d3d3d3;
   background: none;
+  padding: 4px;
 }
 
 .account-order-box-btn-container button:hover {
   border: 1px solid #212529;
 }
 
+.account-order-box-top {
+  display: flex;
+  align-items: center;
+  padding: 4px 0 8px 0 !important;
+  gap: 6px;
+}
+
 .account-order-box-top p {
   font-size: 12px !important;
-  padding: 4px 0 8px 0 !important;
   margin: 0 !important;
   font-weight: 400 !important;
 }
 
-.account-order-box-top p::before {
-  content: "";
-  display: inline-block;
+.account-order-box-top span {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--bg-color, #ffc000);
-  margin-right: 8px;
-  transform: translateY(-2px);
 }
 
 .account-order-box-desc p {
@@ -457,6 +458,76 @@
 
 .account-order-box-active {
   border: 1px solid #212529 !important;
+}
+
+.account-order-toggle-container-wrapper {
+  padding: 20px 10px;
+}
+
+.account-order-toggle-container h5 {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.account-order-track-details-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 400px;
+  margin: 30px auto 20px auto;
+  position: relative;
+}
+
+.account-order-track-details-content div {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #d3d3d3;
+  background-color: white;
+  position: relative;
+  z-index: 3;
+}
+
+.account-order-track-details-content div .name {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  user-select: none;
+}
+
+.account-order-track-details-content .fill-in {
+  border-color: #4cbb17;
+  border-width: 2px;
+}
+
+.account-order-track-details-content .track-line {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: #d3d3d3;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+.account-order-track-details-content .track-line-fill {
+  position: absolute;
+  top: 50%;
+  width: calc(25% + 25px);
+  height: 1px;
+  background-color: #4cbb17;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.account-order-track-details-content .order-dispatched {
+  width: calc(50% + 50px);
+}
+
+.account-order-track-details-content .order-shipped {
+  width: calc(75% + 75px);
 }
 
 @media (max-width: 980px) {
@@ -563,6 +634,10 @@
   .account-order-box-desc span {
     font-size: 11px;
   }
+
+  .account-order-toggle-container h5 {
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -593,5 +668,47 @@
 
   .account-order-box-desc span {
     font-size: 11px;
+  }
+  .account-order-track-details-content {
+    flex-direction: column;
+    margin-left: 30%;
+    margin-right: auto;
+    width: fit-content;
+    gap: 25px;
+    height: 300px;
+    overflow: unset;
+  }
+  .account-order-track-details-content .track-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    width: 1px;
+    height: 100%;
+  }
+
+  .account-order-track-details-content .track-line-fill {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    width: 1px;
+    height: calc(25% + 30px);
+  }
+
+  .account-order-track-details-content .order-dispatched {
+    height: calc(50% + 40px);
+  }
+
+  .account-order-track-details-content .order-shipped {
+    height: calc(75% + 50px);
+  }
+
+  .account-order-track-details-content .name {
+    bottom: 3px !important;
+    left: 63px !important;
+    font-size: 10px;
   }
 }

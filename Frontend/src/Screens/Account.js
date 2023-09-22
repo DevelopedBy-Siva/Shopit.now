@@ -238,7 +238,6 @@ const contentVariants = {
   open: { height: "auto", opacity: 1 },
   closed: { height: 0, opacity: 0 },
 };
-
 const exitTransition = { duration: 0.2 };
 
 function UserOrderBox({ item }) {
@@ -263,10 +262,7 @@ function UserOrderBox({ item }) {
   } = item;
   const { type, picByte } = orderImage;
   const { productName, totalPrice, itemCount } = itemDetails;
-  const { dispatched, shipped } = orderStatus;
-
-  let delivered = false;
-  let cancelled = false;
+  const { dispatched, shipped, delivered, cancelled } = orderStatus;
 
   const status = (
     cancelled
@@ -284,17 +280,38 @@ function UserOrderBox({ item }) {
   const deliveryDay = moment(deliveryDate).format("dddd");
   const estimatedDelivery = moment(deliveryDate).format("LL");
 
+  const orderStatusKeys = [
+    {
+      print: "Processed",
+      fillIn: "#4cbb17",
+    },
+    {
+      print: !dispatched ? "Dispatching" : "Dispatched",
+      fillIn: dispatched && true,
+    },
+    {
+      print: !dispatched ? "" : !shipped ? "Shipping" : "Shipped",
+      fillIn: shipped && true,
+    },
+    {
+      print: !shipped ? "" : "Delivered",
+      fillIn: delivered && true,
+    },
+  ];
   return (
     <div className="account-order-box">
       <div className="account-order-box-top">
-        <p data-bg-color={status[1]}>{status[0]}</p>
+        <span style={{ backgroundColor: status[1] }}></span>
+        <p>{status[0]}</p>
       </div>
       <div className="account-order-box-btm">
         <div className="account-order-box-btm-wrapper">
           <img alt="order" src={imgUrl} />
           <div className="account-order-box-desc">
             <p>{productName}</p>
-            <span>Estimated delivery: {estimatedDelivery}</span>
+            {!delivered && !cancelled && (
+              <span>Estimated delivery: {estimatedDelivery}</span>
+            )}
           </div>
         </div>
         <div className="account-order-box-btn-container">
@@ -325,7 +342,7 @@ function UserOrderBox({ item }) {
       <AnimatePresence>
         {show === "DETAILS" && (
           <motion.div
-            className="account-order-details"
+            className="account-order-toggle-container"
             key="details"
             initial="closed"
             animate="open"
@@ -333,20 +350,15 @@ function UserOrderBox({ item }) {
             variants={contentVariants}
             transition={exitTransition}
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            <div className="account-order-toggle-container-wrapper">
+              <h5>Order Details</h5>
+              <div className="account-order-details-content"></div>
+            </div>
           </motion.div>
         )}
         {show === "TRACK" && (
           <motion.div
-            className="account-order-track-details"
+            className="account-order-toggle-container"
             key="track"
             initial="closed"
             animate="open"
@@ -354,21 +366,29 @@ function UserOrderBox({ item }) {
             variants={contentVariants}
             transition={exitTransition}
           >
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as opposed to using 'Content here, content
-            here', making it look like readable English. Many desktop publishing
-            packages and web page editors now use Lorem Ipsum as their default
-            model text, and a search for 'lorem ipsum' will uncover many web
-            sites still in their infancy. Various versions have evolved over the
-            years, sometimes by accident, sometimes on purpose (injected humour
-            and the like).
+            <div className="account-order-toggle-container-wrapper">
+              <h5>Tracking details</h5>
+              <div className="account-order-track-details-content">
+                {orderStatusKeys.map((item, index) => {
+                  return (
+                    <div className={item.fillIn ? "fill-in" : ""} key={index}>
+                      <span className="name">{item.print}</span>
+                    </div>
+                  );
+                })}
+                <span className="track-line" />
+                <span
+                  className={`track-line-fill ${
+                    dispatched && "order-dispatched"
+                  } ${shipped && "order-shipped"}`}
+                />
+              </div>
+            </div>
           </motion.div>
         )}
         {show === "CANCEL" && (
           <motion.div
-            className="account-order-cancel"
+            className="account-order-toggle-container"
             key="cancel"
             initial="closed"
             animate="open"
@@ -376,13 +396,10 @@ function UserOrderBox({ item }) {
             variants={contentVariants}
             transition={exitTransition}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            <div className="account-order-toggle-container-wrapper">
+              <h5>Cancel Order</h5>
+              <div className="account-order-cancel-content"></div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
