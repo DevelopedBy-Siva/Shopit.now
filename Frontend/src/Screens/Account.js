@@ -3,10 +3,10 @@ import { FaTruck } from "react-icons/fa";
 import { MdRemoveCircle, MdLocationOn, MdKey, MdClose } from "react-icons/md";
 import { HiOutlinePlusSm, HiOutlineMinusSm } from "react-icons/hi";
 import ReactFocusLock from "react-focus-lock";
-import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import axios from "axios";
+import moment from "moment";
 import { passwordPattern } from "../datas/passwordPattern";
 import {
   getCurrentUser,
@@ -25,7 +25,7 @@ const operations = [
     title: "Orders",
     desc: "View your order status and history",
     ico: <FaTruck />,
-    redirect: true,
+    comp: OrderDetails,
   },
   {
     title: "Your Address",
@@ -118,10 +118,7 @@ export default function Account() {
 function ButtonWrapper({ item, loading, setLoading }) {
   const [visible, setVisible] = useState(false);
 
-  const history = useHistory();
-
   function toggle() {
-    if (item.redirect) return history.push("/account/orders");
     if (!loading) return setVisible(!visible);
   }
 
@@ -154,6 +151,123 @@ function FocusWrapper({ loading, toggle, children }) {
         <div className="account-modal-content">{children}</div>
       </div>
     </ReactFocusLock>
+  );
+}
+
+function OrderDetails({ toggle, loading, setLoading }) {
+  const [api, setApi] = useState({
+    loading: true,
+    data: [],
+    error: null,
+  });
+
+  useEffect(() => {
+    async function getApi() {
+      const user = getCurrentUser();
+
+      await axios
+        .get(`${URL(api_endpoints.userOrders)}/${user.id}`, {
+          headers: {
+            Authorization: getJwt(),
+          },
+        })
+        .then(({ data }) => {
+          setApi({ loading: false, error: null, data });
+        })
+        .catch(() => {
+          setApi({ loading: false, error: "error", data: [] });
+        });
+    }
+    getApi();
+  }, []);
+
+  return (
+    <FocusWrapper loading={loading} toggle={toggle}>
+      <div className="account-order-container">
+        <ModalHeadingWrapper loading={loading} toggle={toggle}>
+          Orders
+        </ModalHeadingWrapper>
+        <div className="account-order-container-content">
+          {api.loading ? (
+            <p className="account-order-api-msg">
+              Fetching your recent orders. Please wait...
+            </p>
+          ) : api.error ? (
+            <p className="account-order-api-msg">
+              Something went wrong. Failed to get your orders
+            </p>
+          ) : api.data.length === 0 ? (
+            <p className="account-order-api-msg">No orders found</p>
+          ) : (
+            <div className="account-order-box-container">
+              {api.data.map((item, index) => (
+                <UserOrderBox key={index} item={item} />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </FocusWrapper>
+  );
+}
+
+function UserOrderBox({ item }) {
+  const {
+    billingAddress,
+    deliveryDate,
+    orderImage,
+    itemDetails,
+    modeOfPayment,
+    orderDate,
+    orderStatus,
+  } = item;
+  const { type, picByte } = orderImage;
+  const { productName, totalPrice, itemCount } = itemDetails;
+  const { dispatched, shipped } = orderStatus;
+
+  let delivered = false;
+  let cancelled = false;
+
+  const status = (
+    cancelled
+      ? "Cancelled:#FF0000"
+      : delivered
+      ? "Delivered:#4CBB17"
+      : shipped
+      ? "Shipped:#3498db"
+      : dispatched
+      ? "Dispatched:#3498db"
+      : "Waiting for dispatch:#ffc000"
+  ).split(":");
+
+  const imgUrl = `data:${type};base64,${picByte}`;
+  const deliveryDay = moment(deliveryDate).format("dddd");
+  const estimatedDelivery = moment(deliveryDate).format("LL");
+
+  return (
+    <div className="account-order-box">
+      <div className="account-order-box-top">
+        <p data-bg-color={status[1]}>{status[0]}</p>
+      </div>
+      <div className="account-order-box-btm">
+        <div className="account-order-box-btm-wrapper">
+          <img alt="order" src={imgUrl} />
+          <div className="account-order-box-desc">
+            <p>{productName}</p>
+            <span>Estimated delivery: {estimatedDelivery}</span>
+          </div>
+        </div>
+        <div className="account-order-box-btn-container">
+          {!delivered && !cancelled && (
+            <>
+              <button>Track Order</button>
+              <button>Cancel Order</button>
+            </>
+          )}
+          <button>Order Details</button>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -360,6 +360,96 @@
   color: #d3d3d3 !important;
 }
 
+.account-order-container-content {
+  padding: 10px 0;
+}
+
+.account-order-api-msg {
+  margin-top: 20px !important;
+  text-align: center;
+  font-size: 13px !important;
+}
+
+.account-order-box {
+  border: 1px solid #d3d3d3;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.account-order-box:last-child {
+  margin: 0;
+}
+
+.account-order-box-btm {
+  display: flex;
+}
+
+.account-order-box-btm img {
+  width: 100px;
+  object-fit: contain;
+}
+
+.account-order-box-btm-wrapper {
+  display: flex;
+}
+
+.account-order-box-desc {
+  padding: 8px 4px;
+}
+
+.account-order-box-btm p {
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  text-transform: capitalize;
+  margin: 0 !important;
+}
+
+.account-order-box-btn-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  gap: 6px;
+}
+
+.account-order-box-btn-container button {
+  border-radius: 5px;
+  font-size: 13px;
+  width: 90px;
+  height: 25px;
+  border: 1px solid #d3d3d3;
+  background: none;
+}
+
+.account-order-box-top p {
+  font-size: 12px !important;
+  padding: 4px 0 8px 0 !important;
+  margin: 0 !important;
+  font-weight: 400 !important;
+}
+
+.account-order-box-top p::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--bg-color, #ffc000);
+  margin-right: 8px;
+  transform: translateY(-2px);
+}
+
+.account-order-box-desc p {
+  font-size: 14px !important;
+  line-height: 22px;
+}
+
+.account-order-box-desc span {
+  font-size: 12px;
+  font-weight: 400;
+  color: gray;
+}
+
 @media (max-width: 980px) {
   .user-account-container h1 {
     font-size: 20px;
@@ -453,10 +543,46 @@
   .account-address-go-back {
     font-size: 12px;
   }
+
+  .account-order-box-desc p {
+    font-size: 13px !important;
+  }
+  .account-order-box-btn-container button {
+    font-size: 12px;
+    width: 86px;
+  }
+  .account-order-box-desc span {
+    font-size: 11px;
+  }
 }
 
 @media (max-width: 680px) {
   .address-box-container {
     justify-content: center;
+  }
+
+  .account-order-box-btm img {
+    width: 80px;
+  }
+
+  .account-order-box-btm {
+    flex-direction: column;
+  }
+
+  .account-order-box-btn-container {
+    margin: 20px auto;
+    width: 90%;
+  }
+
+  .account-order-box-btn-container button {
+    width: 100%;
+  }
+
+  .account-order-box-desc p {
+    font-size: 12px !important;
+  }
+
+  .account-order-box-desc span {
+    font-size: 11px;
   }
 }
