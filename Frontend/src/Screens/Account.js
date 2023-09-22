@@ -224,7 +224,13 @@ function OrderDetails({ toggle, loading, setLoading }) {
           ) : (
             <div className="account-order-box-container">
               {api.data.map((item, index) => (
-                <UserOrderBox key={index} item={item} />
+                <UserOrderBox
+                  key={index}
+                  item={item}
+                  setApi={setApi}
+                  api={api}
+                  setLoading={setLoading}
+                />
               ))}
             </div>
           )}
@@ -240,8 +246,9 @@ const contentVariants = {
 };
 const exitTransition = { duration: 0.2 };
 
-function UserOrderBox({ item }) {
+function UserOrderBox({ item, api, setApi, setLoading }) {
   const [show, setShow] = useState(null);
+  const [cancelProduct, setCancelProduct] = useState(null);
 
   function handleShow(task) {
     if (show === task) {
@@ -249,6 +256,38 @@ function UserOrderBox({ item }) {
       return;
     }
     setShow(task);
+  }
+
+  async function handleProductCancellation(cancelId) {
+    const user = getCurrentUser();
+    setCancelProduct(true);
+    setLoading(true);
+    await axios
+      .put(
+        `${URL(api_endpoints.userOrders)}/cancel/${user.id}/${cancelId}`,
+        null,
+        {
+          headers: {
+            Authorization: getJwt(),
+          },
+        }
+      )
+      .then(() => {
+        setShow(null);
+        const data = [...api.data];
+        data.forEach((item) => {
+          if (item.id === cancelId) {
+            item.orderStatus.cancelled = true;
+          }
+        });
+        setApi({ ...api, data });
+        toast.info("Order cancelled successfully");
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      });
+    setLoading(false);
+    setCancelProduct(false);
   }
 
   const {
@@ -318,13 +357,19 @@ function UserOrderBox({ item }) {
           {!delivered && !cancelled && (
             <>
               <button
+                disabled={cancelProduct}
                 className={show === "TRACK" ? "account-order-box-active" : ""}
                 onClick={() => handleShow("TRACK")}
               >
                 Track Order
               </button>
               <button
-                className={show === "CANCEL" ? "account-order-box-active" : ""}
+                disabled={cancelProduct}
+                className={
+                  (!cancelProduct && show) === "CANCEL"
+                    ? "account-order-box-active"
+                    : ""
+                }
                 onClick={() => handleShow("CANCEL")}
               >
                 Cancel Order
@@ -334,6 +379,7 @@ function UserOrderBox({ item }) {
           <button
             className={show === "DETAILS" ? "account-order-box-active" : ""}
             onClick={() => handleShow("DETAILS")}
+            disabled={cancelProduct}
           >
             Order Details
           </button>
@@ -398,7 +444,44 @@ function UserOrderBox({ item }) {
           >
             <div className="account-order-toggle-container-wrapper">
               <h5>Cancel Order</h5>
-              <div className="account-order-cancel-content"></div>
+              <div className="account-order-cancel-content">
+                <div className="account-order-cancel-input">
+                  <div>
+                    <label for="reason">
+                      Select a reason for cancellation :
+                    </label>
+                    <select disabled={cancelProduct} name="reason" id="reason">
+                      <option value="mistake" selected>
+                        Order created by mistake
+                      </option>
+                      <option value="high">Item price too high</option>
+                      <option value="thrid-party">
+                        Item sold by thrid party
+                      </option>
+                      <option value="time">
+                        Item would not arrive on time
+                      </option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label>Write a reason (optional):</label>
+                    <textarea disabled={cancelProduct} maxLength={255} />
+                  </div>
+                </div>
+                <div className="account-order-cancel-btn">
+                  <button
+                    disabled={cancelProduct}
+                    onClick={() => handleProductCancellation(item.id)}
+                  >
+                    {cancelProduct ? (
+                      <Loader style={{ width: "18px", height: "18px" }} />
+                    ) : (
+                      "Confirm cancellation"
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

@@ -18,9 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -333,7 +331,7 @@ public class UserServicesImpl implements UserServices {
         boolean found = oldCart.stream().anyMatch(i -> i.getProductId() == cartDetails.getProductId());
         int totalItems = 1;
         if (found) {
-            for(int index = 0; index < oldCart.size(); index++) {
+            for (int index = 0; index < oldCart.size(); index++) {
                 if (oldCart.get(index).getProductId() == cartDetails.getProductId()) {
                     totalItems = oldCart.get(index).getItemCount() + cartDetails.getItemCount();
                     oldCart.get(index).setItemCount(totalItems);
@@ -346,13 +344,13 @@ public class UserServicesImpl implements UserServices {
         }
 
         Products products = productRepository.findById(cartDetails.getProductId()).orElse(null);
-        if(products == null || products.getInStock() < totalItems)
+        if (products == null || products.getInStock() < totalItems)
             return new ResponseEntity<>("OUT_OF_STOCK", HttpStatus.NOT_ACCEPTABLE);
 
         try {
             user.setCart(oldCart);
             userRepository.save(user);
-            if(products.getInStock() < (totalItems + 1))
+            if (products.getInStock() < (totalItems + 1))
                 return new ResponseEntity<>("OUT_OF_STOCK", HttpStatus.NO_CONTENT);
 
             return new ResponseEntity<>("Successfully added", HttpStatus.OK);
@@ -537,7 +535,11 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public List<Orders> orders(int userId) throws UserNotFound {
-        return ordersRepository.getALlOrders(userId);
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null)
+            throw new UserNotFound("User Not Found");
+        List<Orders> orders = ordersRepository.getALlOrders(userId);
+        return orders;
     }
 
     @Override
