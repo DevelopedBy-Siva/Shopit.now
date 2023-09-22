@@ -3,6 +3,7 @@ import { FaTruck } from "react-icons/fa";
 import { MdRemoveCircle, MdLocationOn, MdKey, MdClose } from "react-icons/md";
 import { HiOutlinePlusSm, HiOutlineMinusSm } from "react-icons/hi";
 import ReactFocusLock from "react-focus-lock";
+import { useLocation } from "react-router-dom";
 import * as Yup from "yup";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import { Formik } from "formik";
@@ -27,6 +28,7 @@ const operations = [
     desc: "View your order status and history",
     ico: <FaTruck />,
     comp: OrderDetails,
+    redirect: true,
   },
   {
     title: "Your Address",
@@ -118,6 +120,14 @@ export default function Account() {
 
 function ButtonWrapper({ item, loading, setLoading }) {
   const [visible, setVisible] = useState(false);
+
+  const location = useLocation();
+  useEffect(() => {
+    if (!item.redirect) return;
+
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get("order")) setVisible(true);
+  }, []);
 
   function toggle() {
     if (!loading) return setVisible(!visible);
@@ -249,6 +259,11 @@ const exitTransition = { duration: 0.2 };
 function UserOrderBox({ item, api, setApi, setLoading }) {
   const [show, setShow] = useState(null);
   const [cancelProduct, setCancelProduct] = useState(null);
+  const [selectedReason, setSelectedReason] = useState("mistake");
+
+  function handleReasonChange(e) {
+    setSelectedReason(e.target.value);
+  }
 
   function handleShow(task) {
     if (show === task) {
@@ -447,13 +462,15 @@ function UserOrderBox({ item, api, setApi, setLoading }) {
               <div className="account-order-cancel-content">
                 <div className="account-order-cancel-input">
                   <div>
-                    <label for="reason">
-                      Select a reason for cancellation :
-                    </label>
-                    <select disabled={cancelProduct} name="reason" id="reason">
-                      <option value="mistake" selected>
-                        Order created by mistake
-                      </option>
+                    <label>Select a reason for cancellation :</label>
+                    <select
+                      onChange={handleReasonChange}
+                      value={selectedReason}
+                      disabled={cancelProduct}
+                      name="reason"
+                      id="reason"
+                    >
+                      <option value="mistake">Order created by mistake</option>
                       <option value="high">Item price too high</option>
                       <option value="thrid-party">
                         Item sold by thrid party
