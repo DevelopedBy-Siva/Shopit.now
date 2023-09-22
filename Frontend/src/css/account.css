@@ -411,6 +411,7 @@
   flex-direction: column;
   margin-left: auto;
   gap: 6px;
+  padding: 8px 0;
 }
 
 .account-order-box-btn-container button {
