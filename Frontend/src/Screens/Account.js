@@ -4,6 +4,7 @@ import { MdRemoveCircle, MdLocationOn, MdKey, MdClose } from "react-icons/md";
 import { HiOutlinePlusSm, HiOutlineMinusSm } from "react-icons/hi";
 import ReactFocusLock from "react-focus-lock";
 import * as Yup from "yup";
+import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import { Formik } from "formik";
 import axios from "axios";
 import moment from "moment";
@@ -131,26 +132,48 @@ function ButtonWrapper({ item, loading, setLoading }) {
           <p>{item.desc}</p>
         </div>
       </div>
-      {visible && (
-        <item.comp toggle={toggle} loading={loading} setLoading={setLoading} />
-      )}
+      <AnimatePresence>
+        {visible && (
+          <item.comp
+            toggle={toggle}
+            loading={loading}
+            setLoading={setLoading}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
 
+const modalContentVariants = {
+  open: { opacity: 1 },
+  closed: { opacity: 0 },
+};
+
+const modalExitTransition = { duration: 0.2 };
+
 function FocusWrapper({ loading, toggle, children }) {
   return (
-    <ReactFocusLock>
-      <div className="account-screen-modal">
-        <button
-          className={`account-screen-modal-overlay ${
-            loading && "account-screen-modal-disable"
-          }`}
-          onClick={toggle}
-        ></button>
-        <div className="account-modal-content">{children}</div>
-      </div>
-    </ReactFocusLock>
+    <div style={{ position: "fixed", zIndex: 99999999 }}>
+      <ReactFocusLock>
+        <motion.div
+          initial="closed"
+          animate="open"
+          exit="closed"
+          variants={modalContentVariants}
+          transition={modalExitTransition}
+          className="account-screen-modal"
+        >
+          <motion.button
+            className={`account-screen-modal-overlay ${
+              loading && "account-screen-modal-disable"
+            }`}
+            onClick={toggle}
+          ></motion.button>
+          <div className="account-modal-content">{children}</div>
+        </motion.div>
+      </ReactFocusLock>
+    </div>
   );
 }
 
@@ -211,7 +234,24 @@ function OrderDetails({ toggle, loading, setLoading }) {
   );
 }
 
+const contentVariants = {
+  open: { height: "auto", opacity: 1 },
+  closed: { height: 0, opacity: 0 },
+};
+
+const exitTransition = { duration: 0.2 };
+
 function UserOrderBox({ item }) {
+  const [show, setShow] = useState(null);
+
+  function handleShow(task) {
+    if (show === task) {
+      setShow(null);
+      return;
+    }
+    setShow(task);
+  }
+
   const {
     billingAddress,
     deliveryDate,
@@ -260,13 +300,92 @@ function UserOrderBox({ item }) {
         <div className="account-order-box-btn-container">
           {!delivered && !cancelled && (
             <>
-              <button>Track Order</button>
-              <button>Cancel Order</button>
+              <button
+                className={show === "TRACK" ? "account-order-box-active" : ""}
+                onClick={() => handleShow("TRACK")}
+              >
+                Track Order
+              </button>
+              <button
+                className={show === "CANCEL" ? "account-order-box-active" : ""}
+                onClick={() => handleShow("CANCEL")}
+              >
+                Cancel Order
+              </button>
             </>
           )}
-          <button>Order Details</button>
+          <button
+            className={show === "DETAILS" ? "account-order-box-active" : ""}
+            onClick={() => handleShow("DETAILS")}
+          >
+            Order Details
+          </button>
         </div>
       </div>
+      <AnimatePresence>
+        {show === "DETAILS" && (
+          <motion.div
+            className="account-order-details"
+            key="details"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={contentVariants}
+            transition={exitTransition}
+          >
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
+          </motion.div>
+        )}
+        {show === "TRACK" && (
+          <motion.div
+            className="account-order-track-details"
+            key="track"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={contentVariants}
+            transition={exitTransition}
+          >
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsum is that it has a more-or-less normal
+            distribution of letters, as opposed to using 'Content here, content
+            here', making it look like readable English. Many desktop publishing
+            packages and web page editors now use Lorem Ipsum as their default
+            model text, and a search for 'lorem ipsum' will uncover many web
+            sites still in their infancy. Various versions have evolved over the
+            years, sometimes by accident, sometimes on purpose (injected humour
+            and the like).
+          </motion.div>
+        )}
+        {show === "CANCEL" && (
+          <motion.div
+            className="account-order-cancel"
+            key="cancel"
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={contentVariants}
+            transition={exitTransition}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

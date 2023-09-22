@@ -375,6 +375,7 @@
   padding: 10px;
   border-radius: 10px;
   margin: 20px 0;
+  overflow: hidden;
 }
 
 .account-order-box:last-child {
@@ -421,6 +422,10 @@
   background: none;
 }
 
+.account-order-box-btn-container button:hover {
+  border: 1px solid #212529;
+}
+
 .account-order-box-top p {
   font-size: 12px !important;
   padding: 4px 0 8px 0 !important;
@@ -448,6 +453,10 @@
   font-size: 12px;
   font-weight: 400;
   color: gray;
+}
+
+.account-order-box-active {
+  border: 1px solid #212529 !important;
 }
 
 @media (max-width: 980px) {
