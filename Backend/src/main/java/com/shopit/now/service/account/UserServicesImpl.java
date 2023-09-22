@@ -539,7 +539,14 @@ public class UserServicesImpl implements UserServices {
         if (user == null)
             throw new UserNotFound("User Not Found");
         List<Orders> orders = ordersRepository.getALlOrders(userId);
-        return orders;
+        List<Orders> group_1 = orders.stream().filter(item -> !item.getOrderStatus().isCancelled())
+                .collect(Collectors.toList());
+        List<Orders> group_2 = orders.stream().filter(item -> item.getOrderStatus().isCancelled())
+                .collect(Collectors.toList());
+
+        List<Orders> combinedGroup = new ArrayList<>(group_1);
+        combinedGroup.addAll(group_2);
+        return combinedGroup;
     }
 
     @Override

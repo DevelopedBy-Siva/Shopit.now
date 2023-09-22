@@ -374,7 +374,7 @@
   border: 1px solid #d3d3d3;
   padding: 10px;
   border-radius: 10px;
-  margin: 20px 0;
+  margin: 20px 0 !important;
   overflow: hidden;
 }
 
