@@ -127,7 +127,7 @@ function ButtonWrapper({ item, loading, setLoading }) {
 
     const searchParams = new URLSearchParams(location.search);
     if (searchParams.get("order")) setVisible(true);
-  }, []);
+  }, [item.redirect, location]);
 
   function toggle() {
     if (!loading) return setVisible(!visible);
@@ -331,8 +331,8 @@ function UserOrderBox({ item, api, setApi, setLoading }) {
   ).split(":");
 
   const imgUrl = `data:${type};base64,${picByte}`;
-  const deliveryDay = moment(deliveryDate).format("dddd");
   const estimatedDelivery = moment(deliveryDate).format("LL");
+  const orderedOn = moment(orderDate).format("LL");
 
   const orderStatusKeys = [
     {
@@ -352,6 +352,8 @@ function UserOrderBox({ item, api, setApi, setLoading }) {
       fillIn: delivered && true,
     },
   ];
+
+  const paymentMethod = modeOfPayment === "COD" ? "Cash on delivery" : "Card";
   return (
     <div className="account-order-box">
       <div className="account-order-box-top">
@@ -413,7 +415,69 @@ function UserOrderBox({ item, api, setApi, setLoading }) {
           >
             <div className="account-order-toggle-container-wrapper">
               <h5>Order Details</h5>
-              <div className="account-order-details-content"></div>
+              <div className="account-order-details-content-ordered-on">
+                <p>
+                  <span>Ordered on:</span> {orderedOn}
+                </p>
+              </div>
+              <div className="account-order-details-content">
+                <div className="account-order-address">
+                  <h6>Shipping Address</h6>
+                  <p>{billingAddress.address}</p>
+                </div>
+                <div>
+                  <h6>Payment Method</h6>
+                  <p>{paymentMethod}</p>
+                </div>
+                <div>
+                  <h6>Order Summary</h6>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>Item(s):</td>
+                        <td>{itemCount}</td>
+                      </tr>
+                      <tr>
+                        <td>Item(s) Subtotal</td>
+                        <td className="summary-currency-sm">
+                          <span>$</span>
+                          <span>{totalPrice}.00</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Shipping:</td>
+                        <td className="summary-currency-sm">
+                          <span>$</span>
+                          <span>5.00</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Promotion Applied:</td>
+                        <td className="summary-currency-sm">
+                          <span>-$</span>
+                          <span>5.00</span>
+                        </td>
+                      </tr>
+                      <tr className="summary-total">
+                        <td>Grand Total:</td>
+                        <td className="summary-currency-sm">
+                          <span>$</span>
+                          <span>{totalPrice}.00</span>
+                        </td>
+                      </tr>
+                      {cancelled && (
+                        <tr className="summary-refund">
+                          <td>Refund Total:</td>
+                          <td className="summary-currency-sm">
+                            <span>$</span>
+                            <span>{totalPrice}.00</span>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

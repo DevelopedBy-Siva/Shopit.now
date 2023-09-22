@@ -18,7 +18,7 @@ class OrderPlacedMsg extends Component {
   }
 
   handleForwardToOrder = () => {
-    this.props.history.push("/account/orders?order=_");
+    this.props.history.push("/account?order=_");
   };
 
   handleForwardToShoping = () => {

@@ -592,6 +592,67 @@
   cursor: wait;
 }
 
+.account-order-details-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.account-order-details-content table {
+  border-collapse: collapse;
+}
+
+.account-order-details-content h6 {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.account-order-details-content td {
+  font-weight: 300;
+  font-size: 12px;
+  padding: 4px 0px;
+}
+
+.account-order-details-content tr td:first-child {
+  padding-right: 20px;
+}
+
+.account-order-details-content .summary-total td,
+.account-order-details-content .summary-refund td {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.account-order-details-content .summary-refund td {
+  color: #008000;
+}
+
+.account-order-details-content-ordered-on {
+  padding: 10px 0 4px 0;
+}
+
+.account-order-details-content-ordered-on span {
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.summary-currency-sm {
+  display: flex;
+  align-items: center;
+}
+
+.summary-currency-sm span:first-of-type {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 1px;
+  font-size: 10px;
+}
+
+.account-order-address {
+  max-width: 150px;
+}
+
 @media (max-width: 980px) {
   .user-account-container h1 {
     font-size: 20px;
@@ -785,5 +846,19 @@
     bottom: 3px !important;
     left: 63px !important;
     font-size: 10px;
+  }
+
+  .account-order-details-content p {
+    font-size: 11px !important;
+  }
+
+  .account-order-details-content td {
+    font-size: 11px;
+  }
+  .account-order-details-content .summary-total {
+    font-size: 12px;
+  }
+  .account-order-details-content {
+    justify-content: baseline;
   }
 }
