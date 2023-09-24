@@ -14,10 +14,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
 import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -46,9 +44,6 @@ public class UserServicesImpl implements UserServices {
     private OrdersRepository ordersRepository;
 
     @Autowired
-    private NotificationRepository notificationRepository;
-
-    @Autowired
     private WishListRepository wishListRepository;
 
     @Override
@@ -61,8 +56,7 @@ public class UserServicesImpl implements UserServices {
         List<User> all = userRepository.getAllUsers();
         List<UserView> view = new ArrayList<>();
         for (User user : all) {
-            String fullname = userRepository.getusername(user.getId());
-            view.add(new UserView(user.getId(), fullname, user.getEmail(), user.getUserProfileImage()));
+            view.add(new UserView(user.getId(), user.getFullname(), user.getEmail()));
         }
         return view;
     }
@@ -248,40 +242,6 @@ public class UserServicesImpl implements UserServices {
         } catch (Exception e) {
             return new ResponseEntity<>("Unknown Error occured", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @Override
-    public ResponseEntity<String> addProfileImage(int id, MultipartFile file) throws UserNotFound, IOException {
-        User user = userRepository.findById(id).orElse(null);
-        if (user == null)
-            throw new UserNotFound("User not found");
-        UserProfileImage present = user.getUserProfileImage();
-        if (present == null) {
-            UserProfileImage userProfileImage = new UserProfileImage(file.getOriginalFilename(), file.getContentType(),
-                    file.getBytes());
-            user.setUserProfileImage(userProfileImage);
-            userProfileImage.setUser(user);
-        } else {
-            present.setName(file.getOriginalFilename());
-            present.setType(file.getContentType());
-            present.setPicByte(file.getBytes());
-            user.setUserProfileImage(present);
-        }
-        try {
-            userRepository.save(user);
-            return new ResponseEntity<>("Profile pic added", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Unknown Error occured", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public UserProfileImage getProfileImage(int id) throws UserNotFound {
-        User user = userRepository.findById(id).orElse(null);
-        if (user == null)
-            throw new UserNotFound("User not found");
-
-        return user.getUserProfileImage();
     }
 
     @Override
@@ -683,26 +643,6 @@ public class UserServicesImpl implements UserServices {
             return new ResponseEntity<>("Shipped Success", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Shipping Failed", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public List<Notification> getNotification() {
-        return notificationRepository.getAllNotification();
-    }
-
-    @Override
-    public ResponseEntity<String> seenNotification() {
-        List<Notification> notifications = notificationRepository.findAll();
-        for (Notification n : notifications) {
-            if (n.isSeen() == false)
-                n.setSeen(true);
-        }
-        try {
-            notificationRepository.saveAll(notifications);
-            return new ResponseEntity<>("Successfully Seen", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Unknown Error occured", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

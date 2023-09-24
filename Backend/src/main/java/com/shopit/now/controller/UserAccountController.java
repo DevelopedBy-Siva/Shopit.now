@@ -86,17 +86,6 @@ public class UserAccountController {
         return accountServices.deleteAddress(uid, aid);
     }
 
-    @PostMapping("/user/profile-image/{id}")
-    ResponseEntity<String> handleProfileImageUpdate(@PathVariable int id,
-                                                    @RequestParam("file") MultipartFile multipartFile) throws UserNotFound, IOException {
-        return accountServices.addProfileImage(id, multipartFile);
-    }
-
-    @GetMapping("/user/profile-image/{id}")
-    UserProfileImage handleGetProfileImage(@PathVariable int id) throws UserNotFound, IOException {
-        return accountServices.getProfileImage(id);
-    }
-
     @GetMapping("/user/orders/{id}")
     List<Orders> getProducts(@PathVariable int id) throws UserNotFound {
         return accountServices.orders(id);
@@ -195,16 +184,6 @@ public class UserAccountController {
     @PutMapping("/user/orders/ship/{id}")
     ResponseEntity<String> shipOrder(@PathVariable int id) {
         return accountServices.shipOrder(id);
-    }
-
-    @GetMapping("/user/orders/notification")
-    List<Notification> getNotifications() {
-        return accountServices.getNotification();
-    }
-
-    @PutMapping("/user/orders/notification/seen")
-    ResponseEntity<String> setNotificationSeen() {
-        return accountServices.seenNotification();
     }
 
     @GetMapping("/user/wishlist/{userId}")

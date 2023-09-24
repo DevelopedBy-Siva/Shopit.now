@@ -32,10 +32,6 @@ public interface UserServices {
 
     ResponseEntity<String> deleteAddress(int userId, int aId) throws UserNotFound;
 
-    ResponseEntity<String> addProfileImage(int id, MultipartFile multipartFile) throws UserNotFound, IOException;
-
-    UserProfileImage getProfileImage(int id) throws UserNotFound;
-
     List<Address> userAddresses(int id);
 
     List<UserView> allUsers();
@@ -90,10 +86,6 @@ public interface UserServices {
     ResponseEntity<String> approveOrder(int id);
 
     ResponseEntity<String> shipOrder(int id);
-
-    List<Notification> getNotification();
-
-    ResponseEntity<String> seenNotification();
 
     boolean checkStock(int id, int cartStock) throws ProductNotFound;
 

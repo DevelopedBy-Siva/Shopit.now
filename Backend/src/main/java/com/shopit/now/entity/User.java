@@ -22,9 +22,6 @@ public class User extends Register {
     @Column(name = "user_roles")
     private String userRoles;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-    private UserProfileImage userProfileImage;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private List<Address> address;
