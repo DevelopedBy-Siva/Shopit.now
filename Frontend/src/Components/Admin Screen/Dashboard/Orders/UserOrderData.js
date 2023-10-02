@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { FaCircle } from "react-icons/fa";
 
 class UserOrderData extends Component {
   getOrderDate = (d) => {
@@ -48,7 +47,7 @@ class UserOrderData extends Component {
     const { modeOfPayment: mode } = modeOfPayment;
     return (
       <>
-        <td>{id}</td>
+        <td>SHP_{id}</td>
         <td>{productName}</td>
         <td>{itemCount}</td>
         <td>
@@ -58,33 +57,39 @@ class UserOrderData extends Component {
         <td>{this.getOrderDate(deliveryDate)}</td>
         <td>{mode}</td>
         <td>
-          {!dispatched ? (
-            <span style={this.pendingStyle}>Pending</span>
-          ) : shipped ? (
-            <span style={this.shippedStyle}>Shipped</span>
-          ) : (
-            <span style={this.dispatchedStyle}>Dispatched</span>
-          )}
+          <div className="admin-current-order-status">
+            {!dispatched ? (
+              <span style={this.pendingStyle}>Pending</span>
+            ) : shipped ? (
+              <span style={this.shippedStyle}>Shipped</span>
+            ) : (
+              <span style={this.dispatchedStyle}>Dispatched</span>
+            )}
+          </div>
         </td>
         <td>
-          {!dispatched ? (
-            <span
-              className={`${adminSubmit ? "disable-admin-btn" : ""}`}
-              onClick={() => approveOrder(id)}
-              style={this.approveStyle}
-            >
-              Approve
-            </span>
-          ) : !shipped ? (
-            <span
-              className={`${adminSubmit ? "disable-admin-btn" : ""}`}
-              onClick={() => shipOrder(id)}
-              style={this.shipStyle}
-            >
-              Ship
-            </span>
+          {shipped ? (
+            ""
           ) : (
-            <FaCircle />
+            <button
+              disabled={adminSubmit}
+              className="admin-current-order-status-btn"
+            >
+              {!dispatched ? (
+                <span
+                  onClick={() => approveOrder(id)}
+                  style={this.approveStyle}
+                >
+                  Approve
+                </span>
+              ) : !shipped ? (
+                <span onClick={() => shipOrder(id)} style={this.shipStyle}>
+                  Ship
+                </span>
+              ) : (
+                ""
+              )}
+            </button>
           )}
         </td>
       </>

@@ -6,6 +6,7 @@
 .admin-full-container {
   position: relative;
   height: 100%;
+  width: 100%;
 }
 .admin-component-heading {
   position: absolute;
@@ -18,6 +19,8 @@
   display: flex;
   flex-direction: column;
   padding: 15px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .role-admin-container .role-admin-l-cont {
@@ -40,6 +43,7 @@
   flex: 1 1;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .role-admin-nav {
   width: 100%;
@@ -143,19 +147,17 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  width: 200px;
+  width: 100%;
+  max-width: 320px;
   margin: 10px;
   box-shadow: 0 0 4px rgb(209, 209, 209);
-  padding: 25px 10px;
+  padding: 25px 20px;
   border-radius: 5px;
   pointer-events: none;
   position: relative;
   background: white;
 }
-.admin-container .admin-control-div:last-child {
-  width: 300px;
-  max-width: 300px !important;
-}
+
 .admin-container .admin-control-div div {
   display: flex;
   align-items: baseline;
@@ -252,6 +254,7 @@
   margin-right: 4px;
   font-size: 16px;
   transition: all 0.2s 0.2s ease-in-out;
+  flex-shrink: 0;
 }
 .role-admin-container
   .role-admin-l-cont
@@ -304,6 +307,7 @@
   margin-right: 4px;
   font-size: 16px;
   transition: all 0.2s 0.2s ease-in-out;
+  flex-shrink: 0;
 }
 .dashboardToggle-left,
 .dashboardToggle-right {
@@ -854,7 +858,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin: 30px 0;
+  gap: 30px;
 }
 .data-empty-animation-container h2,
 .network-error-animation-container h2 {
@@ -951,64 +956,10 @@
   border: 1px solid #343434;
   border-radius: 4px;
 }
-@media (max-width: 780px) {
-  .admin-logout-now-container .logout-btns h5 {
-    font-size: 15px;
+@media (max-width: 920px) {
+  .admin-user-controls {
+    flex-direction: column;
   }
-  .admin-logout-now-container .logout-btns button {
-    font-size: 14px;
-  }
-  .admin-container .admin-control-div {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    width: 200px;
-    margin: 10px;
-    box-shadow: 0 0 4px rgb(209, 209, 209);
-    padding: 25px 10px;
-    border-radius: 5px;
-    pointer-events: none;
-    background: white;
-  }
-  .admin-container .admin-control-div:last-child {
-    width: 250px;
-  }
-  .admin-container .admin-control-div div svg {
-    font-size: 14px;
-  }
-  .admin-container .admin-control-div div h2 {
-    font-size: 12px;
-  }
-  .admin-container .admin-control-div h1 {
-    font-size: 18px;
-  }
-  .notification-container
-    .notifications-display
-    div
-    .notification-user-details {
-    margin: -10px;
-    flex: 0.85;
-  }
-  .notification-container .notifications-display {
-    width: 210px;
-    height: 180px;
-  }
-  .notification-container .notifications-display .notification-display-sub {
-    height: 32px;
-  }
-  .notification-container .notifications-display .notification-user-img {
-    width: 24px;
-    height: 24px;
-    flex: 0.15;
-  }
-
-  .notification-container .notifications-display div h2 {
-    font-size: 10px;
-  }
-  .notification-container .notifications-display div h5 {
-    font-size: 8px;
-  }
-
   .l-cont-cover-disp {
     opacity: 1 !important;
     pointer-events: all !important;
