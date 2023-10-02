@@ -255,7 +255,7 @@ class NewOrders extends Component {
             <table>
               <tbody>
                 <tr>
-                  <th>O.No.</th>
+                  <th>O.Id</th>
                   <th>Product</th>
                   <th>Qty</th>
                   <th>Amount</th>

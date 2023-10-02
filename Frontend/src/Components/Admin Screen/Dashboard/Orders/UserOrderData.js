@@ -1,11 +1,9 @@
 import React, { Component } from "react";
+import moment from "moment";
 
 class UserOrderData extends Component {
   getOrderDate = (d) => {
-    const date = new Date(d);
-    const preview =
-      date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
-    return preview;
+    return moment(d).format("LL");
   };
 
   pendingStyle = {
@@ -50,9 +48,7 @@ class UserOrderData extends Component {
         <td>SHP_{id}</td>
         <td>{productName}</td>
         <td>{itemCount}</td>
-        <td>
-          <span>$</span> {totalPrice}
-        </td>
+        <td className="admin-orders-payment-amount">{totalPrice}</td>
         <td>{this.getOrderDate(orderDate)}</td>
         <td>{this.getOrderDate(deliveryDate)}</td>
         <td>{mode}</td>

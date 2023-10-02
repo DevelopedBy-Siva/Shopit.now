@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import user from "../../../../Images/user.png";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaUser } from "react-icons/fa";
 import DataLoad from "../../Errors/DataLoad";
 import NetworkError from "../../Errors/NetworkError";
 import EmptyMsg from "../../Errors/EmptyMsg";
@@ -60,14 +59,7 @@ class Users extends Component {
                 {filtered.map((i, index) => (
                   <div className="users-each-container-datas" key={index}>
                     <div className="admin-user-image">
-                      <img
-                        src={
-                          i.userProfileImage
-                            ? this.getImage(i.userProfileImage)
-                            : user
-                        }
-                        alt={`user${index}`}
-                      />
+                      <FaUser />
                     </div>
                     <div className="admin-user-details">
                       <h5>{i.name.toLowerCase()}</h5>

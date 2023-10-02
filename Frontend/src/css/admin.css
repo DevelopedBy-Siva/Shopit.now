@@ -142,6 +142,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 .admin-container .admin-control-div {
   display: flex;
@@ -149,7 +150,6 @@
   justify-content: space-between;
   width: 100%;
   max-width: 320px;
-  margin: 10px;
   box-shadow: 0 0 4px rgb(209, 209, 209);
   padding: 25px 20px;
   border-radius: 5px;
@@ -163,19 +163,19 @@
   align-items: baseline;
 }
 .admin-container .admin-control-div div svg {
-  font-size: 16px;
+  font-size: 13px;
   color: #a5a5a5;
 }
 .admin-container .admin-control-div div h2 {
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
   padding-left: 5px;
   color: #a5a5a5;
 }
 .admin-container .admin-control-div h1 {
-  font-size: 26px;
+  font-size: 30px;
   margin: 0;
-  font-weight: bolder;
+  font-weight: 500;
   color: #343434;
 }
 .admin-container .admin-control-div .no-of1 {
@@ -338,6 +338,12 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+.no-of4-money {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 13px !important;
+}
+
 .notification-container .no-notification {
   color: #cecece;
   text-align: center;
@@ -865,7 +871,8 @@
 .network-error-animation-container h2 {
   text-align: center;
   color: #a5a5a5;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 400;
   pointer-events: none;
 }
 .data-empty-animation,

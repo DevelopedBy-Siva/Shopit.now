@@ -87,11 +87,11 @@
   background-color: rgb(169, 169, 169);
 }
 .new-orders-container h1 {
-  font-size: 20px;
-  font-weight: bolder;
+  font-size: 22px;
   color: #343434;
   padding: 10px;
   margin: 0;
+  font-weight: 500;
 }
 .new-orders-admin-container-datas {
   overflow: auto;
@@ -108,8 +108,8 @@
 }
 .new-orders-admin-container-datas th {
   width: 10%;
-  font-size: 12px;
-  font-weight: lighter;
+  font-size: 13px;
+  font-weight: 500;
   text-align: left;
   border-collapse: collapse;
   height: 60px;
@@ -122,12 +122,12 @@
   white-space: nowrap;
 }
 .new-orders-admin-container-datas td {
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 400;
   height: 40px;
   padding-left: 10px;
+  min-width: 80px;
   text-transform: capitalize;
-  font-weight: bold;
-
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -218,6 +218,8 @@
   text-align: center;
   padding: 3px;
   border-radius: 5px;
+  font-size: 11px;
+  font-weight: 500 !important;
 }
 
 .admin-current-order-status-btn {
@@ -240,4 +242,16 @@
   width: 100%;
   display: block;
   border-radius: 5px;
+  font-size: 11px;
+  font-weight: 500 !important;
+}
+
+.admin-orders-payment-amount::before {
+  content: "$";
+  font-size: 11px;
+  padding-right: 1px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.admin-orders-payment-amount::after {
+  content: ".00";
 }

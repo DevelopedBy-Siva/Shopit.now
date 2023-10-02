@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { FaUser, FaShoppingCart, FaBox, FaExclamation } from "react-icons/fa";
+import {
+  FaUser,
+  FaShoppingBag,
+  FaBox,
+  FaExclamation,
+  FaCoins,
+} from "react-icons/fa";
 import Lottie from "lottie-react";
 import loading from "../../../animations/loading.json";
 
@@ -44,7 +50,7 @@ class AdminOperations extends Component {
         </div>
         <div className="admin-control-div">
           <div>
-            <FaShoppingCart className="shopping-icon" />
+            <FaShoppingBag className="shopping-icon" />
             <h2>Orders</h2>
           </div>
           {noOfOrdersLoading ? (
@@ -80,7 +86,7 @@ class AdminOperations extends Component {
         </div>
         <div className="admin-control-div">
           <div>
-            <FaBox className="amount-icon" />
+            <FaCoins />
             <h2>Total Revenue</h2>
           </div>
           {revenueLoading ? (
@@ -94,7 +100,8 @@ class AdminOperations extends Component {
             </h1>
           ) : (
             <h1 className="no-of4">
-              <span>$</span> {revenue}
+              <span className="no-of4-money">$</span>
+              {revenue}
               <span>.00</span>
             </h1>
           )}
