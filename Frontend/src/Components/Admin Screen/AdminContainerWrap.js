@@ -25,33 +25,35 @@ class AdminContainerWrap extends Component {
             <FaUser onClick={handleUserSettings} />
           </div>
         </div>
-        <Switch>
-          <AdminProtectedRoute
-            handleSelectedScreen={handleSelectedScreen}
-            path="/admin/add-product"
-            Component={AddProducts}
-          />
-          <AdminProtectedRoute
-            handleSelectedScreen={handleSelectedScreen}
-            path="/admin/products"
-            Component={AdminProducts}
-          />
-          <AdminProtectedRoute
-            handleSelectedScreen={handleSelectedScreen}
-            path="/admin/advertisement"
-            Component={AdminAdvertisement}
-          />
-          <AdminProtectedRoute
-            handleSelectedScreen={handleSelectedScreen}
-            path="/admin/settings"
-            Component={Settings}
-          />
-          <AdminProtectedRoute
-            handleSelectedScreen={handleSelectedScreen}
-            path="/admin"
-            Component={AdminContainer}
-          />
-        </Switch>
+        <div className="role-admin-right-contain">
+          <Switch>
+            <AdminProtectedRoute
+              handleSelectedScreen={handleSelectedScreen}
+              path="/admin/add-product"
+              Component={AddProducts}
+            />
+            <AdminProtectedRoute
+              handleSelectedScreen={handleSelectedScreen}
+              path="/admin/products"
+              Component={AdminProducts}
+            />
+            <AdminProtectedRoute
+              handleSelectedScreen={handleSelectedScreen}
+              path="/admin/advertisement"
+              Component={AdminAdvertisement}
+            />
+            <AdminProtectedRoute
+              handleSelectedScreen={handleSelectedScreen}
+              path="/admin/settings"
+              Component={Settings}
+            />
+            <AdminProtectedRoute
+              handleSelectedScreen={handleSelectedScreen}
+              path="/admin"
+              Component={AdminContainer}
+            />
+          </Switch>
+        </div>
       </div>
     );
   }
