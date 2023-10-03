@@ -2,9 +2,7 @@ import React from "react";
 import Lottie from "lottie-react";
 import loading from "../../../animations/loading.json";
 import serverError from "../../../animations/server-error.json";
-import ProductEditComponent from "./ProductEditComponent";
 import ProductDetailsContainer from "./ProductDetailsContainer";
-import ProductStockEdit from "./ProductStockEdit";
 import AdminProductsMainContainer from "./AdminProductsMainContainer";
 import { FaSearch } from "react-icons/fa";
 import "../../../css/adminProducts.css";
@@ -19,43 +17,14 @@ class AdminProducts extends AdminProductsMainContainer {
       end,
       pageSize,
       currentPage,
-      submitError,
       submitTrendingId,
       submitTrending,
-      updateSuccess,
-      submittingDetails,
       dataLoaded,
       products,
       unknownError,
-      details,
-      stock,
     } = this.state;
     return (
       <div className="admin-product-container">
-        <ProductEditComponent
-          submitError={submitError}
-          handleProductDetailsSubmit={this.handleProductDetailsSubmit}
-          coverRef={this.toggleEditCover}
-          detailsRef={this.togggleProductDetailsEdit}
-          handleProductEdit={this.handleProductEdit}
-          details={details}
-          submittingDetails={submittingDetails}
-          submittingUpdateDetails={this.submittingUpdateDetails}
-          updateSuccess={updateSuccess}
-          exitBtn={this.exitBtn}
-        />
-        <ProductStockEdit
-          submitError={submitError}
-          stockRef={this.toggleProductStockEdit}
-          handleStockEdit={this.handleStockEdit}
-          stock={stock}
-          handleProductStockSubmit={this.handleProductStockSubmit}
-          submittingDetails={submittingDetails}
-          submittingStockUpdate={this.submittingStockUpdate}
-          updateSuccess={updateSuccess}
-          exitBtn={this.exitStockBtn}
-        />
-
         <div className="admin-product-container-search">
           <input
             value={search}
