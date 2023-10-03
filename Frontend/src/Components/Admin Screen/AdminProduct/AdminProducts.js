@@ -62,30 +62,32 @@ class AdminProducts extends AdminProductsMainContainer {
           </div>
         ) : (
           <>
-            <table className="admin-product-details">
-              <tbody>
-                <tr>
-                  <th>Product</th>
-                  <th>Stock</th>
-                  <th>Trending</th>
-                </tr>
-                {products.map((item, index) => (
-                  <ProductDetailsContainer
-                    item={item}
-                    key={index}
-                    handleProductEdit={this.handleProductEdit}
-                    handleStockEdit={this.handleStockEdit}
-                    handleTrending={this.handleTrending}
-                    submitTrending={submitTrending}
-                    submitTrendingId={submitTrendingId}
-                    toggleTrend={this.toggleTrend}
-                    index={index}
-                    toggleEdit={this.toggleEditDetails}
-                    updateProductDetails={this.updateProductDetails}
-                  />
-                ))}
-              </tbody>
-            </table>
+            <div className="admin-product-details-tb-wrapper">
+              <table className="admin-product-details">
+                <tbody>
+                  <tr>
+                    <th>Product</th>
+                    <th>Stock</th>
+                    <th>Trending</th>
+                  </tr>
+                  {products.map((item, index) => (
+                    <ProductDetailsContainer
+                      item={item}
+                      key={index}
+                      handleProductEdit={this.handleProductEdit}
+                      handleStockEdit={this.handleStockEdit}
+                      handleTrending={this.handleTrending}
+                      submitTrending={submitTrending}
+                      submitTrendingId={submitTrendingId}
+                      toggleTrend={this.toggleTrend}
+                      index={index}
+                      toggleEdit={this.toggleEditDetails}
+                      updateProductDetails={this.updateProductDetails}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <div className="pages">
               {productCount > pageSize && (
                 <button

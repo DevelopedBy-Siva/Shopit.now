@@ -175,6 +175,7 @@ function EditDetailsContainer({ cancel, item, updateProductDetails }) {
                   <label>Name:</label>
                   <input
                     disabled={loading}
+                    maxLength={50}
                     value={values.title}
                     errors={errors.title}
                     onBlur={() => setFieldTouched("title")}
