@@ -25,7 +25,6 @@ class AdminProductsMainContainer extends Component {
 
   state = {
     products: [],
-    trendingLimitWarning: false,
     updateStock: false,
     dataLoaded: true,
     details: {
@@ -81,27 +80,30 @@ class AdminProductsMainContainer extends Component {
 
   handleTrending = (id) => {
     const updatedProduct = [...this.state.products];
-    updatedProduct.forEach((i) => {
+    updatedProduct.forEach(async (i) => {
       if (i.id === id) {
         if (i.trending) {
           i.trending = false;
-          this.submitTrending(false, id);
-          this.setState({ trendingLimitWarning: false });
+          await this.submitTrending(false, id);
         } else {
-          if (this.checkTrendingLimit()) {
-            i.trending = true;
-            this.submitTrending(true, id);
-          } else {
-            this.setState({ trendingLimitWarning: true });
-            setTimeout(
-              () => this.setState({ trendingLimitWarning: false }),
-              4000
-            );
-          }
+          i.trending = true;
+          await this.submitTrending(true, id);
         }
       }
     });
     this.setState({ products: updatedProduct });
+  };
+
+  updateProductDetails = (id, details) => {
+    let data = [...this.state.products];
+    data.forEach((item) => {
+      if (item.id === id) {
+        item.title = details.title;
+        item.inStock = details.stock;
+        item.price = details.price;
+      }
+    });
+    this.setState({ products: [...data] });
   };
 
   submitTrending = async (value, id) => {
@@ -123,18 +125,6 @@ class AdminProductsMainContainer extends Component {
         this.setState({ submitTrending: false, submitTrendingId: null });
       });
   };
-
-  checkTrendingLimit = () => {
-    const products = [...this.state.products];
-    let count = 0;
-    products.forEach((i) => {
-      if (i.trending) count++;
-    });
-    if (count === 10) return false;
-    return true;
-  };
-
-  removeTrendingWarning = () => this.setState({ trendingLimitWarning: false });
 
   handleProductEdit = (item) => {
     const newdetails = { ...this.state.details };

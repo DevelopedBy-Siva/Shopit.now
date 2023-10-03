@@ -54,6 +54,8 @@
   color: #343434;
   text-transform: capitalize;
   font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .trending-header {
   display: flex;

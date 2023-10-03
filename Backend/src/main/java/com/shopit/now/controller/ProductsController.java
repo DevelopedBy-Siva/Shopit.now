@@ -81,7 +81,7 @@ public class ProductsController {
 
     @PutMapping("/update/update-details/{id}")
     public ResponseEntity<?> handleProductDetailsUpdate(@PathVariable int id, @RequestBody AdminProductUpdate adminProductUpdate) {
-        return services.handleProductDetailsUpdate(id, adminProductUpdate.getTitle(), adminProductUpdate.getPrice());
+        return services.handleProductDetailsUpdate(id, adminProductUpdate.getTitle(), adminProductUpdate.getPrice(), adminProductUpdate.getStock());
     }
 
     @PutMapping("/update/update-stock/{id}")

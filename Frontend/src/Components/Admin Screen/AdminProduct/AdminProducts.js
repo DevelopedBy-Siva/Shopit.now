@@ -27,7 +27,6 @@ class AdminProducts extends AdminProductsMainContainer {
       dataLoaded,
       products,
       unknownError,
-      trendingLimitWarning,
       details,
       stock,
     } = this.state;
@@ -56,13 +55,7 @@ class AdminProducts extends AdminProductsMainContainer {
           updateSuccess={updateSuccess}
           exitBtn={this.exitStockBtn}
         />
-        <div
-          className={`trending-warning ${
-            trendingLimitWarning ? "trending-warning-display" : ""
-          }`}
-        >
-          Can have only 10 products trending
-        </div>
+
         <div className="admin-product-container-search">
           <input
             value={search}
@@ -75,7 +68,11 @@ class AdminProducts extends AdminProductsMainContainer {
         </div>
         {unknownError ? (
           <div className="unknown-error">
-            <Lottie animationData={serverError} className="server-error" />
+            <Lottie
+              animationData={serverError}
+              loop={false}
+              className="server-error"
+            />
             <h5>Internal server error occured. Please try after sometime...</h5>
           </div>
         ) : dataLoaded ? (
@@ -114,6 +111,8 @@ class AdminProducts extends AdminProductsMainContainer {
                     submitTrendingId={submitTrendingId}
                     toggleTrend={this.toggleTrend}
                     index={index}
+                    toggleEdit={this.toggleEditDetails}
+                    updateProductDetails={this.updateProductDetails}
                   />
                 ))}
               </tbody>
@@ -156,6 +155,7 @@ class AdminProducts extends AdminProductsMainContainer {
                 </button>
               )}
             </div>
+            <div className="empty-footer"></div>
           </>
         )}
       </div>

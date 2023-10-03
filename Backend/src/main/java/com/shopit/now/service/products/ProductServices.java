@@ -31,7 +31,7 @@ public interface ProductServices {
 
     AllProductDisplay getProductView(int page, int size);
 
-    ResponseEntity<?> handleProductDetailsUpdate(int id, String title, String price);
+    ResponseEntity<?> handleProductDetailsUpdate(int id, String title, String price, int stock);
 
     ResponseEntity<?> handleProductStockUpdate(int id, int stock);
 

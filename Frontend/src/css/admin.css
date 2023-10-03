@@ -991,3 +991,12 @@
     display: block !important;
   }
 }
+
+@media (max-width: 640px) {
+  .admin-container .admin-control-div div h2 {
+    font-size: 14px;
+  }
+  .admin-container .admin-control-div h1 {
+    font-size: 26px;
+  }
+}

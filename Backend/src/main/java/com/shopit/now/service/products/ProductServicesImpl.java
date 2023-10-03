@@ -187,11 +187,13 @@ public class ProductServicesImpl implements ProductServices {
 
     @Override
     @Transactional
-    public ResponseEntity<?> handleProductDetailsUpdate(int id, String title, String price) {
+    public ResponseEntity<?> handleProductDetailsUpdate(int id, String title, String price, int stock) {
         try {
-            productRepository.updateProductDetails(title, price, id);
+            double newPrice = Double.parseDouble(price);
+            productRepository.updateProductDetails(title, newPrice, stock, id);
             return new ResponseEntity<>("Updated Successfully",HttpStatus.OK);
         }catch (Exception e){
+            e.printStackTrace();
             return new ResponseEntity<>("Unknown error occured",HttpStatus.BAD_REQUEST);
         }
     }

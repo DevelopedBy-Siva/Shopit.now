@@ -27,8 +27,8 @@ public interface ProductRepository extends JpaRepository<Products, Integer> {
     int searchedProductLength(@Param("query") String query);
 
     @Modifying
-    @Query("update Products p set p.title=:newTitle, p.price=:newPrice  where p.id=:pid")
-    void updateProductDetails(@Param("newTitle") String newTitle, @Param("newPrice") String newPrice, @Param("pid") int id);
+    @Query("update Products p set p.title=:newTitle, p.price=:newPrice, p.inStock=:stock where p.id=:pid")
+    void updateProductDetails(@Param("newTitle") String newTitle, @Param("newPrice") Double newPrice, @Param("stock") int stock, @Param("pid") int id);
 
     @Modifying
     @Query("update Products p set p.inStock=:stock where p.id=:pid")
