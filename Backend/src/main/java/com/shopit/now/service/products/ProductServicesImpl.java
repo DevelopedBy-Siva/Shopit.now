@@ -254,8 +254,8 @@ public class ProductServicesImpl implements ProductServices {
             return new ResponseEntity<>("Ad already added",HttpStatus.BAD_REQUEST);
         }
         try {
-            advertisementRepository.save(advertisement);
-            return new ResponseEntity<>("Ad added successfully",HttpStatus.OK);
+            Advertisement response = advertisementRepository.save(advertisement);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>("Server error",HttpStatus.INTERNAL_SERVER_ERROR);
         }

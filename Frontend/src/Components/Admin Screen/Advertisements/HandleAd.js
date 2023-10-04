@@ -1,13 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Lottie from "lottie-react";
 import loadAnim from "../../../animations/smallLoad.json";
 import empty from "../../../animations/empty-box.json";
 import serverError from "../../../animations/server-error.json";
+import Loader from "../../Loader";
+import toast from "../../Toast";
+import { formUrl as URL, api_endpoints } from "../../../api/api";
+import { getJwt } from "../../../services/LoginReg";
+import axios from "axios";
 
 class HandleAd extends Component {
   render() {
-    const { deleteLoading, deleteIndex, removeAd, loading, error, data } =
-      this.props;
+    const { loading, error, data, handleAdData } = this.props;
     return (
       <div className="ad-handle-container">
         {loading ? (
@@ -26,23 +30,12 @@ class HandleAd extends Component {
           data.map((i, index) => {
             const imgUrl = `data:${i.type};base64,${i.picByte}`;
             return (
-              <div className="each-ad" key={index}>
-                {deleteLoading && index === deleteIndex && (
-                  <div className="each-ad-cover" />
-                )}
-                <div>
-                  <img src={imgUrl} alt="advertisement" />
-                  <h4>{i.productName}</h4>
-                </div>
-                <span>
-                  <button
-                    disabled={deleteLoading ? true : false}
-                    onClick={() => removeAd(i.productId, index)}
-                  >
-                    Remove
-                  </button>
-                </span>
-              </div>
+              <EachAd
+                imgUrl={imgUrl}
+                item={i}
+                key={index}
+                handleAdData={handleAdData}
+              />
             );
           })
         )}
@@ -52,3 +45,48 @@ class HandleAd extends Component {
 }
 
 export default HandleAd;
+
+function EachAd({ item, imgUrl, handleAdData }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleRemoveAd = async (productId) => {
+    setLoading(true);
+    await axios
+      .delete(`${URL(api_endpoints.productApi)}/mark/marks/${productId}`, {
+        headers: {
+          Authorization: getJwt(),
+        },
+      })
+      .then(() => {
+        handleAdData(productId);
+        toast.info("Advertisement removed");
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      });
+
+    setLoading(false);
+  };
+
+  return (
+    <div className="each-ad">
+      <div>
+        <img src={imgUrl} alt="advertisement" />
+        <h4>{item.productName}</h4>
+      </div>
+      <div className="each-ad-btn">
+        <button
+          disabled={loading}
+          style={loading ? { background: "red" } : {}}
+          onClick={() => handleRemoveAd(item.productId)}
+        >
+          {loading ? (
+            <Loader style={{ width: "18px", height: "18px" }} />
+          ) : (
+            "Remove"
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}

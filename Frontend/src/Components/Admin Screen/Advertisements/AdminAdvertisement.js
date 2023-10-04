@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { FaSearch, FaExclamation } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import Lottie from "lottie-react";
 import loadingIcon from "../../../animations/dataload.json";
-import countLoading from "../../../animations/loading.json";
 import { getJwt } from "../../../services/LoginReg";
 import {
   api_endpoints as API_ENDPOINT,
@@ -14,6 +13,9 @@ import ServerError from "../../../animations/server-error.json";
 import AdProducts from "./AdProducts";
 import "../../../css/adminAdvertisement.css";
 import HandleAd from "./HandleAd";
+import toast from "../../Toast";
+import ReactFocusLock from "react-focus-lock";
+import Loader from "../../Loader";
 
 class AdminAdvertisement extends Component {
   state = {
@@ -26,15 +28,10 @@ class AdminAdvertisement extends Component {
     searchStarted: false,
     searchError: false,
     adInitiate: false,
-    adId: null,
     image: null,
-    alreadyAdvertised: false,
     advertisementLoading: false,
     advertisementError: false,
     advertisements: [],
-    adCountLoading: false,
-    adCountError: false,
-    adCount: 0,
     productCount: 0,
     productCountLoading: false,
     productCountError: false,
@@ -47,7 +44,6 @@ class AdminAdvertisement extends Component {
     this.props.handleSelectedScreen("Advertisement");
     this.getData();
     this.getProductCount();
-    this.getAdCount();
   }
   getData = async () => {
     this.setState({ advertisementLoading: true, advertisementError: false });
@@ -65,22 +61,6 @@ class AdminAdvertisement extends Component {
           advertisementLoading: false,
           advertisementError: true,
         });
-      });
-  };
-
-  getAdCount = async () => {
-    this.setState({ adCountLoading: true, adCountError: false });
-    await axios
-      .get(`${URL(API_ENDPOINT.productApi)}/mark/marks-count`, {
-        headers: {
-          Authorization: getJwt(),
-        },
-      })
-      .then(({ data }) => {
-        this.setState({ adCountLoading: false, adCount: data });
-      })
-      .catch(() => {
-        this.setState({ adCountLoading: false, adCountError: true });
       });
   };
 
@@ -137,22 +117,27 @@ class AdminAdvertisement extends Component {
   };
 
   imageErrorCheck = (errorMsg) => {
-    this.setState({ errorMsg });
-    setTimeout(() => this.setState({ errorMsg: null }), 5000);
+    toast.info(errorMsg);
+  };
+
+  handleAdData = (adId) => {
+    const newAds = this.state.advertisements.filter(
+      (i) => i.productId !== adId
+    );
+    this.setState({ advertisements: [...newAds] });
   };
 
   handleSubmit = async () => {
-    const { image, adId } = this.state;
+    const { image, adInitiate, advertisements } = this.state;
     const uploadImageData = new FormData();
     uploadImageData.append("imageFile", image, image.name);
     this.setState({
       errorMsg: null,
       submitLoading: true,
-      alreadyAdvertised: false,
     });
     await axios
       .post(
-        `${URL(API_ENDPOINT.productApi)}/mark/et-ing/${adId}`,
+        `${URL(API_ENDPOINT.productApi)}/mark/et-ing/${adInitiate.productId}`,
         uploadImageData,
         {
           headers: {
@@ -161,16 +146,21 @@ class AdminAdvertisement extends Component {
           },
         }
       )
-      .then(() => {
-        this.removeAdInitiate();
-        this.getData();
-        this.getAdCount();
-        this.setState({ submitLoading: false });
+      .then(({ data }) => {
+        this.setState({
+          submitLoading: false,
+          advertisements: [...advertisements, data],
+          adInitiate: null,
+          image: null,
+          displayImage: null,
+        });
+        toast.success("Advertisement added");
       })
       .catch(({ response }) => {
         this.setState({ submitLoading: false });
-        if (response.status === 400) this.setState({ alreadyAdvertised: true });
-        else this.imageErrorCheck("Server error. Try again later");
+        if (response && response.status === 400)
+          toast.info("Product already advertised");
+        else toast.error("Something went wrong");
       });
   };
 
@@ -198,51 +188,8 @@ class AdminAdvertisement extends Component {
     }
   };
 
-  handleAdInitiate = (adId) => {
-    this.setState({ adInitiate: true, adId });
-  };
-
-  removeAdInitiate = () => {
-    this.setState({
-      adInitiate: false,
-      image: null,
-      adId: null,
-      alreadyAdvertised: false,
-    });
-    setTimeout(() => this.setState({ displayImage: null }), 300);
-  };
-  removeAd = async (id, index) => {
-    this.setState({
-      deleteIndex: index,
-      deleteLoading: true,
-      deleteError: false,
-    });
-    await axios
-      .delete(`${URL(API_ENDPOINT.productApi)}/mark/marks/${id}`, {
-        headers: {
-          Authorization: getJwt(),
-        },
-      })
-      .then(() => {
-        this.setState({
-          deleteLoading: false,
-          deleteIndex: null,
-          deleteError: null,
-        });
-        this.getAdCount();
-        this.getData();
-      })
-      .catch(({ request }) => {
-        if (request.status === 400) {
-          this.deleteErrorHandle("Ad already deleted");
-        } else this.deleteErrorHandle("Server error occured. Try again later");
-        this.setState({ deleteLoading: false, deleteIndex: null });
-      });
-  };
-
-  deleteErrorHandle = (errorMsg) => {
-    this.setState({ deleteError: errorMsg });
-    setTimeout(() => this.setState({ deleteError: null }), 4000);
+  handleAdInitiate = (val = null) => {
+    this.setState({ adInitiate: val, image: null, displayImage: null });
   };
 
   render() {
@@ -253,14 +200,9 @@ class AdminAdvertisement extends Component {
       productCount,
       productCountLoading,
       productCountError,
-      adCount,
-      adCountError,
-      adCountLoading,
       advertisementLoading,
       advertisementError,
       advertisements,
-      alreadyAdvertised,
-      errorMsg,
       displayImage,
       searchStarted,
       loading,
@@ -290,27 +232,20 @@ class AdminAdvertisement extends Component {
           data={advertisements}
           loading={advertisementLoading}
           error={advertisementError}
+          handleAdData={this.handleAdData}
         />
         <h1>Advertise Products</h1>
         <div className="ad-details">
           <h5>
             Products:
-            {productCountLoading ? (
-              <Lottie animationData={countLoading} className="count-loading" />
-            ) : productCountError ? (
-              <FaExclamation className="count-error" />
-            ) : (
+            {!productCountLoading && !productCountError && (
               <span>{productCount}</span>
             )}
           </h5>
           <h5>
-            Advertisement:
-            {adCountLoading ? (
-              <Lottie animationData={countLoading} className="count-loading" />
-            ) : adCountError ? (
-              <FaExclamation className="count-error" />
-            ) : (
-              <span>{adCount}</span>
+            Advertisements:
+            {!advertisementLoading && !advertisementError && (
+              <span>{advertisements.length}</span>
             )}
           </h5>
         </div>
@@ -332,15 +267,17 @@ class AdminAdvertisement extends Component {
         </div>
         <div className="ad-products-container">
           {loading ? (
-            <Lottie className="loading-icon" animationData={loadingIcon} />
+            <div className="ad-products-container-loading">
+              <Lottie className="loading-icon" animationData={loadingIcon} />
+            </div>
           ) : searchError ? (
             <div className="search-error-container">
-              <Lottie animationData={ServerError} />
+              <Lottie loop={false} animationData={ServerError} />
               <h5>Unknown error occured. Try again later...</h5>
             </div>
           ) : products.length < 1 ? (
             <div className="search-error-container">
-              <Lottie animationData={SearchEmpty} />
+              <Lottie loop={false} animationData={SearchEmpty} />
               {!searchStarted ? (
                 <h5>Search Products</h5>
               ) : (
@@ -349,14 +286,11 @@ class AdminAdvertisement extends Component {
             </div>
           ) : (
             <>
-              <h4>
-                Found: <span>{products.length}</span>
-              </h4>
-              <div className="ad-each-products-container">
+              <div className="ad-products-wrapper">
                 {products.map((i, index) => (
                   <div key={index}>
                     <AdProducts
-                      handleAdInitiate={this.handleAdInitiate}
+                      handleAdInitiate={() => this.handleAdInitiate(i)}
                       product={i}
                     />
                   </div>
@@ -365,59 +299,49 @@ class AdminAdvertisement extends Component {
             </>
           )}
 
-          <div
-            className={`place-ad-container ${
-              adInitiate ? "place-ad-container-display" : ""
-            }`}
-          >
-            {errorMsg && <h2>{errorMsg}</h2>}
-            {submitLoading && (
-              <div className="ad-submit-loading">
-                <Lottie
-                  className="ad-submit-loading-icon"
-                  animationData={loadingIcon}
-                />
-              </div>
-            )}
-            {alreadyAdvertised && (
-              <h3>
-                You have already advertised this product. Select a different
-                product.
-              </h3>
-            )}
-            <div className="ad-image-drop-container">
-              <div>
-                <label htmlFor="file-input">
-                  {!displayImage ? (
-                    <h5>Click to add image</h5>
-                  ) : (
-                    <img src={displayImage} alt="advertisement" />
+          {adInitiate && (
+            <div className="place-ad-container">
+              <ReactFocusLock>
+                <div className="ad-image-drop-container">
+                  <div>
+                    <label htmlFor="file-input">
+                      {!displayImage ? (
+                        <h5>Click to add image</h5>
+                      ) : (
+                        <img src={displayImage} alt="advertisement" />
+                      )}
+                    </label>
+                  </div>
+                  {adInitiate && (
+                    <input
+                      disabled={submitLoading}
+                      onChange={this.handleImageChange}
+                      id="file-input"
+                      type="file"
+                    />
                   )}
-                </label>
-              </div>
-              {adInitiate && (
-                <input
-                  onChange={this.handleImageChange}
-                  id="file-input"
-                  type="file"
-                />
-              )}
-              <div>
-                <button
-                  onClick={this.handleSubmit}
-                  disabled={image && !submitLoading ? false : true}
-                >
-                  Submit
-                </button>
-                <button
-                  disabled={submitLoading ? true : false}
-                  onClick={this.removeAdInitiate}
-                >
-                  Cancel
-                </button>
-              </div>
+                  <div>
+                    <button
+                      onClick={this.handleSubmit}
+                      disabled={image && !submitLoading ? false : true}
+                    >
+                      {submitLoading ? (
+                        <Loader style={{ width: "18px", height: "18px" }} />
+                      ) : (
+                        "Submit"
+                      )}
+                    </button>
+                    <button
+                      disabled={submitLoading}
+                      onClick={() => this.handleAdInitiate(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </ReactFocusLock>
             </div>
-          </div>
+          )}
         </div>
       </div>
     );
