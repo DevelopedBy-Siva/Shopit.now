@@ -102,14 +102,14 @@
 
 .users-container-datas::-webkit-scrollbar-track {
   border-radius: 10px;
-  background: rgb(245, 245, 245);
+  background: none;
 }
 
 .users-container-datas::-webkit-scrollbar-thumb {
-  background: #a5a5a5;
+  background: #e0e0e0;
   border-radius: 10px;
 }
 
 .users-container-datas::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #c7c7c7;
 }

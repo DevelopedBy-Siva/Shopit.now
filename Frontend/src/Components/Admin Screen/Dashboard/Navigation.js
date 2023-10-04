@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AdminDashboard from "./AdminDashboard";
-import { FaTimes } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 
 class Navigation extends Component {
   state = {
@@ -53,7 +53,7 @@ class Navigation extends Component {
             smallDashboard ? "l-cont-cover-disp" : ""
           }`}
         >
-          <FaTimes onClick={handleSmallDashboard} />
+          <IoMdClose onClick={handleSmallDashboard} />
         </div>
       </>
     );

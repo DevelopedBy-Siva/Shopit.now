@@ -40,7 +40,8 @@
 }
 
 .role-admin-right {
-  flex: 1 1;
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -149,7 +150,7 @@
   align-items: baseline;
   justify-content: space-between;
   width: 100%;
-  max-width: 320px;
+  max-width: 327px;
   box-shadow: 0 0 4px rgb(209, 209, 209);
   padding: 25px 20px;
   border-radius: 5px;
@@ -203,6 +204,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .role-admin-container .role-admin-l-cont .dashboard .nav-btn {
   display: flex;
@@ -963,7 +966,11 @@
   border: 1px solid #343434;
   border-radius: 4px;
 }
-@media (max-width: 920px) {
+.dashboard-each-option {
+  width: 170px !important;
+}
+
+@media (max-width: 980px) {
   .admin-user-controls {
     flex-direction: column;
   }
@@ -978,7 +985,8 @@
     display: none;
   }
   .display-dashboard {
-    width: 40% !important;
+    width: 170px;
+    max-width: 170px;
   }
   .dashboardToggle-left,
   .dashboardToggle-right {
