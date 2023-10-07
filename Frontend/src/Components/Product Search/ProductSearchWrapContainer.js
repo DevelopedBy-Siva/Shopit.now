@@ -199,6 +199,7 @@ export default class ProductSearchWrapContainer extends Component {
 
   handleRating = (rate, what) => {
     this.handleFilterToggle();
+    if (this.state.loading) return;
     this.ratingUpdation(rate, what);
   };
 
