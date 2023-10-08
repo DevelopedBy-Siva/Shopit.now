@@ -27,6 +27,7 @@
 .product-search-container .search-details-sub {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   flex: 1;
   min-width: 0;
 }
