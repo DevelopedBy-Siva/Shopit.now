@@ -103,7 +103,7 @@ function ProductFilterDetails({
   return (
     <motion.div className={`product-filter`} {...animationProps}>
       <div className={`product-filter-sub-container`}>
-        <div className="filter-head filter-contain">
+        <div className="filter-head">
           <FaSlidersH className="icon" />
           <h2>Filter</h2>
           <button

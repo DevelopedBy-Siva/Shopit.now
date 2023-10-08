@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Currency from "../Item Screen/Currency";
 
 class PriceRange extends Component {
   state = {};
@@ -8,10 +9,9 @@ class PriceRange extends Component {
     return (
       <div className="price-range filter-contain">
         <h5>Price</h5>
-        <h2>
-          <span>$ </span>
-          {priceRange}
-        </h2>
+        <div className="price-range-display">
+          <Currency curr={priceRange} />
+        </div>
         <div
           className={`price-range-input ${
             loading ? "price-range-input-wait" : ""
@@ -23,18 +23,18 @@ class PriceRange extends Component {
             onChange={(e) => handlePriceRange(e.target.value)}
             value={priceRange}
             type="range"
-            step="500"
-            min="500"
+            step="100"
+            min="0"
             max="10000"
           />
         </div>
         <div className="price-range-values">
-          <h4>
-            <span>$ </span>100
-          </h4>
-          <h4>
-            <span>$ </span>10000
-          </h4>
+          <div className="price-range-values-label">
+            <Currency curr={0} />
+          </div>
+          <div className="price-range-values-label">
+            <Currency curr={10000} />
+          </div>
         </div>
       </div>
     );
