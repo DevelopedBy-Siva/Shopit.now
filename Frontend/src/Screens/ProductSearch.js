@@ -77,6 +77,7 @@ class ProductSearch extends ProductSearchWrapContainer {
               decrementPage={this.decrementPage}
             />
           )}
+          <div className="search-page-footer" />
         </div>
       </div>
     );
