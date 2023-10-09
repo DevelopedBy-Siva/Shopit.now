@@ -43,7 +43,7 @@ class OrderPlacedMsg extends Component {
           >
             <div>
               <Lottie
-                loop={true}
+                loop={false}
                 className="forward-anim"
                 animationData={trackingAnim}
               />
@@ -56,7 +56,7 @@ class OrderPlacedMsg extends Component {
           >
             <div>
               <Lottie
-                loop={true}
+                loop={false}
                 className="forward-anim"
                 animationData={shopAnim}
               />

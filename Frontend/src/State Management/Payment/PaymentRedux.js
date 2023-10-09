@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as service from "../../services/LoginReg";
 import { api_endpoints as API_ENDPOINT, formUrl as URL } from "../../api/api";
+import toast from "../../Components/Toast";
 
 const initialState = {
   processStarted: false,
@@ -168,6 +169,7 @@ const submitDataToServer = (orders) => {
       })
       .catch(() => {
         dispatch(serverErrorOccured());
+        toast.error("Something went wrong. Cannot process order");
       });
   };
 };

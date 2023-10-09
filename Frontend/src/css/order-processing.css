@@ -4,19 +4,10 @@
 }
 .order-process-nav-sub1 {
   display: flex;
-  pointer-events: none;
   text-decoration: none !important;
   padding: 0 0 20px 0;
 }
-.order-process-nav-sub1 h1 {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 30px;
-  margin-top: 5px;
-  padding-right: 3px;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
+
 .order-process-nav-sub2 {
   display: flex;
   justify-content: space-between;
@@ -26,6 +17,7 @@
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  margin-top: 50px;
 }
 .order-process-nav-sub2 svg {
   font-size: 26px;
@@ -34,6 +26,15 @@
   color: rgb(218, 218, 218);
   transition: color 0.2s ease-in;
 }
+
+.order-process-nav-sub2 svg:first-of-type {
+  transform: translateX(-2px);
+}
+
+.order-process-nav-sub2 svg:last-of-type {
+  transform: translateX(4px);
+}
+
 .progress-color {
   color: red !important;
 }
@@ -85,6 +86,7 @@
 }
 .order-process-container p {
   text-align: center;
+  margin-top: 20px;
 }
 .order-process-container .continue-btn {
   padding: 5px;
@@ -95,8 +97,10 @@
   outline: none;
   border-radius: 5px;
   margin: 10px 0;
+  font-size: 14px;
 }
-.order-process-container .continue-btn:hover {
+
+.order-process-container .continue-btn:enabled:hover {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
 .order-delivery-container .order-delivery-sub-container {
@@ -105,6 +109,8 @@
   margin-right: auto;
   border: 1px solid rgb(206, 206, 206);
   border-radius: 5px;
+  height: 220px;
+  overflow-y: auto;
 }
 
 .order-process-btn-container {
@@ -114,6 +120,10 @@
 }
 .order-process-btn-container button {
   width: 80px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 3px;
   outline: none;
   border: none;
@@ -125,8 +135,9 @@
   box-sizing: border-box;
 }
 .order-process-btn-container button:first-child {
-  border: 1px solid black;
+  border: 1px solid #d3d3d3;
   background-color: white;
+  margin-right: 4px;
 }
 .order-process-btn-container button:last-child {
   background-color: red;
@@ -134,7 +145,9 @@
 }
 .disable-continue-btn {
   background-color: rgb(182, 182, 182) !important;
-  pointer-events: none !important;
+  cursor: not-allowed;
+  border: 1px solid rgb(182, 182, 182) !important;
+  color: #dadada !important;
 }
 .payment-mode {
   padding: 10px;
@@ -145,22 +158,24 @@
   padding: 2px;
   cursor: pointer;
 }
-.payment-mode label {
-}
+
 .payment-mode .card-payment {
   padding: 10px;
 }
 .payment-mode .card-payment img {
-  width: 200px;
+  max-width: 200px;
   height: 30px;
   padding: 0 15px;
   margin-bottom: 5px;
+  user-select: none;
+  pointer-events: none;
 }
 .payment-mode .card-payment .payment-input h4 {
-  font-size: 15px;
+  font-size: 13px;
   margin: 0;
-  margin-bottom: 2px !important;
+  margin-bottom: 4px !important;
   padding: 0;
+  font-weight: 300;
 }
 .payment-mode .card-payment .payment-input {
   padding: 15px;
@@ -171,44 +186,51 @@
   height: 30px;
   outline: none;
   border-radius: 5px;
-  border: 1px solid gray;
+  border: 1px solid #d3d3d3;
+  font-weight: 300;
+  font-size: 13px;
+  padding: 0 5px;
+  cursor: text;
 }
 .payment-mode .card-payment .payment-card {
   display: flex;
   margin-bottom: 25px;
 }
 .payment-mode .card-payment .payment-card select {
-  width: 80px;
-  height: 30px;
+  width: 60px;
+  height: 25px;
   outline: none;
   margin-right: 10px;
-  border: 1px solid gray;
-  background-color: rgba(243, 243, 243, 0.707);
+  border: 1px solid #d3d3d3;
+  background-color: #fff;
   color: rgb(49, 49, 49);
-  border-radius: 5px;
+  border-radius: 4px;
+  font-size: 12px;
 }
 .payment-mode .card-payment .payment-input button {
   border: none;
-  font-size: 16px;
-  padding: 4px;
+  font-size: 12px;
+  padding: 4px 8px;
   border-radius: 5px;
   background-color: rgb(255, 174, 0);
+  font-weight: 300;
 }
 .payment-mode .card-payment .payment-input h5 {
   font-size: 12px;
   color: red;
   position: absolute;
   bottom: 0;
+  left: 2px;
+  font-weight: 300;
 }
 .payment-mode .card-payment .payment-input form div {
   position: relative;
 }
 .payment-mode .card-payment .payment-input .card-added-success-msg {
   color: green;
-  font-weight: bold;
-  font-size: 14px;
-  text-transform: uppercase;
-  margin-left: 20px;
+  font-weight: 400;
+  font-size: 13px;
+  margin-left: 10px;
 }
 .order-sucess-container {
   width: 95%;
@@ -229,46 +251,34 @@
   text-decoration: underline;
 }
 .order-sucess-item-details-container {
-  border-bottom: 1px solid rgb(150, 150, 150);
-  margin: 0 15px;
+  border-bottom: 1px solid #d3d3d3;
+  width: 100%;
 }
 .order-sucess-container .order-success-item-details {
-  display: flex;
-  justify-content: space-between;
   padding: 10px 0;
-  align-items: center;
 }
-.order-sucess-container .order-success-item-details span:first-child {
+.order-sucess-container .order-success-item-details td:first-child {
   font-size: 18px;
   text-transform: capitalize;
-  flex: 0.6;
 }
-.order-sucess-container .order-success-item-details span {
+.order-sucess-container .order-success-item-details td {
   pointer-events: none;
 }
-.order-sucess-container .order-success-item-details span:nth-child(2) {
+.order-sucess-container .order-success-item-details td:nth-child(2) {
   font-size: 14px;
   color: rgb(150, 150, 150);
 }
-.order-sucess-container .order-success-item-details span:last-child {
+.order-sucess-container .order-success-item-details td:last-child {
   font-size: 16px;
 }
 .order-sucess-container .amount-payable {
-  margin: 5px 15px;
+  margin: 5px 20px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   pointer-events: none;
 }
-.order-sucess-container .amount-payable span {
-  font-weight: bold;
-}
-.order-sucess-container .amount-payable span:first-child {
-  font-size: 18px;
-}
-.order-sucess-container .amount-payable span:last-child {
-  font-size: 24px;
-}
+
 .order-sucess-container .order-data-loading {
   width: 100%;
   height: 80px;
@@ -283,20 +293,30 @@
 }
 .order-delivery-container .no-address h5 {
   font-size: 18px;
-  margin-bottom: 25px;
+  padding: 20px 0;
   text-align: center;
+  font-weight: 500;
 }
 .order-delivery-container .no-address button {
-  border: none;
-  font-size: 16px;
-  padding: 4px;
-  border-radius: 5px;
   background-color: rgb(255, 174, 0);
+  padding: 5px;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 0 0;
+}
+
+.order-delivery-container .add-address-btn button:disabled {
+  cursor: not-allowed;
 }
 
 .order-delivery-container .no-address .address-container div {
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 32px;
 }
 .order-delivery-container .no-address .address-container div label {
   position: absolute;
@@ -322,27 +342,34 @@
   input:not(:placeholder-shown)
   ~ label {
   transform: translateY(-14px);
-  font-size: 12px;
+  font-size: 13px;
   background-color: white;
+  padding: 0 3px;
   color: rgb(75, 75, 75);
 }
 
 .order-delivery-container .no-address .address-container div input {
-  padding: 2px 4px;
+  padding: 6px 4px;
   border-radius: 5px;
   width: 100%;
   outline: none;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   background-color: white;
   border: 1px solid gray;
 }
+
+.order-delivery-container .no-address .address-container div input:disabled {
+  cursor: not-allowed;
+}
+
 .order-delivery-container .no-address .address-container div h4 {
   position: absolute;
-  bottom: -22px;
-  font-size: 10px;
+  bottom: -24px;
+  font-size: 11px;
   left: 5px;
   color: red;
+  font-weight: 400;
 }
 .order-delivery-container .no-address .no-address-cover {
   position: absolute;
@@ -382,27 +409,30 @@
   top: -1px !important;
 }
 .order-delivery-sub-container {
-  padding: 10px;
-  border-radius: 10px !important;
+  padding: 15px 10px;
+  border-radius: 5px !important;
+  border: 1px solid #d3d3d3;
 }
 .order-delivery-sub-container .each-address {
-  padding: 5px;
+  padding: 25px 15px;
   cursor: pointer;
-  border-radius: 10px;
-  font-size: 16px;
-  height: 80px;
+  border-radius: 5px;
+  font-size: 14px;
   display: flex;
   align-items: center;
-  background-color: rgb(240, 240, 240);
   margin-bottom: 10px;
+  border: 1px solid #d3d3d3;
+  transition: color 0.15s ease-in, background 0.15s ease-in;
+  font-weight: 400;
 }
 .selected-address {
-  background-color: rgb(153, 153, 153) !important;
-  color: white !important;
+  background: #add8e6;
 }
-.order-delivery-sub-container .each-address:last-child {
-  border-bottom: none !important;
+
+.order-delivery-sub-container .each-address:hover {
+  background: #add8e6;
 }
+
 .order-sucess-container {
   position: relative;
   overflow: hidden;
@@ -435,84 +465,89 @@
   border-radius: 0 0 10px 10px;
   transition: all 0.5s ease-in-out;
 }
-@media (max-width: 768px) {
-  .order-process-nav-sub1 h1 {
-    font-size: 20px;
-  }
-}
-@media (max-width: 651px) {
-  .order-process-nav-sub1 h1 {
-    font-size: 18px;
-  }
-  .order-process-nav-sub2 svg {
-    font-size: 16px;
-  }
-  .order-process-nav-sub2 .progress-bar {
-    height: 1px;
-  }
-  .order-delivery-container h2,
-  .payment-mode-container h2 {
-    font-size: 20px;
-    padding: 10px 0;
-  }
-  .order-process-container .continue-btn {
-    padding: 2px;
-    width: 60px;
 
-    margin: 8px 0;
-    font-size: 14px;
-  }
-  .order-process-btn-container button {
-    width: 60px;
-    padding: 2px;
-    font-size: 14px;
-  }
-  .payment-mode .card-payment .payment-input button {
-    font-size: 14px;
-    padding: 2px;
-  }
-  .payment-mode .card-payment .payment-input input {
-    height: 25px;
-  }
-  .payment-mode .card-payment .payment-card select {
-    width: 60px;
-    height: 25px;
-    font-size: 14px;
-  }
-  .order-sucess-container .order-success-item-details span:first-child {
-    font-size: 16px;
-  }
-  .order-sucess-container .order-success-item-details span:nth-child(2) {
-    font-size: 12px;
-  }
-  .order-sucess-container .order-success-item-details span:last-child {
-    font-size: 14px;
-  }
-  .order-sucess-container .amount-payable span:first-child {
-    font-size: 16px;
-  }
-  .order-sucess-container .amount-payable span:last-child {
-    font-size: 20px;
-  }
-  .order-delivery-container .no-address h5 {
-    font-size: 16px;
-  }
-  .order-delivery-container .no-address button {
-    font-size: 14px;
-    padding: 2px;
-  }
-  .order-delivery-container .server-error,
-  .order-server-error {
-    font-size: 10px;
-  }
-  .order-delivery-sub-container .each-address {
-    padding: 4px;
-    font-size: 12px;
-    height: 60px;
-  }
+.order-process-container h2 {
+  font-size: 18px;
 }
-@media (max-width: 329px) {
-  .order-process-nav-sub1 h1 {
-    font-size: 16px;
-  }
+
+.payment-mode label {
+  font-size: 14px;
+  transform: translateY(-2px);
+}
+
+.order-process-btn-container button {
+  padding: 5px;
+  width: 100px;
+  background-color: red;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.order-process-container .address-container form {
+  padding: 0 10px;
+}
+
+.amount-payable-currency {
+  display: flex;
+  align-items: center;
+}
+
+.amount-payable-currency .currency {
+  margin: 10px 0;
+}
+
+.amount-payable-currency .currency::after {
+  content: ".00";
+  font-size: 12px;
+}
+
+.amount-payable span:first-of-type {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+
+.order-success-item-details td {
+  font-size: 14px !important;
+}
+
+.amount-payable-label {
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+
+.order-sucess-item-details-wrapper {
+  padding: 10px 15px;
+}
+
+.order-success-item-details tr:last-of-type td:last-child {
+  margin: 100px;
+}
+
+.order-sucess-item-details-currency span {
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.order-sucess-item-details-currency {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.order-sucess-item-details-currency .currency::after {
+  content: ".00";
+}
+
+.order-sucess-item-details-currency .currency {
+  margin: 0;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.order-success-item-details td {
+  padding: 10px;
 }

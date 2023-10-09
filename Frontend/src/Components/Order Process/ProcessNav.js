@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FaShoppingCart, FaAddressBook, FaCheckSquare } from "react-icons/fa";
-import logo from "../../Icons/logo-now";
+import Logo from "../Logo";
 
 class ProcessNav extends Component {
   render() {
@@ -8,8 +8,7 @@ class ProcessNav extends Component {
     return (
       <div className="order-process-nav">
         <div className="order-process-nav-sub1">
-          <h1>Shopit</h1>
-          {logo}
+          <Logo />
         </div>
         <div className="order-process-nav-sub2">
           <div className="progress-bar">

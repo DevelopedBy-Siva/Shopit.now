@@ -10,6 +10,7 @@ import {
   mapStateToProps,
   mapDispatchToProps,
 } from "../../State Management/MappingStates";
+import toast from "../Toast";
 
 class OrderDelivery extends Component {
   constructor(props) {
@@ -56,7 +57,8 @@ class OrderDelivery extends Component {
         this.setAddress(data);
       })
       .catch(() => {
-        this.setState({ error: true, loading: false });
+        this.setState({ loading: false });
+        toast.error("Something went wrong. Failed to get address");
       });
   };
 
@@ -79,11 +81,7 @@ class OrderDelivery extends Component {
 
   addAddress = (values) => {
     this.btnRef.current.blur();
-    const newAddress = {
-      addressDetails: values,
-      defaultAddress: true,
-    };
-    this.addAddressToServer(newAddress);
+    this.addAddressToServer(values);
   };
 
   addAddressToServer = async (address) => {
@@ -93,12 +91,13 @@ class OrderDelivery extends Component {
       .put(`${URL(API_ENDPOINT.userOperations)}/address/${id}`, address, {
         headers: { Authorization: service.getJwt() },
       })
-      .then(() => {
-        this.setState({ onSubmission: false });
-        this.getAddress();
+      .then(({ data }) => {
+        this.setState({ onSubmission: false, addresses: [{ ...data }] });
+        toast.info("Address added successfully");
       })
       .catch(() => {
         this.setState({ onSubmission: false, onSubmissionError: true });
+        toast.error("Something went wrong. Failed to add address");
       });
   };
 
@@ -112,32 +111,10 @@ class OrderDelivery extends Component {
   };
 
   render() {
-    const {
-      serverErrorVisible,
-      selectedAddress,
-      onSubmissionError,
-      loading,
-      error,
-      addresses,
-      onSubmission,
-    } = this.state;
+    const { selectedAddress, loading, addresses, onSubmission } = this.state;
     return (
       <div className="order-delivery-container">
-        <div
-          className={`server-error1 ${
-            serverErrorVisible ? "server-error-display" : ""
-          }`}
-        >
-          Server error occured. Couldn't fetch address
-        </div>
-        <div
-          className={`server-error2 ${
-            onSubmissionError ? "server-error-display" : ""
-          }`}
-        >
-          Server error occured. Cannot add address right now
-        </div>
-        <h2>Select Delivery Address</h2>
+        {addresses.length > 0 && <h2>Select Delivery Address</h2>}
         {loading ? (
           <Lottie
             animationData={loadingIcon}
@@ -146,17 +123,10 @@ class OrderDelivery extends Component {
         ) : addresses.length === 0 ? (
           <div className="no-address">
             <h5>Add address to continue</h5>
-            {(error || onSubmission) && (
-              <div className="no-address-cover">
-                <Lottie
-                  animationData={loadingIcon}
-                  className="new-address-data-loading"
-                />
-              </div>
-            )}
             <OrderDeliveryAddress
               btnRef={this.btnRef}
               addAddress={this.addAddress}
+              onSubmission={onSubmission}
             />
           </div>
         ) : (

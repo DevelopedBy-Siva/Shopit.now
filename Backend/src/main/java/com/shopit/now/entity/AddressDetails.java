@@ -24,6 +24,6 @@ public class AddressDetails {
     private String state;
 
     @Column(nullable = false, name = "Pincode")
-    private int pincode;
+    private String pincode;
 
 }
