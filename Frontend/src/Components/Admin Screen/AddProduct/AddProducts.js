@@ -99,7 +99,7 @@ class AddProducts extends AddProductMainContainer {
                 />
                 <AdminInputContainer
                   type="number"
-                  name="Price ($)"
+                  name="Price (USD)"
                   disabled={loading}
                   errors={errors.price}
                   touched={touched.price}

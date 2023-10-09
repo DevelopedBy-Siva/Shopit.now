@@ -22,15 +22,15 @@ class Product extends MainProductContainer {
           <Lottie animationData={load} className="product-loader" />
         ) : (
           <>
-            <div className="product-details-header">
-              <ProductDetails
-                overallRating={overallRating}
-                starDimension="16px"
-                starSpacing="1px"
-                product={product}
-              />
-            </div>
             <div className="product-container">
+              <div className="product-details-container product-details-small">
+                <ProductDetails
+                  overallRating={overallRating}
+                  starDimension="16px"
+                  starSpacing="1px"
+                  product={product}
+                />
+              </div>
               <div className="product-image-container">
                 <div className="product-image-wrapper">
                   <div className="all-images">

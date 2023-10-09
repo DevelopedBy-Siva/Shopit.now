@@ -5,6 +5,7 @@ import serverError from "../../animations/server-error.json";
 import ProductDetails from "./ProductDetails";
 import SearchEmpty from "./SearchEmpty";
 import { StarRate } from "./Utils";
+import { MdClose } from "react-icons/md";
 
 class SearchDetails extends Component {
   checkFilterOption = (option, what) => {
@@ -50,7 +51,7 @@ class SearchDetails extends Component {
                   <div className="each-filter-disp" key={index}>
                     <span>{i}</span>
                     <button onClick={() => this.checkFilterOption(i, 0)}>
-                      X
+                      <MdClose />
                     </button>
                   </div>
                 );

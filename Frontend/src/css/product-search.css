@@ -338,21 +338,22 @@
 .product-search-container .filter-disp-container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 10px;
 }
 .product-search-container .filter-disp-container .each-filter-disp {
   margin: 4px 6px;
-  padding: 2px 5px;
+  padding: 3px 5px;
   background-color: #343434;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .product-search-container .filter-disp-container .each-filter-disp span {
   padding: 0 4px;
-  font-size: 14px;
+  font-size: 12px;
   pointer-events: none;
 }
 .product-search-container .filter-disp-container .each-filter-disp button {
@@ -361,11 +362,16 @@
   color: #343434;
   background-color: white;
   font-size: 12px;
-  width: 16px;
-  height: 16px;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
   font-weight: 600;
   text-align: center;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
 }
 .product-search-container .each-search .not-available {
   position: absolute;
