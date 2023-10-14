@@ -58,7 +58,6 @@
   transition: all 0.4s ease-in-out;
   transform: scale(1);
   cursor: pointer;
-  background-color: white;
 }
 .mobile-container .top-brands div:hover {
   transform: scale(1.1);

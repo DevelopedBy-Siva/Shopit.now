@@ -1,6 +1,6 @@
 .todays-deal-container {
   position: relative;
-  margin-top: 80px;
+  margin-top: 70px;
 }
 
 .todays-deal-sub-container {
@@ -30,6 +30,7 @@
   margin-left: auto;
   margin-right: auto;
   --scroll-behavior: smooth;
+  padding: 10px;
 }
 
 .todays-deal-container .todaysdeal-container .todaysdeals-details {
@@ -87,7 +88,7 @@
   margin-left: 25px;
   background-color: #fff;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   position: relative;
   text-decoration: none;
 }

@@ -1,45 +1,16 @@
 import React, { Component } from "react";
 import mobile from "../../Images/mobile.jpeg";
-import iphone from "../../Images/Mobile/iphone.png";
-import samsung from "../../Images/Mobile/samsung.png";
-import pixel from "../../Images/Mobile/pixel.png";
-import oneplus from "../../Images/Mobile/oneplus.png";
-import realme from "../../Images/Mobile/realme.png";
-import redmi from "../../Images/Mobile/redmi.png";
-import oppo from "../../Images/Mobile/oppo.png";
-import vivo from "../../Images/Mobile/vivo.png";
-import asus from "../../Images/Mobile/asus.png";
-import sony from "../../Images/Mobile/sony.png";
-import nokia from "../../Images/Mobile/nokia.png";
+import iphone from "../../Images/Mobile/iphone.webp";
+import samsung from "../../Images/Mobile/samsung.webp";
+import pixel from "../../Images/Mobile/pixel.webp";
+import oneplus from "../../Images/Mobile/oneplus.webp";
+import nothing from "../../Images/Mobile/nothing.webp";
 
 import "../../css/mobile.css";
 
-const brands = [
-  "iPhone",
-  "Samsung",
-  "Google",
-  "OnePlus",
-  "Realme",
-  "Xiaomi",
-  "Oppo",
-  "Vivo",
-  "Asus",
-  "Sony",
-  "Nokia",
-];
-const images = [
-  iphone,
-  samsung,
-  pixel,
-  oneplus,
-  realme,
-  redmi,
-  oppo,
-  vivo,
-  asus,
-  sony,
-  nokia,
-];
+const brands = ["iPhone", "Samsung", "Google", "OnePlus", "Nothing"];
+
+const images = [iphone, samsung, pixel, oneplus, nothing];
 
 class Mobile extends Component {
   state = {};
@@ -66,6 +37,7 @@ class Mobile extends Component {
             </div>
           ))}
         </div>
+        <footer style={{ height: "100px" }} />
       </div>
     );
   }

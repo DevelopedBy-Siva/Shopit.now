@@ -64,7 +64,7 @@ export default function ProductOperations({
         },
       })
       .then(({ status }) => {
-        dispatch(addToCart(cartItem));
+        dispatch(addToCart({ ...cartItem, available: true }));
         if (status === 204) handleOutOfStock();
         toast.success("Item addded to cart", { autoHideDuration: 2000 });
       })

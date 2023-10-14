@@ -82,7 +82,8 @@ class ProceedOrder extends Component {
           </button>
           {(unavailable.length !== 0 || this.availabilityCheck()) && (
             <span>
-              Remove or Save for later the out of stock items to continue
+              Please remove the out-of-stock items or save them for later to
+              continue.
             </span>
           )}
         </h4>

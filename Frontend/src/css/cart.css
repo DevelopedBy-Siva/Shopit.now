@@ -432,9 +432,9 @@
   border-radius: 5px;
   color: white;
   background-color: #343434;
-  padding: 4px;
+  padding: 4px 6px;
   font-size: 10px;
-  bottom: -55px;
+  bottom: -70px;
   left: 50%;
   width: 150px;
   transform: translate(-50%, -50%);

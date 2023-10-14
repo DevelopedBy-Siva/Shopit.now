@@ -106,6 +106,7 @@ class CartItems extends Component {
                     <BiPlus className="icon" />
                   </button>
                   <button
+                    disabled={loading}
                     className={loading ? "disable-btn-loading" : ""}
                     onClick={(e) => this.handleDecrement(item, index, e)}
                   >

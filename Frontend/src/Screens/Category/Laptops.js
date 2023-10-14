@@ -40,6 +40,7 @@ class Laptop extends Component {
             </div>
           ))}
         </div>
+        <footer style={{ height: "100px" }} />
       </div>
     );
   }
