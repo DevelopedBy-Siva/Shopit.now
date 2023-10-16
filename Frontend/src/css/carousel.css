@@ -2,7 +2,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 480px;
+  height: 440px;
 }
 .slick-slider,
 .slick-list,
@@ -90,12 +90,12 @@
     height: 100%;
   }
   .carousel-container {
-    height: 340px;
+    height: 300px;
   }
 }
 
 @media (max-width: 480px) {
   .carousel-container {
-    height: 250px;
+    height: 170px;
   }
 }
