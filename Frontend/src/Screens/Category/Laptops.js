@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import laptop from "../../Images/laptop.jpeg";
-import apple from "../../Images/Laptop/apple.png";
-import hp from "../../Images/Laptop/hp.png";
-import asus from "../../Images/Laptop/asus.png";
-import msi from "../../Images/Laptop/msi.png";
-import lenovo from "../../Images/Laptop/lenovo.png";
-import dell from "../../Images/Laptop/dell.png";
-import acer from "../../Images/Laptop/acer.png";
-import toshiba from "../../Images/Laptop/toshiba.png";
+import apple from "../../Images/Laptop/apple.webp";
+import hp from "../../Images/Laptop/hp.webp";
+import asus from "../../Images/Laptop/asus.webp";
+import msi from "../../Images/Laptop/msi.webp";
+import lenovo from "../../Images/Laptop/lenovo.webp";
+import dell from "../../Images/Laptop/dell.webp";
 
 import "../../css/laptop.css";
 
-const images = [apple, hp, dell, asus, msi, lenovo, acer, toshiba];
+const images = [apple, hp, dell, asus, msi, lenovo];
 
 class Laptop extends Component {
   render() {
@@ -33,6 +31,7 @@ class Laptop extends Component {
               onClick={() => this.props.history.push("/search/laptops")}
               key={index}
               className="laptop-brand-sub-container"
+              style={index === 0 || index === 1 ? { width: "70px" } : {}}
             >
               <div>
                 <img src={i} alt={i} />

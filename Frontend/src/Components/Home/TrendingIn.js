@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import img1 from "../../Images/logo/1.webp";
-import img2 from "../../Images/logo/2.webp";
-import img3 from "../../Images/logo/3.webp";
-import img4 from "../../Images/logo/4.webp";
-import img5 from "../../Images/logo/5.webp";
-import img6 from "../../Images/logo/6.webp";
-import img7 from "../../Images/logo/7.webp";
-import img8 from "../../Images/logo/8.webp";
+import img1 from "../../Images/Fashion/1.webp";
+import img2 from "../../Images/Fashion/2.webp";
+import img3 from "../../Images/Fashion/3.webp";
+import img4 from "../../Images/Fashion/4.webp";
+import img5 from "../../Images/Fashion/5.webp";
+import img6 from "../../Images/Fashion/6.webp";
+import img7 from "../../Images/Fashion/7.webp";
+import img8 from "../../Images/Fashion/8.webp";
 
 import "../../css/trending-in.css";
 

@@ -18,14 +18,6 @@ const categories = [
     link: "",
   },
   {
-    name: "kids & baby",
-    link: "kidsandbaby",
-  },
-  {
-    name: "fashion",
-    link: "fashions",
-  },
-  {
     name: "mobiles",
     link: "mobiles",
   },
@@ -36,6 +28,14 @@ const categories = [
   {
     name: "appliances",
     link: "appliances",
+  },
+  {
+    name: "fashion",
+    link: "fashions",
+  },
+  {
+    name: "kids & babies",
+    link: "kidsandbaby",
   },
 ];
 

@@ -1,26 +1,14 @@
 import React, { Component } from "react";
 import fashionimg from "../../Images/fashion.jpg";
-import van from "../../Images/Fashion/united.jpeg";
-import nike from "../../Images/Fashion/nike.jpeg";
-import roadster from "../../Images/Fashion/roadster.jpeg";
-import wrogn from "../../Images/Fashion/wrogn.jpeg";
-import hrx from "../../Images/Fashion/hrx.jpg";
-import allen from "../../Images/Fashion/allen.jpg";
-import hm from "../../Images/Fashion/hm.jpg";
-import invictus from "../../Images/Fashion/invictus.jpg";
+import img1 from "../../Images/Fashion/1.webp";
+import img2 from "../../Images/Fashion/2.webp";
+import img3 from "../../Images/Fashion/3.webp";
+import img4 from "../../Images/Fashion/4.webp";
+import img5 from "../../Images/Fashion/5.webp";
+import img6 from "../../Images/Fashion/6.webp";
 import "../../css/fashion.css";
 
-const brands = [
-  "Nike",
-  "Van Heusen",
-  "Roadster",
-  "Wrogn",
-  "HRX",
-  "Allen Solly",
-  "H&M",
-  "The Invictus",
-];
-const images = [nike, van, roadster, wrogn, hrx, allen, hm, invictus];
+const images = [img1, img2, img3, img4, img5, img6];
 
 class Fashion extends Component {
   state = {};
@@ -39,13 +27,12 @@ class Fashion extends Component {
         </div>
         <h2>Top Brands Available</h2>
         <div className="top-brands contain">
-          {brands.map((i, index) => (
+          {images.map((i, index) => (
             <div
               onClick={() => this.props.history.push("/search/fashion")}
               key={index}
             >
-              <img src={images[index]} index={i} alt="fashions" />
-              <h5>{i}</h5>
+              <img src={i} alt={`fashions-${index}`} />
             </div>
           ))}
         </div>

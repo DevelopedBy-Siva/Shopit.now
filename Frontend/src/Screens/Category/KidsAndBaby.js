@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import kidsimg from "../../Images/kids.jpg";
-import ajio from "../../Images/Kids/Ajio-Logo.png";
-import gini from "../../Images/Kids/gini.png";
-import little from "../../Images/Kids/little.png";
-import cucumber from "../../Images/Kids/cucumber.png";
-import nautunati from "../../Images/Kids/nautunati.jpg";
-import lilli from "../../Images/Kids/lilli.png";
-import cn from "../../Images/Kids/cn.png";
-import max from "../../Images/Kids/max.png";
+import barbie from "../../Images/Kids/barbie.webp";
+import hm from "../../Images/Kids/h&m.webp";
+import hanna from "../../Images/Kids/hanna.webp";
+import lego from "../../Images/Kids/lego.webp";
+import puma from "../../Images/Kids/puma.webp";
 
 import "../../css/kid.css";
 
-const images = [ajio, cn, cucumber, gini, lilli, little, nautunati, max];
+const images = [barbie, hm, hanna, lego, puma];
 
 class KidsAndBaby extends Component {
   render() {
@@ -31,9 +28,16 @@ class KidsAndBaby extends Component {
               onClick={() => this.props.history.push("/search/kids")}
               key={index}
               className="kids-sub-container"
+              style={
+                index === 0
+                  ? { width: "90px" }
+                  : index === 2
+                  ? { width: "190px" }
+                  : {}
+              }
             >
               <div>
-                <img src={i} alt={i} />
+                <img src={i} alt={`kids-${index}`} />
               </div>
             </div>
           ))}
