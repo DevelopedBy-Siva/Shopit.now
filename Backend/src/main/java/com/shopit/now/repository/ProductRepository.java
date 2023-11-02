@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Products, Integer> {
 
-    @Query("select p1 from Products p1 ORDER BY p1.productRatings.overallRating desc ")
+    @Query("select p1 from Products p1 ORDER BY p1.productRatings.overallRating desc, FUNCTION('RAND')")
     List<Products> findAllBestSellers(Pageable pageable);
 
     @Query("select p1 from Products p1 where p1.trending=true order by p1.price asc ")
