@@ -17,8 +17,8 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/products")
+@CrossOrigin(origins = "https://shopit-now-client.vercel.app", maxAge = 3600)
 public class ProductsController {
 
     @Autowired

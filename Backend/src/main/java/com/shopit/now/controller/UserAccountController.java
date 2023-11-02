@@ -16,7 +16,7 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://shopit-now-client.vercel.app", maxAge = 3600)
 public class UserAccountController {
 
     @Autowired
