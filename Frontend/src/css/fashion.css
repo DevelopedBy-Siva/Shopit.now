@@ -5,7 +5,9 @@
 }
 .fashion-container .fashion-cover {
   width: 100%;
-  height: 300px;
+  height: 360px;
+  border-radius: 10px;
+  margin: 20px auto;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -13,9 +15,8 @@
 }
 .fashion-container .fashion-cover img {
   object-fit: cover;
-  width: 80%;
+  width: 100%;
   height: 100%;
-  flex: 0.7;
 }
 
 .fashion-container .fashion-cover div {
@@ -44,12 +45,11 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 50px;
-  margin-top: 40px;
 }
 .fashion-container .top-brands div {
   width: 160px;
   cursor: pointer;
+  margin: 15px 60px;
 }
 .fashion-container .top-brands div img {
   width: 100%;
@@ -57,9 +57,7 @@
   object-fit: contain;
 }
 .fashion-container h2 {
-  margin: 0;
-  margin: 50px 0 20px;
-  padding: 10px;
+  margin: 80px 0 20px 0;
   font-size: 28px;
   text-align: center;
 }
@@ -70,11 +68,8 @@
   color: rgb(77, 77, 77);
 }
 @media (max-width: 601px) {
-  .fashion-container .fashion-cover div {
-    bottom: 0;
-    width: 80%;
-    height: 120px;
-    right: 10%;
+  .fashion-container .fashion-cover {
+    height: 200px;
   }
   .fashion-container .fashion-cover h5 {
     font-size: 12px;
@@ -86,10 +81,10 @@
   .fashion-container .fashion-cover img {
     width: 100%;
     object-fit: cover;
-    flex: 1;
   }
   .fashion-container .top-brands div {
-    width: 100px;
+    width: 100px !important;
+    margin: 10px 30px;
   }
   .fashion-container h2 {
     font-size: 24px;
