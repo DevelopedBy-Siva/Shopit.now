@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import kidsimg from "../../Images/kids.jpg";
+import kidsimg from "../../Images/kids.webp";
 import barbie from "../../Images/Kids/barbie.webp";
 import hm from "../../Images/Kids/h&m.webp";
 import hanna from "../../Images/Kids/hanna.webp";
@@ -13,16 +13,12 @@ const images = [barbie, hm, hanna, lego, puma];
 class KidsAndBaby extends Component {
   render() {
     return (
-      <div className="kids-container">
+      <div className="kids-container contain">
         <div className="kids-cover">
           <img src={kidsimg} alt="kids-cover" />
-          <div>
-            <h4>Spring</h4>
-            <h5>Take A Sneak Peek into Everything New</h5>
-          </div>
         </div>
         <h2>Top Brands Available</h2>
-        <div className="kids-brand-container contain">
+        <div className="kids-brand-container">
           {images.map((i, index) => (
             <div
               onClick={() => this.props.history.push("/search/kids")}
