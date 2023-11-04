@@ -31,7 +31,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 .kids-container .kids-brand-container .kids-sub-container {
   display: flex;
@@ -40,7 +40,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin: 15px 60px;
+  margin: 10px 70px;
 }
 .kids-brand-container .kids-sub-container div {
   width: 100%;
