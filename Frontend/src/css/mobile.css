@@ -49,13 +49,13 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 .mobile-container .top-brands div {
-  width: 170px;
+  width: 160px;
   flex-direction: column;
   cursor: pointer;
-  margin: 15px 60px;
+  margin: 0px 60px;
 }
 .mobile-container .top-brands img {
   width: 100%;
