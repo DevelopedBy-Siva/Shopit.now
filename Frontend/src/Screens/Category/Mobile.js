@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import mobile from "../../Images/mobile.jpeg";
+import mobile from "../../Images/mobile.webp";
 import apple from "../../Images/Mobile/apple.webp";
 import samsung from "../../Images/Mobile/samsung.webp";
 import google from "../../Images/Mobile/google.webp";
@@ -15,17 +15,12 @@ class Mobile extends Component {
   state = {};
   render() {
     return (
-      <div className="mobile-container">
+      <div className="mobile-container contain">
         <div className="mobile-cover">
           <img src={mobile} alt="mobile-cover" />
-          <div>
-            <h4>iPhone</h4>
-            <h5>Life is easier on iPhone.</h5>
-            <span>And that starts as soon as you turn it on.</span>
-          </div>
         </div>
         <h2>Top Brands Available</h2>
-        <div className="top-brands contain">
+        <div className="top-brands">
           {images.map((i, index) => (
             <div
               onClick={() => this.props.history.push("/search/mobile")}

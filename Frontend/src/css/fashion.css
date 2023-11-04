@@ -45,6 +45,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px;
 }
 .fashion-container .top-brands div {
   width: 160px;
