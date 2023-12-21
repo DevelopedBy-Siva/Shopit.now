@@ -178,7 +178,7 @@
 }
 
 .menu-cover {
-  z-index: 9999999;
+  z-index: 99999999;
   position: fixed;
   left: 0;
   right: 0;
@@ -202,7 +202,7 @@
 }
 
 .menuVisible {
-  z-index: 9999999;
+  z-index: 99999999;
   overflow: hidden;
   right: 0;
   bottom: 0;
