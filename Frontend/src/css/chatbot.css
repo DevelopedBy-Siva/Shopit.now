@@ -102,6 +102,10 @@
   padding-top: 30px;
 }
 
+.chatbot-container .chatbot-content li.ls-padding {
+  padding-top: 10px;
+}
+
 .chatbot-container .chatbot-content li.chat-right {
   justify-content: flex-end;
 }
@@ -143,6 +147,7 @@
   font-weight: 300;
   user-select: none;
   min-width: 55px;
+  white-space: pre-line;
 }
 
 .chatbot-container .chatbot-input {
@@ -192,6 +197,11 @@
   background: none;
   outline: none;
   color: #6a6a6a;
+  transition: color 0.1s ease-out;
+}
+
+.chatbot-container .chatbot-input button:hover {
+  color: #323232;
 }
 
 .chatbot-container .chatbot-head h5 {
@@ -238,6 +248,15 @@
   color: #fff;
   padding: 3px;
   border-radius: 0 0 6px 6px;
+}
+
+.chatbot-content .chat-redirect {
+  color: #0545f5;
+  cursor: pointer;
+  margin-top: 5px;
+  display: block;
+  width: fit-content;
+  text-decoration: underline;
 }
 
 @media (max-width: 640px) {

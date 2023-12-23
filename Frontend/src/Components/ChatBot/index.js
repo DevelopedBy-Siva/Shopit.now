@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import { IoIosChatboxes, IoMdClose } from "react-icons/io";
+import { Link } from "react-router-dom";
+import { IoIosChatboxes, IoMdClose, IoMdSend } from "react-icons/io";
 import { FaRobot } from "react-icons/fa";
-import { IoMdSend } from "react-icons/io";
 import axios from "axios";
 
-import "../../css/chatbot.css";
 import { getCurrentUser } from "../../services/LoginReg";
+
+import "../../css/chatbot.css";
 
 export default function ChatBot() {
   const [showChatBot, setShowChatBot] = useState(false);
@@ -30,7 +31,7 @@ export default function ChatBot() {
   }, [api.data]);
 
   useEffect(() => {
-    callServer("hai", { loading: true, error: false, data: [] });
+    callServer("hai", { loading: true, error: false, data: [] }, true);
   }, []);
 
   async function askQuery(e) {
@@ -47,14 +48,56 @@ export default function ChatBot() {
     await callServer(query, newData);
   }
 
-  async function callServer(query, newData) {
+  function processChatResponse(data) {
+    const response = data.split("___");
+    let value = response[0];
+
+    let redirect;
+    switch (response[1]) {
+      case "track":
+        redirect = "track";
+        break;
+      case "address":
+        redirect = "address";
+        break;
+      case "password":
+        redirect = "password";
+        break;
+      case "deals":
+        redirect = "deals";
+        break;
+      default:
+        redirect = null;
+    }
+    return <RedirectChatResponse value={value} redirect={redirect} />;
+  }
+
+  function RedirectChatResponse({ value, redirect }) {
+    return (
+      <span>
+        {value}
+        {redirect ? (
+          <Link to={redirect} className="chat-redirect">
+            Click Here
+          </Link>
+        ) : (
+          ""
+        )}
+      </span>
+    );
+  }
+
+  async function callServer(query, newData, started = false) {
     await axios
       .post(process.env.REACT_APP_CHAT_BOT_URL, {
         message: query,
+        started,
         isLoggedIn: getCurrentUser() ? true : false,
       })
       .then(({ data }) => {
         newData.data.unshift(data);
+        if (started && data["started"])
+          newData.data.unshift({ query: data["started"], ico: true });
         setNewMsg(true);
       })
       .catch(() => {
@@ -88,18 +131,27 @@ export default function ChatBot() {
               ""
             )}
             <ul ref={chatContainerRef}>
-              {api.data.map((val, index) => (
-                <li key={index} className={val.isClient ? `chat-right` : ""}>
-                  {val.isClient ? (
-                    <span className="client-chat-head">You</span>
-                  ) : (
-                    <span className="bot-chat-head">
-                      <FaRobot />
-                    </span>
-                  )}
-                  <p>{val.query}</p>
-                </li>
-              ))}
+              {api.data.map((val, index) => {
+                return (
+                  <li
+                    key={index}
+                    className={`${val.isClient ? "chat-right " : ""}${
+                      val.ico ? "ls-padding" : ""
+                    }`}
+                  >
+                    {val.isClient ? (
+                      <span className="client-chat-head">You</span>
+                    ) : !val.ico ? (
+                      <span className="bot-chat-head">
+                        <FaRobot />
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                    <p>{processChatResponse(val.query)}</p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <form onSubmit={askQuery} className="chatbot-input">
