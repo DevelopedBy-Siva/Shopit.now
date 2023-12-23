@@ -55,16 +55,16 @@ export default function ChatBot() {
     let redirect;
     switch (response[1]) {
       case "track":
-        redirect = "track";
+        redirect = "/account?order=_";
         break;
       case "address":
-        redirect = "address";
+        redirect = "/account?address=_";
         break;
       case "password":
-        redirect = "password";
+        redirect = "/account?password=_";
         break;
       case "deals":
-        redirect = "deals";
+        redirect = "/search/_?deals=_";
         break;
       default:
         redirect = null;
