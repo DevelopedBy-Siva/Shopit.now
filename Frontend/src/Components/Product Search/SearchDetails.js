@@ -42,9 +42,13 @@ class SearchDetails extends Component {
           <SearchEmpty query={query} />
         ) : (
           <div>
-            <h5 className="results-found">
-              {itemCount} results found for <span>" {query} "</span>
-            </h5>
+            {query === "_" ? (
+              ""
+            ) : (
+              <h5 className="results-found">
+                {itemCount} results found for <span>{query}</span>
+              </h5>
+            )}
             <div className="filter-disp-container">
               {filterDisp.map((i, index) => {
                 return (

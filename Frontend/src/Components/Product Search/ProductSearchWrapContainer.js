@@ -24,7 +24,7 @@ export default class ProductSearchWrapContainer extends Component {
     query: "",
     priceRange: defaultPrice,
     rating: defaultRating,
-    deal: defaultDeal,
+    deal: this.isParamPresent("deals"),
     stock: defaultStock,
     filterDisp: [],
     toggleFilter: false,
@@ -34,6 +34,12 @@ export default class ProductSearchWrapContainer extends Component {
     pagesize: defaultPageSize,
     filterVisible: true,
   };
+
+  isParamPresent(val) {
+    const searchParams = new URLSearchParams(this.props.location.search);
+    const param = searchParams.get(val);
+    return param ? true : false;
+  }
 
   componentDidMount() {
     const query = this.getTheQuery();
@@ -45,7 +51,7 @@ export default class ProductSearchWrapContainer extends Component {
       defaultPrice,
       defaultRating,
       defaultStock,
-      defaultDeal,
+      this.state.deal,
       1
     );
   }
@@ -58,13 +64,6 @@ export default class ProductSearchWrapContainer extends Component {
 
   getTheQuery() {
     return this.props.match.params.query;
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const query = this.getTheQuery();
-    if (prevState.query !== query) {
-      this.resetFilter(query, 1);
-    }
   }
 
   handleFilterReset = () => {
