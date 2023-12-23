@@ -28,19 +28,21 @@ const operations = [
     desc: "View your order status and history",
     ico: <FaTruck />,
     comp: OrderDetails,
-    redirect: true,
+    redirect: "order",
   },
   {
     title: "Your Address",
     desc: "Add a new shipping address to your account",
     ico: <MdLocationOn />,
     comp: AddAddress,
+    redirect: "address",
   },
   {
     title: "Change Password",
     desc: "Update your account password",
     ico: <MdKey />,
     comp: ChangePassword,
+    redirect: "password",
   },
   {
     title: "Delete Account",
@@ -126,7 +128,7 @@ function ButtonWrapper({ item, loading, setLoading }) {
     if (!item.redirect) return;
 
     const searchParams = new URLSearchParams(location.search);
-    if (searchParams.get("order")) setVisible(true);
+    if (searchParams.get(item.redirect)) setVisible(true);
   }, [item.redirect, location]);
 
   function toggle() {

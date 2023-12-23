@@ -37,7 +37,7 @@ function HomeContainer({ user }) {
         <ProtectedRoute path="/cart" Component={Cart} />
         <ProtectedRoute path="/wishlist" Component={Wishlist} />
         <ProtectedRoute path="/order-placed" Component={OrderPlacedMsg} />
-        <ProtectedRoute path="/account" component={Account} />
+        <ProtectedRoute path="/account" Component={Account} />
         <Route path="/not-found" component={NotFound} />
         <Route path="/" exact component={Home} />
         <Redirect to="/not-found" />
