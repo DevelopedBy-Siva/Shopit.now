@@ -21,7 +21,7 @@ export default class ProductSearchWrapContainer extends Component {
     data: [],
     loading: true,
     error: false,
-    query: "",
+    query: "_",
     priceRange: defaultPrice,
     rating: defaultRating,
     deal: this.isParamPresent("deals"),
@@ -54,6 +54,13 @@ export default class ProductSearchWrapContainer extends Component {
       this.state.deal,
       1
     );
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const query = this.getTheQuery();
+    if (prevState.query !== query) {
+      this.resetFilter(query, 1);
+    }
   }
 
   handleFilterToggle = () => {
