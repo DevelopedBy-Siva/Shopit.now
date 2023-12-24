@@ -53,6 +53,7 @@ export default function ChatBot() {
     let value = response[0];
 
     let redirect;
+    let redirect_msg = "Click Here";
     switch (response[1]) {
       case "track":
         redirect = "/account?order=_";
@@ -66,19 +67,29 @@ export default function ChatBot() {
       case "deals":
         redirect = "/search/_?deals=_";
         break;
+      case "login":
+        redirect = "/login";
+        redirect_msg = "Login";
+        break;
       default:
         redirect = null;
     }
-    return <RedirectChatResponse value={value} redirect={redirect} />;
+    return (
+      <RedirectChatResponse
+        value={value}
+        redirect={redirect}
+        redirect_msg={redirect_msg}
+      />
+    );
   }
 
-  function RedirectChatResponse({ value, redirect }) {
+  function RedirectChatResponse({ value, redirect, redirect_msg }) {
     return (
       <span>
         {value}
         {redirect ? (
           <Link to={redirect} className="chat-redirect">
-            Click Here
+            {redirect_msg}
           </Link>
         ) : (
           ""
@@ -98,6 +109,11 @@ export default function ChatBot() {
         newData.data.unshift(data);
         if (started && data["started"])
           newData.data.unshift({ query: data["started"], ico: true });
+        if (data["isLogged"])
+          newData.data.unshift({
+            query: "To use this feature, log in to your account first.___login",
+            ico: true,
+          });
         setNewMsg(true);
       })
       .catch(() => {
