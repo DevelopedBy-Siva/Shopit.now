@@ -18,6 +18,11 @@ public class Products {
     @Column(length = 5024)
     private String description;
     private String category;
+    private String material;
+    private String origin_location;
+    private Double emission_factor;
+    private Double eco_score;
+    private Double weight;
     private int inStock;
     private boolean trending;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

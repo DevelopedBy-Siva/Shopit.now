@@ -16,6 +16,11 @@ public class Product {
     private Double price;
     private String description;
     private String category;
+    private String material;
+    private String origin_location;
+    private double emission_factor;
+    private double eco_score;
+    private double weight;
     private int inStock;
     private boolean trending;
     private Thumbnail thumbnail;

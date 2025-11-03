@@ -16,4 +16,9 @@ public class ProductView {
     private double price;
     private boolean trending;
     private int inStock;
+    private String material;
+    private String origin_location;
+    private double emission_factor;
+    private double eco_score;
+    private double weight;
 }

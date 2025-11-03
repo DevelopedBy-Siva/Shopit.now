@@ -50,6 +50,16 @@ public class ProductServicesImpl implements ProductServices {
             products.setInStock(10);
             products.setTrending(false);
             products.setCategory(products.getCategory().toLowerCase());
+
+            // calculate eco score
+            double penalty = (products.getEmission_factor() / 10.0) + (products.getWeight() / 2.0);
+            int score = (int) Math.round(products.getEco_score() - penalty);
+            double eco_score = Math.max(1, Math.min(10, score));
+
+            products.setEco_score(eco_score);
+            products.setEmission_factor(products.getEmission_factor());
+            products.setMaterial(products.getMaterial());
+            products.setWeight(products.getWeight());
             productRepository.save(products);
             return new ResponseEntity(products.getId(), HttpStatus.OK);
         }catch (Exception e){
@@ -135,7 +145,7 @@ public class ProductServicesImpl implements ProductServices {
         List<ProductView> productViews=new ArrayList<>();
         products
                 .stream()
-                .forEach(p->productViews.add(new ProductView(p.getId(),p.getTitle(),p.getCategory(),p.getPrice(),p.isTrending(),p.getInStock())));
+                .forEach(p->productViews.add(new ProductView(p.getId(),p.getTitle(),p.getCategory(),p.getPrice(),p.isTrending(),p.getInStock(), p.getMaterial(), p.getOrigin_location(), p.getEmission_factor(),p.getEco_score(),p.getWeight())));
         return new AllProductDisplay(handleGetAllproducts(),productViews);
     }
 
@@ -147,7 +157,7 @@ public class ProductServicesImpl implements ProductServices {
         List<ProductView> productViews=new ArrayList<>();
         products
                 .stream()
-                .forEach(p->productViews.add(new ProductView(p.getId(),p.getTitle(),p.getCategory(),p.getPrice(),p.isTrending(),p.getInStock())));
+                .forEach(p->productViews.add(new ProductView(p.getId(),p.getTitle(),p.getCategory(),p.getPrice(),p.isTrending(),p.getInStock(),p.getMaterial(), p.getOrigin_location(), p.getEmission_factor(),p.getEco_score(),p.getWeight())));
         return new AllProductDisplay(productRepository.searchedProductLength(newQuery),productViews);
     }
 
