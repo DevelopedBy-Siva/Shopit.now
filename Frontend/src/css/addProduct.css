@@ -589,6 +589,36 @@ input[type="number"] {
   .close-product-saving-fail {
   animation: failAnimationMessageClose 0.5s 3.5s 1 ease-in-out forwards;
 }
+
+.add-product-container input:disabled,
+.add-product-container select:disabled {
+  cursor: not-allowed;
+}
+
+.material-details {
+  width: 100%;
+  margin: 50px 0 0 0;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.material-details label {
+  color: #343434;
+  font-weight: 400;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.material-details input {
+  color: #3434347f;
+  font-weight: 400;
+  font-size: 16px;
+  padding-left: 5px;
+}
+
 @keyframes failAnimationMessageClose {
   from {
     opacity: 0;

@@ -11,6 +11,7 @@ import dummyImage from "../../../Images/camera.png";
 
 import "../../../css/addProduct.css";
 import Loader from "../../Loader";
+import MaterialsCategory from "./MaterialsCategory";
 
 const validate = Yup.object().shape({
   title: Yup.string()
@@ -20,6 +21,7 @@ const validate = Yup.object().shape({
     .label("Product Name")
     .trim(),
   category: Yup.string().required("Pick the category").label("Category"),
+  material: Yup.string().required("Pick the material").label("Material"),
   description: Yup.string()
     .required("Enter the product description")
     .min(50)
@@ -32,6 +34,18 @@ const validate = Yup.object().shape({
     .required("Enter the price")
     .label("Price")
     .trim(),
+  emission_factor: Yup.number().nullable().label("Emission Factor"),
+  eco_score: Yup.number().nullable().label("Eco Score"),
+  weight: Yup.number()
+    .min(0.1, "Weight cannot be less than 0.1kg")
+    .required("Enter the weight")
+    .label("Weight (in Kg)"),
+  origin_location: Yup.string()
+    .required("Enter the origin location")
+    .min(2)
+    .max(50)
+    .label("Origin Location")
+    .trim(),
 });
 class AddProducts extends AddProductMainContainer {
   render() {
@@ -43,8 +57,13 @@ class AddProducts extends AddProductMainContainer {
             initialValues={{
               title: "",
               category: "",
+              material: "",
               price: "",
               description: "",
+              emission_factor: 0,
+              eco_score: 0,
+              weight: 0,
+              origin_location: "",
             }}
             onSubmit={(values, { resetForm }) =>
               this.handleProductSubmit(values, resetForm)
@@ -57,6 +76,7 @@ class AddProducts extends AddProductMainContainer {
               errors,
               setFieldTouched,
               touched,
+              values,
             }) => (
               <form ref={this.formRef} onSubmit={handleSubmit}>
                 <div className="product-logo-main-container">
@@ -97,8 +117,29 @@ class AddProducts extends AddProductMainContainer {
                   onBlur={() => setFieldTouched("category")}
                   onChange={handleChange("category")}
                 />
+
+                <MaterialsCategory
+                  disabled={loading}
+                  category={values.category}
+                  value={values.material}
+                  errors={errors.material}
+                  touched={touched.material}
+                  onBlur={() => setFieldTouched("material")}
+                  onChange={handleChange("material")}
+                />
                 <AdminInputContainer
                   type="number"
+                  step="any"
+                  name="Weight (in Kg)"
+                  disabled={loading}
+                  errors={errors.weight}
+                  touched={touched.weight}
+                  onBlur={() => setFieldTouched("weight")}
+                  onChange={handleChange("weight")}
+                />
+                <AdminInputContainer
+                  type="number"
+                  step="any"
                   name="Price (USD)"
                   disabled={loading}
                   errors={errors.price}
@@ -106,6 +147,16 @@ class AddProducts extends AddProductMainContainer {
                   onBlur={() => setFieldTouched("price")}
                   onChange={handleChange("price")}
                 />
+                <AdminInputContainer
+                  type="text"
+                  name="Origin Location"
+                  disabled={loading}
+                  errors={errors.origin_location}
+                  touched={touched.origin_location}
+                  onBlur={() => setFieldTouched("origin_location")}
+                  onChange={handleChange("origin_location")}
+                />
+
                 <div className="product-description">
                   <label>Description</label>
                   <textarea

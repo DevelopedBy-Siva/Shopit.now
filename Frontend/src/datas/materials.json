@@ -1,0 +1,63 @@
+{
+  "Mobile & Laptops": [
+    { "name": "Aluminum", "emission_factor": 8.0, "eco_score": 6 },
+    {
+      "name": "Plastic (ABS, Polycarbonate)",
+      "emission_factor": 10.0,
+      "eco_score": 3
+    },
+    { "name": "Recycled Plastic", "emission_factor": 5.5, "eco_score": 6 },
+    { "name": "Stainless Steel", "emission_factor": 6.8, "eco_score": 7 },
+    { "name": "Glass", "emission_factor": 5.2, "eco_score": 7 },
+    { "name": "Carbon Fiber", "emission_factor": 9.0, "eco_score": 4 },
+    { "name": "Magnesium Alloy", "emission_factor": 7.5, "eco_score": 5 },
+    { "name": "Bioplastic (PLA)", "emission_factor": 3.5, "eco_score": 8 }
+  ],
+  "Fashion": [
+    { "name": "Organic Cotton", "emission_factor": 2.0, "eco_score": 9 },
+    { "name": "Regular Cotton", "emission_factor": 3.8, "eco_score": 7 },
+    { "name": "Recycled Cotton", "emission_factor": 1.8, "eco_score": 9 },
+    { "name": "Bamboo Fiber", "emission_factor": 2.5, "eco_score": 9 },
+    { "name": "Hemp", "emission_factor": 1.9, "eco_score": 10 },
+    { "name": "Linen (Flax)", "emission_factor": 2.2, "eco_score": 8 },
+    { "name": "Silk", "emission_factor": 3.5, "eco_score": 6 },
+    { "name": "Leather", "emission_factor": 8.0, "eco_score": 5 },
+    {
+      "name": "Vegan Leather (PU, Pineapple, etc.)",
+      "emission_factor": 4.5,
+      "eco_score": 7
+    },
+    { "name": "Polyester", "emission_factor": 6.5, "eco_score": 4 },
+    {
+      "name": "Recycled Polyester (rPET)",
+      "emission_factor": 3.8,
+      "eco_score": 6
+    },
+    { "name": "Wool", "emission_factor": 4.8, "eco_score": 6 },
+    { "name": "Rayon/Viscose", "emission_factor": 5.0, "eco_score": 5 },
+    { "name": "Cork Fabric", "emission_factor": 2.0, "eco_score": 9 }
+  ],
+  "Kids & Baby": [
+    { "name": "Organic Cotton", "emission_factor": 2.0, "eco_score": 9 },
+    { "name": "Bamboo Fabric", "emission_factor": 2.5, "eco_score": 9 },
+    { "name": "Wood", "emission_factor": 2.5, "eco_score": 8 },
+    { "name": "Recycled Plastic", "emission_factor": 5.0, "eco_score": 6 },
+    { "name": "Bioplastic (PLA)", "emission_factor": 3.0, "eco_score": 8 },
+    { "name": "Silicone", "emission_factor": 4.0, "eco_score": 7 },
+    { "name": "Rubber (Natural)", "emission_factor": 3.2, "eco_score": 8 },
+    { "name": "Polypropylene (PP)", "emission_factor": 6.0, "eco_score": 4 },
+    { "name": "Fabric Composite", "emission_factor": 5.0, "eco_score": 5 }
+  ],
+  "Appliances": [
+    { "name": "Stainless Steel", "emission_factor": 6.8, "eco_score": 7 },
+    { "name": "Aluminum", "emission_factor": 8.0, "eco_score": 6 },
+    { "name": "Copper", "emission_factor": 6.5, "eco_score": 7 },
+    { "name": "Plastic (ABS, PVC)", "emission_factor": 10.0, "eco_score": 3 },
+    { "name": "Recycled Plastic", "emission_factor": 5.5, "eco_score": 6 },
+    { "name": "Glass", "emission_factor": 5.0, "eco_score": 7 },
+    { "name": "Ceramic", "emission_factor": 4.0, "eco_score": 8 },
+    { "name": "Bioplastic", "emission_factor": 3.5, "eco_score": 8 },
+    { "name": "Rubber (Synthetic)", "emission_factor": 6.0, "eco_score": 4 },
+    { "name": "Silicone", "emission_factor": 4.0, "eco_score": 7 }
+  ]
+}
