@@ -1,6 +1,5 @@
 package com.shopit.now.service.products;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shopit.now.customexception.custom.GlobalServerException;
 import com.shopit.now.customexception.custom.InvalidRequest;
@@ -38,6 +37,7 @@ public class ProductServicesImpl implements ProductServices {
     @Autowired
     private ObjectMapper objectMapper;
 
+
     @Override
     public int handleGetAllproducts() {
         return productRepository.getHowManyProducts();
@@ -55,15 +55,12 @@ public class ProductServicesImpl implements ProductServices {
             double penalty = (products.getEmission_factor() / 10.0) + (products.getWeight() / 2.0);
             int score = (int) Math.round(products.getEco_score() - penalty);
             double eco_score = Math.max(1, Math.min(10, score));
-
             products.setEco_score(eco_score);
-            products.setEmission_factor(products.getEmission_factor());
-            products.setMaterial(products.getMaterial());
-            products.setWeight(products.getWeight());
+
             productRepository.save(products);
-            return new ResponseEntity(products.getId(), HttpStatus.OK);
+            return new ResponseEntity<>(products.getId(), HttpStatus.OK);
         }catch (Exception e){
-            return new ResponseEntity("Internal Server Error. Try again later", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error. Try again later", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -75,10 +72,10 @@ public class ProductServicesImpl implements ProductServices {
         products.setThumbnail(thumbnail);
         try {
             productRepository.save(products);
-            return new ResponseEntity("Thumbnail uploaded Successfull",HttpStatus.OK);
+            return new ResponseEntity<>("Thumbnail uploaded Successfull",HttpStatus.OK);
         }catch (Exception e){
             productRepository.deleteById(productId);
-            return new ResponseEntity("Thumbnail not uploaded",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Thumbnail not uploaded",HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -93,10 +90,10 @@ public class ProductServicesImpl implements ProductServices {
         products.setProductimage(images);
         try {
             productRepository.save(products);
-            return new ResponseEntity("All Images uploaded Successfull",HttpStatus.OK);
+            return new ResponseEntity<>("All Images uploaded Successfull",HttpStatus.OK);
         }catch (Exception e){
             productRepository.deleteById(productId);
-            return new ResponseEntity("All Images not uploaded",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("All Images not uploaded",HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -108,8 +105,7 @@ public class ProductServicesImpl implements ProductServices {
                 .stream()
                 .map(x -> x.getRating())
                 .reduce(0, Integer::sum);
-        double overallRating=(Math.round(((float)(ratings+newRating)/totalReviews)*10.0)/10.0);
-        return overallRating;
+        return (Math.round(((float)(ratings+newRating)/totalReviews)*10.0)/10.0);
     }
 
     @Override

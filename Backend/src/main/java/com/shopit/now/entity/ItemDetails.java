@@ -20,4 +20,6 @@ public class ItemDetails {
     private String productName;
     private int itemCount;
     private String totalPrice;
+    private double total_co2_emitted;
+    private double total_co2_saved;
 }
