@@ -126,7 +126,12 @@ class AddProducts extends AddProductMainContainer {
                   touched={touched.material}
                   onBlur={() => setFieldTouched("material")}
                   onChange={handleChange("material")}
+                  valueEcoScore={values.eco_score}
+                  valueEmissionFactor={values.emission_factor}
+                  onChangeEcoScore={handleChange("eco_score")}
+                  onChangeeEmissionFactor={handleChange("emission_factor")}
                 />
+
                 <AdminInputContainer
                   type="number"
                   step="any"

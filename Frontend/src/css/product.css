@@ -1,3 +1,45 @@
+.main-product-eco-container {
+  padding: 30px;
+  border-radius: 10px;
+  margin: 30px 0 0 0;
+  background: #e3e6fa;
+}
+
+.main-product-eco-container p {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  color: #545454;
+}
+
+.main-product-eco-container .eco-recommendations p {
+  margin: 15px 0 5px 0;
+  font-weight: 300;
+  color: #545454;
+}
+
+.main-product-eco-container .eco-recommendations ul {
+  margin: 0;
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.main-product-eco-container .eco-recommendations a {
+  text-transform: capitalize;
+  color: #0513dd;
+  text-decoration: underline;
+}
+
+.main-product-eco-container .eco-recommendations li {
+  color: #545454;
+}
+
 .product-main-container {
   position: relative;
   padding-top: 40px;

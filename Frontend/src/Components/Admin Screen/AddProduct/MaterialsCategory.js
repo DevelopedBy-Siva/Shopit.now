@@ -4,8 +4,10 @@ import materialsData from "../../../datas/materials.json";
 class MaterialsCategory extends Component {
   state = {
     materials: [],
-    emissionFactor: 0,
-    ecoScore: 0,
+    selectedMaterials: [],
+    avgEmissionFactor: 0,
+    avgEcoScore: 0,
+    dropdownOpen: false,
   };
 
   componentDidUpdate(prevProps) {
@@ -24,69 +26,128 @@ class MaterialsCategory extends Component {
       }
 
       if (onChange) {
-        onChange({
-          target: { name: "material", value: "" },
-        });
+        onChange({ target: { name: "material", value: "" } });
       }
 
       this.setState({
         materials,
-        emissionFactor: 0,
-        ecoScore: 0,
+        selectedMaterials: [],
+        avgEmissionFactor: 0,
+        avgEcoScore: 0,
       });
     }
   }
 
-  handleMaterialChange = (e) => {
-    const selectedMaterial = e.target.value;
-    const { materials } = this.state;
-    const { onChange } = this.props;
+  toggleDropdown = () => {
+    this.setState((prev) => ({ dropdownOpen: !prev.dropdownOpen }));
+  };
 
-    if (onChange) onChange(e);
+  handleCheckboxChange = (material) => {
+    this.setState((prevState) => {
+      const alreadySelected = prevState.selectedMaterials.includes(material);
+      const selectedMaterials = alreadySelected
+        ? prevState.selectedMaterials.filter((m) => m !== material)
+        : [...prevState.selectedMaterials, material];
+      return { selectedMaterials };
+    }, this.updateAverages);
+  };
 
-    const found = materials.find((m) => m.name === selectedMaterial);
-    if (found) {
-      this.setState({
-        emissionFactor: found.emission_factor,
-        ecoScore: found.eco_score,
+  updateAverages = () => {
+    const { selectedMaterials, materials } = this.state;
+    const { onChange, onChangeeEmissionFactor, onChangeEcoScore } = this.props;
+
+    const selectedObjects = materials.filter((m) =>
+      selectedMaterials.includes(m.name)
+    );
+
+    if (onChange) {
+      onChange({
+        target: {
+          name: "material",
+          value: selectedMaterials.join(", "),
+        },
       });
+    }
+
+    if (selectedObjects.length > 0) {
+      const avgEmissionFactor =
+        selectedObjects.reduce((sum, m) => sum + m.emission_factor, 0) /
+        selectedObjects.length;
+      const avgEcoScore =
+        selectedObjects.reduce((sum, m) => sum + m.eco_score, 0) /
+        selectedObjects.length;
+
+      this.setState({ avgEmissionFactor, avgEcoScore });
+
+      if (onChangeeEmissionFactor)
+        onChangeeEmissionFactor({
+          target: { name: "emission_factor", value: avgEmissionFactor },
+        });
+
+      if (onChangeEcoScore)
+        onChangeEcoScore({
+          target: { name: "eco_score", value: avgEcoScore },
+        });
     } else {
-      this.setState({ emissionFactor: 0, ecoScore: 0 });
+      this.setState({ avgEmissionFactor: 0, avgEcoScore: 0 });
     }
   };
 
   render() {
-    const { materials, emissionFactor, ecoScore } = this.state;
-    const { errors, touched, disabled, category } = this.props;
+    const {
+      materials,
+      selectedMaterials,
+      dropdownOpen,
+      avgEmissionFactor,
+      avgEcoScore,
+    } = this.state;
+    const { category, disabled } = this.props;
 
     const isDisabled = !category || materials.length === 0 || disabled;
 
     return (
-      <div className="pick-category-container">
-        <select
-          name="material"
-          value={this.props.value || ""}
-          disabled={isDisabled}
-          onChange={this.handleMaterialChange}
-          onBlur={this.props.onBlur}
+      <div className="material-dropdown-container">
+        <label>Select Material(s):</label>
+
+        <div
+          className={`dropdown ${isDisabled ? "disabled" : ""}`}
+          onClick={!isDisabled ? this.toggleDropdown : undefined}
         >
-          <option value="">Pick a material</option>
-          {materials.map((item, index) => (
-            <option value={item.name} key={index}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-        {errors && touched && <h5>{errors}</h5>}
+          <div className="dropdown-header">
+            {selectedMaterials.length > 0
+              ? selectedMaterials.join(", ")
+              : "Pick materials"}
+            <span className="arrow">{dropdownOpen ? "▲" : "▼"}</span>
+          </div>
+
+          {dropdownOpen && (
+            <div className="dropdown-list">
+              {materials.map((item, index) => (
+                <label key={index} className="dropdown-item">
+                  <input
+                    type="checkbox"
+                    checked={selectedMaterials.includes(item.name)}
+                    onChange={() => this.handleCheckboxChange(item.name)}
+                  />
+                  {item.name}
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
 
         <div className="material-details">
           <div>
-            <label>Emission Factor:</label>
-            <input step="any" type="number" value={emissionFactor} disabled />
+            <label>Average Emission Factor:</label>
+            <input
+              type="number"
+              value={avgEmissionFactor.toFixed(3)}
+              disabled
+            />
           </div>
           <div>
-            <label>Eco Score:</label>
-            <input step="any" type="number" value={ecoScore} disabled />
+            <label>Average Base Eco Score:</label>
+            <input type="number" value={avgEcoScore.toFixed(2)} disabled />
           </div>
         </div>
       </div>

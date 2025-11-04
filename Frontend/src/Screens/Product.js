@@ -2,6 +2,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Lottie from "lottie-react";
+import { Link } from "react-router-dom";
 
 import {
   MainProductContainer,
@@ -15,7 +16,17 @@ import ProductOperations from "../Components/Item Screen/ProductOperations";
 
 class Product extends MainProductContainer {
   render() {
-    const { user, loading, initialUrl, product, overallRating } = this.state;
+    const {
+      user,
+      loading,
+      initialUrl,
+      product,
+      overallRating,
+      sustainabilityLoading,
+      sustainabilityInsight,
+      recommendations,
+      recommendationsLoading,
+    } = this.state;
     return (
       <div className="product-main-container contain">
         {loading ? (
@@ -73,6 +84,44 @@ class Product extends MainProductContainer {
                   toggleWishlist={this.toggleWishlist}
                   handleOutOfStock={this.handleOutOfStock}
                 />
+                <div className="main-product-eco-container">
+                  {sustainabilityLoading ? (
+                    <p>Checking how green this product really is 🌿</p>
+                  ) : sustainabilityInsight ? (
+                    <p>{sustainabilityInsight.impact_message}</p>
+                  ) : (
+                    ""
+                  )}
+
+                  <div className="eco-recommendations">
+                    {!sustainabilityLoading &&
+                    sustainabilityInsight &&
+                    recommendationsLoading ? (
+                      <p>Finding greener alternatives... ♻️</p>
+                    ) : recommendations.length > 0 ? (
+                      <>
+                        <p>
+                          Explore these sustainable picks — better for you and
+                          the Earth 🌎
+                        </p>
+
+                        <ul>
+                          {recommendations.map((item, idx) => (
+                            <li key={idx}>
+                              →{" "}
+                              <Link to={`/products/${item.id}`}>
+                                {item.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+
                 <div className="product-description-container">
                   <h5>Product Description</h5>
                   <ReactMarkdown

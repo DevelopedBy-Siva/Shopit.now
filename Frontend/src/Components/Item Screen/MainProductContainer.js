@@ -30,6 +30,12 @@ class MainProductContainer extends Component {
     displayReviewError: false,
     loading: false,
     initialUrl: null,
+
+    sustainabilityInsight: null,
+    recommendations: [],
+
+    sustainabilityLoading: false,
+    recommendationsLoading: false,
   };
 
   currentUser = getCurrentUser();
@@ -55,8 +61,38 @@ class MainProductContainer extends Component {
       )
       .then(({ data: found }) => {
         this.successfullSubmission(found);
+        this.fetchSustainabilityInsight(found.id);
+        this.fetchRecommendations(found.id);
       })
       .catch(() => (window.location = "/not-found"));
+  };
+
+  fetchSustainabilityInsight = async (productId) => {
+    this.setState({ sustainabilityLoading: true });
+    try {
+      const { data } = await axios.get(
+        `http://localhost:5001/api/sustainability/insight?productId=${productId}`
+      );
+      this.setState({ sustainabilityInsight: data });
+    } catch (err) {
+      console.debug("Insight fetch failed:", err);
+    } finally {
+      this.setState({ sustainabilityLoading: false });
+    }
+  };
+
+  fetchRecommendations = async (productId) => {
+    this.setState({ recommendationsLoading: true });
+    try {
+      const { data } = await axios.get(
+        `http://localhost:5001/api/sustainability/recommend/eco?productId=${productId}`
+      );
+      this.setState({ recommendations: data.recommendations || [] });
+    } catch (err) {
+      console.debug("Recommendation fetch failed:", err);
+    } finally {
+      this.setState({ recommendationsLoading: false });
+    }
   };
 
   successfullSubmission = (found) => {
