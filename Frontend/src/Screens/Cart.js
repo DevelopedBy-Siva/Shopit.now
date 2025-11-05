@@ -25,25 +25,62 @@ class Cart extends Component {
     cart: [],
     proceedLoading: false,
     unavailable: [],
+    insightLoading: false,
+    insight: null,
   };
 
   componentDidMount() {
     const { cartFetch, userCart } = this.props;
     const { loading, error } = cartFetch;
     this.props.paymentOver();
-    this.setState({ loading, error, cart: userCart, len: userCart.length });
+    this.setState(
+      { loading, error, cart: userCart, len: userCart.length },
+      () => {
+        if (userCart.length > 0) this.fetchCartInsight(userCart);
+        else
+          this.setState({
+            insight: null,
+          });
+      }
+    );
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, _) {
     const { userCart, cartFetch } = this.props;
     const { loading, error } = cartFetch;
     if (prevProps.userCart !== userCart) {
       this.setState({ cart: userCart, len: userCart.length });
+      if (userCart.length > 0) this.fetchCartInsight(userCart);
+      else
+        this.setState({
+          insight: null,
+        });
     }
     if (prevProps.cartFetch !== cartFetch) {
       this.setState({ loading, error });
     }
   }
+
+  fetchCartInsight = async (cart) => {
+    const apiUrl = process.env.REACT_APP_SUSTAINABILITY_URL;
+    try {
+      this.setState({ insightLoading: true });
+      const cart_items = cart.map((item) => ({
+        id: item.productId,
+        qty: item.itemCount,
+      }));
+
+      const { data } = await axios.post(`${apiUrl}/cart`, { cart_items });
+      console.log(data);
+
+      this.setState({
+        insight: data.cart_summary,
+        insightLoading: false,
+      });
+    } catch (_) {
+      this.setState({ insightLoading: false });
+    }
+  };
 
   proceedOrder = () => {
     const { cart } = this.state;
@@ -101,6 +138,7 @@ class Cart extends Component {
         <div className="cart-container contain">
           <div className="cart-left-container">
             <h2>Shopping Cart</h2>
+
             {loading ? (
               <CartLoadin />
             ) : error ? (

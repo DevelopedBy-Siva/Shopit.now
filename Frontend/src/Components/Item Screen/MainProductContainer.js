@@ -69,9 +69,10 @@ class MainProductContainer extends Component {
 
   fetchSustainabilityInsight = async (productId) => {
     this.setState({ sustainabilityLoading: true });
+    const apiUrl = process.env.REACT_APP_SUSTAINABILITY_URL;
     try {
       const { data } = await axios.get(
-        `http://localhost:5001/api/sustainability/insight?productId=${productId}`
+        `${apiUrl}/insight?productId=${productId}`
       );
       this.setState({ sustainabilityInsight: data });
     } catch (err) {
@@ -83,9 +84,11 @@ class MainProductContainer extends Component {
 
   fetchRecommendations = async (productId) => {
     this.setState({ recommendationsLoading: true });
+    const apiUrl = process.env.REACT_APP_SUSTAINABILITY_URL;
+
     try {
       const { data } = await axios.get(
-        `http://localhost:5001/api/sustainability/recommend/eco?productId=${productId}`
+        `${apiUrl}/recommend/eco?productId=${productId}`
       );
       this.setState({ recommendations: data.recommendations || [] });
     } catch (err) {
