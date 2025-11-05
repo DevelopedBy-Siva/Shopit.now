@@ -9,12 +9,14 @@ import com.shopit.now.entity.*;
 import com.shopit.now.repository.AdvertisementRepository;
 import com.shopit.now.repository.ProductRepository;
 import com.shopit.now.repository.WishListRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
@@ -37,6 +39,11 @@ public class ProductServicesImpl implements ProductServices {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${sustainability.service.url:}")
+    private String sustainabilityUrl;
 
     @Override
     public int handleGetAllproducts() {
@@ -53,10 +60,33 @@ public class ProductServicesImpl implements ProductServices {
             products.setMaterial(products.getMaterial().toLowerCase());
 
             // calculate eco score
-            double penalty = (products.getEmission_factor() / 10.0) + (products.getWeight() / 2.0);
-            int score = (int) Math.round(products.getEco_score() - penalty);
-            double eco_score = Math.max(1, Math.min(10, score));
-            products.setEco_score(eco_score);
+            String flaskUrl = sustainabilityUrl + "/predict";
+
+            JSONObject json = new JSONObject();
+            json.put("category", products.getCategory());
+            json.put("material", products.getMaterial());
+            json.put("weight", products.getWeight());
+            json.put("price", products.getPrice());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<String> entity = new HttpEntity<>(json.toString(), headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    flaskUrl, HttpMethod.POST, entity, String.class);
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                JSONObject resJson = new JSONObject(response.getBody());
+                double ecoScore = resJson.getDouble("predicted_eco_score");
+                double emissionFactor = resJson.getDouble("predicted_emission_factor");
+                products.setEco_score(ecoScore);
+                products.setEmission_factor(emissionFactor);
+            } else {
+                double penalty = (products.getWeight() / 2.0);
+                double ecoScore = Math.max(1, Math.min(10, 7 - penalty));
+                products.setEco_score(ecoScore);
+                products.setEmission_factor(6.5);
+            }
 
             productRepository.save(products);
             return new ResponseEntity<>(products.getId(), HttpStatus.OK);
