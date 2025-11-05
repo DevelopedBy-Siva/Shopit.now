@@ -50,6 +50,7 @@ public class ProductServicesImpl implements ProductServices {
             products.setInStock(10);
             products.setTrending(false);
             products.setCategory(products.getCategory().toLowerCase());
+            products.setMaterial(products.getMaterial().toLowerCase());
 
             // calculate eco score
             double penalty = (products.getEmission_factor() / 10.0) + (products.getWeight() / 2.0);
