@@ -5,8 +5,6 @@ class MaterialsCategory extends Component {
   state = {
     materials: [],
     selectedMaterials: [],
-    avgEmissionFactor: 0,
-    avgEcoScore: 0,
     dropdownOpen: false,
   };
 
@@ -32,8 +30,6 @@ class MaterialsCategory extends Component {
       this.setState({
         materials,
         selectedMaterials: [],
-        avgEmissionFactor: 0,
-        avgEcoScore: 0,
       });
     }
   }
@@ -53,12 +49,8 @@ class MaterialsCategory extends Component {
   };
 
   updateAverages = () => {
-    const { selectedMaterials, materials } = this.state;
-    const { onChange, onChangeeEmissionFactor, onChangeEcoScore } = this.props;
-
-    const selectedObjects = materials.filter((m) =>
-      selectedMaterials.includes(m.name)
-    );
+    const { selectedMaterials } = this.state;
+    const { onChange } = this.props;
 
     if (onChange) {
       onChange({
@@ -68,40 +60,11 @@ class MaterialsCategory extends Component {
         },
       });
     }
-
-    if (selectedObjects.length > 0) {
-      const avgEmissionFactor =
-        selectedObjects.reduce((sum, m) => sum + m.emission_factor, 0) /
-        selectedObjects.length;
-      const avgEcoScore =
-        selectedObjects.reduce((sum, m) => sum + m.eco_score, 0) /
-        selectedObjects.length;
-
-      this.setState({ avgEmissionFactor, avgEcoScore });
-
-      if (onChangeeEmissionFactor)
-        onChangeeEmissionFactor({
-          target: { name: "emission_factor", value: avgEmissionFactor },
-        });
-
-      if (onChangeEcoScore)
-        onChangeEcoScore({
-          target: { name: "eco_score", value: avgEcoScore },
-        });
-    } else {
-      this.setState({ avgEmissionFactor: 0, avgEcoScore: 0 });
-    }
   };
 
   render() {
-    const {
-      materials,
-      selectedMaterials,
-      dropdownOpen,
-      avgEmissionFactor,
-      avgEcoScore,
-    } = this.state;
-    const { category, disabled } = this.props;
+    const { materials, selectedMaterials, dropdownOpen } = this.state;
+    const { category, disabled, touched, errors } = this.props;
 
     const isDisabled = !category || materials.length === 0 || disabled;
 
@@ -135,21 +98,7 @@ class MaterialsCategory extends Component {
             </div>
           )}
         </div>
-
-        <div className="material-details">
-          <div>
-            <label>Average Emission Factor:</label>
-            <input
-              type="number"
-              value={avgEmissionFactor.toFixed(3)}
-              disabled
-            />
-          </div>
-          <div>
-            <label>Average Base Eco Score:</label>
-            <input type="number" value={avgEcoScore.toFixed(2)} disabled />
-          </div>
-        </div>
+        {errors && touched && <h5>{errors}</h5>}
       </div>
     );
   }

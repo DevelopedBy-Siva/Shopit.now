@@ -88,7 +88,11 @@ class Product extends MainProductContainer {
                   {sustainabilityLoading ? (
                     <p>Checking how green this product really is 🌿</p>
                   ) : sustainabilityInsight ? (
-                    <p>{sustainabilityInsight.impact_message}</p>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: sustainabilityInsight.impact_message,
+                      }}
+                    />
                   ) : (
                     ""
                   )}

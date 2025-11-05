@@ -1,8 +1,9 @@
 .main-product-eco-container {
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin: 30px 0 0 0;
   background: #e3e6fa;
+  border: 1px solid #c5caeb;
 }
 
 .main-product-eco-container p {
@@ -11,6 +12,11 @@
   padding: 0;
   font-weight: 400;
   color: #545454;
+}
+
+.main-product-eco-container p b {
+  font-weight: 600;
+  color: #2f3037;
 }
 
 .main-product-eco-container .eco-recommendations p {

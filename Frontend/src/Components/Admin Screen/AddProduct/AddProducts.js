@@ -34,8 +34,6 @@ const validate = Yup.object().shape({
     .required("Enter the price")
     .label("Price")
     .trim(),
-  emission_factor: Yup.number().nullable().label("Emission Factor"),
-  eco_score: Yup.number().nullable().label("Eco Score"),
   weight: Yup.number()
     .min(0.1, "Weight cannot be less than 0.1kg")
     .required("Enter the weight")
@@ -60,8 +58,6 @@ class AddProducts extends AddProductMainContainer {
               material: "",
               price: "",
               description: "",
-              emission_factor: 0,
-              eco_score: 0,
               weight: 0,
               origin_location: "",
             }}
@@ -126,10 +122,6 @@ class AddProducts extends AddProductMainContainer {
                   touched={touched.material}
                   onBlur={() => setFieldTouched("material")}
                   onChange={handleChange("material")}
-                  valueEcoScore={values.eco_score}
-                  valueEmissionFactor={values.emission_factor}
-                  onChangeEcoScore={handleChange("eco_score")}
-                  onChangeeEmissionFactor={handleChange("emission_factor")}
                 />
 
                 <AdminInputContainer

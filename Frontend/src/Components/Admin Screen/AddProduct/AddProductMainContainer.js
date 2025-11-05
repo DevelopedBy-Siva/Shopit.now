@@ -116,8 +116,6 @@ class AddProductMainContainer extends Component {
       category: data.category,
       description: data.description,
       material: data.material,
-      emission_factor: data.emission_factor,
-      eco_score: data.eco_score,
       weight: data.weight,
       origin_location: data.origin_location,
       inStock: 0,
