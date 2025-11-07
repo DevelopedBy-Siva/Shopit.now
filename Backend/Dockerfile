@@ -12,5 +12,5 @@ FROM amazoncorretto:11-alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar shopitnow-0.0.1-SNAPSHOT.jar
 
-EXPOSE 8080
+EXPOSE 8080 9091
 ENTRYPOINT ["java", "-jar", "shopitnow-0.0.1-SNAPSHOT.jar"]
