@@ -180,7 +180,7 @@ class CartItems extends Component {
                         greener option with an eco score of{" "}
                         <b>{suggestion.eco_score}/10</b>
                         {". ( "}
-                        <Link to={`/products/${item.productId}`}>
+                        <Link to={`/products/${suggestion.id}`}>
                           Explore this swap
                         </Link>
                         {" )"}
