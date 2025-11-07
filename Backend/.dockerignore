@@ -1,0 +1,7 @@
+target/
+.gradle/
+.git/
+.gitignore
+*.md
+*.iml
+*.log
