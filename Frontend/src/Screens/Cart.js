@@ -71,10 +71,8 @@ class Cart extends Component {
       }));
 
       const { data } = await axios.post(`${apiUrl}/cart`, { cart_items });
-      console.log(data);
-
       this.setState({
-        insight: data.cart_summary,
+        insight: data,
         insightLoading: false,
       });
     } catch (_) {
@@ -138,7 +136,7 @@ class Cart extends Component {
         <div className="cart-container contain">
           <div className="cart-left-container">
             <h2>Shopping Cart</h2>
-
+            {this.in}
             {loading ? (
               <CartLoadin />
             ) : error ? (
@@ -146,10 +144,61 @@ class Cart extends Component {
             ) : len < 1 ? (
               <CartEmpty />
             ) : (
-              <CartItems
-                removeOutofStock={this.removeOutofStock}
-                unavailable={unavailable}
-              />
+              <div>
+                <div className="green-cart-summary">
+                  {this.state.insightLoading ? (
+                    <p className="loading">Calculating your eco impact… 🌱</p>
+                  ) : (
+                    this.state.insight &&
+                    this.state.insight.cart_summary && (
+                      <div className="cart-details-container">
+                        <p className="cart-heading">🌿 Your Greener Cart</p>
+                        <div className="cart-details">
+                          {this.state.insight.cart_summary.current_total_kg && (
+                            <p>
+                              ◼ Total CO₂ impact:{" "}
+                              <b>
+                                {
+                                  this.state.insight.cart_summary
+                                    .current_total_kg
+                                }{" "}
+                                kg
+                              </b>
+                              {this.state.insight.cart_summary
+                                .optimized_total_kg && (
+                                <>
+                                  {"  "}→
+                                  <b>
+                                    {"  "}
+                                    {
+                                      this.state.insight.cart_summary
+                                        .optimized_total_kg
+                                    }{" "}
+                                    kg
+                                  </b>{" "}
+                                  <i>(optimized)</i>
+                                </>
+                              )}
+                            </p>
+                          )}
+                          {this.state.insight.cart_summary.impact_message && (
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html: `◼ ${this.state.insight.cart_summary.impact_message}`,
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+                <CartItems
+                  removeOutofStock={this.removeOutofStock}
+                  unavailable={unavailable}
+                  insight={this.state.insight}
+                />
+              </div>
             )}
           </div>
           {len > 0 && (

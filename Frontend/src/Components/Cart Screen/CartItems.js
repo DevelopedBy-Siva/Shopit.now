@@ -18,6 +18,7 @@ class CartItems extends Component {
     },
     loadingIndex: null,
     errorIndex: null,
+    openGreenerOptions: [],
   };
 
   componentDidMount() {
@@ -64,82 +65,133 @@ class CartItems extends Component {
     return check;
   };
 
+  toggleGreenerOption = (index) => {
+    this.setState((prev) => {
+      const isOpen = prev.openGreenerOptions.includes(index);
+      return {
+        openGreenerOptions: isOpen
+          ? prev.openGreenerOptions.filter((i) => i !== index)
+          : [...prev.openGreenerOptions, index],
+      };
+    });
+  };
+
   render() {
     const { userCart, cartServer, errorIndex, loadingIndex } = this.state;
+    const { insight } = this.props;
     const { loading, error } = cartServer;
     return (
       <>
-        {userCart.map((item, index) => (
-          <div className="cart-item-main-container" key={index}>
-            {loading && loadingIndex === index ? (
-              <div className="cover-item-operation" />
-            ) : (
-              ""
-            )}
-            <div className="purchase-item-container">
-              <div className="purchase-item-sub-container">
-                <div className="purchase-container">
-                  <h3>
-                    <Link
-                      className="purchase-product-redirect-link"
-                      to={`/products/${item.productId}`}
-                    >
-                      {item.productName.toLowerCase()}
-                    </Link>
-                  </h3>
-                  <h4>
-                    No of items: <span>{item.itemCount}</span>
-                  </h4>
-                </div>
-                <div className="item-increase-container">
-                  <button
-                    disabled={
-                      this.checkUnavailable(item.productId)
-                        ? true
-                        : item.available
-                        ? false
-                        : true
-                    }
-                    className={loading ? "disable-btn-loading" : ""}
-                    onClick={(e) => this.handleIncrement(item, index, e)}
-                  >
-                    <BiPlus className="icon" />
-                  </button>
-                  <button
-                    disabled={loading}
-                    className={loading ? "disable-btn-loading" : ""}
-                    onClick={(e) => this.handleDecrement(item, index, e)}
-                  >
-                    <BiMinus className="icon" />
-                  </button>
-                </div>
-                <div className="item-price">
-                  <Currency curr={item.totalPrice} />
-                </div>
-              </div>
-              <div className="item-operations">
-                <button
-                  onClick={(e) => this.handleSaveForLater(item, index, e)}
-                >
-                  Save for later
-                </button>
-                <button
-                  onClick={(e) => this.handleDelete(item.productId, index, e)}
-                >
-                  Delete
-                </button>
-              </div>
-              {error && errorIndex === index ? (
-                <h5>Server error occured.Try again later</h5>
+        {userCart.map((item, index) => {
+          const recommendations =
+            insight && insight.recommendations ? insight.recommendations : [];
+
+          const suggestion = recommendations.find(
+            (rec_item) => rec_item?.original?.id === item?.productId
+          )?.suggested;
+
+          return (
+            <div className="cart-item-main-container" key={index}>
+              {loading && loadingIndex === index ? (
+                <div className="cover-item-operation" />
               ) : (
                 ""
               )}
-              {(this.checkUnavailable(item.productId) || !item.available) && (
-                <span className="out-of-stock">Out of Stock</span>
-              )}
+              <div className="purchase-item-container">
+                <div className="purchase-item-sub-container">
+                  <div className="purchase-container">
+                    <h3>
+                      <Link
+                        className="purchase-product-redirect-link"
+                        to={`/products/${item.productId}`}
+                      >
+                        {item.productName.toLowerCase()}
+                      </Link>
+                    </h3>
+                    <h4>
+                      No of items: <span>{item.itemCount}</span>
+                    </h4>
+                  </div>
+                  <div className="item-increase-container">
+                    <button
+                      disabled={
+                        this.checkUnavailable(item.productId)
+                          ? true
+                          : item.available
+                          ? false
+                          : true
+                      }
+                      className={loading ? "disable-btn-loading" : ""}
+                      onClick={(e) => this.handleIncrement(item, index, e)}
+                    >
+                      <BiPlus className="icon" />
+                    </button>
+                    <button
+                      disabled={loading}
+                      className={loading ? "disable-btn-loading" : ""}
+                      onClick={(e) => this.handleDecrement(item, index, e)}
+                    >
+                      <BiMinus className="icon" />
+                    </button>
+                  </div>
+                  <div className="item-price">
+                    <Currency curr={item.totalPrice} />
+                  </div>
+                </div>
+                <div className="item-operations">
+                  <button
+                    onClick={(e) => this.handleSaveForLater(item, index, e)}
+                  >
+                    Save for later
+                  </button>
+                  <button
+                    onClick={(e) => this.handleDelete(item.productId, index, e)}
+                  >
+                    Delete
+                  </button>
+                </div>
+                {error && errorIndex === index ? (
+                  <h5>Server error occured.Try again later</h5>
+                ) : (
+                  ""
+                )}
+                {(this.checkUnavailable(item.productId) || !item.available) && (
+                  <span className="out-of-stock">Out of Stock</span>
+                )}
+                {suggestion && suggestion.co2_saved_kg > 0 && (
+                  <div className="greener-options-container">
+                    <button onClick={() => this.toggleGreenerOption(index)}>
+                      🌿 View Greener Option
+                    </button>
+                    <ul
+                      className={`content ${
+                        this.state.openGreenerOptions.includes(index)
+                          ? "open"
+                          : ""
+                      }`}
+                    >
+                      <li>◼</li>
+                      <li>
+                        <b style={{ textTransform: "capitalize" }}>
+                          {suggestion.title}
+                        </b>{" "}
+                        reduces your footprint by{" "}
+                        <b>{suggestion.co2_saved_kg} kg</b> CO₂ and enjoy a
+                        greener option with an eco score of{" "}
+                        <b>{suggestion.eco_score}/10</b>
+                        {". ( "}
+                        <Link to={`/products/${item.productId}`}>
+                          Explore this swap
+                        </Link>
+                        {" )"}
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </>
     );
   }

@@ -112,7 +112,7 @@ class Product extends MainProductContainer {
                         <ul>
                           {recommendations.map((item, idx) => (
                             <li key={idx}>
-                              →{" "}
+                              ◼{" "}
                               <Link to={`/products/${item.id}`}>
                                 {item.title}
                               </Link>
