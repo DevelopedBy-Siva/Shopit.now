@@ -17,8 +17,7 @@ import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
-//@CrossOrigin(origins = "https://shopit-now-client.vercel.app", maxAge = 3600)
-@CrossOrigin(origins = "https://shopit-now-1.onrender.com", maxAge = 3600)
+@CrossOrigin(origins = "https://shopit-now-client.vercel.app", maxAge = 3600)
 public class UserAccountController {
 
     @Autowired
