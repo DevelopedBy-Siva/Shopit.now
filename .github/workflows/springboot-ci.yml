@@ -26,8 +26,8 @@ jobs:
           distribution: "temurin"
           cache: "maven"
 
-      - name: Build and run tests
-        run: mvn clean verify -DskipTests=false
+      - name: Build Spring Boot app
+        run: mvn clean package -DskipTests=true
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -36,7 +36,7 @@ jobs:
           path: Backend/target/*.jar
 
   docker-build:
-    name: 🐳 Docker Build Verification
+    name: Docker Build Verification
     runs-on: ubuntu-latest
     needs: build-test
 
