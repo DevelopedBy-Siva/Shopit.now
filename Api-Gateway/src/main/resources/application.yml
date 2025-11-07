@@ -15,16 +15,12 @@ spring:
           uri: https://ecom-chat-bot.onrender.com
           predicates:
             - Path=/api/chat/**
-          filters:
-            - RewritePath=/api/chat/(?<segment>.*), /${segment}
 
 
         - id: sustainability-service
           uri: https://shopitnow-sustainability-tracker.onrender.com
           predicates:
             - Path=/api/sustainability/**
-          filters:
-            - RewritePath=/api/sustainability/(?<segment>.*), /${segment}
 
 
         - id: core-backend
