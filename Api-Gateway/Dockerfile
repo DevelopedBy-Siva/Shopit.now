@@ -1,4 +1,4 @@
-FROM maven:3.9.9-amazoncorretto-11 AS builder
+FROM maven:3.9.4-amazoncorretto-11 AS builder
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM amazoncorretto:11-alpine-jre
+FROM amazoncorretto:11-alpine
 
 WORKDIR /app
 COPY --from=builder /app/target/api-gateway-0.0.1-SNAPSHOT.jar app.jar
