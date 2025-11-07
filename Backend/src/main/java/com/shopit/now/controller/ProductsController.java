@@ -18,8 +18,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
-//@CrossOrigin(origins = "https://shopit-now-client.vercel.app", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "https://shopit-now-client.vercel.app", maxAge = 3600)
 public class ProductsController {
 
     @Autowired
