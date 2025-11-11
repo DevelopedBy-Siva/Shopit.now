@@ -22,6 +22,12 @@ It features a **Cart Optimizer** that recommends eco-friendly product alternativ
 - **Monitoring:** Prometheus integration for metrics and performance monitoring.
 
 ---
+## Overview
+
+![System Architecture](./UML.png)
+
+
+---
 
 **Backend:**  
 - Java (Spring Boot) — Core business logic & JWT authentication  
